@@ -9,13 +9,23 @@
 
 #define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
-
+#include "Textures.h"
 #include "Scence.h"
-
+#include "tinyXML.h"
 using namespace std;
 
 #define KEYBOARD_BUFFER_SIZE 1024
-
+//string MARIO_DB = "Textures/Sprites/MarioDB.xml";
+//string ENEMY_DB = "Textures/Sprites/EnemyDB.xml";
+//string INTRO_DB = "Textures/Sprites/IntroDB.xml";
+//string MISC_DB = "Textures/Sprites/MiscDB.xml";
+//string UI_DB = "Textures/Sprites/UiDB.xml";
+//
+//string MARIO_ANIM = "Textures/Animations/MarioAnim.xml";
+//string ENEMY_ANIM = "Textures/Animations/EnemyAnim.xml";
+//string INTRO_ANIM = "Textures/Animations/IntroAnim.xml";
+//string MISC_ANIM = "Textures/Animations/MiscAnim.xml";
+//string UI_ANIM = "Textures/Animations/UiAnim.xml";
 
 class CGame
 {
@@ -48,6 +58,8 @@ class CGame
 	void _ParseSection_SETTINGS(string line);
 	void _ParseSection_SCENES(string line);
 
+	void _ParseSection_SPRITES(string line);
+	void _ParseSection_ANIMATIONS(string line);
 public:
 	void InitKeyboard();
 	void SetKeyHandler(LPKEYEVENTHANDLER handler) { keyHandler = handler; }
@@ -58,6 +70,7 @@ public:
 	void ProcessKeyboard();
 
 	void Load(LPCWSTR gameFile);
+	void LoadSource();
 	LPSCENE GetCurrentScene() { return scenes[current_scene]; }
 	void SwitchScene(int scene_id);
 

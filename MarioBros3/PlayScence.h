@@ -7,23 +7,20 @@
 #include "Mario.h"
 #include "Goomba.h"
 #include "Koopas.h"
-#include "./tinyXML/tinyXML.h"
 
 using namespace std;
-string SPRITE_PATH = "Textures/Sprites/";
-string ANIMATION_PATH = "Textures/Animations/";
 
-string MARIO_DB = "Textures/Sprites/MarioDB.xml";
-string ENEMY_DB = "Textures/Sprites/EnemyDB.xml";
-string INTRO_DB = "Textures/Sprites/IntroDB.xml";
-string MISC_DB = "Textures/Sprites/MiscDB.xml";
-string UI_DB = "Textures/Sprites/UiDB.xml";
-
-string MARIO_ANIM = "Textures/Animations/MarioAnim.xml";
-string ENEMY_ANIM = "Textures/Animations/EnemyAnim.xml";
-string INTRO_ANIM = "Textures/Animations/IntroAnim.xml";
-string MISC_ANIM = "Textures/Animations/MiscAnim.xml";
-string UI_ANIM = "Textures/Animations/UiAnim.xml";
+//string MARIO_DB = "Textures/Sprites/MarioDB.xml";
+//string ENEMY_DB = "Textures/Sprites/EnemyDB.xml";
+//string INTRO_DB = "Textures/Sprites/IntroDB.xml";
+//string MISC_DB = "Textures/Sprites/MiscDB.xml";
+//string UI_DB = "Textures/Sprites/UiDB.xml";
+//
+//string MARIO_ANIM = "Textures/Animations/MarioAnim.xml";
+//string ENEMY_ANIM = "Textures/Animations/EnemyAnim.xml";
+//string INTRO_ANIM = "Textures/Animations/IntroAnim.xml";
+//string MISC_ANIM = "Textures/Animations/MiscAnim.xml";
+//string UI_ANIM = "Textures/Animations/UiAnim.xml";
 
 class CPlayScene: public CScene
 {
@@ -46,6 +43,7 @@ public:
 	virtual void Render();
 	virtual void Unload();
 
+	void LoadSource();
 	CMario * GetPlayer() { return player; } 
 
 	//friend class CPlayScenceKeyHandler;

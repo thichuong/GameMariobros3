@@ -75,14 +75,14 @@
     <ClInclude Include="Koopas.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="tinyXML\tinystr.h">
-      <Filter>Framework\tinyXML</Filter>
-    </ClInclude>
-    <ClInclude Include="tinyXML\tinyxml.h">
-      <Filter>Framework\tinyXML</Filter>
-    </ClInclude>
     <ClInclude Include="Animations.h">
       <Filter>Framework\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="tinystr.h">
+      <Filter>Framework\tinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml.h">
+      <Filter>Framework\tinyXML</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,20 +125,20 @@
     <ClCompile Include="Koopas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tinyXML\tinystr.cpp">
-      <Filter>Framework\tinyXML</Filter>
-    </ClCompile>
-    <ClCompile Include="tinyXML\tinyxml.cpp">
-      <Filter>Framework\tinyXML</Filter>
-    </ClCompile>
-    <ClCompile Include="tinyXML\tinyxmlparser.cpp">
-      <Filter>Framework\tinyXML</Filter>
-    </ClCompile>
-    <ClCompile Include="tinyXML\xmltest.cpp">
-      <Filter>Framework\tinyXML</Filter>
-    </ClCompile>
     <ClCompile Include="Animations.cpp">
       <Filter>Framework\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="tinystr.cpp">
+      <Filter>Framework\tinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml.cpp">
+      <Filter>Framework\tinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxmlparser.cpp">
+      <Filter>Framework\tinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="xmltest.cpp">
+      <Filter>Framework\tinyXML</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +158,21 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="textures\title.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\Enemy\enemy_x3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\Mario\NES - Super Mario Bros 3 - Mario Luigi x 3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\Misc\intro_x3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\Misc\misc_x3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\Misc\UI_x3.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
