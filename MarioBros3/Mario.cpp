@@ -123,7 +123,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 void CMario::Render()
 {
-	string ani =" ";
+	string ani = string();
 	if (state == MARIO_STATE_DIE)
 		ani = MARIO_ANI_DIE;
 	else
@@ -149,14 +149,15 @@ void CMario::Render()
 			ani = MARIO_ANI_SMALL_WALKING_RIGHT;
 		else ani = MARIO_ANI_SMALL_WALKING_LEFT;
 	}
-
+	ani  = "ani-raccoon-mario-fly";
 	int alpha = 255;
-	if (untouchable) alpha = 128;
+	RenderBoundingBox();
 
+	//if (untouchable) alpha = 128;
 	if (animations->Get(ani) != NULL)
 		animations->Get(ani)->Render(x, y);
 
-	RenderBoundingBox();
+	
 }
 void CMario::SetAnimationSet(CAnimations* ani_set)
 {

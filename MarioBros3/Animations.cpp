@@ -4,7 +4,7 @@
 CAnimationSets * CAnimationSets::__instance = NULL;
 
 
-void CAnimation::Add(LPSPRITE sprite, DWORD time)
+void CAnimation::Add(LPSPRITE sprite, float time)
 {
 	int t = time;
 	if (time == 0) t = this->defaultTime;
