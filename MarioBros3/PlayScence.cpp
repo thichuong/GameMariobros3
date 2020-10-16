@@ -63,13 +63,16 @@ void CPlayScene::LoadSource()
 	textures->Add("tex-misc", L"Textures\\Misc\\misc_x3.png", D3DCOLOR_XRGB(255, 255, 255));
 	textures->Add("tex-ui", L"Textures\\Misc\\UIx3.png", D3DCOLOR_XRGB(255, 255, 255));
 
-	GameAni = new CAnimations();
+	PlaySprites = CSprites::GetInstance();
+	
 
 	_ParseSection_SPRITES("Textures/Sprites/MarioDB.xml");
 	_ParseSection_SPRITES("Textures/Sprites/EnemyDB.xml");
 	_ParseSection_SPRITES("Textures/Sprites/IntroDB.xml");
 	_ParseSection_SPRITES("Textures/Sprites/MiscDB.xml");
 	_ParseSection_SPRITES("Textures/Sprites/UiDB.xml");
+
+	PlayAni = CAnimations::GetInstance();
 
 	_ParseSection_ANIMATIONS("Textures/Animations/MarioAnim.xml");
 	_ParseSection_ANIMATIONS("Textures/Animations/EnemyAnim.xml");
@@ -99,12 +102,9 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 			node->QueryIntAttribute("height", &height);
 			OutputDebugStringW(ToLPCWSTR(spriteID + ':' + to_string(left) + ':' + to_string(top) + ':' + to_string(width) + ':' + to_string(height) + '\n'));
 
-			CSprites::GetInstance()->Add(spriteID, left, top, left + width, top + height, tex);
+			PlaySprites->Add(spriteID, left, top, left + width, top + height, tex);
 		}
 	}
-
-
-
 }
 void CPlayScene::_ParseSection_ANIMATIONS(string line)
 {
@@ -134,16 +134,13 @@ void CPlayScene::_ParseSection_ANIMATIONS(string line)
 			for (TiXmlElement* sprNode = node->FirstChildElement(); sprNode != nullptr; sprNode = sprNode->NextSiblingElement())
 			{
 				string id = sprNode->Attribute("id");
-				//LPSPRITE sprite = CSprites::GetInstance()->Get(id);
-				float detailFrameTime;
-				//sprNode->QueryFloatAttribute("frameTime", &detailFrameTime);
-				//LPANIMATION_FRAME frame = new CAnimationFrame(sprite, detailFrameTime);
-				ani->Add(id, frameTime);
+				LPSPRITE sprite = PlaySprites->Get(id);
+				ani->Add(sprite, frameTime);
 
 				OutputDebugStringW(ToLPCWSTR("|--" + id + ':' + to_string(frameTime) + '\n'));
 			}
 			
-			GameAni->Add(aniId, ani);
+			PlayAni->Add(aniId, ani);
 			//CAnimations::GetInstance()->Add(aniId, ani);
 			
 		}
@@ -190,8 +187,6 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	string ani_set_id = tokens[3].c_str();
 
-	CAnimationSets * animation_sets = CAnimationSets::GetInstance();
-
 	CGameObject *obj = NULL;
 
 	switch (object_type)
@@ -227,7 +222,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	obj->SetPosition(x, y);
 	//CAnimations ani_set = CAnimationSets::GetInstance()->Get(ani_set_id);
 
-	obj->SetAnimationSet(GameAni);
+	obj->SetAnimationSet(PlayAni);
 	objects.push_back(obj);
 }
 

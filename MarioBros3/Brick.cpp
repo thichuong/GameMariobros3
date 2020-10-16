@@ -15,6 +15,5 @@ void CBrick::GetBoundingBox(float &l, float &t, float &r, float &b)
 }
 void CBrick::SetAnimationSet(CAnimations* ani_set)
 {
-	animations = new CAnimations();
-	animations->Add("ani-brick", ani_set->Get("ani-brick"));
+	animations = ani_set;
 }

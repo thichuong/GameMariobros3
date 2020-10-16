@@ -4,16 +4,14 @@
 CAnimationSets * CAnimationSets::__instance = NULL;
 
 
-void CAnimation::Add(string spriteId, DWORD time)
+void CAnimation::Add(LPSPRITE sprite, DWORD time)
 {
 	int t = time;
 	if (time == 0) t = this->defaultTime;
 
-	LPSPRITE sprite = CSprites::GetInstance()->Get(spriteId);
-
 	if (sprite == NULL)
 	{
-		DebugOut(L"[ERROR] Sprite ID %d cannot be found!\n", spriteId);
+		//DebugOut(L"[ERROR] Sprite ID %d cannot be found!\n", spriteId);
 	}
 
 	LPANIMATION_FRAME frame = new CAnimationFrame(sprite, t);

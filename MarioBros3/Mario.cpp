@@ -123,7 +123,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 void CMario::Render()
 {
-	string ani ="";
+	string ani =" ";
 	if (state == MARIO_STATE_DIE)
 		ani = MARIO_ANI_DIE;
 	else
@@ -156,15 +156,19 @@ void CMario::Render()
 	if (animations->Get(ani) != NULL)
 		animations->Get(ani)->Render(x, y);
 
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }
 void CMario::SetAnimationSet(CAnimations* ani_set)
 {
+	/*animations = new CAnimations();
+	
 	animations->Add(MARIO_ANI_BIG_IDLE_RIGHT, ani_set->Get(MARIO_ANI_BIG_IDLE_RIGHT));
 	animations->Add(MARIO_ANI_SMALL_IDLE_RIGHT, ani_set->Get(MARIO_ANI_SMALL_IDLE_RIGHT));
 	animations->Add(MARIO_ANI_BIG_WALKING_RIGHT, ani_set->Get(MARIO_ANI_BIG_WALKING_RIGHT));
 	animations->Add(MARIO_ANI_SMALL_WALKING_RIGHT, ani_set->Get(MARIO_ANI_SMALL_WALKING_RIGHT));
-	animations->Add(MARIO_ANI_DIE, ani_set->Get(MARIO_ANI_DIE));
+	animations->Add(MARIO_ANI_DIE, ani_set->Get(MARIO_ANI_DIE));*/
+
+	animations = ani_set;
 }
 void CMario::SetState(int state)
 {

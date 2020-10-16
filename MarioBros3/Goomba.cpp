@@ -42,7 +42,7 @@ void CGoomba::Render()
 	if (state == GOOMBA_STATE_DIE) {
 		ani = GOOMBA_ANI_DIE;
 	}
-	if(animations->Get(ani)!=NULL)
+	if(animations->Get( ani)!=NULL)
 		animations->Get(ani)->Render(x, y);
 	//CAnimations::GetInstance()->Get(ani)->Render(x,y);
 	//animation_set->at(ani)->Render(x, y);
@@ -65,6 +65,5 @@ void CGoomba::SetState(int state)
 }
 void CGoomba::SetAnimationSet(CAnimations* ani_set)
 {
-	animations->Add(GOOMBA_ANI_WALKING, ani_set->Get(GOOMBA_ANI_WALKING));
-	animations->Add(GOOMBA_ANI_DIE, ani_set->Get(GOOMBA_ANI_DIE));
+	animations = ani_set;
 }

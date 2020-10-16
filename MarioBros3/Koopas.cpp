@@ -69,7 +69,5 @@ void CKoopas::SetState(int state)
 }
 void CKoopas::SetAnimationSet(CAnimations* ani_set)
 {
-	animations->Add(KOOPAS_ANI_WALKING_LEFT, ani_set->Get(KOOPAS_ANI_WALKING_LEFT));
-	animations->Add(KOOPAS_ANI_DIE, ani_set->Get(KOOPAS_ANI_DIE));
-	animations->Add(KOOPAS_ANI_WALKING_RIGHT, ani_set->Get(KOOPAS_ANI_WALKING_RIGHT));
+	animations = ani_set;
 }
