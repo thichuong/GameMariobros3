@@ -24,4 +24,5 @@ class CKoopas : public CGameObject
 public:
 	CKoopas();
 	virtual void SetState(int state);
+	virtual void SetAnimationSet(CAnimations* ani_set);
 };

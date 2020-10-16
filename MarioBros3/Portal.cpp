@@ -22,3 +22,7 @@ void CPortal::GetBoundingBox(float &l, float &t, float &r, float &b)
 	r = x + width;
 	b = y + height;
 }
+void CPortal::SetAnimationSet(CAnimations* ani_set)
+{
+	
+}

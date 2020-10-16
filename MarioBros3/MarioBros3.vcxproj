@@ -185,8 +185,8 @@
     <ClCompile Include="tinystr.cpp" />
     <ClCompile Include="tinyxml.cpp" />
     <ClCompile Include="tinyxmlparser.cpp" />
+    <ClCompile Include="tinyXML\tinyxmlerror.cpp" />
     <ClCompile Include="Utils.cpp" />
-    <ClCompile Include="xmltest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\enemies-2.png" />

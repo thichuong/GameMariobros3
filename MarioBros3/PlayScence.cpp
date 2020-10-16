@@ -53,73 +53,101 @@ void CPlayScene::_ParseSection_TEXTURES(string line)
 	CTextures::GetInstance()->Add(texID, path.c_str(), D3DCOLOR_XRGB(R, G, B));
 }
 
+void CPlayScene::LoadSource()
+{
+	CTextures* textures = CTextures::GetInstance();
+
+	textures->Add("tex-mario", L"Textures\\Mario\\NES - Super Mario Bros 3 - Mario Luigi x 3.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add("tex-enemy", L"Textures\\Enemy\\enemy_x3.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add("tex-intro", L"Textures\\Misc\\intro_x3.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add("tex-misc", L"Textures\\Misc\\misc_x3.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add("tex-ui", L"Textures\\Misc\\UIx3.png", D3DCOLOR_XRGB(255, 255, 255));
+
+	GameAni = new CAnimations();
+
+	_ParseSection_SPRITES("Textures/Sprites/MarioDB.xml");
+	_ParseSection_SPRITES("Textures/Sprites/EnemyDB.xml");
+	_ParseSection_SPRITES("Textures/Sprites/IntroDB.xml");
+	_ParseSection_SPRITES("Textures/Sprites/MiscDB.xml");
+	_ParseSection_SPRITES("Textures/Sprites/UiDB.xml");
+
+	_ParseSection_ANIMATIONS("Textures/Animations/MarioAnim.xml");
+	_ParseSection_ANIMATIONS("Textures/Animations/EnemyAnim.xml");
+	_ParseSection_ANIMATIONS("Textures/Animations/IntroAnim.xml");
+	_ParseSection_ANIMATIONS("Textures/Animations/MiscAnim.xml");
+	_ParseSection_ANIMATIONS("Textures/Animations/UiAnim.xml");
+}
 void CPlayScene::_ParseSection_SPRITES(string line)
 {
-	/*TiXmlDocument document(line.c_str());
-	TiXmlElement* root = document.RootElement();
-	TiXmlElement* texture = root->FirstChildElement();
+	TiXmlDocument doc(line.c_str());
 
-	string textureID = texture->Attribute("id");
-	LPDIRECT3DTEXTURE9 tex = CTextures::GetInstance()->Get(textureID);
-
-	for (TiXmlElement* node = texture->FirstChildElement(); node != nullptr; node = node->NextSiblingElement())
+	if (doc.LoadFile())
 	{
-		string spriteID = node->Attribute("id");
-		int left, top, width, height;
-		node->QueryIntAttribute("left", &left);
-		node->QueryIntAttribute("top", &top);
-		node->QueryIntAttribute("width", &width);
-		node->QueryIntAttribute("height", &height);
-		OutputDebugStringW(ToLPCWSTR(spriteID + ':' + to_string(left) + ':' + to_string(top) + ':' + to_string(width) + ':' + to_string(height) + '\n'));
+		TiXmlElement* root = doc.RootElement();
+		TiXmlElement* texture = root->FirstChildElement();
 
-		RECT rect;
-		rect.left = left;
-		rect.top = top;
-		rect.right = left + width;
-		rect.bottom = top + height;
+		string textureID = texture->Attribute("textureId");
+		LPDIRECT3DTEXTURE9 tex = CTextures::GetInstance()->Get(textureID);
 
-		CSprites::GetInstance()->Add(spriteID, left, top, left + width, top + height, tex);
-	}*/
+		for (TiXmlElement* node = texture->FirstChildElement(); node != nullptr; node = node->NextSiblingElement())
+		{
+			string spriteID = node->Attribute("id");
+			int left, top, width, height;
+			node->QueryIntAttribute("left", &left);
+			node->QueryIntAttribute("top", &top);
+			node->QueryIntAttribute("width", &width);
+			node->QueryIntAttribute("height", &height);
+			OutputDebugStringW(ToLPCWSTR(spriteID + ':' + to_string(left) + ':' + to_string(top) + ':' + to_string(width) + ':' + to_string(height) + '\n'));
+
+			CSprites::GetInstance()->Add(spriteID, left, top, left + width, top + height, tex);
+		}
+	}
+
+
 
 }
 void CPlayScene::_ParseSection_ANIMATIONS(string line)
 {
 	//
-	//TiXmlDocument document(line.c_str());
+	TiXmlDocument doc(line.c_str());
+	if (doc.LoadFile())
+	{
+		TiXmlElement* root = doc.RootElement();
+		TiXmlElement* info = root->FirstChildElement();
 
-	//TiXmlElement* root = document.RootElement();
-	//TiXmlElement* info = root->FirstChildElement();
+		string gameObjectID = info->Attribute("gameObjectId");
+		string textureID = info->Attribute("textureId");
+		string ani_set_id = "AllAnimations";
+		OutputDebugStringW(ToLPCWSTR("Gameobject id: " + gameObjectID + '\n'));
+		OutputDebugStringW(ToLPCWSTR("Texture id: " + textureID + '\n'));
 
-	//string gameObjectID = info->Attribute("gameObjectId");
-	//string textureID = info->Attribute("textureId");
+		CAnimations* animations = CAnimations::GetInstance();
+		for (TiXmlElement* node = info->FirstChildElement(); node != nullptr; node = node->NextSiblingElement())
+		{
+			string aniId = node->Attribute("aniId");
+			float frameTime;
+			node->QueryFloatAttribute("frameTime", &frameTime);
+			//string name = node->Attribute("id");
+			OutputDebugStringW(ToLPCWSTR(aniId + ':' + to_string(frameTime) + ':' + '\n'));
+			LPANIMATION ani = new CAnimation();
 
-	//OutputDebugStringW(ToLPCWSTR("Gameobject id: " + gameObjectID + '\n'));
-	//OutputDebugStringW(ToLPCWSTR("Texture id: " + textureID + '\n'));
+			for (TiXmlElement* sprNode = node->FirstChildElement(); sprNode != nullptr; sprNode = sprNode->NextSiblingElement())
+			{
+				string id = sprNode->Attribute("id");
+				//LPSPRITE sprite = CSprites::GetInstance()->Get(id);
+				float detailFrameTime;
+				//sprNode->QueryFloatAttribute("frameTime", &detailFrameTime);
+				//LPANIMATION_FRAME frame = new CAnimationFrame(sprite, detailFrameTime);
+				ani->Add(id, frameTime);
 
-	//for (TiXmlElement* node = info->FirstChildElement(); node != nullptr; node = node->NextSiblingElement())
-	//{
-	//	string aniId = node->Attribute("aniId");
-	//	float frameTime;
-	//	node->QueryFloatAttribute("frameTime", &frameTime);
-	//	string name = node->Attribute("name");
-	//	OutputDebugStringW(ToLPCWSTR(aniId + ':' + to_string(frameTime) + ':' + name + '\n'));
-	//	LPANIMATION ani = new CAnimation();
-	//	//LPANIMATION ani = new LPANIMATION();
-	//	// Sprite ref
-	//	for (TiXmlElement* sprNode = node->FirstChildElement(); sprNode != nullptr; sprNode = sprNode->NextSiblingElement())
-	//	{
-	//		string id = sprNode->Attribute("id");
-	//		//LPSPRITE sprite = CSprites::GetInstance()->Get(id);
-	//		float detailFrameTime;
-	//		sprNode->QueryFloatAttribute("frameTime", &detailFrameTime);
-	//		//LPANIMATION_FRAME frame = new CAnimationFrame(sprite, detailFrameTime);
-	//		ani->Add(id,detailFrameTime);
-
-	//		OutputDebugStringW(ToLPCWSTR("|--" + id + ':' + to_string(detailFrameTime) + '\n'));
-	//	}
-
-	//	CAnimations::GetInstance()->Add(aniId, ani);
-	//}
+				OutputDebugStringW(ToLPCWSTR("|--" + id + ':' + to_string(frameTime) + '\n'));
+			}
+			
+			GameAni->Add(aniId, ani);
+			//CAnimations::GetInstance()->Add(aniId, ani);
+			
+		}
+	}
 }
 
 void CPlayScene::_ParseSection_ANIMATION_SETS(string line)
@@ -197,29 +225,15 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	// General object setup
 	obj->SetPosition(x, y);
+	//CAnimations ani_set = CAnimationSets::GetInstance()->Get(ani_set_id);
 
-	LPANIMATION ani_set = CAnimations::GetInstance()->Get(ani_set_id);
-
-	obj->SetAnimationSet(ani_set);
+	obj->SetAnimationSet(GameAni);
 	objects.push_back(obj);
 }
-void CPlayScene::LoadSource()
-{
-	/*_ParseSection_SPRITES(MARIO_DB);
-	_ParseSection_SPRITES(MISC_DB);
-	_ParseSection_SPRITES(UI_DB);
-	_ParseSection_SPRITES(ENEMY_DB);
-	_ParseSection_SPRITES(INTRO_DB);
 
-	_ParseSection_ANIMATIONS(MARIO_ANIM);
-	_ParseSection_ANIMATIONS(MISC_ANIM);
-	_ParseSection_ANIMATIONS(UI_ANIM);
-	_ParseSection_ANIMATIONS(ENEMY_ANIM);
-	_ParseSection_ANIMATIONS(INTRO_ANIM);*/
-}
 void CPlayScene::Load()
 {
-	
+	LoadSource();
 	
 	DebugOut(L"[INFO] Start loading scene resources from : %s \n", sceneFilePath);
 

@@ -26,7 +26,7 @@ class CPlayScene: public CScene
 {
 protected: 
 	CMario *player;					// A play scene has to have player, right? 
-
+	CAnimations* GameAni;
 	vector<LPGAMEOBJECT> objects;
 
 	void _ParseSection_TEXTURES(string line);
@@ -37,7 +37,6 @@ protected:
 
 public: 
 	CPlayScene(int id, LPCWSTR filePath);
-
 	virtual void Load();
 	virtual void Update(DWORD dt);
 	virtual void Render();

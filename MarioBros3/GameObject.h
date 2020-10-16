@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <d3dx9.h>
 #include <vector>
+#include <string>
 
 #include "Sprites.h"
 #include "Animations.h"
@@ -60,8 +61,9 @@ public:
 
 	DWORD dt; 
 
-	//LPANIMATION_SET animation_set;
-	LPANIMATION animations;
+	//CAnimationSet* animation_set;
+	CAnimations* animations;
+	//LPANIMATION animations;
 public: 
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
@@ -72,8 +74,8 @@ public:
 
 	void RenderBoundingBox();
 
-	void SetAnimationSet(LPANIMATION ani_set) { animations = ani_set; }
-
+	//void SetAnimationSet(CAnimationSet* ani_set) { animation_set = ani_set; }
+	
 	LPCOLLISIONEVENT SweptAABBEx(LPGAMEOBJECT coO);
 	void CalcPotentialCollisions(vector<LPGAMEOBJECT> *coObjects, vector<LPCOLLISIONEVENT> &coEvents);
 	void FilterCollision(
@@ -87,7 +89,7 @@ public:
 		float &rdy);
 
 	CGameObject();
-
+	virtual void SetAnimationSet(CAnimations* ani_set) {};
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom) = 0;
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects = NULL);
 	virtual void Render() = 0;

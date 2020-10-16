@@ -57,6 +57,6 @@ public:
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
 
 	void Reset();
-
+	virtual void SetAnimationSet(CAnimations* ani_set);
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 };

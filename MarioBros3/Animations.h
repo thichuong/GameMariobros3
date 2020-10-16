@@ -47,6 +47,7 @@ public:
 	void Add(string id, LPANIMATION ani);
 	LPANIMATION Get(string id);
 	void Clear();
+	
 
 	static CAnimations * GetInstance();
 };

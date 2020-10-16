@@ -46,9 +46,10 @@ void CKoopas::Render()
 	else if (vx > 0) ani = KOOPAS_ANI_WALKING_RIGHT;
 	else if (vx <= 0) ani = KOOPAS_ANI_WALKING_LEFT;
 
-	CAnimations::GetInstance()->Get(ani)->Render(x, y);
-
-	RenderBoundingBox();
+	//CAnimations::GetInstance()->Get(ani)->Render(x, y);
+	if (animations->Get(ani) != NULL)
+		animations->Get(ani)->Render(x, y);
+	//RenderBoundingBox();
 }
 
 void CKoopas::SetState(int state)
@@ -65,4 +66,10 @@ void CKoopas::SetState(int state)
 		vx = KOOPAS_WALKING_SPEED;
 	}
 
+}
+void CKoopas::SetAnimationSet(CAnimations* ani_set)
+{
+	animations->Add(KOOPAS_ANI_WALKING_LEFT, ani_set->Get(KOOPAS_ANI_WALKING_LEFT));
+	animations->Add(KOOPAS_ANI_DIE, ani_set->Get(KOOPAS_ANI_DIE));
+	animations->Add(KOOPAS_ANI_WALKING_RIGHT, ani_set->Get(KOOPAS_ANI_WALKING_RIGHT));
 }

@@ -45,9 +45,6 @@
     <ClInclude Include="PlayScence.h">
       <Filter>Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Portal.h">
-      <Filter>Framework</Filter>
-    </ClInclude>
     <ClInclude Include="Textures.h">
       <Filter>Framework</Filter>
     </ClInclude>
@@ -84,6 +81,9 @@
     <ClInclude Include="tinyxml.h">
       <Filter>Framework\tinyXML</Filter>
     </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -93,9 +93,6 @@
       <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="PlayScence.cpp">
-      <Filter>Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Portal.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="Textures.cpp">
@@ -137,8 +134,11 @@
     <ClCompile Include="tinyxmlparser.cpp">
       <Filter>Framework\tinyXML</Filter>
     </ClCompile>
-    <ClCompile Include="xmltest.cpp">
+    <ClCompile Include="tinyXML\tinyxmlerror.cpp">
       <Filter>Framework\tinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -153,11 +153,19 @@ void CMario::Render()
 	int alpha = 255;
 	if (untouchable) alpha = 128;
 
-	CAnimations::GetInstance()->Get(ani)->Render(x, y);
+	if (animations->Get(ani) != NULL)
+		animations->Get(ani)->Render(x, y);
 
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
-
+void CMario::SetAnimationSet(CAnimations* ani_set)
+{
+	animations->Add(MARIO_ANI_BIG_IDLE_RIGHT, ani_set->Get(MARIO_ANI_BIG_IDLE_RIGHT));
+	animations->Add(MARIO_ANI_SMALL_IDLE_RIGHT, ani_set->Get(MARIO_ANI_SMALL_IDLE_RIGHT));
+	animations->Add(MARIO_ANI_BIG_WALKING_RIGHT, ani_set->Get(MARIO_ANI_BIG_WALKING_RIGHT));
+	animations->Add(MARIO_ANI_SMALL_WALKING_RIGHT, ani_set->Get(MARIO_ANI_SMALL_WALKING_RIGHT));
+	animations->Add(MARIO_ANI_DIE, ani_set->Get(MARIO_ANI_DIE));
+}
 void CMario::SetState(int state)
 {
 	CGameObject::SetState(state);
