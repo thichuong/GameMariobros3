@@ -57,11 +57,11 @@ void CPlayScene::LoadSource()
 {
 	CTextures* textures = CTextures::GetInstance();
 
-	textures->Add("tex-mario", L"Textures\\Mario\\SuperMarioBros3.png", D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add("tex-enemy", L"Textures\\Enemy\\enemy_x3.png", D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add("tex-intro", L"Textures\\Misc\\intro_x3.png", D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add("tex-misc", L"Textures\\Misc\\misc_x3.png", D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add("tex-ui", L"Textures\\Misc\\UIx3.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add("tex-mario", L"Textures\\Mario\\mario.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add("tex-enemy", L"Textures\\Enemy\\enemy.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add("tex-intro", L"Textures\\Misc\\intro.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add("tex-misc", L"Textures\\Misc\\misc.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add("tex-ui", L"Textures\\Misc\\UI.png", D3DCOLOR_XRGB(255, 255, 255));
 
 	PlaySprites = CSprites::GetInstance();
 	
@@ -132,7 +132,7 @@ void CPlayScene::_ParseSection_ANIMATIONS(string line)
 			{
 				string id = sprNode->Attribute("id");
 				LPSPRITE sprite = PlaySprites->Get(id);
-				ani->Add(sprite, frameTime);
+				ani->Add(sprite);
 				DebugOut(L"					 Loading Id = : %s \n", ToLPCWSTR(id));
 			}
 			

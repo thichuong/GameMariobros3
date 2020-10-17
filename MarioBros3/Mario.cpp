@@ -149,7 +149,7 @@ void CMario::Render()
 			ani = MARIO_ANI_SMALL_WALKING_RIGHT;
 		else ani = MARIO_ANI_SMALL_WALKING_LEFT;
 	}
-	ani  = "ani-raccoon-mario-fly";
+	
 	int alpha = 255;
 	RenderBoundingBox();
 

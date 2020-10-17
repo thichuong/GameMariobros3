@@ -2,8 +2,8 @@
 
 void CBrick::Render()
 {
-	if(animations->Get("ani-music-box")!=NULL)
-		animations->Get("ani-music-box")->Render(x, y);
+	if(animations->Get("ani-brick")!=NULL)
+		animations->Get("ani-brick")->Render(x, y);
 }
 
 void CBrick::GetBoundingBox(float &l, float &t, float &r, float &b)
