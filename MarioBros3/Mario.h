@@ -48,7 +48,7 @@ class CMario : public CGameObject
 	float start_y; 
 	float ax;
 public: 
-	CMario(float x = 0.0f, float y = 0.0f);
+	CMario(float x = 10.0f, float y = 1290.0f);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
 

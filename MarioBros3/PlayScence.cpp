@@ -57,11 +57,11 @@ void CPlayScene::LoadSource()
 {
 	CTextures* textures = CTextures::GetInstance();
 
-	textures->Add("tex-mario", L"Textures\\Mario\\mario.png", D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add("tex-enemy", L"Textures\\Enemy\\enemy.png", D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add("tex-intro", L"Textures\\Misc\\intro.png", D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add("tex-misc", L"Textures\\Misc\\misc.png", D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add("tex-ui", L"Textures\\Misc\\UI.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add("tex-mario", L"Textures\\Mario\\mario_x3.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add("tex-enemy", L"Textures\\Enemy\\enemy_x3.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add("tex-intro", L"Textures\\Misc\\intro_x3.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add("tex-misc", L"Textures\\Misc\\misc_x3.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add("tex-ui", L"Textures\\Misc\\UI_x3.png", D3DCOLOR_XRGB(255, 255, 255));
 
 	PlaySprites = CSprites::GetInstance();
 	
@@ -101,6 +101,11 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 			node->QueryIntAttribute("width", &width);
 			node->QueryIntAttribute("height", &height);
 			
+			left = left * 3 ;
+			top = top * 3 ;
+			width = width * 3;
+			height = height * 3;
+
 			PlaySprites->Add(spriteID, left, top, left + width, top + height, tex);
 		}
 	}
@@ -181,6 +186,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	float x = atof(tokens[1].c_str());
 	float y = atof(tokens[2].c_str());
 
+	 
+	x = x * 3;
+	y = y * 3;
 	string ani_set_id = tokens[3].c_str();
 
 	CGameObject *obj = NULL;
@@ -193,7 +201,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			DebugOut(L"[ERROR] MARIO object was created before!\n");
 			return;
 		}
-		obj = new CMario(x,y); 
+		obj = new CMario(100,290); 
 		player = (CMario*)obj;  
 
 		DebugOut(L"[INFO] Player object created!\n");
@@ -225,9 +233,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 void CPlayScene::Load()
 {
 	LoadSource();
-	
+	gamemap = new CGameMap();
+	gamemap->FromTMX("Textures/Maps", "world-1-1-map.tmx");
+	objects = gamemap->MapOBJECTS(PlayAni);
 	DebugOut(L"[INFO] Start loading scene resources from : %s \n", sceneFilePath);
-
+	
 	ifstream f;
 	f.open(sceneFilePath);
 
@@ -257,13 +267,20 @@ void CPlayScene::Load()
 		//
 		switch (section)
 		{ 
-			case SCENE_SECTION_TEXTURES: _ParseSection_TEXTURES(line); break;
+			//case SCENE_SECTION_TEXTURES: _ParseSection_TEXTURES(line); break;
 //			case SCENE_SECTION_SPRITES: _ParseSection_SPRITES(line); break;
 //			case SCENE_SECTION_ANIMATIONS: _ParseSection_ANIMATIONS(line); break;
 //			case SCENE_SECTION_ANIMATION_SETS: _ParseSection_ANIMATION_SETS(line); break;
-			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
+//			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
 		}
 	}
+	
+	player = new CMario();
+	player->SetPosition(100,900);
+	//CAnimations ani_set = CAnimationSets::GetInstance()->Get(ani_set_id);
+	
+	player->SetAnimationSet(PlayAni);
+	objects.push_back(player);
 	
 	f.close();
 
@@ -294,16 +311,20 @@ void CPlayScene::Update(DWORD dt)
 	// Update camera to follow mario
 	float cx, cy;
 	player->GetPosition(cx, cy);
-
 	CGame *game = CGame::GetInstance();
 	cx -= game->GetScreenWidth() / 2;
 	cy -= game->GetScreenHeight() / 2;
-
-	CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
+	if (cx < 0)
+		cx = 0;
+	if (cy < 0)
+		cy = 0;
+	CGame::GetInstance()->SetCamPos(cx, cy);
+	
 }
 
 void CPlayScene::Render()
 {
+	gamemap->Render(CGame::GetInstance());
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
 }

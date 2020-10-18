@@ -25,7 +25,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	// Calculate dx, dy 
 	CGameObject::Update(dt);
-
+	
 	// Simple fall down
 	vy += MARIO_GRAVITY*dt;
 
@@ -50,6 +50,14 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		x += dx; 
 		y += dy;
+		if (x < 0)
+			x = 0;
+		if (y > 1500)
+		{
+			y = 1400;
+			vy = 0;
+		}
+			
 	}
 	else
 	{
@@ -119,6 +127,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	// clean up collision events
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+	
 }
 
 void CMario::Render()
@@ -205,13 +214,13 @@ void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom
 
 	if (level==MARIO_LEVEL_BIG)
 	{
-		right = x + MARIO_BIG_BBOX_WIDTH;
-		bottom = y + MARIO_BIG_BBOX_HEIGHT;
+		right = x + MARIO_BIG_BBOX_WIDTH*3;
+		bottom = y + MARIO_BIG_BBOX_HEIGHT*3;
 	}
 	else
 	{
-		right = x + MARIO_SMALL_BBOX_WIDTH;
-		bottom = y + MARIO_SMALL_BBOX_HEIGHT;
+		right = x + MARIO_SMALL_BBOX_WIDTH*3;
+		bottom = y + MARIO_SMALL_BBOX_HEIGHT*3;
 	}
 }
 

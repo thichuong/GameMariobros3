@@ -3,6 +3,7 @@
 #include "Textures.h"
 #include "Scence.h"
 #include "GameObject.h"
+#include "GameMap.h"
 #include "Brick.h"
 #include "Mario.h"
 #include "Goomba.h"
@@ -29,6 +30,7 @@ protected:
 	CAnimations* PlayAni;
 	CSprites* PlaySprites;
 	vector<LPGAMEOBJECT> objects;
+	CGameMap* gamemap;
 
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);

@@ -22,20 +22,11 @@
     <Filter Include="Framework\tinyXML">
       <UniqueIdentifier>{04952969-2a5b-4ced-9d28-8f68d6e96a5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Map">
+      <UniqueIdentifier>{96a0e518-b40c-484c-a616-f6b0d39de82b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MarioBros3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Framework</Filter>
     </ClInclude>
@@ -83,6 +74,12 @@
     </ClInclude>
     <ClInclude Include="Portal.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap.h">
+      <Filter>Framework\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TileSet.h">
+      <Filter>Framework\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +136,12 @@
     </ClCompile>
     <ClCompile Include="Portal.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMap.cpp">
+      <Filter>Framework\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="TileSet.cpp">
+      <Filter>Framework\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -75,6 +75,8 @@ public:
 
 	int GetScreenWidth() { return screen_width; }
 	int GetScreenHeight() { return screen_height; }
+	int GetScamX() { return cam_x; }
+	int GetScamY() { return cam_y; }
 
 	static void SweptAABB(
 		float ml,			// move left 
