@@ -313,7 +313,7 @@ void CPlayScene::Update(DWORD dt)
 	player->GetPosition(cx, cy);
 	CGame *game = CGame::GetInstance();
 	cx -= game->GetScreenWidth() / 2;
-	cy -= game->GetScreenHeight() / 2;
+	cy -= (game->GetScreenHeight() / 2) *1.5;
 	if (cx < 0)
 		cx = 0;
 	if (cy < 0)

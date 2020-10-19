@@ -79,7 +79,6 @@ void CGameMap::Render(CGame* game)
 vector<LPGAMEOBJECT> CGameMap::MapOBJECTS( CAnimations* PlayAni)
 {
 	vector<LPGAMEOBJECT> objects;
-	DebugOut(L"[Load] obj %d\n", 2);
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height ; j++) {
 			int x = i * tileWidth;
@@ -87,7 +86,7 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS( CAnimations* PlayAni)
 			for (Layer layer : layers) {
 				
 				int id = layer->GetTileID(i % width, j % height);
-				DebugOut(L"	[Load] obj %d\n", id);
+				
 				if(CreatObject(id, x, y, PlayAni))
 					objects.push_back(CreatObject(id, x, y, PlayAni));
 			}
@@ -134,7 +133,6 @@ CGameMap::~CGameMap()
 LPGAMEOBJECT CreatObject(int id, int x, int y, CAnimations* Ani)
 {
 	CGameObject* obj = NULL;
-	DebugOut(L"		[New] obj %d\n", id);
 	switch (id)
 	{
 	case 391:

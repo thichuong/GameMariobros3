@@ -10,8 +10,7 @@ CTileSet::CTileSet(TiXmlElement* data, string xmlPath)
 	data->QueryIntAttribute("tilecount", &tileCount);
 	data->QueryIntAttribute("columns", &columns);
 
-	sizex = sizex ;
-	sizey = sizey ;
+	
 	CTextures* textures = CTextures::GetInstance();
 	TiXmlElement* imgDom = data->FirstChildElement("image");
 	string imgPath = xmlPath + "\\" + imgDom->Attribute("source");
@@ -29,11 +28,11 @@ CTileSet::CTileSet(TiXmlElement* data, string xmlPath)
 			
 			if (object != NULL ) {
 				PRECT rect = new RECT();
-				float left, top, right, bottom;
-				object->QueryFloatAttribute("x",&left);
-				object->QueryFloatAttribute("y", &top);
-				object->QueryFloatAttribute("width", &right);
-				object->QueryFloatAttribute("height", &bottom);
+				int left, top, right, bottom;
+				object->QueryIntAttribute("x",&left);
+				object->QueryIntAttribute("y", &top);
+				object->QueryIntAttribute("width", &right);
+				object->QueryIntAttribute("height", &bottom);
 				rect->left = left;
 				rect->top = top;
 				rect->right = rect->right + rect->left;
@@ -58,17 +57,17 @@ PRECT CTileSet::GetBlockBoundingBox(int id)
 	return blocks[id];
 }
 
-void CTileSet::Draw(int gid, float x, float y)
+void CTileSet::Draw(int gid, int x, int y)
 {
 	if (gid < firstgid) return;
 
-	float left, top, right, bottom;
+	int left, top, right, bottom;
 	top = ((gid - firstgid) / columns) * sizey;
 	left = ((gid - firstgid) % columns) * sizex;
 	bottom = top + sizey;
 	right = left + sizex;
 	CGame* game = CGame::GetInstance();
-	game->Draw(x, y, texture, left, top, right, bottom, 255);
+	game->Draw(x, y, texture, left, top, right, bottom);
 	//CGame::GetInstance()->Draw(x, y, texture, left, top, right, bottom, 255);
 }
 

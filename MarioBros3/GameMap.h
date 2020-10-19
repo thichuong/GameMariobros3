@@ -18,6 +18,7 @@ class CLayer
 	
 
 	int** tiles;
+
 	//int tiles[500][500];
 public:
 	int id;
@@ -54,5 +55,5 @@ public:
 	~CGameMap();
 
 };
-
+  
 LPGAMEOBJECT CreatObject(int id, int x, int y, CAnimations* Ani);
