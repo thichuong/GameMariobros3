@@ -84,12 +84,21 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS( CAnimations* PlayAni)
 			int x = i * tileWidth;
 			int y = j * tileHeight;
 			for (Layer layer : layers) {
+				switch (layer->id)
+				{
+				case 4:
+				case 5:
+				case 6:
+				case 8:
+					int id = layer->GetTileID(i % width, j % height);
+
+					if (CreatObject(id, x, y, PlayAni) != NULL)
+						objects.push_back(CreatObject(id, x, y, PlayAni));
+					break;
 				
-				int id = layer->GetTileID(i % width, j % height);
-				
-				if(CreatObject(id, x, y, PlayAni))
-					objects.push_back(CreatObject(id, x, y, PlayAni));
+				}
 			}
+
 		}
 	}
 	return objects;
@@ -133,21 +142,11 @@ CGameMap::~CGameMap()
 LPGAMEOBJECT CreatObject(int id, int x, int y, CAnimations* Ani)
 {
 	CGameObject* obj = NULL;
-	switch (id)
+	if(id != 0)
 	{
-	case 391:
-	case 392:
-	case 490:
-	case 491:
-	case 520:
-	case 521:
 		obj = new CBrick();
 		obj->SetPosition(x, y);
 		obj->SetAnimationSet(Ani);
-		
-		break;
-	default:
-		break;
 	}
 	return obj;
 }
