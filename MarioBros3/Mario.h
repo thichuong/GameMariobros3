@@ -14,16 +14,13 @@
 #define MARIO_STATE_JUMP			300
 #define MARIO_STATE_DIE				400
 
-#define MARIO_ANI_BIG_IDLE_RIGHT		"ani-big-mario-walk"
-#define MARIO_ANI_BIG_IDLE_LEFT			"ani-big-mario-walk"
-#define MARIO_ANI_SMALL_IDLE_RIGHT		"ani-small-mario-walk"
-#define MARIO_ANI_SMALL_IDLE_LEFT			"ani-small-mario-walk"
+#define MARIO_ANI_BIG_IDLE		"ani-big-mario-idle"
+#define MARIO_ANI_SMALL_IDLE		"ani-small-mario-idle"
 
-#define MARIO_ANI_BIG_WALKING_RIGHT			"ani-big-mario-walk"
-#define MARIO_ANI_BIG_WALKING_LEFT			"ani-big-mario-walk"
-#define MARIO_ANI_SMALL_WALKING_RIGHT		"ani-small-mario-walk"
-#define MARIO_ANI_SMALL_WALKING_LEFT		"ani-small-mario-walk"
+#define MARIO_ANI_BIG_WALKING		"ani-big-mario-walk"
+#define MARIO_ANI_SMALL_WALKING		"ani-small-mario-walk"
 
+#define MARIO_ANI_LEFT
 #define MARIO_ANI_DIE				"ani-small-mario-idle"
 
 #define	MARIO_LEVEL_SMALL	1

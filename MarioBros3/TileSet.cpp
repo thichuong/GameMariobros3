@@ -26,13 +26,19 @@ CTileSet::CTileSet(TiXmlElement* data, string xmlPath)
 		TiXmlElement* objects = node->FirstChildElement("objectgroup");
 		for (TiXmlElement* object = data->FirstChildElement("tile"); object != nullptr; object = object->NextSiblingElement("tile")) {
 			
-			if (object != NULL ) {
+			/*if (object != NULL ) {
 				PRECT rect = new RECT();
 				int left, top, right, bottom;
 				object->QueryIntAttribute("x",&left);
 				object->QueryIntAttribute("y", &top);
 				object->QueryIntAttribute("width", &right);
 				object->QueryIntAttribute("height", &bottom);
+				
+				top = ((id - firstgid) / columns) * sizey;
+				left = ((id - firstgid) % columns) * sizex;
+				bottom = top + sizey;
+				right = left + sizex;
+
 				rect->left = left;
 				rect->top = top;
 				rect->right = rect->right + rect->left;
@@ -40,7 +46,7 @@ CTileSet::CTileSet(TiXmlElement* data, string xmlPath)
 
 				this->blocks[id] = rect;
 				
-			}
+			}*/
 		}
 	}
 }
@@ -68,7 +74,6 @@ void CTileSet::Draw(int gid, int x, int y)
 	right = left + sizex;
 	CGame* game = CGame::GetInstance();
 	game->Draw(x, y, texture, left, top, right, bottom);
-	//CGame::GetInstance()->Draw(x, y, texture, left, top, right, bottom, 255);
 }
 
 CTileSet::~CTileSet()

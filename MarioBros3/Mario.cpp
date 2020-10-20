@@ -28,7 +28,12 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	
 	// Simple fall down
 	vy += MARIO_GRAVITY*dt;
-
+	if (x+dx <= 1)
+	{
+		x = 1;
+		dx = 0;
+	}
+		
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
@@ -50,11 +55,10 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		x += dx; 
 		y += dy;
-		if (x < 0)
-			x = 0;
+		
 		if (y > 1500)
 		{
-			y = 1400;
+			y = 1000;
 			vy = 0;
 		}
 			
@@ -77,7 +81,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		y += min_ty*dy + ny*0.4f;
 		
 		if (nx != 0) vx = 0;	
-		if (ny!=0) vy = 0;
+		if (ny != 0) vy = 0;
 
 		
 		//
@@ -133,6 +137,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 void CMario::Render()
 {
 	string ani = string();
+	bool ani_left = false;
 	if (state == MARIO_STATE_DIE)
 		ani = MARIO_ANI_DIE;
 	else
@@ -140,31 +145,37 @@ void CMario::Render()
 	{
 		if (vx == 0)
 		{
-			if (nx>0) ani = MARIO_ANI_BIG_IDLE_RIGHT;
-			else ani = MARIO_ANI_BIG_IDLE_LEFT;
+			ani = MARIO_ANI_BIG_IDLE;
+			if (nx <= 0)  ani_left = TRUE;
 		}
-		else if (vx > 0) 
-			ani = MARIO_ANI_BIG_WALKING_RIGHT; 
-		else ani = MARIO_ANI_BIG_WALKING_LEFT;
+		else
+		{
+			ani = MARIO_ANI_BIG_WALKING;
+			if (vx < 0)
+				ani_left = TRUE;
+		}
 	}
 	else if (level == MARIO_LEVEL_SMALL)
 	{
 		if (vx == 0)
 		{
-			if (nx>0) ani = MARIO_ANI_SMALL_IDLE_RIGHT;
-			else ani = MARIO_ANI_SMALL_IDLE_LEFT;
+			ani = MARIO_ANI_SMALL_IDLE;
+			if (nx <= 0) ani_left = TRUE;
 		}
-		else if (vx > 0)
-			ani = MARIO_ANI_SMALL_WALKING_RIGHT;
-		else ani = MARIO_ANI_SMALL_WALKING_LEFT;
+		else
+		{
+			ani = MARIO_ANI_SMALL_WALKING;
+			if (vx <= 0)
+				ani_left = TRUE;
+		}
 	}
 	
-	int alpha = 255;
-	RenderBoundingBox();
+	
+	//RenderBoundingBox();
 
 	//if (untouchable) alpha = 128;
 	if (animations->Get(ani) != NULL)
-		animations->Get(ani)->Render(x, y);
+		animations->Get(ani)->Render(x, y, ani_left);
 
 	
 }
