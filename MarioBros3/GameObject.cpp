@@ -76,10 +76,8 @@ void CGameObject::CalcPotentialCollisions(
 		else
 			delete e;
 	}
-
 	std::sort(coEvents.begin(), coEvents.end(), CCollisionEvent::compare);
 }
-
 void CGameObject::FilterCollision(
 	vector<LPCOLLISIONEVENT>& coEvents,
 	vector<LPCOLLISIONEVENT>& coEventsResult,
@@ -90,7 +88,6 @@ void CGameObject::FilterCollision(
 	min_ty = 1.0f;
 	int min_ix = -1;
 	int min_iy = -1;
-
 	int reFilter = -1;
 
 	nx = 0.0f;
@@ -103,7 +100,7 @@ void CGameObject::FilterCollision(
 			if (i != reFilter)
 			{
 				LPCOLLISIONEVENT c = coEvents[i];
-
+			
 				if (c->t < min_tx && c->nx != 0) {
 					min_tx = c->t; nx = c->nx; min_ix = i; rdx = c->dx;
 				}
@@ -113,7 +110,6 @@ void CGameObject::FilterCollision(
 				}
 			}
 		}
-
 		if (min_ix >= 0 && min_iy >= 0)
 		{
 
@@ -128,7 +124,9 @@ void CGameObject::FilterCollision(
 				{
 					//coEventsResult.push_back(coEvents[min_iy]);
 					nx = 0.0f;
+					min_tx = 1.0f;
 					reFilter = min_ix;
+					//DeletecoEvents(coEvents, min_ix);
 				}
 				else
 				{
@@ -144,8 +142,10 @@ void CGameObject::FilterCollision(
 				{
 					//coEventsResult.push_back(coEvents[min_ix]);
 					ny = 0.0f;
+					min_ty = 1.0f;
 					reFilter = min_iy;
-					//DebugOut(L"[FilterCollision] sprite added: %d, %d, %d, %d, %d \n", id, );
+					//DeletecoEvents(coEvents, min_iy);
+					//DebugOut(L"[FilterCollision] FilterCollision: %d \n", min_iy);
 				}
 				else
 				{
@@ -160,7 +160,9 @@ void CGameObject::FilterCollision(
 				{
 					//coEventsResult.push_back(coEvents[min_ix]);
 					ny = 0.0f;
+					min_ty = 1.0f;
 					reFilter = min_iy;
+					//DeletecoEvents(coEvents, min_iy);
 				}
 				else
 				{
@@ -181,14 +183,16 @@ void CGameObject::FilterCollision(
 		{
 			if (i != reFilter)
 			{
+		
 				LPCOLLISIONEVENT c = coEvents[i];
 
 				if (c->t < min_tx && c->nx != 0) {
 					min_tx = c->t; nx = c->nx; min_ix = i; rdx = c->dx;
+					
 				}
-
 				if (c->t < min_ty && c->ny != 0) {
 					min_ty = c->t; ny = c->ny; min_iy = i; rdy = c->dy;
+					DebugOut(L"			[FilterCollision] FilterCollision : %d \n", min_iy);
 				}
 			}
 		}
