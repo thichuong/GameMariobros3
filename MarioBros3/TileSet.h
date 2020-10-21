@@ -16,7 +16,7 @@ class CTileSet
 	int columns;
 	float sizex;
 	float sizey;
-	//RECT r;
+	RECT r;
 	LPDIRECT3DTEXTURE9 texture;
 
 	unordered_map<int, PRECT> blocks;
@@ -26,7 +26,7 @@ public:
 	CTileSet(TiXmlElement* data, string xmlPath);
 
 	int GetFirstGID();
-
+	int GettileCount() { return tileCount; };
 	PRECT GetBlockBoundingBox(int id);
 
 	void Draw(int gid, int x, int y);

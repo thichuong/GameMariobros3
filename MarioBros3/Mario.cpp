@@ -26,10 +26,28 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	// Calculate dx, dy 
 	//CGameObject::Update(dt);
 	this->dt = dt;
+	if (walking)
+	{
+		if (nx > 0)
+			if (vx <= MARIO_WALKING_SPEED)
+				vx += dt * MARIO_WALKING_SPEED_UP;
+			else vx = MARIO_WALKING_SPEED;
+		else
+			if (vx >= -MARIO_WALKING_SPEED)
+				vx -= dt * MARIO_WALKING_SPEED_UP;
+			else vx = -MARIO_WALKING_SPEED;
+	}
+	else
+	{
+		if (vx >= 0.04 || vx <= -0.04)
+			vx -= dt * MARIO_WALKING_SPEED_DOWN * vx;
+		else vx = 0;
+	}
+	
 	//dx = vx * dt;
 
 	dy = vy * dt;
-
+	dx = 0;
 	// Simple fall down
 	vy += MARIO_GRAVITY*dt;
 
@@ -83,7 +101,11 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		y += min_ty*dy + ny*0.4f;
 		
 		if (nx != 0) vx = 0;	
-		if (ny != 0) vy = 0;
+		if (ny != 0) {
+			vy = 0;
+			if(ny < 0)
+				jumped = FALSE;
+		}
 
 		
 		//
@@ -132,16 +154,19 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 
 	coEvents.clear();
+	;
 	dx = vx * dt;
 	dy = 0;
+	if (x + dx <= 1)
+	{
+		dx = 0;
+		x = 1;
+		DebugOut(L"[INFO] mario position %d, \n", x);	
+	}
+		
+	
 	if (state != MARIO_STATE_DIE)
 		CalcPotentialCollisions(coObjects, coEvents);
-	if (GetTickCount() - untouchable_start > MARIO_UNTOUCHABLE_TIME)
-	{
-		untouchable_start = 0;
-		untouchable = 0;
-	}
-
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{
@@ -290,22 +315,29 @@ void CMario::SetState(int state)
 	switch (state)
 	{
 	case MARIO_STATE_WALKING_RIGHT:
-		vx = MARIO_WALKING_SPEED;
-		nx = 1;	
+		walking = TRUE;
+		nx = 1;
 		break;
 	case MARIO_STATE_WALKING_LEFT: 
-		vx = -MARIO_WALKING_SPEED;
+		walking = TRUE;
 		nx = -1;
 		break;
 	case MARIO_STATE_JUMP:
 		// TODO: need to check if Mario is *current* on a platform before allowing to jump again
-		vy = -MARIO_JUMP_SPEED_Y;
+		if (!jumped)
+		{
+			vy = -MARIO_JUMP_SPEED_Y;
+			jumped = TRUE;
+		}
 		break; 
 	case MARIO_STATE_IDLE: 
-		vx = 0;
+		vx = vx;
+		walking = FALSE;
 		break;
 	case MARIO_STATE_DIE:
 		vy = -MARIO_DIE_DEFLECT_SPEED;
+		vx = 0;
+		walking = FALSE;
 		break;
 	}
 }

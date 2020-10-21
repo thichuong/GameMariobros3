@@ -10,7 +10,7 @@
 #include "Mario.h"
 #include "Goomba.h"
 #include "Koopas.h"
-
+#include "CollisionBox.h"
 using namespace std;
 
 class CLayer

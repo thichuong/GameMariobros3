@@ -1,9 +1,12 @@
 #pragma once
 #include "GameObject.h"
 
-#define MARIO_WALKING_SPEED		0.15f 
+#define MARIO_WALKING_SPEED		0.5f
+#define MARIO_WALKING_SPEED_UP	0.004f
+#define MARIO_WALKING_SPEED_DOWN 0.004f
 //0.1f
-#define MARIO_JUMP_SPEED_Y		0.5f
+#define MARIO_JUMP_SPEED_Y		0.8f
+#define MARIO_JUMP_SPEED_Y_UP	0.004f
 #define MARIO_JUMP_DEFLECT_SPEED 0.2f
 #define MARIO_GRAVITY			0.002f
 #define MARIO_DIE_DEFLECT_SPEED	 0.5f
@@ -40,6 +43,9 @@ class CMario : public CGameObject
 	int level;
 	int untouchable;
 	DWORD untouchable_start;
+	bool walking;
+	bool jumped;
+	
 
 	float start_x;			// initial position of Mario at scene
 	float start_y; 

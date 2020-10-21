@@ -24,7 +24,7 @@ CLayer::CLayer(TiXmlElement* data)
 			
 		}
 	}
-
+	DebugOut(L"[Load Layer] CTileSet = : %d \n", id);
 	splitted.clear();
 }
 
@@ -46,10 +46,12 @@ CGameMap::CGameMap()
 }
 TileSet CGameMap::GetTileSet(int id)
 {
-	TileSet tileset = tilesets[id];
-	if (tileset == NULL)
-		DebugOut(L"[ERROR] Failed to find animation id: %d\n", id);
-	return tileset;
+	for (auto& tileset : tilesets) 
+	{
+			if (id >= tileset.second->GetFirstGID() && id <= tileset.second->GettileCount())
+				return tileset.second;
+	}
+	return NULL;
 }
 void CGameMap::Render(CGame* game)
 {
@@ -70,7 +72,8 @@ void CGameMap::Render(CGame* game)
 			for (Layer layer : layers) {
 				if (layer->Hidden) continue;
 				int id = layer->GetTileID(i % width, j % height);
-				this->GetTileSet(1)->Draw(id, x, y);
+				if(this->GetTileSet(id))
+					this->GetTileSet(id)->Draw(id, x, y);
 			}
 		}
 	}
@@ -84,19 +87,11 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS( CAnimations* PlayAni)
 			int x = i * tileWidth;
 			int y = j * tileHeight;
 			for (Layer layer : layers) {
-				switch (layer->id)
-				{
-				case 4:
-				case 5:
-				case 6:
-				case 8:
-					int id = layer->GetTileID(i % width, j % height);
-
-					if (CreatObject(id, x, y, PlayAni) != NULL)
-						objects.push_back(CreatObject(id, x, y, PlayAni));
-					break;
 				
-				}
+					int id = layer->GetTileID(i % width, j % height);
+					if(this->GetTileSet(id))
+						if(this->GetTileSet(id)->GetBlockBoundingBox(id))
+							objects.push_back(CreatObject(id, x, y, PlayAni));
 			}
 
 		}
@@ -144,7 +139,7 @@ LPGAMEOBJECT CreatObject(int id, int x, int y, CAnimations* Ani)
 	CGameObject* obj = NULL;
 	if(id != 0)
 	{
-		obj = new CBrick();
+		obj = new CCollisionBox();
 		obj->SetPosition(x, y);
 		obj->SetAnimationSet(Ani);
 	}
