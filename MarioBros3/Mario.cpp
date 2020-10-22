@@ -57,8 +57,14 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	coEvents.clear();
 
 	this->dt = dt;
-	//dx = vx * dt;
+	dx = vx * dt;
 	dy = vy * dt;
+	if (x + dx <= 1)
+	{
+		dx = 0;
+		x = 1;
+		DebugOut(L"[INFO] mario position %d, \n", x);
+	}
 	// turn off collision when die 
 	if (state!=MARIO_STATE_DIE)
 		CalcPotentialCollisions(coObjects, coEvents);
@@ -100,13 +106,14 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		x += min_tx*dx + nx*0.4f;
 		y += min_ty*dy + ny*0.4f;
 		
+
 		if (nx != 0) vx = 0;	
 		if (ny != 0) {
 			vy = 0;
 			if(ny < 0)
 				jumped = FALSE;
 		}
-
+ 
 		
 		//
 		// Collision logic with other objects
@@ -148,99 +155,6 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			else if (dynamic_cast<CPortal *>(e->obj))
 			{
 				CPortal *p = dynamic_cast<CPortal *>(e->obj);
-				CGame::GetInstance()->SwitchScene(p->GetSceneId());
-			}
-		}
-	}
-
-	coEvents.clear();
-	;
-	dx = vx * dt;
-	dy = 0;
-	if (x + dx <= 1)
-	{
-		dx = 0;
-		x = 1;
-		DebugOut(L"[INFO] mario position %d, \n", x);	
-	}
-		
-	
-	if (state != MARIO_STATE_DIE)
-		CalcPotentialCollisions(coObjects, coEvents);
-	// No collision occured, proceed normally
-	if (coEvents.size() == 0)
-	{
-		x += dx;
-		y += dy;
-
-		if (y > 1500)
-		{
-			y = 1000;
-			vy = 0;
-		}
-
-	}
-	else
-	{
-		float min_tx, min_ty, nx = 0, ny;
-		float rdx = 0;
-		float rdy = 0;
-
-		// TODO: This is a very ugly designed function!!!!
-		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
-
-		// how to push back Mario if collides with a moving objects, what if Mario is pushed this way into another object?
-		//if (rdx != 0 && rdx!=dx)
-		//	x += nx*abs(rdx); 
-
-		// block every object first!
-		x += min_tx * dx + nx * 0.4f;
-		y += min_ty * dy + ny * 0.4f;
-
-		if (nx != 0) vx = 0;
-		if (ny != 0) vy = 0;
-
-
-		//
-		// Collision logic with other objects
-		//
-		for (UINT i = 0; i < coEventsResult.size(); i++)
-		{
-			LPCOLLISIONEVENT e = coEventsResult[i];
-
-			if (dynamic_cast<CGoomba*>(e->obj)) // if e->obj is Goomba 
-			{
-				CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
-
-				// jump on top >> kill Goomba and deflect a bit 
-				if (e->ny < 0)
-				{
-					if (goomba->GetState() != GOOMBA_STATE_DIE)
-					{
-						goomba->SetState(GOOMBA_STATE_DIE);
-						vy = -MARIO_JUMP_DEFLECT_SPEED;
-					}
-				}
-				else if (e->nx != 0)
-				{
-					if (untouchable == 0)
-					{
-						if (goomba->GetState() != GOOMBA_STATE_DIE)
-						{
-							if (level > MARIO_LEVEL_SMALL)
-							{
-								level = MARIO_LEVEL_SMALL;
-								StartUntouchable();
-							}
-							else
-								SetState(MARIO_STATE_DIE);
-						}
-					}
-				}
-			} // if Goomba
-			else if (dynamic_cast<CPortal*>(e->obj))
-			{
-				CPortal* p = dynamic_cast<CPortal*>(e->obj);
 				CGame::GetInstance()->SwitchScene(p->GetSceneId());
 			}
 		}

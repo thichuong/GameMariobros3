@@ -84,120 +84,57 @@ void CGameObject::FilterCollision(
 	float& min_tx, float& min_ty,
 	float& nx, float& ny, float& rdx, float& rdy)
 {
+	float tempx, tempy ;
 	min_tx = 1.0f;
 	min_ty = 1.0f;
 	int min_ix = -1;
 	int min_iy = -1;
-	int reFilter = -1;
+	int min_t = -1;
 
 	nx = 0.0f;
 	ny = 0.0f;
 
 	coEventsResult.clear();
-
-		for (UINT i = 0; i < coEvents.size(); i++)
-		{
-			if (i != reFilter)
-			{
-				LPCOLLISIONEVENT c = coEvents[i];
+	DebugOut(L"[INFO] coEvents \n");
+	for (UINT i = 0; i < coEvents.size(); i++)
+	{
 			
-				if (c->t < min_tx && c->nx != 0) {
-					min_tx = c->t; nx = c->nx; min_ix = i; rdx = c->dx;
-				}
-
-				if (c->t < min_ty && c->ny != 0) {
-					min_ty = c->t; ny = c->ny; min_iy = i; rdy = c->dy;
-				}
-			}
-		}
-		if (min_ix >= 0 && min_iy >= 0)
-		{
-
-			float box_xl, box_xt, box_xr, box_xb;
-			float box_yl, box_yt, box_yr, box_yb;
-
-			coEvents[min_ix]->obj->GetBoundingBox(box_xl, box_xt, box_xr, box_xb);
-			coEvents[min_iy]->obj->GetBoundingBox(box_yl, box_yt, box_yr, box_yb);
-			if (ny < 0)
-			{
-				if (box_xt == box_yt)
-				{
-					//coEventsResult.push_back(coEvents[min_iy]);
-					nx = 0.0f;
-					min_tx = 1.0f;
-					reFilter = min_ix;
-					//DeletecoEvents(coEvents, min_ix);
-				}
-				else
-				{
-					if (min_ix >= 0) coEventsResult.push_back(coEvents[min_ix]);
-					if (min_iy >= 0) coEventsResult.push_back(coEvents[min_iy]);
-				
-				}
+		LPCOLLISIONEVENT c = coEvents[i];
+		DebugOut(L"		[INFO] mario  %f, \n", c->t);
+			if (c->t < min_tx && c->nx != 0) {
+				min_tx = c->t; nx = c->nx; min_ix = i; rdx = c->dx;
 			}
 
-			else if (nx < 0)
-			{
-				if (box_xl == box_yl)
-				{
-					//coEventsResult.push_back(coEvents[min_ix]);
-					ny = 0.0f;
-					min_ty = 1.0f;
-					reFilter = min_iy;
-					//DeletecoEvents(coEvents, min_iy);
-					//DebugOut(L"[FilterCollision] FilterCollision: %d \n", min_iy);
-				}
-				else
-				{
-					if (min_ix >= 0) coEventsResult.push_back(coEvents[min_ix]);
-					if (min_iy >= 0) coEventsResult.push_back(coEvents[min_iy]);
-					
-				}
+			if (c->t < min_ty && c->ny != 0) {
+				min_ty = c->t; ny = c->ny; min_iy = i; rdy = c->dy;
 			}
-			else
-			{
-				if (box_xr == box_yr)
-				{
-					//coEventsResult.push_back(coEvents[min_ix]);
-					ny = 0.0f;
-					min_ty = 1.0f;
-					reFilter = min_iy;
-					//DeletecoEvents(coEvents, min_iy);
-				}
-				else
-				{
-					if (min_ix >= 0) coEventsResult.push_back(coEvents[min_ix]);
-					if (min_iy >= 0) coEventsResult.push_back(coEvents[min_iy]);
-					
-				}
-
-			}
-		}
-		else
-		{
-			if (min_ix >= 0) coEventsResult.push_back(coEvents[min_ix]);
-			if (min_iy >= 0) coEventsResult.push_back(coEvents[min_iy]);
 			
 		}
-		for (UINT i = 0; i < coEvents.size(); i++)
-		{
-			if (i != reFilter)
-			{
-		
-				LPCOLLISIONEVENT c = coEvents[i];
-
-				if (c->t < min_tx && c->nx != 0) {
-					min_tx = c->t; nx = c->nx; min_ix = i; rdx = c->dx;
-					
-				}
-				if (c->t < min_ty && c->ny != 0) {
-					min_ty = c->t; ny = c->ny; min_iy = i; rdy = c->dy;
-					DebugOut(L"			[FilterCollision] FilterCollision : %d \n", min_iy);
-				}
-			}
-		}
-	if (min_ix >= 0) coEventsResult.push_back(coEvents[min_ix]);
-	if (min_iy >= 0) coEventsResult.push_back(coEvents[min_iy]);
+	tempx = x;
+	tempy = y;
+	x += min_tx * dx + nx * 0.4f;
+	y += min_ty * dy + ny * 0.4f;
+	
+	if (min_ix >= 0)
+	{
+		dy = 0;
+		dx = vx * dt;
+		LPCOLLISIONEVENT e = SweptAABBEx(coEvents[min_ix]->obj);
+		if (e->t > 0 && e->t <= 1.0f)
+			coEventsResult.push_back(coEvents[min_ix]);
+	}
+	if (min_iy >= 0) 
+	{
+		dx = 0;
+		dy = vy * dt;
+		LPCOLLISIONEVENT e = SweptAABBEx(coEvents[min_iy]->obj);
+		if (e->t > 0 && e->t <= 1.0f)
+			coEventsResult.push_back(coEvents[min_iy]);
+	}
+	dx = vx * dt;
+	dy = vy * dt;
+	x = tempx;
+	y = tempy;
 }
 
 
