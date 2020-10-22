@@ -24,8 +24,7 @@ CTileSet::CTileSet(TiXmlElement* data, string xmlPath)
 		int id = 0; node->QueryIntAttribute("id", &id);
 		
 		TiXmlElement* objects = node->FirstChildElement("objectgroup");
-		for (TiXmlElement* object = data->FirstChildElement("tile"); object != nullptr; object = object->NextSiblingElement("tile")) {
-			
+		for (TiXmlElement* object = objects->FirstChildElement("object"); object != nullptr; object = object->NextSiblingElement("object")) {
 			if (object != NULL ) {
 				PRECT rect = new RECT();
 				int left, top, right, bottom;
@@ -40,7 +39,7 @@ CTileSet::CTileSet(TiXmlElement* data, string xmlPath)
 				rect->bottom = top + bottom;
 
 				this->blocks[id] = rect;
-				DebugOut(L"		[Load rect] rect left = : %d \n", rect->left);
+				DebugOut(L"		[Load rect] rect bottom = : %d \n", rect->bottom);
 			}
 		}
 	}

@@ -56,6 +56,7 @@ public:
 	float vy;
 
 	int nx;	 
+	int wx;
 
 	int state;
 
@@ -87,7 +88,16 @@ public:
 		float &ny, 
 		float &rdx, 
 		float &rdy);
-
+	void FilterCollisionX(
+		vector<LPCOLLISIONEVENT>& coEvents,
+		vector<LPCOLLISIONEVENT>& coEventsResult,
+		float& min_tx,float& nx,float& rdx);
+	void FilterCollisionY(
+		vector<LPCOLLISIONEVENT>& coEvents,
+		vector<LPCOLLISIONEVENT>& coEventsResult,
+		float& min_ty,
+		float& ny,
+		float& rdy);
 	CGameObject();
 	virtual void SetAnimationSet(CAnimations* ani_set) {};
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom) = 0;

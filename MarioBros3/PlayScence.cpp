@@ -58,27 +58,27 @@ void CPlayScene::LoadSource()
 	CTextures* textures = CTextures::GetInstance();
 
 	textures->Add("tex-mario", L"Textures\\Mario\\mario_x3.png", D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add("tex-enemy", L"Textures\\Enemy\\enemy_x3.png", D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add("tex-intro", L"Textures\\Misc\\intro_x3.png", D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add("tex-misc", L"Textures\\Misc\\misc_x3.png", D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add("tex-ui", L"Textures\\Misc\\UI_x3.png", D3DCOLOR_XRGB(255, 255, 255));
+	//textures->Add("tex-enemy", L"Textures\\Enemy\\enemy_x3.png", D3DCOLOR_XRGB(255, 255, 255));
+	//textures->Add("tex-intro", L"Textures\\Misc\\intro_x3.png", D3DCOLOR_XRGB(255, 255, 255));
+	//textures->Add("tex-misc", L"Textures\\Misc\\misc_x3.png", D3DCOLOR_XRGB(255, 255, 255));
+	//textures->Add("tex-ui", L"Textures\\Misc\\UI_x3.png", D3DCOLOR_XRGB(255, 255, 255));
 
 	PlaySprites = CSprites::GetInstance();
 	
-	_ParseSection_SPRITES("Textures/Sprites/IntroDB.xml");
-	_ParseSection_SPRITES("Textures/Sprites/MiscDB.xml");
+	//_ParseSection_SPRITES("Textures/Sprites/IntroDB.xml");
+	//_ParseSection_SPRITES("Textures/Sprites/MiscDB.xml");
 	_ParseSection_SPRITES("Textures/Sprites/MarioDB.xml");
-	_ParseSection_SPRITES("Textures/Sprites/EnemyDB.xml");
+	//_ParseSection_SPRITES("Textures/Sprites/EnemyDB.xml");
 	
-	_ParseSection_SPRITES("Textures/Sprites/UiDB.xml");
+	//_ParseSection_SPRITES("Textures/Sprites/UiDB.xml");
 
 	PlayAni = CAnimations::GetInstance();
-	_ParseSection_ANIMATIONS("Textures/Animations/IntroAnim.xml");
-	_ParseSection_ANIMATIONS("Textures/Animations/MiscAnim.xml");
+	//_ParseSection_ANIMATIONS("Textures/Animations/IntroAnim.xml");
+	//_ParseSection_ANIMATIONS("Textures/Animations/MiscAnim.xml");
 	_ParseSection_ANIMATIONS("Textures/Animations/MarioAnim.xml");
-	_ParseSection_ANIMATIONS("Textures/Animations/EnemyAnim.xml");
+	//_ParseSection_ANIMATIONS("Textures/Animations/EnemyAnim.xml");
 	
-	_ParseSection_ANIMATIONS("Textures/Animations/UiAnim.xml");
+	//_ParseSection_ANIMATIONS("Textures/Animations/UiAnim.xml");
 }
 void CPlayScene::_ParseSection_SPRITES(string line)
 {
@@ -245,35 +245,6 @@ void CPlayScene::Load()
 	int section = SCENE_SECTION_UNKNOWN;					
 
 	char str[MAX_SCENE_LINE];
-	while (f.getline(str, MAX_SCENE_LINE))
-	{
-		string line(str);
-
-		if (line[0] == '#') continue;	// skip comment lines	
-
-		if (line == "[TEXTURES]") { section = SCENE_SECTION_TEXTURES; continue; }
-		//if (line == "[SPRITES]") { 
-		//	section = SCENE_SECTION_SPRITES; continue; }
-	//	if (line == "[ANIMATIONS]") { 
-		//	section = SCENE_SECTION_ANIMATIONS; continue; }
-		//if (line == "[ANIMATION_SETS]") { 
-		//	section = SCENE_SECTION_ANIMATION_SETS; continue; }
-		if (line == "[OBJECTS]") { 
-			section = SCENE_SECTION_OBJECTS; continue; }
-		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }	
-
-		//
-		// data section
-		//
-		switch (section)
-		{ 
-			//case SCENE_SECTION_TEXTURES: _ParseSection_TEXTURES(line); break;
-//			case SCENE_SECTION_SPRITES: _ParseSection_SPRITES(line); break;
-//			case SCENE_SECTION_ANIMATIONS: _ParseSection_ANIMATIONS(line); break;
-//			case SCENE_SECTION_ANIMATION_SETS: _ParseSection_ANIMATION_SETS(line); break;
-//			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
-		}
-	}
 	
 	player = new CMario();
 	player->SetPosition(100,900);
@@ -284,7 +255,7 @@ void CPlayScene::Load()
 	
 	f.close();
 
-	CTextures::GetInstance()->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
+	//CTextures::GetInstance()->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
 
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
 }
@@ -348,28 +319,15 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 
 	CMario *mario = ((CPlayScene*)scence)->GetPlayer();
-	switch (KeyCode)
-	{
-	case DIK_SPACE:
-		mario->SetState(MARIO_STATE_JUMP);
-		break;
-	case DIK_A: 
-		mario->Reset();
-		break;
-	}
+	mario->OnKeyDown(KeyCode)
+	
 }
 
 void CPlayScenceKeyHandler::KeyState(BYTE *states)
 {
 	CGame *game = CGame::GetInstance();
 	CMario *mario = ((CPlayScene*)scence)->GetPlayer();
-
+	mario->KeyState(states);
 	// disable control key when Mario die 
-	if (mario->GetState() == MARIO_STATE_DIE) return;
-	if (game->IsKeyDown(DIK_RIGHT))
-		mario->SetState(MARIO_STATE_WALKING_RIGHT);
-	else if (game->IsKeyDown(DIK_LEFT))
-		mario->SetState(MARIO_STATE_WALKING_LEFT);
-	else
-		mario->SetState(MARIO_STATE_IDLE);
+	
 }

@@ -56,4 +56,4 @@ public:
 
 };
   
-LPGAMEOBJECT CreatObject(int id, int x, int y, CAnimations* Ani);
+LPGAMEOBJECT CreatObject(PRECT Box, int x, int y, CAnimations* Ani);

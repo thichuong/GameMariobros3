@@ -24,17 +24,22 @@ CMario::CMario(float x, float y) : CGameObject()
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	// Calculate dx, dy 
-	//CGameObject::Update(dt);
-	this->dt = dt;
+	
 	if (walking)
 	{
-		if (nx > 0)
+		if (ax > 0)
 			if (vx <= MARIO_WALKING_SPEED)
+			{
 				vx += dt * MARIO_WALKING_SPEED_UP;
+				if(vx > MARIO_WALKING_SPEED) vx = MARIO_WALKING_SPEED;
+			}	
 			else vx = MARIO_WALKING_SPEED;
 		else
 			if (vx >= -MARIO_WALKING_SPEED)
+			{
 				vx -= dt * MARIO_WALKING_SPEED_UP;
+				if(vx < -MARIO_WALKING_SPEED) vx = -MARIO_WALKING_SPEED;
+			}	
 			else vx = -MARIO_WALKING_SPEED;
 	}
 	else
@@ -46,28 +51,29 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	
 	//dx = vx * dt;
 
-	dy = vy * dt;
-	dx = 0;
 	// Simple fall down
-	vy += MARIO_GRAVITY*dt;
+
 
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
-
+	vector<LPGAMEOBJECT> coObjectsResult;
 	coEvents.clear();
-
-	this->dt = dt;
-	dx = vx * dt;
-	dy = vy * dt;
+	
+	CGameObject::Update(dt);
+	vy += MARIO_GRAVITY * dt;
 	if (x + dx <= 1)
 	{
-		dx = 0;
-		x = 1;
+		//dx = 0;
+		x = 2;
 		DebugOut(L"[INFO] mario position %d, \n", x);
 	}
 	// turn off collision when die 
-	if (state!=MARIO_STATE_DIE)
+	if (state != MARIO_STATE_DIE)
+	{
 		CalcPotentialCollisions(coObjects, coEvents);
+		for (UINT i = 0; i < coEvents.size(); i++)  coObjectsResult.push_back(coEvents[i]->obj);
+	}
+		
 
 	// reset untouchable timer if untouchable time has passed
 	if ( GetTickCount() - untouchable_start > MARIO_UNTOUCHABLE_TIME) 
@@ -81,7 +87,6 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		x += dx; 
 		y += dy;
-		
 		if (y > 1500)
 		{
 			y = 1000;
@@ -106,12 +111,44 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		x += min_tx*dx + nx*0.4f;
 		y += min_ty*dy + ny*0.4f;
 		
+		if (min_tx > min_ty)
+		{
+			//y += min_ty * dy + ny * 0.4f;
+			dy = 0;
+			coEvents.clear();
+			CalcPotentialCollisions(&coObjectsResult, coEvents);
+			if(coEvents.size()> 0)
+				FilterCollisionX(coEvents, coEventsResult, min_tx, nx,  rdx);
+			else
+			{
+				x-= min_tx * dx + nx * 0.4f;
+				x += dx;
+			}
+			dy = vy * dt;
+		}
+		else
+		{
+			//x += min_tx * dx + nx * 0.4f;
+			dx = 0;
+			coEvents.clear();
+			CalcPotentialCollisions(&coObjectsResult, coEvents);
+			if (coEvents.size() > 0)
+				FilterCollisionY(coEvents, coEventsResult, min_ty, ny, rdy);
+			else
+			{
+				y-= min_ty * dy + ny * 0.4f;
+				y += dy;
+			}
+			dx = vx * dt;
+			//y += min_ty * dy + ny * 0.4f;
+		}
+		
 
 		if (nx != 0) vx = 0;	
 		if (ny != 0) {
 			vy = 0;
-			if(ny < 0)
-				jumped = FALSE;
+			if (ny < 0)
+				onGround = TRUE;
 		}
  
 		
@@ -177,7 +214,7 @@ void CMario::Render()
 		if (vx == 0)
 		{
 			ani = MARIO_ANI_BIG_IDLE;
-			if (nx <= 0)  ani_left = TRUE;
+			if (ax <= 0)  ani_left = TRUE;
 		}
 		else
 		{
@@ -191,7 +228,7 @@ void CMario::Render()
 		if (vx == 0)
 		{
 			ani = MARIO_ANI_SMALL_IDLE;
-			if (nx <= 0) ani_left = TRUE;
+			if (ax <= 0) ani_left = TRUE;
 		}
 		else
 		{
@@ -212,15 +249,15 @@ void CMario::Render()
 }
 void CMario::SetAnimationSet(CAnimations* ani_set)
 {
-	/*animations = new CAnimations();
+	animations = new CAnimations();
 	
-	animations->Add(MARIO_ANI_BIG_IDLE_RIGHT, ani_set->Get(MARIO_ANI_BIG_IDLE_RIGHT));
-	animations->Add(MARIO_ANI_SMALL_IDLE_RIGHT, ani_set->Get(MARIO_ANI_SMALL_IDLE_RIGHT));
-	animations->Add(MARIO_ANI_BIG_WALKING_RIGHT, ani_set->Get(MARIO_ANI_BIG_WALKING_RIGHT));
-	animations->Add(MARIO_ANI_SMALL_WALKING_RIGHT, ani_set->Get(MARIO_ANI_SMALL_WALKING_RIGHT));
-	animations->Add(MARIO_ANI_DIE, ani_set->Get(MARIO_ANI_DIE));*/
+	animations->Add(MARIO_ANI_BIG_IDLE, ani_set->Get(MARIO_ANI_BIG_IDLE));
+	animations->Add(MARIO_ANI_SMALL_IDLE, ani_set->Get(MARIO_ANI_SMALL_IDLE));
+	animations->Add(MARIO_ANI_BIG_WALKING, ani_set->Get(MARIO_ANI_BIG_WALKING));
+	animations->Add(MARIO_ANI_SMALL_WALKING, ani_set->Get(MARIO_ANI_SMALL_WALKING));
+	animations->Add(MARIO_ANI_DIE, ani_set->Get(MARIO_ANI_DIE));
 
-	animations = ani_set;
+	//animations = ani_set;
 }
 void CMario::SetState(int state)
 {
@@ -230,22 +267,22 @@ void CMario::SetState(int state)
 	{
 	case MARIO_STATE_WALKING_RIGHT:
 		walking = TRUE;
-		nx = 1;
+		ax = 1;
 		break;
 	case MARIO_STATE_WALKING_LEFT: 
 		walking = TRUE;
-		nx = -1;
+		ax = -1;
 		break;
 	case MARIO_STATE_JUMP:
 		// TODO: need to check if Mario is *current* on a platform before allowing to jump again
-		if (!jumped)
+		if (onGround)
 		{
 			vy = -MARIO_JUMP_SPEED_Y;
-			jumped = TRUE;
+			onGround = FALSE;
 		}
 		break; 
 	case MARIO_STATE_IDLE: 
-		vx = vx;
+		
 		walking = FALSE;
 		break;
 	case MARIO_STATE_DIE:
@@ -263,16 +300,40 @@ void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom
 
 	if (level==MARIO_LEVEL_BIG)
 	{
-		right = x + MARIO_BIG_BBOX_WIDTH*3;
-		bottom = y + MARIO_BIG_BBOX_HEIGHT*3;
+		right = x + MARIO_BIG_BBOX_WIDTH;
+		bottom = y + MARIO_BIG_BBOX_HEIGHT;
 	}
 	else
 	{
-		right = x + MARIO_SMALL_BBOX_WIDTH*3;
-		bottom = y + MARIO_SMALL_BBOX_HEIGHT*3;
+		right = x + MARIO_SMALL_BBOX_WIDTH;
+		bottom = y + MARIO_SMALL_BBOX_HEIGHT;
 	}
 }
+void CMario::OnKeyUp(int keyCode) {
 
+}
+void CMario::OnKeyDown(int keyCode)
+{
+	switch (keyCode)
+	{
+	case DIK_SPACE:
+		Mariostate.jump = JumpStates::Jump;
+		break;
+	case DIK_A:
+		Reset();
+		break;
+	}
+}
+void CMario::KeyState(BYTE* state)
+{
+	if (GetState() == MARIO_STATE_DIE) return;
+	if (CGame::GetInstance()->IsKeyDown(DIK_RIGHT))
+		SetState(MARIO_STATE_WALKING_RIGHT);
+	else if (CGame::GetInstance()->IsKeyDown(DIK_LEFT))
+		SetState(MARIO_STATE_WALKING_LEFT);
+	else
+		SetState(MARIO_STATE_IDLE);
+}
 /*
 	Reset Mario status to the beginning state of a scene
 */

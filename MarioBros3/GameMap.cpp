@@ -91,7 +91,7 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS( CAnimations* PlayAni)
 					int id = layer->GetTileID(i % width, j % height);
 					if(this->GetTileSet(id))
 						if(this->GetTileSet(id)->GetBlockBoundingBox(id))
-							objects.push_back(CreatObject(id, x, y, PlayAni));
+							objects.push_back(CreatObject(this->GetTileSet(id)->GetBlockBoundingBox(id), x, y, PlayAni));
 			}
 
 		}
@@ -134,14 +134,15 @@ CGameMap::~CGameMap()
 	layers.clear();
 	tilesets.clear();
 }
-LPGAMEOBJECT CreatObject(int id, int x, int y, CAnimations* Ani)
+LPGAMEOBJECT CreatObject(PRECT Box, int x, int y, CAnimations* Ani)
 {
 	CGameObject* obj = NULL;
-	if(id != 0)
+	if(Box !=NULL)
 	{
-		obj = new CCollisionBox();
+		obj = new CCollisionBox(Box->left, Box->top, Box->right, Box->bottom);
 		obj->SetPosition(x, y);
 		obj->SetAnimationSet(Ani);
+		DebugOut(L"		[Load BOX] CTileSet = : %d \n", Box->bottom);
 	}
 	return obj;
 }
