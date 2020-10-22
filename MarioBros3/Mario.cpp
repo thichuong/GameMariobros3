@@ -108,12 +108,12 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		//	x += nx*abs(rdx); 
 		
 		// block every object first!
-		x += min_tx*dx + nx*0.4f;
-		y += min_ty*dy + ny*0.4f;
+		
 		
 		if (min_tx > min_ty)
 		{
-			//y += min_ty * dy + ny * 0.4f;
+			x += min_ty * dx;
+			y += min_ty * dy + ny * 0.4f;
 			dy = 0;
 			coEvents.clear();
 			CalcPotentialCollisions(&coObjectsResult, coEvents);
@@ -125,10 +125,12 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				x += dx;
 			}
 			dy = vy * dt;
+			x += min_tx * dx + nx * 0.4f;
 		}
 		else
 		{
-			//x += min_tx * dx + nx * 0.4f;
+			x += min_tx * dx + nx * 0.4f;
+			y += min_tx * dy ;
 			dx = 0;
 			coEvents.clear();
 			CalcPotentialCollisions(&coObjectsResult, coEvents);
@@ -140,7 +142,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				y += dy;
 			}
 			dx = vx * dt;
-			//y += min_ty * dy + ny * 0.4f;
+			y += min_ty * dy + ny * 0.4f;
 		}
 		
 
@@ -317,6 +319,7 @@ void CMario::OnKeyDown(int keyCode)
 	switch (keyCode)
 	{
 	case DIK_SPACE:
+		SetState(MARIO_STATE_JUMP);
 		Mariostate.jump = JumpStates::Jump;
 		break;
 	case DIK_A:

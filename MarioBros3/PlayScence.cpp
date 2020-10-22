@@ -319,7 +319,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 
 	CMario *mario = ((CPlayScene*)scence)->GetPlayer();
-	mario->OnKeyDown(KeyCode)
+	mario->OnKeyDown(KeyCode);
 	
 }
 
