@@ -21,7 +21,6 @@ CLayer::CLayer(TiXmlElement* data)
 		tiles[i] = new int[height];
 		for (int j = 0; j < this->height; j++) {
 			tiles[i][j] = stoi(splitted[i + j * width]);
-			
 		}
 	}
 	DebugOut(L"[Load Layer] CTileSet = : %d \n", id);
