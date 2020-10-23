@@ -25,7 +25,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	// Calculate dx, dy 
 	
-	if (walking)
+	if (Mariostate.movement == MoveStates::Walk)
 	{
 		if (ax > 0)
 			if (vx <= MARIO_WALKING_SPEED)
@@ -61,6 +61,14 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	
 	CGameObject::Update(dt);
 	vy += MARIO_GRAVITY * dt;
+	if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
+	if (Mariostate.jump == JumpStates::Jump && canHighjump)
+	{
+		vy -= MARIO_JUMP_SPEED_Y_HIGH*dt;
+		if (vy < -0.6)
+			canHighjump = FALSE;
+	}
+		
 	if (x + dx <= 1)
 	{
 		//dx = 0;
@@ -92,6 +100,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			y = 1000;
 			vy = 0;
 		}
+		
 			
 	}
 	else
@@ -112,37 +121,49 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		
 		if (min_tx > min_ty)
 		{
+			float px = x;
 			x += min_ty * dx;
 			y += min_ty * dy + ny * 0.4f;
 			dy = 0;
+			
+			//DebugOut(L"		[X]point = : %f \n",px);
 			coEvents.clear();
 			CalcPotentialCollisions(&coObjectsResult, coEvents);
-			if(coEvents.size()> 0)
-				FilterCollisionX(coEvents, coEventsResult, min_tx, nx,  rdx);
+			if (coEvents.size() > 0)
+			{
+				FilterCollisionX(coEvents, coEventsResult, min_tx, nx, rdx);
+				//x -= min_ty * dx;
+				x += min_tx * dx + nx * 0.4f;
+				DebugOut(L"		[X] coEvents.size() = : %d \n", coEvents.size());
+			}
 			else
 			{
-				x-= min_tx * dx + nx * 0.4f;
-				x += dx;
+				x = px + dx ;
 			}
 			dy = vy * dt;
-			x += min_tx * dx + nx * 0.4f;
+			
 		}
 		else
 		{
+			float py = y ;
 			x += min_tx * dx + nx * 0.4f;
 			y += min_tx * dy ;
 			dx = 0;
 			coEvents.clear();
 			CalcPotentialCollisions(&coObjectsResult, coEvents);
 			if (coEvents.size() > 0)
+			{
 				FilterCollisionY(coEvents, coEventsResult, min_ty, ny, rdy);
+				y += min_ty * dy + ny * 0.4f;
+			}
+				
 			else
 			{
-				y-= min_ty * dy + ny * 0.4f;
-				y += dy;
+				//y-= min_ty * dy + ny * 0.4f;
+				y = py + dy;
 			}
 			dx = vx * dt;
-			y += min_ty * dy + ny * 0.4f;
+			//y += min_ty * dy + ny * 0.4f;
 		}
 		
 
@@ -150,7 +171,12 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		if (ny != 0) {
 			vy = 0;
 			if (ny < 0)
+			{
 				onGround = TRUE;
+				Mariostate.jump = JumpStates::Stand;
+			}
+				
+				
 		}
  
 		
@@ -312,30 +338,89 @@ void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom
 	}
 }
 void CMario::OnKeyUp(int keyCode) {
-
+	if (keyCode == DIK_SPACE)
+	{
+		canHighjump = FALSE;
+	}
 }
 void CMario::OnKeyDown(int keyCode)
 {
 	switch (keyCode)
 	{
 	case DIK_SPACE:
-		SetState(MARIO_STATE_JUMP);
-		Mariostate.jump = JumpStates::Jump;
+		//SetState(MARIO_STATE_JUMP);
+		 if (onGround)
+		{
+			Mariostate.jump = JumpStates::Jump;
+			//onGround = FALSE;
+			//vy = -MARIO_JUMP_SPEED_Y;
+		}
 		break;
 	case DIK_A:
 		Reset();
 		break;
 	}
+	SetVectorMario();
 }
 void CMario::KeyState(BYTE* state)
 {
 	if (GetState() == MARIO_STATE_DIE) return;
 	if (CGame::GetInstance()->IsKeyDown(DIK_RIGHT))
-		SetState(MARIO_STATE_WALKING_RIGHT);
+	{
+		Mariostate.movement = MoveStates::Walk;
+		ax = 1;
+	}
+	//SetState(MARIO_STATE_WALKING_RIGHT);
 	else if (CGame::GetInstance()->IsKeyDown(DIK_LEFT))
-		SetState(MARIO_STATE_WALKING_LEFT);
-	else
-		SetState(MARIO_STATE_IDLE);
+	{
+		Mariostate.movement = MoveStates::Walk;
+		ax = -1;
+	}
+		
+	else if(CGame::GetInstance()->IsKeyDown(DIK_DOWN))
+		Mariostate.movement = MoveStates::Crouch;
+	else Mariostate.movement = MoveStates::Idle;
+
+	if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
+	{
+		//if (Mariostate.jump == JumpStates::Jump && canHighjump)
+		//	{
+		//		Mariostate.jump = JumpStates::High;
+		//	}
+	}
+	SetVectorMario();
+}
+void CMario::SetVectorMario()
+{
+	switch (Mariostate.movement)
+	{
+	case MoveStates::Walk:
+		break;
+	case MoveStates::Idle:
+		break;   
+	}
+	switch (Mariostate.jump)
+	{
+	case JumpStates::Stand:
+	case JumpStates::Fall:
+		canHighjump = FALSE;
+		break;
+	case JumpStates::Jump:
+			if (onGround)
+			{
+				vy = -MARIO_JUMP_SPEED_Y;
+				onGround = FALSE;
+				canHighjump = TRUE;
+			}
+			break;
+	case JumpStates::High:
+	{
+		//if(canHighjump)
+		//	vy = -MARIO_JUMP_SPEED_Y_HIGH;
+		//canHighjump = FALSE;
+	}
+		
+	}
 }
 /*
 	Reset Mario status to the beginning state of a scene

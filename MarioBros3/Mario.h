@@ -5,8 +5,8 @@
 #define MARIO_WALKING_SPEED_UP	0.004f
 #define MARIO_WALKING_SPEED_DOWN 0.002f
 //0.1f
-#define MARIO_JUMP_SPEED_Y		1.0f
-#define MARIO_JUMP_SPEED_Y_UP	0.004f
+#define MARIO_JUMP_SPEED_Y		0.3f
+#define MARIO_JUMP_SPEED_Y_HIGH	0.004f
 #define MARIO_JUMP_DEFLECT_SPEED 0.2f
 #define MARIO_GRAVITY			0.003f
 #define MARIO_DIE_DEFLECT_SPEED	 0.5f
@@ -65,6 +65,7 @@ class CMario : public CGameObject
 	DWORD untouchable_start;
 	bool walking;
 	bool onGround; 
+	bool canHighjump;
 	MarioStateSet Mariostate;
 
 	float start_x;			// initial position of Mario at scene
@@ -80,6 +81,7 @@ public:
 	void SetState(int state);
 	void SetLevel(int l) { level = l; }
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
+	void SetVectorMario();
 
 	void Reset();
 	virtual void SetAnimationSet(CAnimations* ani_set);

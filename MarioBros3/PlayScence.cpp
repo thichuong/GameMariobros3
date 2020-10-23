@@ -284,12 +284,17 @@ void CPlayScene::Update(DWORD dt)
 	player->GetPosition(cx, cy);
 	CGame *game = CGame::GetInstance();
 	cx -= game->GetScreenWidth() / 2;
-	cy -= (game->GetScreenHeight() / 2) *1.5;
+	cy -= (game->GetScreenHeight() / 2);
 	if (cx < 0)
 		cx = 0;
-	if (cy < 0)
-		cy = 0;
-	CGame::GetInstance()->SetCamPos(cx, cy);
+	if (cy < cy - game->GetScreenHeight() /2 )
+	{
+		cy -= (game->GetScreenHeight() / 2);
+		if (cy < 0)
+			cy = 0;
+	}
+	
+	CGame::GetInstance()->SetCamPos(cx, 750);
 	
 }
 
@@ -298,6 +303,7 @@ void CPlayScene::Render()
 	gamemap->Render(CGame::GetInstance());
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
+	
 }
 
 /*
@@ -330,4 +336,9 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 	mario->KeyState(states);
 	// disable control key when Mario die 
 	
+}
+void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
+{
+	CMario* mario = ((CPlayScene*)scence)->GetPlayer();
+	mario->OnKeyUp(KeyCode);
 }

@@ -65,8 +65,8 @@ void CGameMap::Render(CGame* game)
 	
 	int camsizex= game->GetScreenWidth() / tileWidth;
 	int camsizey = game->GetScreenHeight() / tileHeight;
-	for (int i = col; i < camsizex + col + 5; i++) {
-		for (int j = row; j < camsizey + row + 5; j++) {
+	for (int i = col; i < camsizex + col + 3; i++) {
+		for (int j = row; j < camsizey + row + 3; j++) {
 			int x = i * tileWidth ;
 			int y = j * tileHeight ;
 			for (Layer layer : layers) {
