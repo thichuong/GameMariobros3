@@ -27,18 +27,17 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	
 	if (Mariostate.movement == MoveStates::Walk)
 	{
+		
 		if (ax > 0)
-			if (vx <= MARIO_WALKING_SPEED)
+			if (vx + dt * MARIO_WALKING_SPEED_UP < MARIO_WALKING_SPEED )
 			{
 				vx += dt * MARIO_WALKING_SPEED_UP;
-				if(vx > MARIO_WALKING_SPEED) vx = MARIO_WALKING_SPEED;
 			}	
 			else vx = MARIO_WALKING_SPEED;
 		else
-			if (vx >= -MARIO_WALKING_SPEED)
+			if (vx - dt * MARIO_WALKING_SPEED_UP > -MARIO_WALKING_SPEED )
 			{
 				vx -= dt * MARIO_WALKING_SPEED_UP;
-				if(vx < -MARIO_WALKING_SPEED) vx = -MARIO_WALKING_SPEED;
 			}	
 			else vx = -MARIO_WALKING_SPEED;
 	}
@@ -71,7 +70,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		
 	if (x + dx <= 1)
 	{
-		//dx = 0;
+		dx = 0;
 		x = 2;
 		DebugOut(L"[INFO] mario position %d, \n", x);
 	}
@@ -174,15 +173,14 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				onGround = TRUE;
 				Mariostate.jump = JumpStates::Stand;
-			}
-				
-				
+			}	
 		}
  
 		
 		//
 		// Collision logic with other objects
 		//
+		/*
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
@@ -223,8 +221,9 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				CGame::GetInstance()->SwitchScene(p->GetSceneId());
 			}
 		}
+		*/
 	}
-
+	
 	// clean up collision events
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	

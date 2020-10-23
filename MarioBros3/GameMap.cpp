@@ -115,7 +115,7 @@ void CGameMap::FromTMX(string filePath, string fileName)
 
 		//Load tileset
 		for (TiXmlElement* node = root->FirstChildElement("tileset"); node != nullptr; node = node->NextSiblingElement("tileset")) {
-			TileSet tileSet = new CTileSet(node, "Textures\\Maps");
+			TileSet tileSet = new CTileSet(node, filePath);
 			tilesets[tileSet->GetFirstGID()] = tileSet;
 		}
 

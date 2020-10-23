@@ -1,9 +1,9 @@
 #pragma once
 #include "GameObject.h"
 
-#define MARIO_WALKING_SPEED		0.5f
-#define MARIO_WALKING_SPEED_UP	0.004f
-#define MARIO_WALKING_SPEED_DOWN 0.002f
+const float MARIO_WALKING_SPEED = 0.5f;
+const float MARIO_WALKING_SPEED_UP = 0.01f;
+const float MARIO_WALKING_SPEED_DOWN = 0.002f;
 //0.1f
 #define MARIO_JUMP_SPEED_Y		0.3f
 #define MARIO_JUMP_SPEED_Y_HIGH	0.004f

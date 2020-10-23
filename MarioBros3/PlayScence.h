@@ -39,7 +39,7 @@ protected:
 	void _ParseSection_OBJECTS(string line);
 
 public: 
-	CPlayScene(int id, LPCWSTR filePath);
+	CPlayScene(int id, string filePath);
 	virtual void Load();
 	virtual void Update(DWORD dt);
 	virtual void Render();

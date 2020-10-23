@@ -376,49 +376,50 @@ void CGame::_ParseSection_SCENES(string line)
 	int id = atoi(tokens[0].c_str());
 	LPCWSTR path = ToLPCWSTR(tokens[1]);
 
-	LPSCENE scene = new CPlayScene(id, path);
-	scenes[id] = scene;
+	
 }
 
 /*
 	Load game campaign file and load/initiate first scene
 */
 
-void CGame::Load(LPCWSTR gameFile)
+void CGame::Load(string gameFile)
 {
 	
 	DebugOut(L"[INFO] Start loading game file : %s\n", gameFile);
+	string fullPath = gameFile;
+	TiXmlDocument doc(gameFile.c_str());
 
-	ifstream f;
-	f.open(gameFile);
+
 	char str[MAX_GAME_LINE];
 
 	// current resource section flag
 	int section = GAME_FILE_SECTION_UNKNOWN;
 
-	while (f.getline(str, MAX_GAME_LINE))
+	if (doc.LoadFile())
 	{
-		string line(str);
-
-		if (line[0] == '#') continue;	// skip comment lines	
-
-		if (line == "[SETTINGS]") { section = GAME_FILE_SECTION_SETTINGS; continue; }
-		if (line == "[SCENES]") { section = GAME_FILE_SECTION_SCENES; continue; }
-
+		TiXmlElement* root = doc.RootElement();
+		TiXmlElement* info = root->FirstChildElement();
+		TiXmlElement* node = info->FirstChildElement("SETTINGS");
+		int start;
+		node->QueryIntAttribute("start", &start);
+		current_scene = start;
+		node = info->FirstChildElement("SCENES");
+		string path = node->Attribute("filepath");
+		for (TiXmlElement* sprNode = node->FirstChildElement(); sprNode != nullptr; sprNode = sprNode->NextSiblingElement())
+		{
+			string line = sprNode->Attribute("file");
+			int id;
+			sprNode->QueryIntAttribute("id", &id);
+			//_ParseSection_SCENES(path + line);
+			LPSCENE scene = new CPlayScene(id, path + line);
+			scenes[id] = scene;
+			DebugOut(L"[INFO] start scene %d \n", id);
+		}
+	}
 		//
 		// data section
 		//
-		switch (section)
-		{
-			case GAME_FILE_SECTION_SETTINGS: _ParseSection_SETTINGS(line); break;
-			case GAME_FILE_SECTION_SCENES: _ParseSection_SCENES(line); break;
-		}
-	}
-
-	f.close();
-
-	DebugOut(L"[INFO] Loading game file : %s has been loaded successfully\n",gameFile);
-
 	SwitchScene(current_scene);
 }
 

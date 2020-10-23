@@ -10,7 +10,7 @@
 
 using namespace std;
 
-CPlayScene::CPlayScene(int id, LPCWSTR filePath):
+CPlayScene::CPlayScene(int id, string filePath):
 	CScene(id, filePath)
 {
 	key_handler = new CPlayScenceKeyHandler(this);
@@ -82,16 +82,17 @@ void CPlayScene::LoadSource()
 }
 void CPlayScene::_ParseSection_SPRITES(string line)
 {
+	
 	TiXmlDocument doc(line.c_str());
 	
 	if (doc.LoadFile())
 	{
 		TiXmlElement* root = doc.RootElement();
 		TiXmlElement* texture = root->FirstChildElement();
-
+		
 		string textureID = texture->Attribute("textureId");
 		LPDIRECT3DTEXTURE9 tex = CTextures::GetInstance()->Get(textureID);
-
+		
 		for (TiXmlElement* node = texture->FirstChildElement(); node != nullptr; node = node->NextSiblingElement())
 		{
 			string spriteID = node->Attribute("id");
@@ -109,9 +110,11 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 			PlaySprites->Add(spriteID, left, top, left + width, top + height, tex);
 		}
 	}
+	DebugOut(L"[INFO] Loading aniId = : %s \n", ToLPCWSTR(line));
 }
 void CPlayScene::_ParseSection_ANIMATIONS(string line)
 {
+	
 	TiXmlDocument doc(line.c_str());
 	
 	if (doc.LoadFile())
@@ -232,28 +235,68 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 void CPlayScene::Load()
 {
-	LoadSource();
-	gamemap = new CGameMap();
-	gamemap->FromTMX("Textures/Maps", "world-1-1-map.tmx");
-	objects = gamemap->MapOBJECTS(PlayAni);
-	DebugOut(L"[INFO] Start loading scene resources from : %s \n", sceneFilePath);
-	
-	ifstream f;
-	f.open(sceneFilePath);
+	//LoadSource();
+	PlaySprites = CSprites::GetInstance();
+	PlayAni = CAnimations::GetInstance();
+	TiXmlDocument doc(sceneFilePath.c_str());
+	if (doc.LoadFile())
+	{
+		TiXmlElement* root = doc.RootElement();
+		TiXmlElement* info = root->FirstChildElement();
+		string Name = info->Attribute("Game");
+		int id;
+		info->QueryIntAttribute("id", &id);
+		TiXmlElement* node = info->FirstChildElement("LoadMAP");
+		string file = node->Attribute("file");
+		string filepath = node->Attribute("filepath");
+		DebugOut(L"[INFO] GameMap: %s \n", file.c_str());
+
+		gamemap = new CGameMap();
+		gamemap->FromTMX(filepath, file);
+		objects = gamemap->MapOBJECTS(PlayAni);
+		DebugOut(L"[INFO]Staet load : %d \n", id);
+		for (TiXmlElement* node = info->FirstChildElement("LoadSPRITES"); node != nullptr; node = node->NextSiblingElement("LoadSPRITES"))
+		{
+			string file = node->Attribute("file");
+			string source = node->Attribute("source");
+			CTextures* textures = CTextures::GetInstance();
+
+			textures->Add("tex-mario", ToLPCWSTR(source), D3DCOLOR_XRGB(255, 255, 255));
+			//_ParseSection_SPRITES("file");
+			DebugOut(L"[INFO]Start load : %d \n", id);
+			_ParseSection_SPRITES(file);
+			
+		}
+		for (TiXmlElement* node = info->FirstChildElement("LoadANIMATIONS"); node != nullptr; node = node->NextSiblingElement("LoadANIMATIONS"))
+		{
+			string file = node->Attribute("file");
+			_ParseSection_ANIMATIONS(file);
+			
+			
+		}
+		
+		
+		node = info->FirstChildElement("LoadLayer");
+		float x, y;
+		node->QueryFloatAttribute("x", &x);
+		node->QueryFloatAttribute("y", &y);
+		player = new CMario(100, 290);
+		player->SetPosition(x, y);
+		player->SetAnimationSet(PlayAni);
+		objects.push_back(player);
+		DebugOut(L"[INFO] GameMap:   \n");
+	}
+	//ifstream f;
+	//f.open(sceneFilePath);
 
 	// current resource section flag
-	int section = SCENE_SECTION_UNKNOWN;					
-
-	char str[MAX_SCENE_LINE];
 	
-	player = new CMario();
-	player->SetPosition(100,900);
+	
 	//CAnimations ani_set = CAnimationSets::GetInstance()->Get(ani_set_id);
 	
-	player->SetAnimationSet(PlayAni);
-	objects.push_back(player);
 	
-	f.close();
+	
+	//f.close();
 
 	//CTextures::GetInstance()->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
 
