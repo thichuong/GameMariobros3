@@ -337,7 +337,7 @@ void CPlayScene::Update(DWORD dt)
 			cy = 0;
 	}
 	
-	CGame::GetInstance()->SetCamPos(cx, 750);
+	CGame::GetInstance()->SetCamPos(cx, cy);
 	
 }
 

@@ -38,14 +38,19 @@ const float MARIO_RUNING_SPEED = 0.40f;
 #define MARIO_ANI_CROUCHING "-crouch"
 #define MARIO_ANI_LEFT
 #define MARIO_ANI_DIE				"ani-small-mario-idle"
+#define MARIO_ANI_FLY	"-fly"
+#define MARIO_ANI_FALL "-fall"
 
 #define MARIO_ANI_SMALL "-small-mario"
 #define MARIO_ANI_BIG "-big-mario"
 #define MARIO_ANI_FIRE "-fire-mario"
-
+#define MARIO_ANI_RACCOON "-raccoon-mario"
 #define	MARIO_LEVEL_SMALL	1
 #define	MARIO_LEVEL_BIG		2
 #define MARIO_LEVEL_FIRE	3
+#define MARIO_LEVEL_RACCOON	4
+
+
 
 #define MARIO_BIG_BBOX_WIDTH  42
 #define MARIO_BIG_BBOX_HEIGHT 80
