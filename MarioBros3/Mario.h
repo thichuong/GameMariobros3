@@ -45,6 +45,13 @@ const float MARIO_RUNING_SPEED = 0.40f;
 #define MARIO_ANI_BIG "-big-mario"
 #define MARIO_ANI_FIRE "-fire-mario"
 #define MARIO_ANI_RACCOON "-raccoon-mario"
+
+#define small "small"
+#define big "big"
+#define fire "fire"
+#define raccoon "raccoon"
+#define none "none"
+
 #define	MARIO_LEVEL_SMALL	1
 #define	MARIO_LEVEL_BIG		2
 #define MARIO_LEVEL_FIRE	3
@@ -84,7 +91,8 @@ struct MarioStateSet
 };
 class CMario : public CGameObject
 {
-	int level;
+protected:
+	string changeMario;
 	int untouchable;
 	DWORD untouchable_start;
 	bool walking;
@@ -98,17 +106,18 @@ class CMario : public CGameObject
 public: 
 	CMario(float x = 10.0f, float y = 1290.0f);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
-	virtual void Render();
+	virtual void Render() = 0;
 	void OnKeyUp(int keyCode);
 	void OnKeyDown(int keyCode);
 	void KeyState(BYTE* state);
 	void SetState(int state);
 	void SetLevel(int l);
+	string GetLevel();
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
 	void ChangeState();
 	void SetMoveState(MoveStates e) ;
 	void SetJumpState(JumpStates e) ;
 	void Reset();
 	virtual void SetAnimationSet(CAnimations* ani_set);
-	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
+	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) {};
 };

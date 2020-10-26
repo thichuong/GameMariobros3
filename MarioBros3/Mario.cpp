@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <assert.h>
 #include "Utils.h"
+#include "Player.h"
 
 #include "Mario.h"
 #include "Game.h"
@@ -10,7 +11,7 @@
 
 CMario::CMario(float x, float y) : CGameObject()
 {
-	level = MARIO_LEVEL_BIG;
+	//level = MARIO_LEVEL_BIG;
 	untouchable = 0;
 	SetState(MARIO_STATE_IDLE);
 	Mariostate.movement = MoveStates::Idle;
@@ -19,12 +20,13 @@ CMario::CMario(float x, float y) : CGameObject()
 	this->x = x; 
 	this->y = y; 
 	ax = 1;
+	changeMario = none;
 }
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	// Calculate dx, dy 
-	
+	CGameObject::Update(dt);
 	if (Mariostate.movement == MoveStates::Walk || Mariostate.movement == MoveStates::Run)
 	{
 		float maxpeed;
@@ -53,20 +55,20 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			vx -= dt * MARIO_WALKING_SPEED_DOWN * vx;
 		else vx = 0;
 	}
-	
+	vy += MARIO_GRAVITY * dt;
 	//dx = vx * dt;
 
 	// Simple fall down
 
-
+	
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 	vector<LPGAMEOBJECT> coObjectsResult;
 	coEvents.clear();
 	
-	CGameObject::Update(dt);
-	vy += MARIO_GRAVITY * dt;
-	if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
+	
+	
+	/*if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
 	{
 		if (abs(vx) == MARIO_RUNING_SPEED && Mariostate.jump == JumpStates::Jump && canHighjump)
 			SetJumpState(JumpStates::Super);
@@ -96,7 +98,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		}
 			
 	}
-		
+		*/
 	
 	
 	if (x + dx <= 1)
@@ -264,61 +266,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	
 }
 
-void CMario::Render()
-{
-	string ani = "ani";
-	bool ani_left = false;
-	if (ax < 0)
-		ani_left = TRUE;
-	if (state == MARIO_STATE_DIE)
-		ani = MARIO_ANI_DIE;
-	else
-	{
-		if (level == MARIO_LEVEL_BIG) ani += MARIO_ANI_BIG;
-		else if (level == MARIO_LEVEL_SMALL) ani += MARIO_ANI_SMALL;
-		else if (level == MARIO_LEVEL_FIRE) ani += MARIO_ANI_FIRE;
-		else if (level == MARIO_LEVEL_RACCOON) ani += MARIO_ANI_RACCOON;
 
-		if (Mariostate.jump == JumpStates::Jump)
-			ani += MARIO_ANI_JUMPING;
-		else if (Mariostate.jump == JumpStates::Super)
-		{
-			if (level != 4)
-				ani += MARIO_ANI_HIGH_JUMPING;
-			else ani += MARIO_ANI_FLY;
-		}
-		else if (Mariostate.jump == JumpStates::Fall)
-				 ani += MARIO_ANI_FALL;
-		else
-		{
-			if (Mariostate.movement == MoveStates::Idle)
-			{
-				if(vx == 0)ani += MARIO_ANI_IDLE;
-				else ani+= MARIO_ANI_WALKING;
-			}
-			if (Mariostate.movement == MoveStates::Walk)
-			{
-				if (vx * ax >= 0)
-					ani += MARIO_ANI_WALKING;
-				else
-					ani += MARIO_ANI_SKIDING;
-			}
-			if(Mariostate.movement == MoveStates::Crouch)
-				ani += MARIO_ANI_CROUCHING;
-			if (Mariostate.movement == MoveStates::Run)
-				ani += MARIO_ANI_RUNING;
-		}
-
-	}
-	
-	//RenderBoundingBox();
-
-	//if (untouchable) alpha = 128;
-	if (animations->Get(ani) != NULL)
-		animations->Get(ani)->Render(x, y, ani_left);
-
-	
-}
 void CMario::SetAnimationSet(CAnimations* ani_set)
 {
 	animations = new CAnimations();
@@ -335,7 +283,7 @@ void CMario::SetState(int state)
 {
 	CGameObject::SetState(state);
 }
-
+/*
 void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {
 	left = x;
@@ -353,6 +301,7 @@ void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom
 		bottom = y + MARIO_SMALL_BBOX_HEIGHT;
 	}
 }
+*/
 void CMario::OnKeyUp(int keyCode) {
 	if (keyCode == DIK_SPACE)
 	{
@@ -411,10 +360,10 @@ void CMario::KeyState(BYTE* state)
 	}
 	else if(CGame::GetInstance()->IsKeyDown(DIK_DOWN))
 	{
-		if (level > MARIO_LEVEL_SMALL)
-		{
+		//if (level > MARIO_LEVEL_SMALL)
+		//{
 			SetMoveState(MoveStates::Crouch);
-		}
+	//	}
 			
 	}
 	else SetMoveState(MoveStates::Idle);
@@ -468,7 +417,7 @@ void  CMario::SetMoveState(MoveStates e)
 	if (Mariostate.movement == MoveStates::Crouch)
 	{
 		if (preMariostate.movement != MoveStates::Crouch)
-			y += (MARIO_BIG_BBOX_HEIGHT - MARIO_BIG_BBOX_HEIGHT_CROUCHING - 0.4);
+			y += (MARIO_BIG_BBOX_HEIGHT - MARIO_BIG_BBOX_HEIGHT_CROUCHING - 0.5);
 	}
 	else
 	{
@@ -487,12 +436,30 @@ void CMario::SetJumpState(JumpStates e)
 void CMario::SetLevel(int l)
 {
 	
-	if (level == MARIO_LEVEL_SMALL)
+	if (l == MARIO_LEVEL_SMALL)
 	{
 		y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT + 0.4);
 	}
-	level = l;
-	StartUntouchable();
+	string level;
+	switch (l)
+	{
+	case 0: level = none;
+		break;
+	case 1: level= small;
+		break;
+	case 2:level= big;
+		break;
+	case 3:level= fire;
+		break;
+	case 4: level=raccoon;
+		break;
+	}
+	changeMario = level;
+	//StartUntouchable();
+}
+string CMario::GetLevel()
+{
+	return changeMario;
 }
 /*
 	Reset Mario status to the beginning state of a scene
@@ -500,7 +467,7 @@ void CMario::SetLevel(int l)
 void CMario::Reset()
 {
 	SetState(MARIO_STATE_IDLE);
-	SetLevel(MARIO_LEVEL_BIG);
+	//SetLevel(MARIO_LEVEL_BIG);
 	SetPosition(start_x, start_y);
 	SetSpeed(0, 0);
 }

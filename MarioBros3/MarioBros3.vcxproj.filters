@@ -28,6 +28,12 @@
     <Filter Include="Source Files\GameObject">
       <UniqueIdentifier>{2e387356-2742-4388-9037-b92682ff5d48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObject\Mario">
+      <UniqueIdentifier>{d7e07c8d-667a-4341-9554-d5f40e2fa768}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Mario\player">
+      <UniqueIdentifier>{42fcad28-f178-4795-a525-112d292e0b1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -78,9 +84,6 @@
     <ClInclude Include="Koopas.h">
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Mario.h">
-      <Filter>Source Files\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Portal.h">
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
@@ -89,6 +92,24 @@
     </ClInclude>
     <ClInclude Include="FireBullet.h">
       <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Mario.h">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="BigMario.h">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="RaccoonMario.h">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="FireMario.h">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallMario.h">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Source Files\GameObject\Mario\player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -146,9 +167,6 @@
     <ClCompile Include="Koopas.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Mario.cpp">
-      <Filter>Source Files\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Portal.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
@@ -157,6 +175,24 @@
     </ClCompile>
     <ClCompile Include="FireBullet.cpp">
       <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Mario.cpp">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="BigMario.cpp">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="FireMario.cpp">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="RaccoonMario.cpp">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallMario.cpp">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\GameObject\Mario\player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

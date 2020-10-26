@@ -8,7 +8,7 @@
 #include "Mario.h"
 #include "Goomba.h"
 #include "Koopas.h"
-
+#include "Player.h"
 using namespace std;
 
 //string MARIO_DB = "Textures/Sprites/MarioDB.xml";
@@ -26,7 +26,7 @@ using namespace std;
 class CPlayScene: public CScene
 {
 protected: 
-	CMario *player;					// A play scene has to have player, right? 
+	CPlayer *player;					// A play scene has to have player, right? 
 	CAnimations* PlayAni;
 	CSprites* PlaySprites;
 	vector<LPGAMEOBJECT> objects;
@@ -46,7 +46,7 @@ public:
 	virtual void Unload();
 
 	void LoadSource();
-	CMario * GetPlayer() { return player; } 
+	CPlayer* GetPlayer() { return player; }
 
 	//friend class CPlayScenceKeyHandler;
 };

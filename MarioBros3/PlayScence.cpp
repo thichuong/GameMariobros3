@@ -204,8 +204,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			DebugOut(L"[ERROR] MARIO object was created before!\n");
 			return;
 		}
-		obj = new CMario(100,290); 
-		player = (CMario*)obj;  
+		//obj = new CMario(100,290); 
+		//player = (CMario*)obj;  
 
 		DebugOut(L"[INFO] Player object created!\n");
 		break;
@@ -280,7 +280,7 @@ void CPlayScene::Load()
 		float x, y;
 		node->QueryFloatAttribute("x", &x);
 		node->QueryFloatAttribute("y", &y);
-		player = new CMario(100, 290);
+		player = new CPlayer();
 		player->SetPosition(x, y);
 		player->SetAnimationSet(PlayAni);
 		objects.push_back(player);
@@ -367,7 +367,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 
-	CMario *mario = ((CPlayScene*)scence)->GetPlayer();
+	CPlayer*mario = ((CPlayScene*)scence)->GetPlayer();
 	mario->OnKeyDown(KeyCode);
 	
 }
@@ -375,13 +375,13 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 void CPlayScenceKeyHandler::KeyState(BYTE *states)
 {
 	CGame *game = CGame::GetInstance();
-	CMario *mario = ((CPlayScene*)scence)->GetPlayer();
+	CPlayer *mario = ((CPlayScene*)scence)->GetPlayer();
 	mario->KeyState(states);
 	// disable control key when Mario die 
 	
 }
 void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 {
-	CMario* mario = ((CPlayScene*)scence)->GetPlayer();
+	CPlayer* mario = ((CPlayScene*)scence)->GetPlayer();
 	mario->OnKeyUp(KeyCode);
 }
