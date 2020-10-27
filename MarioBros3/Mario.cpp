@@ -202,7 +202,8 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		if (nx != 0)
 		{
 			vx = 0;
-			Mariostate.movement = MoveStates::Idle;
+			if(Mariostate.movement != MoveStates::Crouch)
+				Mariostate.movement = MoveStates::Idle;
 		}
 		if (ny != 0) {
 			vy = 0;
@@ -307,8 +308,8 @@ void CMario::OnKeyUp(int keyCode) {
 	{
 		canHighjump = FALSE;
 	}
-	if (keyCode == DIK_DOWN)
-		SetMoveState(MoveStates::Idle);
+	/*if (keyCode == DIK_DOWN)
+		SetMoveState(MoveStates::Idle);*/
 }
 void CMario::OnKeyDown(int keyCode)
 {

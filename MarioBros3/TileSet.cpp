@@ -67,7 +67,7 @@ void CTileSet::Draw(int gid, int x, int y)
 	bottom = top + sizey;
 	right = left + sizex;
 	CGame* game = CGame::GetInstance();
-	game->Draw(x, y, texture, left, top, right, bottom);
+	game->Draw(x, y, 0, texture, left, top, right, bottom);
 }
 
 CTileSet::~CTileSet()

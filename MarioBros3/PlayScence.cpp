@@ -97,17 +97,18 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 		{
 			string spriteID = node->Attribute("id");
 			int left, top, width, height;
+			int xPivot = 0;
 			node->QueryIntAttribute("left", &left);
 			node->QueryIntAttribute("top", &top);
 			node->QueryIntAttribute("width", &width);
 			node->QueryIntAttribute("height", &height);
-			
+			if (node->Attribute("xPivot") != NULL) node->QueryIntAttribute("xPivot", &xPivot);
 			left = left * 3 ;
 			top = top * 3 ;
 			width = width * 3;
 			height = height * 3;
 
-			PlaySprites->Add(spriteID, left, top, left + width, top + height, tex);
+			PlaySprites->Add(spriteID, left, top, left + width, top + height, tex, xPivot);
 		}
 	}
 	DebugOut(L"[INFO] Loading aniId = : %s \n", ToLPCWSTR(line));

@@ -62,26 +62,28 @@ void CGame::Init(HWND hWnd)
 /*
 	Utility function to wrap LPD3DXSPRITE::Draw 
 */
-void CGame::Draw(int x, int y, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
+void CGame::Draw(int x, int y,int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
-	D3DXVECTOR3 p(x -(int) cam_x, y -(int) cam_y, 0);
+	D3DXVECTOR3 p(x -(int) cam_x - xPivot, y -(int) cam_y, 0);
+	D3DXVECTOR3 pcenter3((right - left) / 2 , 0, 0);
 	RECT r; 
 	r.left = left;
 	r.top = top;
 	r.right = right;
 	r.bottom = bottom;
-	spriteHandler->Draw(texture, &r, NULL, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
+	spriteHandler->Draw(texture, &r, &pcenter3, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
-void CGame::DrawFlipX(int x, int y, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
+void CGame::DrawFlipX(int x, int y, int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
-	D3DXVECTOR3 p(x - (int)cam_x, y - (int)cam_y, 0);
+	D3DXVECTOR3 p(x - (int)cam_x - xPivot, y - (int)cam_y, 0);
 	RECT r;
 	r.left = left;
 	r.top = top;
 	r.right = right;
 	r.bottom = bottom;
-	D3DXVECTOR2 pcenter2(p.x+(right-left)/2, p.y+(bottom-top)/2);
-	D3DXVECTOR3 pcenter3(pcenter2.x, pcenter2.y, 0);
+	//D3DXVECTOR2 pcenter2(p.x+(right-left)/2, p.y+(bottom-top)/2);
+	D3DXVECTOR2 pcenter2(p.x + (right - left) / 2, p.y + (bottom - top) / 2);
+	D3DXVECTOR3 pcenter3(-((right - left) / 2 - xPivot) , 0, 0);
 	D3DXVECTOR2 pScale(-1.0f, 1.0f);
 	D3DXMATRIX oldMatrix, newMatrix;
 	spriteHandler->GetTransform(&oldMatrix);
@@ -90,7 +92,8 @@ void CGame::DrawFlipX(int x, int y, LPDIRECT3DTEXTURE9 texture, int left, int to
 
 	spriteHandler->SetTransform(&newMatrix);
 
-	spriteHandler->Draw(texture, &r, NULL, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
+	spriteHandler->Draw(texture, &r, &pcenter3, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
+	//spriteHandler->Draw(texture, &r, NULL, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 	spriteHandler->SetTransform(&oldMatrix);
 
 }

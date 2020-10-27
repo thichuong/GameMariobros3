@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "Utils.h"
 
-CSprite::CSprite(string id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex)
+CSprite::CSprite(string id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex, int xPivot)
 {
 	this->id = id;
 	this->left = left;
@@ -10,6 +10,7 @@ CSprite::CSprite(string id, int left, int top, int right, int bottom, LPDIRECT3D
 	this->right = right;
 	this->bottom = bottom;
 	this->texture = tex;
+	this->xPivot = xPivot;
 }
 
 CSprites * CSprites::__instance = NULL;
@@ -24,15 +25,15 @@ void CSprite::Draw(float x, float y, bool flipx, int alpha)
 {
 	CGame * game = CGame::GetInstance();
 	if (!flipx)
-		game->Draw(x, y, texture, left, top, right, bottom, alpha);
+		game->Draw(x, y, xPivot,  texture, left, top, right, bottom, alpha);
 	else
 		//game->Draw(x, y, texture, left, top, right, bottom, alpha);
-		game->DrawFlipX(x, y, texture, left, top, right, bottom, alpha);
+		game->DrawFlipX(x, y, xPivot, texture, left, top, right, bottom, alpha);
 }
 
-void CSprites::Add(string id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex)
+void CSprites::Add(string id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex, int xPivot)
 {
-	LPSPRITE s = new CSprite(id, left, top, right, bottom, tex);
+	LPSPRITE s = new CSprite(id, left, top, right, bottom, tex, xPivot);
 	sprites[id] = s;
 
 	DebugOut(L"[INFO] sprite added: %d, %d, %d, %d, %d \n", id, left, top, right, bottom);
