@@ -30,8 +30,11 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	if (Mariostate.movement == MoveStates::Walk || Mariostate.movement == MoveStates::Run)
 	{
 		float maxpeed;
-		if (Mariostate.movement == MoveStates::Walk) maxpeed = MARIO_WALKING_SPEED;
-		else maxpeed = MARIO_RUNING_SPEED;
+		if (Mariostate.movement == MoveStates::Run && Mariostate.jump == JumpStates::Stand) 
+			maxpeed = MARIO_RUNING_SPEED;
+		else 
+			maxpeed = MARIO_WALKING_SPEED;
+		 
 		if (ax > 0)
 			if (vx + dt * MARIO_WALKING_SPEED_UP < maxpeed)
 			{
