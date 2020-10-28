@@ -1,16 +1,16 @@
 #pragma once
 #include "GameObject.h"
 
-const float MARIO_WALKING_SPEED = 0.2f;
-const float MARIO_WALKING_SPEED_UP = 0.002f;
-const float MARIO_WALKING_SPEED_DOWN = 0.002f;
-const float MARIO_RUNING_SPEED = 0.40f;
-
+#define MARIO_WALKING_SPEED  0.2f
+#define MARIO_WALKING_SPEED_UP  0.002f
+#define MARIO_WALKING_SPEED_DOWN  0.005f
+#define MARIO_RUNING_SPEED 0.5f
+#define MARIO_MIN_SPEED 0.1f
 //0.1f
 #define MARIO_JUMP_SPEED_Y		0.3f
 #define MARIO_JUMP_SPEED_Y_SPEED	0.004f
 #define MARIO_JUMP_SPEED_Y_HIGH		0.6f
-#define MARIO_JUMP_SPEED_Y_SUPER	0.9f
+#define MARIO_JUMP_SPEED_Y_SUPER	1.0f
 #define MARIO_JUMP_DEFLECT_SPEED 0.2f
 #define MARIO_GRAVITY			0.003f
 #define MARIO_DIE_DEFLECT_SPEED	 0.5f
@@ -104,7 +104,7 @@ protected:
 	float start_y; 
 	float ax;
 public: 
-	CMario(float x = 10.0f, float y = 1290.0f);
+	CMario(float x = 0, float y = 0);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render() = 0;
 	void OnKeyUp(int keyCode);

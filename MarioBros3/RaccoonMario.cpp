@@ -4,10 +4,45 @@
 
 void RaccoonMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
+	float maxspeed;
+	if (Mariostate.movement == MoveStates::Walk || Mariostate.movement == MoveStates::Run)
+	{
+		
+		if (Mariostate.movement == MoveStates::Run && Mariostate.jump == JumpStates::Stand)
+			maxspeed = MARIO_RUNING_SPEED;
+		else
+			maxspeed = MARIO_WALKING_SPEED;
+		if(Mariostate.jump == JumpStates::Super ) maxspeed = MARIO_RUNING_SPEED;
+		if (ax > 0)
+			if (vx + dt * MARIO_WALKING_SPEED_UP < maxspeed)
+			{
+				if (vx >= 0)
+					vx += dt * MARIO_WALKING_SPEED_UP;
+				else vx += dt * MARIO_WALKING_SPEED_UP * 0.5;
+			}
+			else vx = maxspeed;
+		else
+			if (vx - dt * MARIO_WALKING_SPEED_UP > -maxspeed)
+			{
+				if (vx <= 0)
+					vx -= dt * MARIO_WALKING_SPEED_UP;
+				else vx -= dt * MARIO_WALKING_SPEED_UP * 0.5;
+			}
+			else vx = -maxspeed;
+	}
+	else
+	{
+		if (vx >= MARIO_MIN_SPEED || vx <= -MARIO_MIN_SPEED)
+			vx -= dt * MARIO_WALKING_SPEED_DOWN * vx;
+		else vx = 0;
+	}
+	
+
 	if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
 	{
-		if (abs(vx) == MARIO_RUNING_SPEED && Mariostate.jump == JumpStates::Jump && canHighjump)
+		if (abs(vx) == maxspeed && Mariostate.jump == JumpStates::Jump && canHighjump)
 			SetJumpState(JumpStates::Super);
+
 		if (Mariostate.jump == JumpStates::Jump && canHighjump)
 		{
 			vy -= MARIO_JUMP_SPEED_Y_SPEED * dt;
@@ -19,7 +54,7 @@ void RaccoonMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 		{
 			vy -= MARIO_JUMP_SPEED_Y_SPEED * dt;
 			
-				if (vy < -MARIO_JUMP_SPEED_Y_SUPER)
+				if (vy < -MARIO_JUMP_SPEED_Y_SUPER *1.3)
 					canHighjump = FALSE;
 
 		}
@@ -30,6 +65,8 @@ void RaccoonMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 		}
 
 	}
+		vy += MARIO_GRAVITY * dt;
+	
 	CMario::Update(dt, colliable_objects);
 }
 void RaccoonMario::Render()

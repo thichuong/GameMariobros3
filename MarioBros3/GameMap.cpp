@@ -92,7 +92,6 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS( CAnimations* PlayAni)
 						if(this->GetTileSet(id)->GetBlockBoundingBox(id))
 							objects.push_back(CreatObject(this->GetTileSet(id)->GetBlockBoundingBox(id), x, y, PlayAni));
 			}
-
 		}
 	}
 	return objects;

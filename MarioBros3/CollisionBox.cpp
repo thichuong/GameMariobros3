@@ -3,6 +3,8 @@ CCollisionBox::CCollisionBox(float l, float t, float w, float h)
 {
 	box_width = w;
 	box_height = h;
+	if( h > 1) collision = CCollision2D::Full;
+	else collision = CCollision2D::Top;
 }
 void  CCollisionBox::Render()
 {

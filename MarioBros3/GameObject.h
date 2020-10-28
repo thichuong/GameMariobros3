@@ -41,6 +41,14 @@ struct CCollisionEvent
 	}
 };
 
+enum class CCollision2D
+{
+	Full, // 4 sides of box: default
+	Left,
+	Top,
+	Right,
+	Bottom
+};
 
 class CGameObject
 {
@@ -61,11 +69,11 @@ public:
 	int state;
 
 	DWORD dt; 
-
+	CCollision2D collision;
 	//CAnimationSet* animation_set;
 	CAnimations* animations;
 	//LPANIMATION animations;
-public: 
+public:
 	virtual void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
 	void GetPosition(float &x, float &y) { x = this->x; y = this->y; }

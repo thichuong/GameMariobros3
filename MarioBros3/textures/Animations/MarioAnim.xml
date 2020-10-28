@@ -192,7 +192,7 @@
 		<!-- Animation FALL-->
 		<Animation aniId="ani-raccoon-mario-fall" frameTime="100" name="FALL">
 			<Sprite id="spr-raccoon-mario-fall-0" left="129" top="143"  width="23" height="27" frameTime="100"/>
-		</Animation>
+		</Animation>   
 		<!-- Animation SPEED UP-->
 		<Animation aniId="ani-raccoon-mario-speed-up" frameTime="100" name="SPEED-UP">
 			<Sprite id="spr-raccoon-mario-speed-up-0" left="360" top="142"  width="24" height="28" frameTime="100"/>
