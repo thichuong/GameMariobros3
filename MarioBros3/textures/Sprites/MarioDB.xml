@@ -70,7 +70,7 @@
 		<Sprite id="spr-raccoon-mario-fall-0" left="283" top="143"  width="23" height="27" frameTime="100" xPivot="15"/>
 		<Sprite id="spr-raccoon-mario-run-0" left="283" top="143"  width="23" height="27" frameTime="100" xPivot="15"/>
 		<Sprite id="spr-raccoon-mario-run-1" left="309" top="143"  width="23" height="27" frameTime="100" xPivot="15"/>
-		<Sprite id="spr-raccoon-mario-run-2" left="335" top="142"  width="22" height="28" frameTime="100" xPivot="15"/>
+		<Sprite id="spr-raccoon-mario-run-2" left="335" top="142"  width="22" height="28" frameTime="100" xPivot="14"/>
 		<Sprite id="spr-raccoon-mario-speed-up-0" left="360" top="142"  width="24" height="28" frameTime="100" xPivot="15"/>
 		<Sprite id="spr-raccoon-mario-speed-up-1" left="387" top="142"  width="24" height="28" frameTime="100" xPivot="15"/>
 		<Sprite id="spr-raccoon-mario-speed-up-2" left="414" top="143"  width="24" height="27" frameTime="100" xPivot="15"/>
