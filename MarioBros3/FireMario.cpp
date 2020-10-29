@@ -21,9 +21,20 @@ void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 			if (vy < -MARIO_JUMP_SPEED_Y_SUPER )
 				canHighjump = FALSE;
 		}
+		else if(Mariostate.movement == MoveStates::Attack && canHighjump)
+		{
+			vy -= MARIO_JUMP_SPEED_Y_SPEED * dt;
+			if (vy < -MARIO_JUMP_SPEED_Y_HIGH)
+				canHighjump = FALSE;
+
+		}
 	}
 	vy += MARIO_GRAVITY * dt;
 	CMario::Update(dt, colliable_objects);
+	if (CGame::GetInstance()->IsKeyDown(DIK_X) && Mariostate.movement != MoveStates::Crouch)
+	{
+		SetMoveState(MoveStates::Attack);
+	}
 }
 void FireMario::Render()
 {
@@ -44,6 +55,7 @@ void FireMario::Render()
 		}
 		else if (Mariostate.jump == JumpStates::Fall)
 			ani = FALL;
+		
 		else
 		{
 			if (Mariostate.movement == MoveStates::Idle)
@@ -63,6 +75,8 @@ void FireMario::Render()
 			if (Mariostate.movement == MoveStates::Run)
 				ani = RUN;
 		}
+		if (Mariostate.movement == MoveStates::Attack)
+			ani = ATTACK;
 	}
 	if (animations->Get(ani) != NULL)
 		animations->Get(ani)->Render(x, y, ani_left);
@@ -86,4 +100,17 @@ void FireMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(IDLE, ani_set->Get("ani-fire-mario-idle"));
 	animations->Add(SKID, ani_set->Get("ani-fire-mario-skid"));
 	animations->Add(CROUCH, ani_set->Get("ani-fire-mario-crouch"));
+	animations->Add(ATTACK, ani_set->Get("ani-fire-mario-throw"));
+
+}
+void FireMario::KeyState(BYTE* state)
+{
+	if (GetState() == MARIO_STATE_DIE) return;
+	if (CGame::GetInstance()->IsKeyDown(DIK_X))
+	{
+		SetMoveState(MoveStates::Attack);
+	}
+	else
+		CMario::KeyState(state);
+
 }

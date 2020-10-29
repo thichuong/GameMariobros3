@@ -34,7 +34,7 @@ void CAnimation::Render(float x, float y, bool flipx, int alpha)
 		{
 			currentFrame++;
 			lastFrameTime = now;
-			if (currentFrame == frames.size()) currentFrame = 0;
+			if (currentFrame >= frames.size()) currentFrame = 0;
 		}
 	}
 		frames[currentFrame]->GetSprite()->Draw(x, y, flipx, alpha);

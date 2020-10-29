@@ -32,6 +32,10 @@ void RaccoonMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	}
 	vy += MARIO_GRAVITY * dt;
 	CMario::Update(dt, colliable_objects);
+	if (CGame::GetInstance()->IsKeyDown(DIK_X) && Mariostate.movement != MoveStates::Crouch)
+	{
+		SetMoveState(MoveStates::Attack);
+	}
 }
 void RaccoonMario::Render()
 {
@@ -76,6 +80,8 @@ void RaccoonMario::Render()
 			if (Mariostate.movement == MoveStates::Run)
 				ani = RUN;
 		}
+		if (Mariostate.movement == MoveStates::Attack)
+			ani = ATTACK;
 	}
 	if (animations->Get(ani) != NULL)
 		animations->Get(ani)->Render(x, y, ani_left);
@@ -100,4 +106,5 @@ void  RaccoonMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(IDLE, ani_set->Get("ani-raccoon-mario-idle"));
 	animations->Add(SKID, ani_set->Get("ani-raccoon-mario-skid"));
 	animations->Add(CROUCH, ani_set->Get("ani-raccoon-mario-crouch"));
+	animations->Add(ATTACK, ani_set->Get("ani-raccoon-mario-spin"));
 }

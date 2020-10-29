@@ -27,8 +27,8 @@ class CPlayScene: public CScene
 {
 protected: 
 	CPlayer *player;					// A play scene has to have player, right? 
-	CAnimations* PlayAni;
-	CSprites* PlaySprites;
+	//CAnimations* PlayAni;
+	//CSprites* PlaySprites;
 	vector<LPGAMEOBJECT> objects;
 	CGameMap* gamemap;
 

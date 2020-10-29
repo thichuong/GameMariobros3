@@ -9,5 +9,6 @@ public:
 	virtual void Render();
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void SetAnimationSet(CAnimations* ani_set);
+	virtual void KeyState(BYTE* state);
 };
 

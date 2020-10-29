@@ -30,27 +30,36 @@ void CMario::UpdateVx()
 		if (!CGame::GetInstance()->IsKeyDown(DIK_Z) && Mariostate.jump != JumpStates::Super)
 		{
 			if (ax > 0)
+			{
+				if (vx == 0) vx = MARIO_WALKING_SPEED;
 				if (vx + dt * MARIO_WALKING_SPEED_UP < MARIO_WALKING_SPEED)
 				{
 					if (vx >= 0)
 						vx += dt * MARIO_WALKING_SPEED_UP;
-					else vx += dt * MARIO_WALKING_SPEED_UP * 0.5;
+					else vx += dt * MARIO_WALKING_SPEED_DOWN ;
 				}
 				else
 				{
 					vx = MARIO_WALKING_SPEED;
 
 				}
+			}
+				
 			else
+			{
+				if (vx == 0) vx =-MARIO_WALKING_SPEED;
+				
 				if (vx - dt * MARIO_WALKING_SPEED_UP > -MARIO_WALKING_SPEED)
 				{
 					if (vx <= 0)
 						vx -= dt * MARIO_WALKING_SPEED_UP;
-					else vx -= dt * MARIO_WALKING_SPEED_UP * 0.5;
+					else vx -= dt * MARIO_WALKING_SPEED_DOWN;
 				}
 				else {
 					vx = -MARIO_WALKING_SPEED;
 				}
+			}
+				
 		}
 		else
 		{
@@ -59,7 +68,7 @@ void CMario::UpdateVx()
 					{
 						if (vx >= 0)
 							vx += dt * MARIO_WALKING_SPEED_UP;
-						else vx += dt * MARIO_WALKING_SPEED_UP * 0.5;
+						else vx += dt * MARIO_WALKING_SPEED_DOWN;
 					}
 					else
 					{
@@ -71,7 +80,7 @@ void CMario::UpdateVx()
 					{
 						if (vx <= 0)
 							vx -= dt * MARIO_WALKING_SPEED_UP;
-						else vx -= dt * MARIO_WALKING_SPEED_UP * 0.5;
+						else vx -= dt * MARIO_WALKING_SPEED_DOWN;
 					}
 					else {
 						vx = -MARIO_RUNING_SPEED;
@@ -359,9 +368,7 @@ void CMario::KeyState(BYTE* state)
 {
 	if (GetState() == MARIO_STATE_DIE) return;
 	if (CGame::GetInstance()->IsKeyDown(DIK_RIGHT))
-	{
-		
-		
+	{		
 		 SetMoveState(MoveStates::Walk);
 		ax = 1;
 	}
@@ -369,7 +376,7 @@ void CMario::KeyState(BYTE* state)
 	else if (CGame::GetInstance()->IsKeyDown(DIK_LEFT))
 	{
 		
-		 SetMoveState(MoveStates::Walk);
+		SetMoveState(MoveStates::Walk);
 		ax = -1;
 		
 	}

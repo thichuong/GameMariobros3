@@ -2,8 +2,8 @@
 #include "GameObject.h"
 
 #define MARIO_WALKING_SPEED  0.2f
-#define MARIO_WALKING_SPEED_UP  0.002f
-#define MARIO_WALKING_SPEED_DOWN  0.005f
+#define MARIO_WALKING_SPEED_UP  0.0002f
+#define MARIO_WALKING_SPEED_DOWN  0.002f
 #define MARIO_RUNING_SPEED  0.5f
 #define MARIO_MIN_SPEED  0.1f
 //0.1f
@@ -29,7 +29,7 @@
 #define JUMP		"jump"
 #define FLY	"fly"
 #define FALL "fall"
-
+#define ATTACK "attack"
 #define MARIO_ANI_SMALL "-small-mario"
 #define MARIO_ANI_BIG "-big-mario"
 #define MARIO_ANI_FIRE "-fire-mario"
@@ -62,7 +62,8 @@ enum class MoveStates
 	Idle,
 	Walk,
 	Run,
-	Crouch
+	Crouch,
+	Attack
 };
 
 enum class JumpStates
@@ -71,7 +72,7 @@ enum class JumpStates
 	Jump,
 	Super,
 	Fall,
-	Attack
+	
 };
 
 struct MarioStateSet

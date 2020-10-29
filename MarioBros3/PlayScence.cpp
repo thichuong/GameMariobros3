@@ -55,27 +55,27 @@ void CPlayScene::_ParseSection_TEXTURES(string line)
 
 void CPlayScene::LoadSource()
 {
-	CTextures* textures = CTextures::GetInstance();
+	//CTextures* textures = CTextures::GetInstance();
 
-	textures->Add("tex-mario", L"Textures\\Mario\\mario_x3.png", D3DCOLOR_XRGB(255, 255, 255));
+	//textures->Add("tex-mario", L"Textures\\Mario\\mario_x3.png", D3DCOLOR_XRGB(255, 255, 255));
 	//textures->Add("tex-enemy", L"Textures\\Enemy\\enemy_x3.png", D3DCOLOR_XRGB(255, 255, 255));
 	//textures->Add("tex-intro", L"Textures\\Misc\\intro_x3.png", D3DCOLOR_XRGB(255, 255, 255));
 	//textures->Add("tex-misc", L"Textures\\Misc\\misc_x3.png", D3DCOLOR_XRGB(255, 255, 255));
 	//textures->Add("tex-ui", L"Textures\\Misc\\UI_x3.png", D3DCOLOR_XRGB(255, 255, 255));
 
-	PlaySprites = CSprites::GetInstance();
+	//PlaySprites = CSprites::GetInstance();
 	
 	//_ParseSection_SPRITES("Textures/Sprites/IntroDB.xml");
 	//_ParseSection_SPRITES("Textures/Sprites/MiscDB.xml");
-	_ParseSection_SPRITES("Textures/Sprites/MarioDB.xml");
+	//_ParseSection_SPRITES("Textures/Sprites/MarioDB.xml");
 	//_ParseSection_SPRITES("Textures/Sprites/EnemyDB.xml");
 	
 	//_ParseSection_SPRITES("Textures/Sprites/UiDB.xml");
 
-	PlayAni = CAnimations::GetInstance();
+	//PlayAni = CAnimations::GetInstance();
 	//_ParseSection_ANIMATIONS("Textures/Animations/IntroAnim.xml");
 	//_ParseSection_ANIMATIONS("Textures/Animations/MiscAnim.xml");
-	_ParseSection_ANIMATIONS("Textures/Animations/MarioAnim.xml");
+	//_ParseSection_ANIMATIONS("Textures/Animations/MarioAnim.xml");
 	//_ParseSection_ANIMATIONS("Textures/Animations/EnemyAnim.xml");
 	
 	//_ParseSection_ANIMATIONS("Textures/Animations/UiAnim.xml");
@@ -108,7 +108,7 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 			width = width * 3;
 			height = height * 3;
 
-			PlaySprites->Add(spriteID, left, top, left + width, top + height, tex, xPivot);
+			CSprites::GetInstance()->Add(spriteID, left, top, left + width, top + height, tex, xPivot);
 		}
 	}
 	DebugOut(L"[INFO] Loading aniId = : %s \n", ToLPCWSTR(line));
@@ -140,12 +140,12 @@ void CPlayScene::_ParseSection_ANIMATIONS(string line)
 			for (TiXmlElement* sprNode = node->FirstChildElement(); sprNode != nullptr; sprNode = sprNode->NextSiblingElement())
 			{
 				string id = sprNode->Attribute("id");
-				LPSPRITE sprite = PlaySprites->Get(id);
+				LPSPRITE sprite = CSprites::GetInstance()->Get(id);
 				ani->Add(sprite);
 				DebugOut(L"					 Loading Id = : %s \n", ToLPCWSTR(id));
 			}
 			
-			PlayAni->Add(aniId, ani);
+			CAnimations::GetInstance()->Add(aniId, ani);
 			
 			
 		}
@@ -230,15 +230,15 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	obj->SetPosition(x, y);
 	//CAnimations ani_set = CAnimationSets::GetInstance()->Get(ani_set_id);
 
-	obj->SetAnimationSet(PlayAni);
+	obj->SetAnimationSet(CAnimations::GetInstance());
 	objects.push_back(obj);
 }
 
 void CPlayScene::Load()
 {
 	//LoadSource();
-	PlaySprites = CSprites::GetInstance();
-	PlayAni = CAnimations::GetInstance();
+	/*playsprites = csprites::getinstance();
+	playani = canimations::getinstance();*/
 	TiXmlDocument doc(sceneFilePath.c_str());
 	if (doc.LoadFile())
 	{
@@ -252,17 +252,15 @@ void CPlayScene::Load()
 		string filepath = node->Attribute("filepath");
 		DebugOut(L"[INFO] GameMap: %s \n", file.c_str());
 
-		gamemap = new CGameMap();
-		gamemap->FromTMX(filepath, file);
-		objects = gamemap->MapOBJECTS(PlayAni);
-		DebugOut(L"[INFO]Staet load : %d \n", id);
+		
 		for (TiXmlElement* node = info->FirstChildElement("LoadSPRITES"); node != nullptr; node = node->NextSiblingElement("LoadSPRITES"))
 		{
 			string file = node->Attribute("file");
 			string source = node->Attribute("source");
+			string textureId = node->Attribute("textureId");
 			CTextures* textures = CTextures::GetInstance();
 
-			textures->Add("tex-mario", ToLPCWSTR(source), D3DCOLOR_XRGB(255, 255, 255));
+			textures->Add(textureId, ToLPCWSTR(source), D3DCOLOR_XRGB(255, 255, 255));
 			//_ParseSection_SPRITES("file");
 			DebugOut(L"[INFO]Start load : %d \n", id);
 			_ParseSection_SPRITES(file);
@@ -275,7 +273,13 @@ void CPlayScene::Load()
 			
 			
 		}
-		
+		node = info->FirstChildElement("LoadMAP");
+		file = node->Attribute("file");
+		filepath = node->Attribute("filepath");
+		gamemap = new CGameMap();
+		gamemap->FromTMX(filepath, file);
+		objects = gamemap->MapOBJECTS(CAnimations::GetInstance());
+		DebugOut(L"[INFO]Staet load : %d \n", id);
 		
 		node = info->FirstChildElement("LoadLayer");
 		float x, y;
@@ -283,7 +287,7 @@ void CPlayScene::Load()
 		node->QueryFloatAttribute("y", &y);
 		player = new CPlayer();
 		player->SetPosition(x, y);
-		player->SetAnimationSet(PlayAni);
+		player->SetAnimationSet(CAnimations::GetInstance());
 		objects.push_back(player);
 		DebugOut(L"[INFO] GameMap:   \n");
 	}
