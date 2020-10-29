@@ -5,7 +5,7 @@
 
 		<!--Small Mario-->
 	 	<!-- Animation IDLE FRONT-->
-		 <Animation aniId="ani-small-mario-idle-front" frameTime="100" name="IDLE-FRONT">
+		 <Animation aniId="ani-small-mario-idle-front" frameTime="50" name="IDLE-FRONT">
 			<Sprite id="spr-small-mario-idle-front-0" left="397" top="8"  width="16" height="16" frameTime="100"/>
 		</Animation>
 		<!-- Animation IDLE-->
@@ -184,7 +184,8 @@
 			<Sprite id="spr-raccoon-mario-run-0" left="283" top="143"  width="23" height="27" frameTime="100"/>
 			<Sprite id="spr-raccoon-mario-run-1" left="309" top="143"  width="23" height="27" frameTime="100"/>
 			<Sprite id="spr-raccoon-mario-run-2" left="335" top="142"  width="22" height="28" frameTime="100"/>
-		</Animation>
+      <Sprite id="spr-raccoon-mario-run-1" left="309" top="143"  width="23" height="27" frameTime="100"/>
+    </Animation>
 		<!-- Animation JUMP-->
 		<Animation aniId="ani-raccoon-mario-jump" frameTime="100" name="JUMP">
 			<Sprite id="spr-raccoon-mario-jump-0" left="257" top="143"  width="23" height="27" frameTime="100"/>
@@ -192,7 +193,13 @@
 		<!-- Animation FALL-->
 		<Animation aniId="ani-raccoon-mario-fall" frameTime="100" name="FALL">
 			<Sprite id="spr-raccoon-mario-fall-0" left="129" top="143"  width="23" height="27" frameTime="100"/>
-		</Animation>   
+		</Animation>
+    <!-- Animation FLOAT-->
+    <Animation aniId="ani-raccoon-mario-float" frameTime="50" name="FLOAT">
+      <Sprite id="spr-raccoon-mario-run-2" left="129" top="143"  width="23" height="27" frameTime="50"/>
+      <Sprite id="spr-raccoon-mario-run-1" left="129" top="143"  width="23" height="27" frameTime="50"/>
+      <Sprite id="spr-raccoon-mario-run-0" left="80" top="142"  width="21" height="28" frameTime="50"/>
+    </Animation>
 		<!-- Animation SPEED UP-->
 		<Animation aniId="ani-raccoon-mario-speed-up" frameTime="100" name="SPEED-UP">
 			<Sprite id="spr-raccoon-mario-speed-up-0" left="360" top="142"  width="24" height="28" frameTime="100"/>
@@ -200,19 +207,17 @@
 			<Sprite id="spr-raccoon-mario-speed-up-2" left="414" top="143"  width="24" height="27" frameTime="100"/>
 		</Animation>
 		<!-- Animation FLY-->
-		<Animation aniId="ani-raccoon-mario-fly" frameTime="100" name="FLY">
-			<Sprite id="spr-raccoon-mario-fly-0" left="441" top="143"  width="24" height="27" frameTime="100"/>
-			<Sprite id="spr-raccoon-mario-fly-1" left="468" top="143"  width="24" height="27" frameTime="100"/>
-			<Sprite id="spr-raccoon-mario-fly-2" left="495" top="142"  width="24" height="28" frameTime="100"/>
+		<Animation aniId="ani-raccoon-mario-fly" frameTime="50" name="FLY">
+			<Sprite id="spr-raccoon-mario-fly-0" left="441" top="143"  width="24" height="27" frameTime="50"/>
+			<Sprite id="spr-raccoon-mario-fly-1" left="468" top="143"  width="24" height="27" frameTime="50"/>
+			<Sprite id="spr-raccoon-mario-fly-2" left="495" top="142"  width="24" height="28" frameTime="50"/>
 		</Animation>
 		<!-- Animation SPIN-->
 		<Animation aniId="ani-raccoon-mario-spin" frameTime="100" name="SPIN">
-			<Sprite id="spr-raccoon-mario-spin-0" left="80" top="142"  width="21" height="28" frameTime="100" xPivot="14"/>
-			<Sprite id="spr-raccoon-mario-spin-1" left="78" top="107"  width="23" height="28" frameTime="100" xPivot="7"/>
 			<Sprite id="spr-raccoon-mario-spin-2" left="174" top="142"  width="16" height="28" frameTime="100"/>
-			<Sprite id="spr-raccoon-mario-spin-3" left="193" top="142"  width="23" height="28" frameTime="100" xPivot="7"/>
+			<Sprite id="spr-raccoon-mario-spin-3" left="193" top="142"  width="23" height="28" frameTime="100"/>
 			<Sprite id="spr-raccoon-mario-spin-4" left="219" top="142"  width="16" height="28" frameTime="100"/>
-			<Sprite id="spr-raccoon-mario-spin-5" left="80" top="142"  width="21" height="28" frameTime="100" xPivot="14"/>
+			<Sprite id="spr-raccoon-mario-spin-1" left="78"  top="107"  width="23" height="28" frameTime="100"/>
 		</Animation>
 		<!-- Animation CROUCH-->
 		<Animation aniId="ani-raccoon-mario-crouch" frameTime="100" name="CROUCH">
@@ -287,8 +292,8 @@
 		</Animation>
 		<!-- Animation THROW -->
 		<Animation aniId="ani-fire-mario-throw" frameTime="100" name="THROW">
-			<Sprite id="spr-fire-mario-throw-0" left="280" top="109"  width="14" height="27" frameTime="100"/>
-			<Sprite id="spr-fire-mario-throw-1" left="297" top="109"  width="14" height="27" frameTime="100"/>
+			<Sprite id="spr-fire-mario-throw-0" left="280" top="109"  width="14" height="27" frameTime="50"/>
+			<Sprite id="spr-fire-mario-throw-1" left="297" top="109"  width="14" height="27" frameTime="50"/>
 		</Animation>
 		<!-- Animation FIRE BALL-->
 		<Animation aniId="ani-fire-ball" frameTime="100" name="THROW">
@@ -298,7 +303,7 @@
 			<Sprite id="spr-fire-ball-3" left="195" top="123"  width="8" height="9" frameTime="100" transcolor="0"/>
 		</Animation>
 		<!-- Animation RUN -->
-		<Animation aniId="ani-fire-mario-high-speed" frameTime="100" name="RUN">
+		<Animation aniId="ani-fire-mario-run" frameTime="100" name="RUN">
 			<Sprite id="spr-fire-mario-walk-0" left="206" top="109"  width="14" height="27" frameTime="100"/>
 			<Sprite id="spr-fire-mario-walk-1" left="223" top="109"  width="16" height="27" frameTime="100"/>
 			<Sprite id="spr-fire-mario-walk-2" left="242" top="110"  width="16" height="26" frameTime="100"/>

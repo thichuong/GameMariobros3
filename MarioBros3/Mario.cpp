@@ -23,10 +23,82 @@ CMario::CMario(float x, float y) : CGameObject()
 	changeMario = none;
 	collision = CCollision2D::Full;
 }
+void CMario::UpdateVx()
+{
+	if (Mariostate.movement == MoveStates::Run || Mariostate.movement == MoveStates::Walk)
+	{
+		if (!CGame::GetInstance()->IsKeyDown(DIK_Z) && Mariostate.jump != JumpStates::Super)
+		{
+			if (ax > 0)
+				if (vx + dt * MARIO_WALKING_SPEED_UP < MARIO_WALKING_SPEED)
+				{
+					if (vx >= 0)
+						vx += dt * MARIO_WALKING_SPEED_UP;
+					else vx += dt * MARIO_WALKING_SPEED_UP * 0.5;
+				}
+				else
+				{
+					vx = MARIO_WALKING_SPEED;
 
+				}
+			else
+				if (vx - dt * MARIO_WALKING_SPEED_UP > -MARIO_WALKING_SPEED)
+				{
+					if (vx <= 0)
+						vx -= dt * MARIO_WALKING_SPEED_UP;
+					else vx -= dt * MARIO_WALKING_SPEED_UP * 0.5;
+				}
+				else {
+					vx = -MARIO_WALKING_SPEED;
+				}
+		}
+		else
+		{
+				if (ax > 0)
+					if (vx + dt * MARIO_WALKING_SPEED_UP < MARIO_RUNING_SPEED)
+					{
+						if (vx >= 0)
+							vx += dt * MARIO_WALKING_SPEED_UP;
+						else vx += dt * MARIO_WALKING_SPEED_UP * 0.5;
+					}
+					else
+					{
+						vx = MARIO_RUNING_SPEED;
+						SetMoveState(MoveStates::Run);
+					}
+				else
+					if (vx - dt * MARIO_WALKING_SPEED_UP > -MARIO_RUNING_SPEED)
+					{
+						if (vx <= 0)
+							vx -= dt * MARIO_WALKING_SPEED_UP;
+						else vx -= dt * MARIO_WALKING_SPEED_UP * 0.5;
+					}
+					else {
+						vx = -MARIO_RUNING_SPEED;
+						SetMoveState(MoveStates::Run);
+					}
+		}
+	}
+	
+	else
+	{
+		if (vx >= MARIO_MIN_SPEED || vx <= -MARIO_MIN_SPEED)
+			vx -= dt * MARIO_WALKING_SPEED_DOWN * vx;
+		else vx = 0;
+	}
+}
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	// Calculate dx, dy 
+
+	if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
+	{
+		if (onGround && Mariostate.jump == JumpStates::Stand)
+		{
+			SetJumpState(JumpStates::Jump);
+			onGround = FALSE;
+		}
+	}
 	CGameObject::Update(dt);
 	
 	//dx = vx * dt;
@@ -203,7 +275,12 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	
 	// clean up collision events
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-	
+	if (vy > 0)
+	{
+		onGround = FALSE;
+		SetJumpState(JumpStates::Fall);
+	}
+		
 }
 
 
@@ -284,17 +361,15 @@ void CMario::KeyState(BYTE* state)
 	if (CGame::GetInstance()->IsKeyDown(DIK_RIGHT))
 	{
 		
-		if (CGame::GetInstance()->IsKeyDown(DIK_Z))
-			SetMoveState(MoveStates::Run);
-		else SetMoveState(MoveStates::Walk);
+		
+		 SetMoveState(MoveStates::Walk);
 		ax = 1;
 	}
 	//SetState(MARIO_STATE_WALKING_RIGHT);
 	else if (CGame::GetInstance()->IsKeyDown(DIK_LEFT))
 	{
-		if (CGame::GetInstance()->IsKeyDown(DIK_Z))
-			SetMoveState(MoveStates::Run);
-		else SetMoveState(MoveStates::Walk);
+		
+		 SetMoveState(MoveStates::Walk);
 		ax = -1;
 		
 	}
@@ -310,10 +385,11 @@ void CMario::KeyState(BYTE* state)
 
 	if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
 	{
-		//if (Mariostate.jump == JumpStates::Jump && canHighjump)
-		//	{
-		//		Mariostate.jump = JumpStates::High;
-		//	}
+		if (onGround && Mariostate.jump == JumpStates::Stand)
+		{
+			SetJumpState(JumpStates::Jump);
+			onGround = FALSE;
+		}
 	}
 	ChangeState();
 }

@@ -65,7 +65,7 @@ void CGame::Init(HWND hWnd)
 void CGame::Draw(int x, int y,int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
 	D3DXVECTOR3 p(x -(int) cam_x - xPivot, y -(int) cam_y, 0);
-	D3DXVECTOR3 pcenter3((right - left) / 2 , 0, 0);
+	D3DXVECTOR3 pcenter3((right - left) / 2 - xPivot, 0, 0);
 	RECT r; 
 	r.left = left;
 	r.top = top;
@@ -75,7 +75,7 @@ void CGame::Draw(int x, int y,int xPivot, LPDIRECT3DTEXTURE9 texture, int left, 
 }
 void CGame::DrawFlipX(int x, int y, int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
-	D3DXVECTOR3 p(x - (int)cam_x - xPivot, y - (int)cam_y, 0);
+	D3DXVECTOR3 p(x - (int)cam_x + xPivot, y - (int)cam_y, 0);
 	RECT r;
 	r.left = left;
 	r.top = top;

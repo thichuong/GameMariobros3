@@ -1,8 +1,11 @@
 #pragma once
 #include "Mario.h"
+#define FLOAT "float"
+
 class RaccoonMario :
     public CMario
 {
+	bool slowFall;
 public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
 	virtual void Render();

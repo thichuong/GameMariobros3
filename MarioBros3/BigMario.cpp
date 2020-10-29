@@ -3,42 +3,10 @@
 
 void BigMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
-	float maxspeed;
-	if (Mariostate.movement == MoveStates::Walk || Mariostate.movement == MoveStates::Run)
-	{
-		
-		if (Mariostate.movement == MoveStates::Run && Mariostate.jump == JumpStates::Stand)
-			maxspeed = MARIO_RUNING_SPEED;
-		else
-			maxspeed = MARIO_WALKING_SPEED;
-		if (Mariostate.jump == JumpStates::Super) maxspeed = MARIO_RUNING_SPEED;
-		if (ax > 0)
-			if (vx + dt * MARIO_WALKING_SPEED_UP < maxspeed)
-			{
-				if (vx >= 0)
-					vx += dt * MARIO_WALKING_SPEED_UP;
-				else vx += dt * MARIO_WALKING_SPEED_UP * 0.5;
-			}
-			else vx = maxspeed;
-		else
-			if (vx - dt * MARIO_WALKING_SPEED_UP > -maxspeed)
-			{
-				if (vx <= 0)
-					vx -= dt * MARIO_WALKING_SPEED_UP;
-				else vx -= dt * MARIO_WALKING_SPEED_UP * 0.5;
-			}
-			else vx = -maxspeed;
-	}
-	else
-	{
-		if (vx >= MARIO_MIN_SPEED || vx <= -MARIO_MIN_SPEED)
-			vx -= dt * MARIO_WALKING_SPEED_DOWN * vx;
-		else vx = 0;
-	}
-
+	UpdateVx();
 	if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
 	{
-		if (abs(vx) == maxspeed && Mariostate.jump == JumpStates::Jump && canHighjump)
+		if (Mariostate.movement == MoveStates::Run && Mariostate.jump == JumpStates::Jump && canHighjump)
 			SetJumpState(JumpStates::Super);
 		if (Mariostate.jump == JumpStates::Jump && canHighjump)
 		{
@@ -50,10 +18,9 @@ void BigMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 		else if (Mariostate.jump == JumpStates::Super && canHighjump)
 		{
 			vy -= MARIO_JUMP_SPEED_Y_SPEED * dt;
-			if (vy < -MARIO_JUMP_SPEED_Y_SUPER * 0.8)
+			if (vy < -MARIO_JUMP_SPEED_Y_SUPER)
 				canHighjump = FALSE;
 		}
-
 	}
 	vy += MARIO_GRAVITY * dt;
 	CMario::Update(dt, colliable_objects);
@@ -61,7 +28,7 @@ void BigMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 void BigMario::Render()
 {
 	//CMario::Render();
-	string ani = "ani";
+	string ani = "";
 	bool ani_left = false;
 	if (ax < 0)
 		ani_left = TRUE;
@@ -69,33 +36,32 @@ void BigMario::Render()
 		ani = MARIO_ANI_DIE;
 	else
 	{
-		ani += MARIO_ANI_BIG;
 		if (Mariostate.jump == JumpStates::Jump)
-			ani += MARIO_ANI_JUMPING;
+			ani = JUMP;
 		else if (Mariostate.jump == JumpStates::Super)
 		{
-			ani += MARIO_ANI_HIGH_JUMPING;
+			ani = FLY;
 		}
 		else if (Mariostate.jump == JumpStates::Fall)
-			ani += MARIO_ANI_FALL;
+			ani = FALL;
 		else
 		{
 			if (Mariostate.movement == MoveStates::Idle)
 			{
-				if (vx == 0)ani += MARIO_ANI_IDLE;
-				else ani += MARIO_ANI_WALKING;
+				if (vx == 0)ani = IDLE;
+				else ani = WALK;
 			}
 			if (Mariostate.movement == MoveStates::Walk)
 			{
 				if (vx * ax >= 0)
-					ani += MARIO_ANI_WALKING;
+					ani = WALK;
 				else
-					ani += MARIO_ANI_SKIDING;
+					ani = SKID;
 			}
 			if (Mariostate.movement == MoveStates::Crouch)
-				ani += MARIO_ANI_CROUCHING;
+				ani = CROUCH;
 			if (Mariostate.movement == MoveStates::Run)
-				ani += MARIO_ANI_RUNING;
+				ani = RUN;
 		}
 	}
 	if (animations->Get(ani) != NULL)
@@ -108,4 +74,16 @@ void BigMario::GetBoundingBox(float& left, float& top, float& right, float& bott
 	right = x + MARIO_BIG_BBOX_WIDTH;
 	if (Mariostate.movement != MoveStates::Crouch) bottom = y + MARIO_BIG_BBOX_HEIGHT;
 	else bottom = y + MARIO_BIG_BBOX_HEIGHT_CROUCHING;
+}
+void BigMario::SetAnimationSet(CAnimations* ani_set)
+{
+	animations = new CAnimations();
+	animations->Add(RUN, ani_set->Get("ani-big-mario-high-speed"));
+	animations->Add(WALK, ani_set->Get("ani-big-mario-walk"));
+	animations->Add(JUMP, ani_set->Get("ani-big-mario-jump"));
+	animations->Add(FLY, ani_set->Get("ani-big-mario-high-jump"));
+	animations->Add(FALL, ani_set->Get("ani-big-mario-fall"));
+	animations->Add(IDLE, ani_set->Get("ani-big-mario-idle"));
+	animations->Add(SKID, ani_set->Get("ani-big-mario-skid"));
+	animations->Add(CROUCH, ani_set->Get("ani-big-mario-crouch"));
 }
