@@ -22,6 +22,8 @@ CMario::CMario(float x, float y) : CGameObject()
 	ax = 1;
 	changeMario = none;
 	collision = CCollision2D::Full;
+	timecooldown = 0;
+	timeattack = 0;
 }
 void CMario::UpdateVx()
 {
@@ -95,6 +97,8 @@ void CMario::UpdateVx()
 			vx -= dt * MARIO_WALKING_SPEED_DOWN * vx;
 		else vx = 0;
 	}
+//	slowFall = FALSE;
+
 }
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
@@ -289,9 +293,68 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		onGround = FALSE;
 		SetJumpState(JumpStates::Fall);
 	}
-		
+	if (timecooldown > 0)
+	{
+		timecooldown -= dt;
+		timeattack -= dt;
+	}
+	else
+	{
+		timecooldown = 0;
+	}
 }
 
+void CMario::Render()
+{
+	string ani = IDLE;
+	bool ani_left = false;
+	if (ax < 0)
+		ani_left = TRUE;
+	if (state == MARIO_STATE_DIE)
+		ani = MARIO_ANI_DIE;
+	else
+	{
+
+		if (Mariostate.jump == JumpStates::Jump)
+			ani = JUMP;
+		else if (Mariostate.jump == JumpStates::Super)
+		{
+			ani = FLY;
+		}
+		else if (Mariostate.jump == JumpStates::Fall)
+		{
+			ani = FALL;
+			if (slowFall) ani = FLOAT;
+		}
+
+		else
+		{
+			if (Mariostate.movement == MoveStates::Idle)
+			{
+				if (vx == 0)ani = IDLE;
+				else ani = WALK;
+			}
+			if (Mariostate.movement == MoveStates::Walk)
+			{
+				if (vx * ax >= 0)
+					ani = WALK;
+				else
+					ani = SKID;
+			}
+			if (Mariostate.movement == MoveStates::Crouch)
+				ani = CROUCH;
+			if (Mariostate.movement == MoveStates::Run)
+				ani = RUN;
+		}
+		if ( timeattack > 0)
+			ani = ATTACK;
+	}
+	if (animations->Get(ani) != NULL)
+		if (ani == ATTACK)
+			animations->Get(ATTACK)->Render(x, y, MARIO_TIME_ATTACK, ani_left);
+		else
+			animations->Get(ani)->Render(x, y, ani_left);
+}
 
 void CMario::SetAnimationSet(CAnimations* ani_set)
 {
@@ -395,6 +458,7 @@ void CMario::KeyState(BYTE* state)
 		if (onGround && Mariostate.jump == JumpStates::Stand)
 		{
 			SetJumpState(JumpStates::Jump);
+			vy -= MARIO_JUMP_SPEED_Y*dt;
 			onGround = FALSE;
 		}
 	}
@@ -439,6 +503,10 @@ void CMario::ChangeState()
 
 void  CMario::SetMoveState(MoveStates e) 
 { 
+	if (e == MoveStates::Attack && timecooldown > 0)
+	{
+		return;
+	}
 	preMariostate = Mariostate;
 	Mariostate.movement = e; 
 	if (Mariostate.movement == MoveStates::Crouch)
@@ -451,7 +519,12 @@ void  CMario::SetMoveState(MoveStates e)
 		if (preMariostate.movement == MoveStates::Crouch)
 			y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_BIG_BBOX_HEIGHT_CROUCHING + 0.4);
 	}
-	
+	if (Mariostate.movement == MoveStates::Attack && timecooldown == 0)
+	{
+		timecooldown = MARIO_TIME_COOLDOWN;
+		timeattack = MARIO_TIME_ATTACK;
+	}
+		
 }
 void CMario::SetJumpState(JumpStates e)
 {

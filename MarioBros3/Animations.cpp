@@ -39,7 +39,27 @@ void CAnimation::Render(float x, float y, bool flipx, int alpha)
 	}
 		frames[currentFrame]->GetSprite()->Draw(x, y, flipx, alpha);
 }
-
+void CAnimation::Render(float x, float y, DWORD timeRender, bool flipx, int alpha)
+{
+	DWORD now = GetTickCount();
+	if (currentFrame == -1)
+	{
+		currentFrame = 0;
+		lastFrameTime = now;
+	}
+	else
+	{
+		//DWORD t = frames[currentFrame]->GetTime();
+		DWORD t = timeRender/ frames.size();
+		if (now - lastFrameTime > t)
+		{
+			currentFrame++;
+			lastFrameTime = now;
+			if (currentFrame >= frames.size()) currentFrame = 0;
+		}
+	}
+	frames[currentFrame]->GetSprite()->Draw(x, y, flipx, alpha);
+}
 CAnimations * CAnimations::__instance = NULL;
 
 CAnimations * CAnimations::GetInstance()
@@ -57,7 +77,7 @@ LPANIMATION CAnimations::Get(string id)
 {
 	LPANIMATION ani = animations[id];
 	if (ani == NULL)
-		DebugOut(L"[ERROR] Failed to find animation id: %d\n", id);
+		DebugOut(L"[ERROR] Failed to find animation id: %s \n", ToLPCWSTR(id));
 	return ani;
 }
 

@@ -7,14 +7,17 @@
 #define MARIO_RUNING_SPEED  0.5f
 #define MARIO_MIN_SPEED  0.1f
 //0.1f
-#define MARIO_JUMP_SPEED_Y  0.3f
-#define MARIO_JUMP_SPEED_Y_SPEED  0.004f
-#define MARIO_JUMP_SPEED_Y_HIGH  0.6f
+#define MARIO_JUMP_SPEED_Y  0.02f
+#define MARIO_JUMP_SPEED_Y_SPEED  0.0035f
+#define MARIO_JUMP_SPEED_Y_HIGH  0.55f
 #define MARIO_JUMP_SPEED_Y_SUPER  0.9f
 #define MARIO_FLY_SPEED_Y  1.3f
 #define MARIO_JUMP_DEFLECT_SPEED  0.2f
 #define MARIO_GRAVITY  0.003f
 #define MARIO_DIE_DEFLECT_SPEED  0.5f
+
+#define MARIO_TIME_ATTACK 200
+#define MARIO_TIME_COOLDOWN 400
 
 #define MARIO_STATE_IDLE			0
 #define MARIO_STATE_DIE				100
@@ -86,18 +89,21 @@ protected:
 	string changeMario;
 	int untouchable;
 	DWORD untouchable_start;
+	int timecooldown;
+	int timeattack;
 	bool walking;
 	bool onGround; 
 	bool canHighjump;
 	MarioStateSet Mariostate, preMariostate;
-
+	bool slowFall;
 	float start_x;			// initial position of Mario at scene
 	float start_y; 
 	float ax;
+
 public: 
 	CMario(float x = 0, float y = 0);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
-	virtual void Render() = 0;
+	virtual void Render();
 	void UpdateVx();
 	virtual void OnKeyUp(int keyCode);
 	virtual void OnKeyDown(int keyCode);

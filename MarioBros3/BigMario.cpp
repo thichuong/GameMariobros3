@@ -25,48 +25,7 @@ void BigMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	vy += MARIO_GRAVITY * dt;
 	CMario::Update(dt, colliable_objects);
 }
-void BigMario::Render()
-{
-	//CMario::Render();
-	string ani = "";
-	bool ani_left = false;
-	if (ax < 0)
-		ani_left = TRUE;
-	if (state == MARIO_STATE_DIE)
-		ani = MARIO_ANI_DIE;
-	else
-	{
-		if (Mariostate.jump == JumpStates::Jump)
-			ani = JUMP;
-		else if (Mariostate.jump == JumpStates::Super)
-		{
-			ani = FLY;
-		}
-		else if (Mariostate.jump == JumpStates::Fall)
-			ani = FALL;
-		else
-		{
-			if (Mariostate.movement == MoveStates::Idle)
-			{
-				if (vx == 0)ani = IDLE;
-				else ani = WALK;
-			}
-			if (Mariostate.movement == MoveStates::Walk)
-			{
-				if (vx * ax >= 0)
-					ani = WALK;
-				else
-					ani = SKID;
-			}
-			if (Mariostate.movement == MoveStates::Crouch)
-				ani = CROUCH;
-			if (Mariostate.movement == MoveStates::Run)
-				ani = RUN;
-		}
-	}
-	if (animations->Get(ani) != NULL)
-		animations->Get(ani)->Render(x, y, ani_left);
-}
+
 void BigMario::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	left = x;
