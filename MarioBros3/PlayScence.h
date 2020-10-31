@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "Textures.h"
 #include "Scence.h"
-#include "GameObject.h"
 #include "GameMap.h"
 #include "Brick.h"
 #include "Mario.h"
@@ -30,6 +29,7 @@ protected:
 	//CAnimations* PlayAni;
 	//CSprites* PlaySprites;
 	vector<LPGAMEOBJECT> objects;
+	vector<LPGAMEOBJECT> earseobjects;
 	CGameMap* gamemap;
 
 	void _ParseSection_TEXTURES(string line);
@@ -44,7 +44,8 @@ public:
 	virtual void Update(DWORD dt);
 	virtual void Render();
 	virtual void Unload();
-
+	virtual void addobject(LPGAMEOBJECT object) { objects.push_back(object); }
+	virtual void delobject(LPGAMEOBJECT object) { earseobjects.push_back(object); }
 	void LoadSource();
 	CPlayer* GetPlayer() { return player; }
 

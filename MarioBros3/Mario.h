@@ -2,15 +2,15 @@
 #include "GameObject.h"
 
 #define MARIO_WALKING_SPEED  0.2f
-#define MARIO_WALKING_SPEED_UP  0.0002f
-#define MARIO_WALKING_SPEED_DOWN  0.002f
-#define MARIO_RUNING_SPEED  0.5f
+#define MARIO_WALKING_SPEED_UP  0.0003f
+#define MARIO_WALKING_SPEED_DOWN  0.0015f
+#define MARIO_RUNING_SPEED  0.6f
 #define MARIO_MIN_SPEED  0.1f
 //0.1f
 #define MARIO_JUMP_SPEED_Y  0.02f
 #define MARIO_JUMP_SPEED_Y_SPEED  0.0035f
 #define MARIO_JUMP_SPEED_Y_HIGH  0.55f
-#define MARIO_JUMP_SPEED_Y_SUPER  0.9f
+#define MARIO_JUMP_SPEED_Y_SUPER  0.7f
 #define MARIO_FLY_SPEED_Y  1.3f
 #define MARIO_JUMP_DEFLECT_SPEED  0.2f
 #define MARIO_GRAVITY  0.003f
@@ -32,7 +32,9 @@
 #define JUMP		"jump"
 #define FLY	"fly"
 #define FALL "fall"
+#define FLOAT "float"
 #define ATTACK "attack"
+
 #define MARIO_ANI_SMALL "-small-mario"
 #define MARIO_ANI_BIG "-big-mario"
 #define MARIO_ANI_FIRE "-fire-mario"
@@ -89,8 +91,9 @@ protected:
 	string changeMario;
 	int untouchable;
 	DWORD untouchable_start;
-	int timecooldown;
-	int timeattack;
+	DWORD timeattack;
+	DWORD  timecooldown;
+	DWORD  ani_timeattack;
 	bool walking;
 	bool onGround; 
 	bool canHighjump;

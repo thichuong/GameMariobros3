@@ -1,7 +1,10 @@
 #include "Goomba.h"
+#include "Game.h"
+
 CGoomba::CGoomba()
 {
 	SetState(GOOMBA_STATE_WALKING);
+
 }
 
 void CGoomba::GetBoundingBox(float &left, float &top, float &right, float &bottom)
@@ -18,22 +21,41 @@ void CGoomba::GetBoundingBox(float &left, float &top, float &right, float &botto
 
 void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
-	CGameObject::Update(dt, coObjects);
+	CGameObject::Update(dt);
+	vy += GOOMBA_GRAVITY * dt;
 
-	//
-	// TO-DO: make sure Goomba can interact with the world and to each of them too!
-	// 
+	vector<LPCOLLISIONEVENT> coEvents;
+	vector<LPCOLLISIONEVENT> coEventsResult;
+	coEvents.clear();
 
-	x += dx;
-	y += dy;
+	CalcPotentialCollisions(coObjects, coEvents);
 
-	if (vx < 0 && x < 0) {
-		x = 0; vx = -vx;
+	if (coEvents.size() == 0)
+	{
+		x += dx;
+		y += dy;
+		if (y > 1500) y = 1000;
 	}
+	else
+	{
+		float min_tx, min_ty, nx = 0, ny = 0;
+		float rdx = 0;
+		float rdy = 0;
 
-	if (vx > 0 && x > 290) {
-		x = 290; vx = -vx;
+		// TODO: This is a very ugly designed function!!!!
+		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
+
+		x += min_tx * dx + nx * 0.4;
+		y += min_ty * dy + ny * 0.5;
+		if (ny != 0) vy = 0;
+		if (nx != 0)
+		{
+			
+		}
 	}
+	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+	if (state == GOOMBA_STATE_DIE) CGame::GetInstance()->GetCurrentScene()->delobject(this);
+	
 }
 
 void CGoomba::Render()
@@ -55,7 +77,6 @@ void CGoomba::SetState(int state)
 	switch (state)
 	{
 		case GOOMBA_STATE_DIE:
-			y += GOOMBA_BBOX_HEIGHT - GOOMBA_BBOX_HEIGHT_DIE + 1;
 			vx = 0;
 			vy = 0;
 			break;

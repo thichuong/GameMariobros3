@@ -323,6 +323,18 @@ void CPlayScene::Update(DWORD dt)
 	{
 		objects[i]->Update(dt, &coObjects);
 	}
+	if (earseobjects.size() > 0)
+	{
+		for (auto e : earseobjects)
+		{
+			for (size_t i = 0; i < objects.size(); i++)
+			{
+				if (objects[i] == e) objects.erase(objects.begin()+i);
+				e->~CGameObject();
+			}
+		}
+		earseobjects.clear();
+	}
 
 	// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)
 	if (player == NULL) return; 
@@ -374,7 +386,18 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 
 	CPlayer*mario = ((CPlayScene*)scence)->GetPlayer();
 	mario->OnKeyDown(KeyCode);
-	
+	if (KeyCode == DIK_0)
+	{
+		float camw, camh;
+		camw = CGame::GetInstance()->GetScreenWidth();
+		camh = CGame::GetInstance()->GetScreenHeight();
+		float x, y;
+		mario->GetPosition(x, y);
+		LPGAMEOBJECT object = new CGoomba();
+		object->SetAnimationSet(CAnimations::GetInstance());
+		object->SetPosition(x + camw/2, y - camh/2);
+		((CPlayScene*)scence)->addobject(object);
+	}
 }
 
 void CPlayScenceKeyHandler::KeyState(BYTE *states)

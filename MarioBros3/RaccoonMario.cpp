@@ -1,7 +1,13 @@
 #include "RaccoonMario.h"
 #include "Game.h"
 
-
+RaccoonMario::RaccoonMario() :CMario()
+{
+	collision = CCollision2D::Full;
+	timecooldown = RACCOONMARIO_TIMECOOLDOWN;
+	ani_timeattack = RACCOONMARIO_ANI_ATTACKTIME;
+	timeattack = RACCOONMARIO_TIMECOOLDOWN;
+}
 void RaccoonMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
 	UpdateVx();
@@ -23,7 +29,7 @@ void RaccoonMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 		}
 		else
 			if (vy > 0)
-			{
+			{			
 				vy = MARIO_GRAVITY * dt;
 				slowFall = TRUE;
 			}
@@ -31,7 +37,7 @@ void RaccoonMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	}
 	vy += MARIO_GRAVITY * dt;
 	CMario::Update(dt, colliable_objects);
-	if (CGame::GetInstance()->IsKeyDown(DIK_X) && timecooldown ==0)
+	if (CGame::GetInstance()->IsKeyDown(DIK_X))
 	{
 		SetMoveState(MoveStates::Attack);
 	}

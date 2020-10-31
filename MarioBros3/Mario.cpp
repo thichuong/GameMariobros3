@@ -23,7 +23,6 @@ CMario::CMario(float x, float y) : CGameObject()
 	changeMario = none;
 	collision = CCollision2D::Full;
 	timecooldown = 0;
-	timeattack = 0;
 }
 void CMario::UpdateVx()
 {
@@ -97,7 +96,7 @@ void CMario::UpdateVx()
 			vx -= dt * MARIO_WALKING_SPEED_DOWN * vx;
 		else vx = 0;
 	}
-//	slowFall = FALSE;
+	slowFall = FALSE;
 
 }
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -121,7 +120,6 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
-	vector<LPGAMEOBJECT> coObjectsResult;
 	coEvents.clear();
 	
 	if (x + dx <= 1)
@@ -134,7 +132,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	if (state != MARIO_STATE_DIE)
 	{
 		CalcPotentialCollisions(coObjects, coEvents);
-		for (UINT i = 0; i < coEvents.size(); i++)  coObjectsResult.push_back(coEvents[i]->obj);
+//		for (UINT i = 0; i < coEvents.size(); i++)  coObjectsResult.push_back(coEvents[i]->obj);
 	}
 		
 
@@ -158,69 +156,15 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	else
 	{
-		float min_tx, min_ty, nx = 0, ny;
+		float min_tx, min_ty, nx = 0, ny = 0;
 		float rdx = 0; 
 		float rdy = 0;
 
 		// TODO: This is a very ugly designed function!!!!
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
-
-		// how to push back Mario if collides with a moving objects, what if Mario is pushed this way into another object?
-		//if (rdx != 0 && rdx!=dx)
-		//	x += nx*abs(rdx); 
 		
-		// block every object first!
-		
-		
-		if (min_tx > min_ty)
-		{
-			float px = x;
-			x += min_ty * dx;
-			y += min_ty * dy + ny * 0.4f;
-			dy = 0;
-			
-			//DebugOut(L"		[X]point = : %f \n",px);
-			coEvents.clear();
-			CalcPotentialCollisions(&coObjectsResult, coEvents);
-			if (coEvents.size() > 0)
-			{
-				FilterCollisionX(coEvents, coEventsResult, min_tx, nx, rdx);
-				//x -= min_ty * dx;
-				x += min_tx * dx + nx * 0.4f;
-				DebugOut(L"		[X] coEvents.size() = : %d \n", coEvents.size());
-			}
-			else
-			{
-				x = px + dx ;
-				nx = 0;
-			}
-			dy = vy * dt;
-			
-		}
-		else
-		{
-			float py = y ;
-			x += min_tx * dx + nx * 0.4f;
-			y += min_tx * dy ;
-			dx = 0;
-			coEvents.clear();
-			CalcPotentialCollisions(&coObjectsResult, coEvents);
-			if (coEvents.size() > 0)
-			{
-				FilterCollisionY(coEvents, coEventsResult, min_ty, ny, rdy);
-				y += min_ty * dy + ny * 0.4f;
-			}
-				
-			else
-			{
-				//y-= min_ty * dy + ny * 0.4f;
-				y = py + dy;
-				ny = 0;
-			}
-			dx = vx * dt;
-			//y += min_ty * dy + ny * 0.4f;
-		}
-		
+		x += min_tx * dx + nx * 0.4;
+		y += min_ty * dy + ny * 0.4;
 
 		if (nx != 0)
 		{
@@ -228,6 +172,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if(Mariostate.movement != MoveStates::Crouch)
 				Mariostate.movement = MoveStates::Idle;
 		}
+
 		if (ny != 0) {
 			vy = 0;
 			if (ny < 0)
@@ -242,7 +187,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		//
 		// Collision logic with other objects
 		//
-		/*
+		
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
@@ -266,13 +211,13 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					{
 						if (goomba->GetState()!=GOOMBA_STATE_DIE)
 						{
-							if (level > MARIO_LEVEL_SMALL)
+						/*	if (level > MARIO_LEVEL_SMALL)
 							{
 								level = MARIO_LEVEL_SMALL;
 								StartUntouchable();
 							}
 							else 
-								SetState(MARIO_STATE_DIE);
+								SetState(MARIO_STATE_DIE);*/
 						}
 					}
 				}
@@ -283,24 +228,21 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				CGame::GetInstance()->SwitchScene(p->GetSceneId());
 			}
 		}
-		*/
+		
 	}
 	
 	// clean up collision events
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+
 	if (vy > 0)
 	{
 		onGround = FALSE;
 		SetJumpState(JumpStates::Fall);
 	}
-	if (timecooldown > 0)
+	
+	if (timeattack < timecooldown)
 	{
-		timecooldown -= dt;
-		timeattack -= dt;
-	}
-	else
-	{
-		timecooldown = 0;
+		timeattack += dt;
 	}
 }
 
@@ -346,12 +288,12 @@ void CMario::Render()
 			if (Mariostate.movement == MoveStates::Run)
 				ani = RUN;
 		}
-		if ( timeattack > 0)
+		if (ani_timeattack > timeattack)
 			ani = ATTACK;
 	}
 	if (animations->Get(ani) != NULL)
 		if (ani == ATTACK)
-			animations->Get(ATTACK)->Render(x, y, MARIO_TIME_ATTACK, ani_left);
+			animations->Get(ani)->Render(x, y, MARIO_TIME_ATTACK, ani_left);
 		else
 			animations->Get(ani)->Render(x, y, ani_left);
 }
@@ -503,7 +445,7 @@ void CMario::ChangeState()
 
 void  CMario::SetMoveState(MoveStates e) 
 { 
-	if (e == MoveStates::Attack && timecooldown > 0)
+	if (e == MoveStates::Attack && timeattack < timecooldown)
 	{
 		return;
 	}
@@ -519,10 +461,9 @@ void  CMario::SetMoveState(MoveStates e)
 		if (preMariostate.movement == MoveStates::Crouch)
 			y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_BIG_BBOX_HEIGHT_CROUCHING + 0.4);
 	}
-	if (Mariostate.movement == MoveStates::Attack && timecooldown == 0)
+	if (Mariostate.movement == MoveStates::Attack && timeattack >= timecooldown)
 	{
-		timecooldown = MARIO_TIME_COOLDOWN;
-		timeattack = MARIO_TIME_ATTACK;
+		timeattack = 0;
 	}
 		
 }

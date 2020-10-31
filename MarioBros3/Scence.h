@@ -2,6 +2,7 @@
 
 #include <d3dx9.h>
 #include <string>
+#include "GameObject.h"
 #include "KeyEventHandler.h"
 
 using namespace std;
@@ -20,6 +21,8 @@ public:
 	virtual void Unload() = 0;
 	virtual void Update(DWORD dt) = 0;
 	virtual void Render() = 0; 
+	virtual void addobject(LPGAMEOBJECT object) =0;
+	virtual void delobject(LPGAMEOBJECT object) = 0;
 };
 typedef CScene * LPSCENE;
 

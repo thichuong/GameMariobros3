@@ -58,7 +58,6 @@ void CKoopas::SetState(int state)
 	switch (state)
 	{
 	case KOOPAS_STATE_DIE:
-		y += KOOPAS_BBOX_HEIGHT - KOOPAS_BBOX_HEIGHT_DIE + 1;
 		vx = 0;
 		vy = 0;
 		break;

@@ -43,13 +43,17 @@ struct CCollisionEvent
 
 enum class CCollision2D
 {
-	Full, // 4 sides of box: default
+	Full, 
 	Left,
 	Top,
 	Right,
 	Bottom
 };
-
+enum class typeObject
+{
+	normal,
+	enemy
+};
 class CGameObject
 {
 public:

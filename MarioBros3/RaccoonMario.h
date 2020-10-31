@@ -1,12 +1,15 @@
 #pragma once
 #include "Mario.h"
-#define FLOAT "float"
+
+#define RACCOONMARIO_TIMECOOLDOWN 300
+#define RACCOONMARIO_ANI_ATTACKTIME 200
 
 class RaccoonMario :
     public CMario
 {
-	bool slowFall;
+
 public:
+	RaccoonMario();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void SetAnimationSet(CAnimations* ani_set);

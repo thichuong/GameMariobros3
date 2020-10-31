@@ -1,6 +1,14 @@
 #include "FireMario.h"
 #include "Game.h"
+#include "FireBullet.h"
 
+FireMario::FireMario() : CMario()
+{
+	collision = CCollision2D::Full;
+	timecooldown = FIREMARIO_TIMECOOLDOWN;
+	ani_timeattack = FIREMARIO_ANI_ATTACKTIME;
+	timeattack = FIREMARIO_TIMECOOLDOWN;
+}
 void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
 	UpdateVx();
@@ -31,9 +39,15 @@ void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	}
 	vy += MARIO_GRAVITY * dt;
 	CMario::Update(dt, colliable_objects);
-	if (CGame::GetInstance()->IsKeyDown(DIK_X)  && timecooldown == 0)
+	if (CGame::GetInstance()->IsKeyDown(DIK_X))
 	{
 		SetMoveState(MoveStates::Attack);
+
+	}
+	if (timeattack == 0)
+	{
+		CFireBullet* firebullet =  new CFireBullet(x,y,ax);
+		CGame::GetInstance()->GetCurrentScene()->addobject(firebullet);
 	}
 }
 

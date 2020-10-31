@@ -2,7 +2,9 @@
 <Textures>
 	<Textures Game="MarioBros3" id="1">
 		<LoadSPRITES file ="textures/Sprites/MarioDB.xml" source ="Textures\\Mario\\mario_x3.png" textureId="tex-mario"/>
-		<LoadANIMATIONS file ="Textures/Animations/MarioAnim.xml"/>	
+		<LoadSPRITES file ="textures/Sprites/EnemyDB.xml" source ="Textures\\Enemy\\enemy_x3.png" textureId="tex-enemy"/>
+		<LoadANIMATIONS file ="Textures/Animations/MarioAnim.xml"/>
+		<LoadANIMATIONS file ="Textures/Animations/EnemyAnim.xml"/> 
 		<LoadMAP filepath ="textures/Maps" file ="world-1-1-map.tmx"/>
 		<LoadLayer x ="100" y="900" />
 	</Textures>
