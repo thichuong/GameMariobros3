@@ -111,6 +111,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			onGround = FALSE;
 		}
 	}
+	
 	CGameObject::Update(dt);
 	
 	//dx = vx * dt;

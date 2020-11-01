@@ -44,13 +44,14 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 		// TODO: This is a very ugly designed function!!!!
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
-
+	
+		y += min_ty * dy + ny * 0.4;
 		x += min_tx * dx + nx * 0.4;
-		y += min_ty * dy + ny * 0.5;
+		//y += min_ty * dy + ny * 0.5;
 		if (ny != 0) vy = 0;
 		if (nx != 0)
 		{
-			
+			vx = -vx;
 		}
 	}
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];

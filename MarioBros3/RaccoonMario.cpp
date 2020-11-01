@@ -1,5 +1,8 @@
 #include "RaccoonMario.h"
+#include "CollisionBox.h"
 #include "Game.h"
+#include "Goomba.h"
+#include "Utils.h"
 
 RaccoonMario::RaccoonMario() :CMario()
 {
@@ -40,7 +43,13 @@ void RaccoonMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	if (CGame::GetInstance()->IsKeyDown(DIK_X))
 	{
 		SetMoveState(MoveStates::Attack);
+		
 	}
+	if (timeattack == 0)
+	{
+		TailAttack(dt, colliable_objects);
+	}
+
 }
 //void RaccoonMario::Render()
 //{
@@ -115,4 +124,27 @@ void  RaccoonMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(SKID, ani_set->Get("ani-raccoon-mario-skid"));
 	animations->Add(CROUCH, ani_set->Get("ani-raccoon-mario-crouch"));
 	animations->Add(ATTACK, ani_set->Get("ani-raccoon-mario-spin"));
+}
+void RaccoonMario::TailAttack(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
+{
+	CCollisionBox* tail = new CCollisionBox(x , y  , MARIO_BIG_BBOX_WIDTH * 2, MARIO_BIG_BBOX_HEIGHT / 2);
+	tail->SetPosition(x - MARIO_BIG_BBOX_WIDTH/2, y + MARIO_BIG_BBOX_HEIGHT/2);
+	vector<LPGAMEOBJECT> coObjectsResult;
+
+	tail->CalcCollisions(colliable_objects, coObjectsResult);
+	//DebugOut(L"	[coObjectsResult] = : %d \n", coObjectsResult.size());
+	//DebugOut(L"	[coObjectsResult] MArio  : %f \n", x);
+	//DebugOut(L"	[coObjectsResult] taik  : %f \n", tail->x);
+	for (UINT i = 0; i < coObjectsResult.size(); i++)
+	{
+		LPGAMEOBJECT e = coObjectsResult[i];
+	
+		if (dynamic_cast<CGoomba*>(e)) // if e->obj is Goomba 
+		{
+			CGoomba* goomba = dynamic_cast<CGoomba*>(e);
+			goomba->SetState(GOOMBA_STATE_DIE);
+		}
+	}
+	coObjectsResult.clear();
+	delete tail;
 }

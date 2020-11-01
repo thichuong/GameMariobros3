@@ -90,7 +90,9 @@ public:
 	//void SetAnimationSet(CAnimationSet* ani_set) { animation_set = ani_set; }
 	
 	LPCOLLISIONEVENT SweptAABBEx(LPGAMEOBJECT coO);
+	bool AABBEx(LPGAMEOBJECT coO);
 	void CalcPotentialCollisions(vector<LPGAMEOBJECT> *coObjects, vector<LPCOLLISIONEVENT> &coEvents);
+	void CalcCollisions(vector<LPGAMEOBJECT>* coObjects, vector<LPGAMEOBJECT>& coObjectsResult);
 	void FilterCollision(
 		vector<LPCOLLISIONEVENT> &coEvents, 
 		vector<LPCOLLISIONEVENT> &coEventsResult, 

@@ -57,7 +57,19 @@ LPCOLLISIONEVENT CGameObject::SweptAABBEx(LPGAMEOBJECT coO)
 	CCollisionEvent * e = new CCollisionEvent(t, nx, ny, rdx, rdy, coO);
 	return e;
 }
+bool CGameObject::AABBEx(LPGAMEOBJECT coO)
+{
+	float sl, st, sr, sb;		// static object bbox
+	float ml, mt, mr, mb;		// moving object bbox
+	
 
+	coO->GetBoundingBox(sl, st, sr, sb);
+	GetBoundingBox(ml, mt, mr, mb);
+	
+	if (mr < sl || ml > sr || mb < st || mt > sb) return false;
+	return true;
+
+}
 /*
 	Calculate potential collisions with the list of colliable objects 
 	
@@ -96,6 +108,7 @@ void CGameObject::FilterCollision(
 {
 	vector<LPGAMEOBJECT> coObjectsResult;
 	for (UINT i = 0; i < coEvents.size(); i++)  coObjectsResult.push_back(coEvents[i]->obj);
+
 	vector<LPCOLLISIONEVENT> coEventsxy;
 	float tempx, tempy ;
 	min_tx = 1.0f;
@@ -104,8 +117,8 @@ void CGameObject::FilterCollision(
 	int min_iy = -1;
 	nx = 0.0f;
 	ny = 0.0f;
-	tempx = x;
-	tempy = y;
+	tempx = this->x;
+	tempy = this->y;
 	coEventsResult.clear();
 
 	for (UINT i = 0; i < coEvents.size(); i++)
@@ -124,12 +137,12 @@ void CGameObject::FilterCollision(
 
 	if (min_tx > min_ty)
 	{
-		float px = x;
+		
 		x += min_ty * dx;
 		y += min_ty * dy + ny * 0.4f;
 		dy = 0;
 		coEventsResult.push_back(coEvents[min_iy]);
-		//DebugOut(L"		[X]point = : %f \n",px);
+		//DebugOut(L"		[Y]point = : %f \n", y );
 		coEventsxy.clear();
 
 		CalcPotentialCollisions(&coObjectsResult, coEventsxy);
@@ -137,20 +150,23 @@ void CGameObject::FilterCollision(
 		{
 			FilterCollisionX(coEventsxy, coEventsResult, min_tx, nx, rdx);
 			//x -= min_ty * dx;
-			x += min_tx * dx + nx * 0.4f;
-			DebugOut(L"		[X] coEvents.size() = : %d \n", coEvents.size());
+			//x += min_tx * dx + nx * 0.4f;
+			if (min_ty + min_tx < 1) min_tx = min_ty + min_tx;
+			else min_tx = 1;
 		}
 		else
 		{
-			x = px + dx;
 			nx = 0;
+			min_tx = 1;
 		}
 		dy = vy * dt;
-
+		y -= min_ty * dy + ny * 0.4;
+		x -= min_ty * dx;;
 	}
 	else
 	{
-		float py = y;
+		
+		
 		x += min_tx * dx + nx * 0.4f;
 		y += min_tx * dy;
 		dx = 0;
@@ -160,20 +176,23 @@ void CGameObject::FilterCollision(
 		if (coEvents.size() > 0)
 		{
 			FilterCollisionY(coEventsxy, coEventsResult, min_ty, ny, rdy);
-			y += min_ty * dy + ny * 0.4f;
+			//y += min_ty * dy + ny * 0.4f;
+			if (min_ty + min_tx < 1) min_ty = min_ty + min_tx;
+			else min_ty = 1;
 		}
 
 		else
 		{
 			//y-= min_ty * dy + ny * 0.4f;
-			y = py + dy;
+			
 			ny = 0;
+			min_ty = 1;
 		}
 		dx = vx * dt;
-		//y += min_ty * dy + ny * 0.4f;
+		x -= min_tx * dx + nx * 0.4f;
+		y -= min_tx * dy;
 	}
-	x = tempx;
-	y = tempy;
+	
 	for (UINT i = 0; i < coEventsxy.size(); i++)  coEvents.push_back(coEventsxy[i]);
 	
 }
@@ -224,7 +243,16 @@ void CGameObject::FilterCollisionY(
 	}
 	if (min_iy >= 0) coEventsResult.push_back(coEvents[min_iy]);
 }
-
+void CGameObject::CalcCollisions(vector<LPGAMEOBJECT>* coObjects, vector<LPGAMEOBJECT>& coObjectsResult)
+{
+	for (UINT i = 0; i < coObjects->size(); i++)
+	{
+		if( AABBEx(coObjects->at(i)))
+		{
+			coObjectsResult.push_back(coObjects->at(i));
+		}
+	}
+}
 
 void CGameObject::RenderBoundingBox()
 {
