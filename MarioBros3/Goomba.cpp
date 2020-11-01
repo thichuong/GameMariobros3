@@ -4,7 +4,9 @@
 CGoomba::CGoomba()
 {
 	SetState(GOOMBA_STATE_WALKING);
-
+	typeobject = TypeObject::enemy;
+	collision = CCollision::Full;
+	flydie = false;
 }
 
 void CGoomba::GetBoundingBox(float &left, float &top, float &right, float &bottom)
@@ -28,7 +30,8 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	vector<LPCOLLISIONEVENT> coEventsResult;
 	coEvents.clear();
 
-	CalcPotentialCollisions(coObjects, coEvents);
+	if(!flydie)
+		CalcPotentialCollisions(coObjects, coEvents);
 
 	if (coEvents.size() == 0)
 	{
@@ -55,21 +58,29 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		}
 	}
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-	if (state == GOOMBA_STATE_DIE) CGame::GetInstance()->GetCurrentScene()->delobject(this);
-	
+	CGame* game = CGame::GetInstance();
+	if (state == GOOMBA_STATE_DIE && !flydie ) game->GetCurrentScene()->delobject(this);
+	if(y > game->GetScamY() + game->GetScreenHeight()) game->GetCurrentScene()->delobject(this);
 }
 
 void CGoomba::Render()
 {
+	D3DXVECTOR2 pScale(1, 1);
 	string ani = GOOMBA_ANI_WALKING;
+	
 	if (state == GOOMBA_STATE_DIE) {
-		ani = GOOMBA_ANI_DIE;
+		if(!flydie)
+			ani = GOOMBA_ANI_DIE;
+		else
+		{
+			ani = GOOMBE_ANI_IDLE;
+			pScale.y = -pScale.y;
+		}
 	}
 	if(animations->Get( ani)!=NULL)
-		animations->Get(ani)->Render(x, y);
-	//CAnimations::GetInstance()->Get(ani)->Render(x,y);
-	//animation_set->at(ani)->Render(x, y);
-	//RenderBoundingBox();
+		animations->Get(ani)->Render(x, y, pScale);
+		//animations->Get(ani)->Render(x, y);
+
 }
 
 void CGoomba::SetState(int state)
@@ -79,7 +90,8 @@ void CGoomba::SetState(int state)
 	{
 		case GOOMBA_STATE_DIE:
 			vx = 0;
-			vy = 0;
+			collision = CCollision::None;
+		
 			break;
 		case GOOMBA_STATE_WALKING: 
 			vx = -GOOMBA_WALKING_SPEED;
@@ -88,4 +100,20 @@ void CGoomba::SetState(int state)
 void CGoomba::SetAnimationSet(CAnimations* ani_set)
 {
 	animations = ani_set;
+}
+void CGoomba::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
+{
+	if (obj->typeobject == TypeObject::player )
+	{
+		if (ny < 0)
+			SetState(GOOMBA_STATE_DIE);
+		else
+			obj->DownLevel();
+	}
+	else if(obj->typeobject != TypeObject::player)
+	{
+		flydie = TRUE;
+		vy = -GOOMBA_FLY_DIE;
+		SetState(GOOMBA_STATE_DIE);
+	}
 }

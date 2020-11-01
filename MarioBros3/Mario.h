@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
+
 #define MARIO_WALKING_SPEED  0.2f
 #define MARIO_WALKING_SPEED_UP  0.0003f
 #define MARIO_WALKING_SPEED_DOWN  0.0015f
@@ -12,7 +13,7 @@
 #define MARIO_JUMP_SPEED_Y_HIGH  0.55f
 #define MARIO_JUMP_SPEED_Y_SUPER  0.7f
 #define MARIO_FLY_SPEED_Y  1.3f
-#define MARIO_JUMP_DEFLECT_SPEED  0.2f
+#define MARIO_JUMP_DEFLECT_SPEED  0.4f
 #define MARIO_GRAVITY  0.003f
 #define MARIO_DIE_DEFLECT_SPEED  0.5f
 
@@ -112,10 +113,13 @@ public:
 	virtual void OnKeyDown(int keyCode);
 	virtual void KeyState(BYTE* state);
 	void SetState(int state);
-	void SetLevel(int l);
+	void SetLevel(string l);
 	string GetLevel();
+	virtual void DownLevel() ;
+
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
 	void ChangeState();
+
 	virtual void SetMoveState(MoveStates e) ;
 	virtual void SetJumpState(JumpStates e) ;
 	void Reset();

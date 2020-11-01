@@ -9,6 +9,7 @@ CFireBullet::CFireBullet(float x, float y, int ax)
 	this->y = y;
 	vx = ax * Bullet_SPEED;
 	SetAnimationSet(CAnimations::GetInstance());
+	typeobject = TypeObject::Bullet;
 }
 void CFireBullet::SetAnimationSet(CAnimations* ani_set)
 {
@@ -57,17 +58,18 @@ void CFireBullet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		if (ny < 0) vy = -Bullet_JUMP;
 		if (nx != 0)
 		{
-			CGame::GetInstance()->GetCurrentScene()->delobject(this);
+			
 		}
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
 
-			if (dynamic_cast<CGoomba*>(e->obj)) // if e->obj is Goomba 
+			if (e->obj->typeobject == TypeObject::enemy) // if e->obj is Goomba 
 			{
-				CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
-				goomba->SetState(GOOMBA_STATE_DIE);
+				LPGAMEOBJECT obj = e->obj;
+				obj->CollisionObject(this,e->nx,e->ny);
 			}
+			else if(e->nx != 0 && nx != 0 ) CGame::GetInstance()->GetCurrentScene()->delobject(this);
 		}
 
 	}

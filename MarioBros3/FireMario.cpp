@@ -4,7 +4,7 @@
 
 FireMario::FireMario() : CMario()
 {
-	collision = CCollision2D::Full;
+	collision = CCollision::Full;
 	timecooldown = FIREMARIO_TIMECOOLDOWN;
 	ani_timeattack = FIREMARIO_ANI_ATTACKTIME;
 	timeattack = FIREMARIO_TIMECOOLDOWN;

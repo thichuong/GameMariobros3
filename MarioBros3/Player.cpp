@@ -11,6 +11,9 @@ CPlayer::CPlayer()
 	
 	levelMario = big;
 	playMario = ListMario[levelMario];
+	collision = CCollision::Full;
+	typeobject = TypeObject::player;
+	downleveltime = DOWN_LEVEL_TIME;
 }
 
 CPlayer* CPlayer::__instance = NULL;
@@ -25,6 +28,8 @@ CPlayer* CPlayer::GetInstance()
 void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
 	if (playMario->GetLevel() != none) SwitchToMario(playMario->GetLevel());
+	if (downleveltime < DOWN_LEVEL_TIME) downleveltime += dt;
+
 	playMario->Update(dt, colliable_objects);
 	playMario->GetPosition(this->x, this->y);
 }
@@ -53,10 +58,24 @@ void CPlayer::SetPosition(float x, float y)
 void CPlayer::SwitchToMario(string state)
 {
 	if (levelMario == small) this->y -= MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT + 0.4;
+	if(state == small) this->y += MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT - 0.4;
 	levelMario = state;
-	playMario->SetLevel(0);
+	playMario->SetLevel(none);
 	playMario = ListMario[levelMario];
 	playMario->SetPosition(this->x, this->y);
 	playMario->StartUntouchable();
 	DebugOut(L"[Change playMario]   %s \n", ToLPCWSTR(levelMario));
+}
+void CPlayer::Downlevel()
+{
+	if (downleveltime >= DOWN_LEVEL_TIME)
+	{
+		if (levelMario == small) playMario->SetState(MARIO_STATE_DIE);
+		else if (levelMario == big) playMario->SetLevel(small);
+		else playMario->SetLevel(big);
+		
+		DebugOut(L"[:Downlevel playMario]   %s \n", ToLPCWSTR(levelMario));
+		downleveltime = 0;
+	}
+	
 }

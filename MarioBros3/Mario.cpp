@@ -21,8 +21,9 @@ CMario::CMario(float x, float y) : CGameObject()
 	this->y = y; 
 	ax = 1;
 	changeMario = none;
-	collision = CCollision2D::Full;
+	collision = CCollision::Full;
 	timecooldown = 0;
+	typeobject = TypeObject::player;
 }
 void CMario::UpdateVx()
 {
@@ -193,40 +194,13 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
 
-			if (dynamic_cast<CGoomba *>(e->obj)) // if e->obj is Goomba 
+			if (e->obj->typeobject == TypeObject::enemy) // if e->obj is Goomba 
 			{
-				CGoomba *goomba = dynamic_cast<CGoomba *>(e->obj);
-
-				// jump on top >> kill Goomba and deflect a bit 
-				if (e->ny < 0)
-				{
-					if (goomba->GetState()!= GOOMBA_STATE_DIE)
-					{
-						goomba->SetState(GOOMBA_STATE_DIE);
-						vy = -MARIO_JUMP_DEFLECT_SPEED;
-					}
-				}
-				else if (e->nx != 0)
-				{
-					if (untouchable==0)
-					{
-						if (goomba->GetState()!=GOOMBA_STATE_DIE)
-						{
-						/*	if (level > MARIO_LEVEL_SMALL)
-							{
-								level = MARIO_LEVEL_SMALL;
-								StartUntouchable();
-							}
-							else 
-								SetState(MARIO_STATE_DIE);*/
-						}
-					}
-				}
-			} // if Goomba
-			else if (dynamic_cast<CPortal *>(e->obj))
-			{
-				CPortal *p = dynamic_cast<CPortal *>(e->obj);
-				CGame::GetInstance()->SwitchScene(p->GetSceneId());
+				LPGAMEOBJECT obj = e->obj;
+				// jump on top >> kill Goomba and deflect a bit 					
+				obj->CollisionObject(this, e->nx, e->ny);
+				if(e->ny > 0)
+					vy = -MARIO_JUMP_DEFLECT_SPEED;
 			}
 		}
 		
@@ -316,23 +290,7 @@ void CMario::SetState(int state)
 	CGameObject::SetState(state);
 }
 /*
-void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom)
-{
-	left = x;
-	top = y; 
 
-	if (level != MARIO_LEVEL_SMALL)
-	{
-		right = x + MARIO_BIG_BBOX_WIDTH;
-		if (Mariostate.movement != MoveStates::Crouch) bottom = y + MARIO_BIG_BBOX_HEIGHT;
-		else bottom = y + MARIO_BIG_BBOX_HEIGHT_CROUCHING;
-	}
-	else
-	{
-		right = x + MARIO_SMALL_BBOX_WIDTH;
-		bottom = y + MARIO_SMALL_BBOX_HEIGHT;
-	}
-}
 */
 void CMario::OnKeyUp(int keyCode) {
 	if (keyCode == DIK_SPACE)
@@ -359,13 +317,13 @@ void CMario::OnKeyDown(int keyCode)
 	case DIK_A:
 		Reset();
 		break;
-	case DIK_1: SetLevel(1);
+	case DIK_1: SetLevel(small);
 		break;
-	case DIK_2: SetLevel(2);
+	case DIK_2: SetLevel(big);
 		break;
-	case DIK_3:	SetLevel(3);
+	case DIK_3:	SetLevel(fire);
 		break;
-	case DIK_4: SetLevel(4);
+	case DIK_4: SetLevel(raccoon);
 		break;
 	}
 	ChangeState();
@@ -446,7 +404,7 @@ void CMario::ChangeState()
 
 void  CMario::SetMoveState(MoveStates e) 
 { 
-	if (e == MoveStates::Attack && timeattack < timecooldown)
+	if (e == MoveStates::Attack && timeattack < timecooldown && Mariostate.movement!= MoveStates::Crouch)
 	{
 		return;
 	}
@@ -475,33 +433,25 @@ void CMario::SetJumpState(JumpStates e)
 	Mariostate.jump = e;
 
 }
-void CMario::SetLevel(int l)
+void CMario::SetLevel(string l)
 {
 	
-	if (l == MARIO_LEVEL_SMALL)
+	if (l == small)
 	{
 		y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT + 0.4);
 	}
-	string level;
-	switch (l)
-	{
-	case 0: level = none;
-		break;
-	case 1: level= small;
-		break;
-	case 2:level= big;
-		break;
-	case 3:level= fire;
-		break;
-	case 4: level=raccoon;
-		break;
-	}
-	changeMario = level;
+	
+	changeMario = l;
+	DebugOut(L"[:SET level playMario]   %s \n", ToLPCWSTR(changeMario));
 	//StartUntouchable();
 }
 string CMario::GetLevel()
 {
 	return changeMario;
+}
+void CMario::DownLevel()
+{
+	CGame::GetInstance()->GetCurrentScene()->GetPlayer()->Downlevel();
 }
 /*
 	Reset Mario status to the beginning state of a scene

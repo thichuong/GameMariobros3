@@ -6,7 +6,7 @@
 
 RaccoonMario::RaccoonMario() :CMario()
 {
-	collision = CCollision2D::Full;
+	collision = CCollision::Full;
 	timecooldown = RACCOONMARIO_TIMECOOLDOWN;
 	ani_timeattack = RACCOONMARIO_ANI_ATTACKTIME;
 	timeattack = RACCOONMARIO_TIMECOOLDOWN;
@@ -51,58 +51,7 @@ void RaccoonMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	}
 
 }
-//void RaccoonMario::Render()
-//{
-//	//CMario::Render();
-//	string ani = "";
-//	bool ani_left = false;
-//	if (ax < 0)
-//		ani_left = TRUE;
-//	if (state == MARIO_STATE_DIE)
-//		ani = MARIO_ANI_DIE;
-//	else
-//	{
-//		
-//		if (Mariostate.jump == JumpStates::Jump)
-//			ani = JUMP;
-//		else if (Mariostate.jump == JumpStates::Super)
-//		{
-//			ani = FLY;
-//		}
-//		else if (Mariostate.jump == JumpStates::Fall)
-//		{
-//			ani = FALL;
-//			if (slowFall) ani = FLOAT;
-//		}
-//			
-//		else
-//		{
-//			if (Mariostate.movement == MoveStates::Idle)
-//			{
-//				if (vx == 0)ani = IDLE;
-//				else ani = WALK;
-//			}
-//			if (Mariostate.movement == MoveStates::Walk)
-//			{
-//				if (vx * ax >= 0)
-//					ani = WALK;
-//				else
-//					ani = SKID;
-//			}
-//			if (Mariostate.movement == MoveStates::Crouch)
-//				ani = CROUCH;
-//			if (Mariostate.movement == MoveStates::Run)
-//				ani = RUN;
-//		}
-//		if (Mariostate.movement == MoveStates::Attack)
-//			ani = ATTACK;
-//	}
-//	if (animations->Get(ani) != NULL)
-//		if(ani == ATTACK)
-//			animations->Get(ani)->Render(x, y,100, ani_left);
-//		else
-//			animations->Get(ani)->Render(x, y, ani_left);
-//}
+
 void RaccoonMario::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	left = x;
@@ -127,7 +76,7 @@ void  RaccoonMario::SetAnimationSet(CAnimations* ani_set)
 }
 void RaccoonMario::TailAttack(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
-	CCollisionBox* tail = new CCollisionBox(x , y  , MARIO_BIG_BBOX_WIDTH * 2, MARIO_BIG_BBOX_HEIGHT / 2);
+	CCollisionBox* tail = new CCollisionBox(x , y , MARIO_BIG_BBOX_WIDTH * 2, MARIO_BIG_BBOX_HEIGHT / 2);
 	tail->SetPosition(x - MARIO_BIG_BBOX_WIDTH/2, y + MARIO_BIG_BBOX_HEIGHT/2);
 	vector<LPGAMEOBJECT> coObjectsResult;
 
@@ -138,11 +87,11 @@ void RaccoonMario::TailAttack(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	for (UINT i = 0; i < coObjectsResult.size(); i++)
 	{
 		LPGAMEOBJECT e = coObjectsResult[i];
-	
-		if (dynamic_cast<CGoomba*>(e)) // if e->obj is Goomba 
+
+		if (e->typeobject == TypeObject::enemy) // if e->obj is Goomba 
 		{
-			CGoomba* goomba = dynamic_cast<CGoomba*>(e);
-			goomba->SetState(GOOMBA_STATE_DIE);
+			float nx = this->x > e->x ? -1 : 1;
+			e->CollisionObject(tail,nx,0);
 		}
 	}
 	coObjectsResult.clear();

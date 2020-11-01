@@ -7,7 +7,7 @@
 #include "Mario.h"
 #include "Goomba.h"
 #include "Koopas.h"
-#include "Player.h"
+
 using namespace std;
 
 //string MARIO_DB = "Textures/Sprites/MarioDB.xml";
@@ -47,7 +47,7 @@ public:
 	virtual void addobject(LPGAMEOBJECT object) { objects.push_back(object); }
 	virtual void delobject(LPGAMEOBJECT object) { earseobjects.push_back(object); }
 	void LoadSource();
-	CPlayer* GetPlayer() { return player; }
+	virtual CPlayer* GetPlayer() { return player; }
 
 	//friend class CPlayScenceKeyHandler;
 };

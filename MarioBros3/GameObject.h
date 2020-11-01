@@ -41,18 +41,21 @@ struct CCollisionEvent
 	}
 };
 
-enum class CCollision2D
+enum class CCollision
 {
 	Full, 
 	Left,
 	Top,
 	Right,
-	Bottom
+	Bottom,
+	None
 };
-enum class typeObject
+enum class TypeObject
 {
 	normal,
-	enemy
+	enemy,
+	player,
+	Bullet
 };
 class CGameObject
 {
@@ -73,7 +76,8 @@ public:
 	int state;
 
 	DWORD dt; 
-	CCollision2D collision;
+	CCollision collision;
+	TypeObject typeobject;
 	//CAnimationSet* animation_set;
 	CAnimations* animations;
 	//LPANIMATION animations;
@@ -89,6 +93,7 @@ public:
 
 	//void SetAnimationSet(CAnimationSet* ani_set) { animation_set = ani_set; }
 	
+
 	LPCOLLISIONEVENT SweptAABBEx(LPGAMEOBJECT coO);
 	bool AABBEx(LPGAMEOBJECT coO);
 	void CalcPotentialCollisions(vector<LPGAMEOBJECT> *coObjects, vector<LPCOLLISIONEVENT> &coEvents);
@@ -113,12 +118,13 @@ public:
 		float& ny,
 		float& rdy);
 	CGameObject();
+	virtual void CollisionObject(LPGAMEOBJECT obj, int nx, int ny) {};
 	virtual void SetAnimationSet(CAnimations* ani_set) {};
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom) = 0;
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects = NULL);
 	virtual void Render() = 0;
 	virtual void SetState(int state) { this->state = state; }
-
+	virtual void DownLevel() {};
 
 	~CGameObject();
 };

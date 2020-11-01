@@ -4,6 +4,7 @@
 #include <string>
 #include "GameObject.h"
 #include "KeyEventHandler.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -23,6 +24,7 @@ public:
 	virtual void Render() = 0; 
 	virtual void addobject(LPGAMEOBJECT object) =0;
 	virtual void delobject(LPGAMEOBJECT object) = 0;
+	virtual CPlayer* GetPlayer() { return NULL; }
 };
 typedef CScene * LPSCENE;
 

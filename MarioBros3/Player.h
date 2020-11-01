@@ -11,7 +11,7 @@
 #define big "big"
 #define fire "fire"
 #define raccoon "raccoon"
-
+#define DOWN_LEVEL_TIME 1000
 using namespace std;
 class CPlayer : public CGameObject
 {
@@ -19,6 +19,7 @@ class CPlayer : public CGameObject
     unordered_map<string, CMario*> ListMario;
     CMario* playMario;
     string levelMario;
+    DWORD downleveltime;
 public:
     CPlayer();
     void SwitchToMario(string state);
@@ -30,7 +31,7 @@ public:
     virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
     virtual void SetAnimationSet(CAnimations* ani_set);
     void SetPosition(float x, float y);
-
+    void Downlevel();
 
     static  CPlayer* GetInstance();
 };

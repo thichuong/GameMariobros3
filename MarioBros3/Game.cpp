@@ -73,6 +73,29 @@ void CGame::Draw(int x, int y,int xPivot, LPDIRECT3DTEXTURE9 texture, int left, 
 	r.bottom = bottom;
 	spriteHandler->Draw(texture, &r, &pcenter3, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
+void CGame::Draw(int x, int y, int xPivot, D3DXVECTOR2 vectorflip, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
+{
+	D3DXVECTOR3 p(x - (int)cam_x + xPivot, y - (int)cam_y, 0);
+	RECT r;
+	r.left = left;
+	r.top = top;
+	r.right = right;
+	r.bottom = bottom;
+
+	D3DXVECTOR2 pcenter2(p.x + (right - left + xPivot) / 2, p.y + (bottom - top) / 2);
+	D3DXVECTOR3 pcenter3(((right - left + xPivot) / 2)* vectorflip.x,0, 0);
+	D3DXVECTOR2 pScale(vectorflip.x, vectorflip.y);
+	D3DXMATRIX oldMatrix, newMatrix;
+	spriteHandler->GetTransform(&oldMatrix);
+
+	D3DXMatrixTransformation2D(&newMatrix, &pcenter2, 0.0f, &pScale, NULL, 0.0f, NULL);
+
+	spriteHandler->SetTransform(&newMatrix);
+
+	spriteHandler->Draw(texture, &r, &pcenter3, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
+	spriteHandler->SetTransform(&oldMatrix);
+
+}
 void CGame::DrawFlipX(int x, int y, int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
 	D3DXVECTOR3 p(x - (int)cam_x + xPivot, y - (int)cam_y, 0);
@@ -97,22 +120,6 @@ void CGame::DrawFlipX(int x, int y, int xPivot, LPDIRECT3DTEXTURE9 texture, int 
 
 }
 
-void CGame::DrawFlipY(D3DXVECTOR2 position, D3DXVECTOR2 pointCenter, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
-{
-	D3DXVECTOR3 p(position.x, position.y, 0);
-	D3DXVECTOR3 pCenter(pointCenter.x, pointCenter.y, 0);
-	D3DXVECTOR2 pScale(1.0f, -1.0f);
-	D3DXMATRIX oldMatrix, newMatrix;
-	spriteHandler->GetTransform(&oldMatrix);
-
-	D3DXMatrixTransformation2D(&newMatrix, &position, 0.0f, &pScale, NULL, 0.0f, NULL);
-	spriteHandler->SetTransform(&newMatrix);
-
-	D3DXVECTOR3 pInt(trunc(position.x), trunc(position.y), 0);
-
-	//spriteHandler->Draw(texture, &rect, &pCenter, &pInt, D3DCOLOR_ARGB(alpha, 255, 255, 255));
-	//spriteHandler->SetTransform(&oldMatrix);
-}
 
 int CGame::IsKeyDown(int KeyCode)
 {

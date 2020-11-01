@@ -398,6 +398,19 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 		object->SetPosition(x + camw/2, y - camh/2);
 		((CPlayScene*)scence)->addobject(object);
 	}
+	if (KeyCode == DIK_9)
+	{
+
+		float camw, camh;
+		camw = CGame::GetInstance()->GetScreenWidth();
+		camh = CGame::GetInstance()->GetScreenHeight();
+		float x, y;
+		mario->GetPosition(x, y);
+		LPGAMEOBJECT object = new CKoopas();
+		object->SetAnimationSet(CAnimations::GetInstance());
+		object->SetPosition(x + camw / 2, y - camh / 2);
+		((CPlayScene*)scence)->addobject(object);
+	}
 }
 
 void CPlayScenceKeyHandler::KeyState(BYTE *states)

@@ -54,18 +54,18 @@ TileSet CGameMap::GetTileSet(int id)
 }
 void CGameMap::Render(CGame* game)
 {
-	int col = game->GetScamX() / tileWidth;
-	int row = game->GetScamY() / tileHeight;
+	int Width = game->GetScamX() / tileWidth;
+	int Height = game->GetScamY() / tileHeight;
 
-	if (col > 0) col--;
-	if (row > 0) row--;
+	if (Width > 0) Width--;
+	if (Height > 0) Height--;
 
 	//Vec2 camSize = Vec2(this->camera->GetCamSize().x / tileWidth, this->camera->GetCamSize().y / tileHeight);
 	
-	int camsizex= game->GetScreenWidth() / tileWidth;
-	int camsizey = game->GetScreenHeight() / tileHeight;
-	for (int i = col; i < camsizex + col + 3; i++) {
-		for (int j = row; j < camsizey + row + 3; j++) {
+	int camWidth = game->GetScreenWidth() / tileWidth;
+	int camHeight = game->GetScreenHeight() / tileHeight;
+	for (int i = Width; i < camWidth + Width + 3; i++) {
+		for (int j = Height; j < camHeight + Height + 3; j++) {
 			int x = i * tileWidth ;
 			int y = j * tileHeight ;
 			for (Layer layer : layers) {

@@ -5,7 +5,7 @@
 #define Bullet_BBOX_HEIGHT 24
 #define Bullet_SPEED 0.6
 #define GRAVITY  0.003f
-#define Bullet_JUMP 0.0f
+#define Bullet_JUMP 0.6f
 
 #define ANI "ANI"
 class CFireBullet :
