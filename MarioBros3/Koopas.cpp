@@ -1,5 +1,6 @@
 #include "Koopas.h"
 #include "Game.h"
+#include "Mario.h"
 
 CKoopas::CKoopas()
 {
@@ -23,6 +24,11 @@ void CKoopas::GetBoundingBox(float &left, float &top, float &right, float &botto
 
 void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
+	if (state == KOOPAS_STATE_SHELL_HOLD)
+	{
+		vx = 0;
+		vy = 0;
+	}
 	CGameObject::Update(dt);
 	vy += KOOPAS_GRAVITY * dt;
 	
@@ -30,7 +36,7 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	vector<LPCOLLISIONEVENT> coEventsResult;
 	coEvents.clear();
 
-	if (!flydie)
+	if (!flydie && !(state == KOOPAS_STATE_SHELL_HOLD))
 		CalcPotentialCollisions(coObjects, coEvents);
 
 	if (coEvents.size() == 0)
@@ -63,6 +69,16 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		{
 			vx = -vx;
 		}
+		for (UINT i = 0; i < coEventsResult.size(); i++)
+		{
+			LPCOLLISIONEVENT e = coEventsResult[i];
+
+			if (e->obj->typeobject == TypeObject::enemy) // if e->obj is Goomba 
+			{
+				LPGAMEOBJECT obj = e->obj;
+				obj->CollisionObject(this, e->nx, e->ny);
+			}
+		}
 	}
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	CGame* game = CGame::GetInstance();
@@ -84,7 +100,8 @@ void CKoopas::Render()
 		ani = KOOPAS_ANI_SHELL;
 	if(state == KOOPAS_STATE_SHELL_RUN)
 		ani = KOOPAS_ANI_SHELL_RUN;
-
+	if (state == KOOPAS_STATE_SHELL_HOLD)
+		ani = KOOPAS_ANI_SHELL;
 	//CAnimations::GetInstance()->Get(ani)->Render(x, y);
 	if (animations->Get(ani) != NULL)
 		animations->Get(ani)->Render(x, y, pScale);
@@ -103,13 +120,18 @@ void CKoopas::SetState(int state)
 		break;
 	case KOOPAS_STATE_WALKING:
 		vx = -KOOPAS_WALKING_SPEED;
+		collision = CCollision::Full;
 		break;
 	case KOOPAS_STATE_SHELL:
 		vx = 0;
+		collision = CCollision::Full;
 		break;
 	case KOOPAS_STATE_SHELL_RUN:
+		collision = CCollision::Full;
 		break;
-
+	case KOOPAS_STATE_SHELL_HOLD:
+		collision = CCollision::None;
+		break;
 	}
 
 }
@@ -122,15 +144,30 @@ void CKoopas::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 {
 	if (obj->typeobject == TypeObject::player)
 	{
+		if (state == KOOPAS_STATE_SHELL_HOLD && !CGame::GetInstance()->IsKeyDown(DIK_Z))
+		{
+			SetState(KOOPAS_STATE_SHELL);
+		}
 		if (ny < 0)
 		{
 			if (state == KOOPAS_STATE_WALKING)
 				SetState(KOOPAS_STATE_SHELL);
 			else if (state == KOOPAS_STATE_SHELL)
 			{
-				SetState(KOOPAS_STATE_SHELL_RUN);
+
+				if (CGame::GetInstance()->IsKeyDown(DIK_Z))
+				{
+					SetState(KOOPAS_STATE_SHELL_HOLD);
+					CMario* mario = dynamic_cast<CMario*>(obj);
+					mario->holdObj(this);
+				}
+				else
+				{
+					SetState(KOOPAS_STATE_SHELL_RUN);
 				if (obj->x < this->x) vx = KOOPAS_RUN_SPEED;
 				else vx = -KOOPAS_RUN_SPEED;
+				}
+				
 			}
 			else if (state == KOOPAS_STATE_SHELL_RUN) SetState(KOOPAS_STATE_SHELL);
 		}		
@@ -140,9 +177,19 @@ void CKoopas::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 				obj->DownLevel();
 			else 
 			{
-				SetState(KOOPAS_STATE_SHELL_RUN);
-				if (obj->x < this->x) vx = KOOPAS_RUN_SPEED;
-				else vx = -KOOPAS_RUN_SPEED;
+				if (CGame::GetInstance()->IsKeyDown(DIK_Z))
+				{
+					SetState(KOOPAS_STATE_SHELL_HOLD);
+					CMario* mario = dynamic_cast<CMario*>(obj);
+					mario->holdObj(this);
+				}
+				else
+				{
+					SetState(KOOPAS_STATE_SHELL_RUN);
+					if (obj->x < this->x) vx = KOOPAS_RUN_SPEED;
+					else vx = -KOOPAS_RUN_SPEED;
+				}
+				
 			}
 		}
 	}

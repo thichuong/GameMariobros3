@@ -7,6 +7,7 @@ CGoomba::CGoomba()
 	typeobject = TypeObject::enemy;
 	collision = CCollision::Full;
 	flydie = false;
+	timedie = 0;
 }
 
 void CGoomba::GetBoundingBox(float &left, float &top, float &right, float &bottom)
@@ -59,7 +60,10 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	CGame* game = CGame::GetInstance();
-	if (state == GOOMBA_STATE_DIE && !flydie ) game->GetCurrentScene()->delobject(this);
+	if (state == GOOMBA_STATE_DIE && !flydie)
+		if (timedie >= GOOMA_TIME_DIE)
+			game->GetCurrentScene()->delobject(this);
+		else timedie += dt;
 	if(y > game->GetScamY() + game->GetScreenHeight()) game->GetCurrentScene()->delobject(this);
 }
 

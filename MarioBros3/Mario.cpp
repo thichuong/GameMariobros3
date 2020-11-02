@@ -24,12 +24,14 @@ CMario::CMario(float x, float y) : CGameObject()
 	collision = CCollision::Full;
 	timecooldown = 0;
 	typeobject = TypeObject::player;
+	holdobject = NULL;
+	hold = false;
 }
 void CMario::UpdateVx()
 {
 	if (Mariostate.movement == MoveStates::Run || Mariostate.movement == MoveStates::Walk)
 	{
-		if (!CGame::GetInstance()->IsKeyDown(DIK_Z) && Mariostate.jump != JumpStates::Super)
+		if ((!CGame::GetInstance()->IsKeyDown(DIK_Z) && Mariostate.jump != JumpStates::Super) || hold ==true)
 		{
 			if (ax > 0)
 			{
@@ -199,7 +201,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				LPGAMEOBJECT obj = e->obj;
 				// jump on top >> kill Goomba and deflect a bit 					
 				obj->CollisionObject(this, e->nx, e->ny);
-				if(e->ny > 0)
+				if(e->ny < 0)
 					vy = -MARIO_JUMP_DEFLECT_SPEED;
 			}
 		}
@@ -219,6 +221,21 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		timeattack += dt;
 	}
+	if (hold)
+	{
+		float l, t, r, b;
+		if (ax >= 0)
+		{
+			GetBoundingBox(l, t, r, b);
+			holdobject->SetPosition(x + (r - l)- MARIO_HOLD, y +MARIO_SMALL_BBOX_HEIGHT/3);
+		}
+		else
+		{
+			holdobject->GetBoundingBox(l, t, r, b);
+			holdobject->SetPosition(x - (r - l) + MARIO_HOLD, y + MARIO_SMALL_BBOX_HEIGHT/3);
+		}
+	}
+
 }
 
 void CMario::Render()
@@ -263,6 +280,10 @@ void CMario::Render()
 			if (Mariostate.movement == MoveStates::Run)
 				ani = RUN;
 		}
+		if (hold)
+		{
+			ani = HOLD;
+		}
 		if (ani_timeattack > timeattack)
 			ani = ATTACK;
 	}
@@ -271,6 +292,7 @@ void CMario::Render()
 			animations->Get(ani)->Render(x, y, MARIO_TIME_ATTACK, ani_left);
 		else
 			animations->Get(ani)->Render(x, y, ani_left);
+	
 }
 
 void CMario::SetAnimationSet(CAnimations* ani_set)
@@ -296,6 +318,10 @@ void CMario::OnKeyUp(int keyCode) {
 	if (keyCode == DIK_SPACE)
 	{
 		canHighjump = FALSE;
+	}
+	if(keyCode == DIK_Z)
+	{
+		kickObj();
 	}
 	/*if (keyCode == DIK_DOWN)
 		SetMoveState(MoveStates::Idle);*/
@@ -432,6 +458,23 @@ void CMario::SetJumpState(JumpStates e)
 	preMariostate = Mariostate; 
 	Mariostate.jump = e;
 
+}
+void CMario::holdObj(LPGAMEOBJECT obj)
+{
+	holdobject = obj;
+	hold = true;  
+	holdobject->collision = CCollision::None;
+}
+void CMario::kickObj()
+{
+	if (hold)
+	{
+		holdobject->collision = CCollision::Full;
+		holdobject->CollisionObject(this, 0, 0);
+		hold = false;
+		holdobject = NULL;
+	}
+	
 }
 void CMario::SetLevel(string l)
 {

@@ -24,6 +24,7 @@ void BigMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	}
 	vy += MARIO_GRAVITY * dt;
 	CMario::Update(dt, colliable_objects);
+	
 }
 
 void BigMario::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -45,4 +46,5 @@ void BigMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(IDLE, ani_set->Get("ani-big-mario-idle"));
 	animations->Add(SKID, ani_set->Get("ani-big-mario-skid"));
 	animations->Add(CROUCH, ani_set->Get("ani-big-mario-crouch"));
+	animations->Add(HOLD, ani_set->Get("ani-big-mario-hold"));
 }

@@ -45,11 +45,11 @@ void RaccoonMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 		SetMoveState(MoveStates::Attack);
 		
 	}
-	if (timeattack == 0)
+	if (timeattack >= 0 && timeattack <= RACCOONMARIO_ATTACKTIME)
 	{
 		TailAttack(dt, colliable_objects);
 	}
-
+	
 }
 
 void RaccoonMario::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -73,6 +73,7 @@ void  RaccoonMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(SKID, ani_set->Get("ani-raccoon-mario-skid"));
 	animations->Add(CROUCH, ani_set->Get("ani-raccoon-mario-crouch"));
 	animations->Add(ATTACK, ani_set->Get("ani-raccoon-mario-spin"));
+	animations->Add(HOLD, ani_set->Get("ani-raccoon-mario-hold"));
 }
 void RaccoonMario::TailAttack(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {

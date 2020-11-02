@@ -24,6 +24,7 @@ void SmallMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	}
 	vy += MARIO_GRAVITY * dt;
 	CMario::Update(dt, colliable_objects);
+
 }
 
 void SmallMario::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -44,6 +45,7 @@ void SmallMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(IDLE, ani_set->Get("ani-small-mario-idle"));
 	animations->Add(SKID, ani_set->Get("ani-small-mario-skid"));
 	animations->Add(CROUCH, ani_set->Get("ani-small-mario-crouch"));
+	animations->Add(HOLD, ani_set->Get("ani-small-mario-hold"));
 }
 void SmallMario::KeyState(BYTE* state)
 {

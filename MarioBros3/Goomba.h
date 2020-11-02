@@ -5,6 +5,7 @@
 #define GOOMBA_GRAVITY  0.003f
 #define GOOMBA_FLY_DIE 0.9f
 
+#define GOOMA_TIME_DIE 200
 
 #define GOOMBA_BBOX_WIDTH 48
 #define GOOMBA_BBOX_HEIGHT 48
@@ -20,6 +21,7 @@
 class CGoomba : public CGameObject
 {
 	bool flydie;
+	DWORD timedie;
 public:
 	CGoomba();
 	virtual void SetState(int state);

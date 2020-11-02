@@ -35,6 +35,8 @@
 #define FALL "fall"
 #define FLOAT "float"
 #define ATTACK "attack"
+#define HOLD "hold"
+
 
 #define MARIO_ANI_SMALL "-small-mario"
 #define MARIO_ANI_BIG "-big-mario"
@@ -57,6 +59,7 @@
 #define MARIO_BIG_BBOX_WIDTH  42
 #define MARIO_BIG_BBOX_HEIGHT 80
 #define MARIO_BIG_BBOX_HEIGHT_CROUCHING 54
+#define MARIO_HOLD 15
 
 #define MARIO_SMALL_BBOX_WIDTH  39
 #define MARIO_SMALL_BBOX_HEIGHT 45
@@ -102,7 +105,9 @@ protected:
 	bool slowFall;
 	float start_x;			// initial position of Mario at scene
 	float start_y; 
-	float ax;
+	
+	bool hold;
+	LPGAMEOBJECT holdobject;
 
 public: 
 	CMario(float x = 0, float y = 0);
@@ -117,6 +122,9 @@ public:
 	string GetLevel();
 	virtual void DownLevel() ;
 
+	void holdObj(LPGAMEOBJECT obj); 
+	void kickObj();
+
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
 	void ChangeState();
 
@@ -124,5 +132,5 @@ public:
 	virtual void SetJumpState(JumpStates e) ;
 	void Reset();
 	virtual void SetAnimationSet(CAnimations* ani_set);
-	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) {};
+	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) =0;
 };

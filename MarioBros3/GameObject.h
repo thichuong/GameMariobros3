@@ -70,6 +70,8 @@ public:
 	float vx;
 	float vy;
 
+	float ax;
+
 	int nx;	 
 	int wx;
 

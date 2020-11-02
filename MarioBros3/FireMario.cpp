@@ -49,6 +49,7 @@ void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 		CFireBullet* firebullet =  new CFireBullet(x,y,ax);
 		CGame::GetInstance()->GetCurrentScene()->addobject(firebullet);
 	}
+	
 }
 
 void FireMario::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -71,5 +72,5 @@ void FireMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(SKID, ani_set->Get("ani-fire-mario-skid"));
 	animations->Add(CROUCH, ani_set->Get("ani-fire-mario-crouch"));
 	animations->Add(ATTACK, ani_set->Get("ani-fire-mario-throw"));
-
+	animations->Add(HOLD, ani_set->Get("ani-fire-mario-hold"));
 }

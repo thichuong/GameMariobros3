@@ -3,7 +3,7 @@
 #include "GameObject.h"
 
 #define KOOPAS_WALKING_SPEED 0.03f;
-#define KOOPAS_RUN_SPEED 0.2f
+#define KOOPAS_RUN_SPEED 0.5f
 #define KOOPAS_GRAVITY  0.003f
 #define KOOPAS_FLY 0.9f
 
@@ -16,6 +16,7 @@
 #define KOOPAS_STATE_DIE 200
 #define KOOPAS_STATE_SHELL 300
 #define KOOPAS_STATE_SHELL_RUN 400
+#define KOOPAS_STATE_SHELL_HOLD 500
 
 #define KOOPAS_ANI_WALKING "ani-green-koopa-troopa-move"
 #define KOOPAS_ANI_DIE "ani-green-koopa-troopa-crouch"
@@ -25,6 +26,7 @@
 class CKoopas : public CGameObject
 {
 	bool flydie;
+	
 public:
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);

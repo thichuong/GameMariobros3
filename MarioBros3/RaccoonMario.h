@@ -3,6 +3,7 @@
 
 #define RACCOONMARIO_TIMECOOLDOWN 300
 #define RACCOONMARIO_ANI_ATTACKTIME 200
+#define RACCOONMARIO_ATTACKTIME		50
 
 class RaccoonMario :
     public CMario

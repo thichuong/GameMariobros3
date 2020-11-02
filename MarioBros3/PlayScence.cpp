@@ -260,7 +260,7 @@ void CPlayScene::Load()
 			string textureId = node->Attribute("textureId");
 			CTextures* textures = CTextures::GetInstance();
 
-			textures->Add(textureId, ToLPCWSTR(source), D3DCOLOR_XRGB(255, 255, 255));
+			textures->Add(textureId, ToLPCWSTR(source), D3DCOLOR_ARGB(0,255, 255, 255));
 			//_ParseSection_SPRITES("file");
 			DebugOut(L"[INFO]Start load : %d \n", id);
 			_ParseSection_SPRITES(file);
