@@ -63,7 +63,12 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	if (state == GOOMBA_STATE_DIE && !flydie)
 		if (timedie >= GOOMA_TIME_DIE)
 			game->GetCurrentScene()->delobject(this);
-		else timedie += dt;
+		else
+		{
+			timedie += dt;
+			vy = 0;
+		}
+
 	if(y > game->GetScamY() + game->GetScreenHeight()) game->GetCurrentScene()->delobject(this);
 }
 
@@ -95,10 +100,11 @@ void CGoomba::SetState(int state)
 		case GOOMBA_STATE_DIE:
 			vx = 0;
 			collision = CCollision::None;
-		
+			y += GOOMBA_BBOX_HEIGHT - GOOMBA_BBOX_HEIGHT_DIE - 0.4;
 			break;
 		case GOOMBA_STATE_WALKING: 
 			vx = -GOOMBA_WALKING_SPEED;
+			break;
 	}
 }
 void CGoomba::SetAnimationSet(CAnimations* ani_set)
@@ -107,10 +113,14 @@ void CGoomba::SetAnimationSet(CAnimations* ani_set)
 }
 void CGoomba::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 {
-	if (obj->typeobject == TypeObject::player )
+	if (obj->typeobject == TypeObject::enemy) return;
+	if (obj->typeobject == TypeObject::player)
 	{
 		if (ny < 0)
+		{
 			SetState(GOOMBA_STATE_DIE);
+			vy = 0;
+		}			
 		else
 			obj->DownLevel();
 	}

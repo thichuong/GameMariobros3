@@ -70,6 +70,7 @@ void CMario::UpdateVx()
 				if (ax > 0)
 					if (vx + dt * MARIO_WALKING_SPEED_UP < MARIO_RUNING_SPEED)
 					{
+						if (vx == 0) vx = MARIO_WALKING_SPEED;
 						if (vx >= 0)
 							vx += dt * MARIO_WALKING_SPEED_UP;
 						else vx += dt * MARIO_WALKING_SPEED_DOWN;
@@ -82,6 +83,7 @@ void CMario::UpdateVx()
 				else
 					if (vx - dt * MARIO_WALKING_SPEED_UP > -MARIO_RUNING_SPEED)
 					{
+						if (vx == 0) vx = -MARIO_WALKING_SPEED;
 						if (vx <= 0)
 							vx -= dt * MARIO_WALKING_SPEED_UP;
 						else vx -= dt * MARIO_WALKING_SPEED_DOWN;
@@ -195,12 +197,11 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
-
+			LPGAMEOBJECT obj = e->obj;
+			// jump on top >> kill Goomba and deflect a bit 					
+			obj->CollisionObject(this, e->nx, e->ny);
 			if (e->obj->typeobject == TypeObject::enemy) // if e->obj is Goomba 
-			{
-				LPGAMEOBJECT obj = e->obj;
-				// jump on top >> kill Goomba and deflect a bit 					
-				obj->CollisionObject(this, e->nx, e->ny);
+			{	
 				if(e->ny < 0)
 					vy = -MARIO_JUMP_DEFLECT_SPEED;
 			}
@@ -224,16 +225,21 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	if (hold)
 	{
 		float l, t, r, b;
+		float hl, ht, hr, hb;
+		GetBoundingBox(l, t, r, b);
 		if (ax >= 0)
 		{
-			GetBoundingBox(l, t, r, b);
-			holdobject->SetPosition(x + (r - l)- MARIO_HOLD, y +MARIO_SMALL_BBOX_HEIGHT/3);
+			holdobject->SetPosition(x + (r - l)- MARIO_HOLD, b - MARIO_BIG_BBOX_HEIGHT*0.6);
+			
 		}
 		else
 		{
-			holdobject->GetBoundingBox(l, t, r, b);
-			holdobject->SetPosition(x - (r - l) + MARIO_HOLD, y + MARIO_SMALL_BBOX_HEIGHT/3);
+			holdobject->GetBoundingBox(hl, ht, hr, hb);
+			holdobject->SetPosition(x - (hr - hl) + MARIO_HOLD, b - MARIO_BIG_BBOX_HEIGHT * 0.6);
+			
 		}
+		holdobject->vx = vx;
+		holdobject->vy = vy;
 	}
 
 }

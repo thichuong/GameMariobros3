@@ -92,8 +92,10 @@ void CGameObject::CalcPotentialCollisions(
 				coEvents.push_back(e);
 			else if(e->ny < 0 && e->obj->collision== CCollision::Top)
 				coEvents.push_back(e);
-
-
+			else if (e->nx < 0 && e->obj->collision == CCollision::Left)
+				coEvents.push_back(e);
+			else if (e->nx > 0 && e->obj->collision == CCollision::Right)
+				coEvents.push_back(e);
 		}
 		else
 			delete e;
@@ -137,7 +139,6 @@ void CGameObject::FilterCollision(
 
 	if (min_tx > min_ty)
 	{
-		
 		x += min_ty * dx;
 		y += min_ty * dy + ny * 0.4f;
 		dy = 0;
@@ -153,6 +154,7 @@ void CGameObject::FilterCollision(
 			//x += min_tx * dx + nx * 0.4f;
 			if (min_ty + min_tx < 1) min_tx = min_ty + min_tx;
 			else min_tx = 1;
+		
 		}
 		else
 		{
@@ -161,7 +163,8 @@ void CGameObject::FilterCollision(
 		}
 		dy = vy * dt;
 		y -= min_ty * dy + ny * 0.4;
-		x -= min_ty * dx;;
+		x -= min_ty * dx;
+
 	}
 	else
 	{

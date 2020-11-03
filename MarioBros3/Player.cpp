@@ -59,6 +59,7 @@ void CPlayer::SwitchToMario(string state)
 {
 	if (levelMario == small) this->y -= MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT + 0.4;
 	if(state == small) this->y += MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT - 0.4;
+	ListMario[state]->kickObj();
 	levelMario = state;
 	playMario->SetLevel(none);
 	playMario = ListMario[levelMario];
