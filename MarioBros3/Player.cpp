@@ -9,6 +9,12 @@ CPlayer::CPlayer()
 	ListMario[fire] = new FireMario();
 	ListMario[raccoon] = new RaccoonMario();
 	
+	ListMario[small]->setPlayer(this);
+	ListMario[big]->setPlayer(this);
+	ListMario[fire]->setPlayer(this);
+	ListMario[raccoon]->setPlayer(this);
+
+	holdobject = NULL;
 	levelMario = big;
 	playMario = ListMario[levelMario];
 	collision = CCollision::Full;
@@ -59,7 +65,6 @@ void CPlayer::SwitchToMario(string state)
 {
 	if (levelMario == small) this->y -= MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT + 0.4;
 	if(state == small) this->y += MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT - 0.4;
-	ListMario[state]->kickObj();
 	levelMario = state;
 	playMario->SetLevel(none);
 	playMario = ListMario[levelMario];

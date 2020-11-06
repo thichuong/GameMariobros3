@@ -11,7 +11,9 @@
 class CFireBullet :
     public CGameObject
 {
+	bool active;
 public:
+	bool getactive() { return active; }
 	CFireBullet(float x, float y, int ax);
 	virtual void Render();
 	virtual void GetBoundingBox(float& l, float& t, float& r, float& b);

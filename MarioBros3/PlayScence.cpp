@@ -288,7 +288,7 @@ void CPlayScene::Load()
 		player = new CPlayer();
 		player->SetPosition(x, y);
 		player->SetAnimationSet(CAnimations::GetInstance());
-		objects.push_back(player);
+		//objects.push_back(player);
 		DebugOut(L"[INFO] GameMap:   \n");
 	}
 	//ifstream f;
@@ -314,11 +314,11 @@ void CPlayScene::Update(DWORD dt)
 	// TO-DO: This is a "dirty" way, need a more organized way 
 
 	vector<LPGAMEOBJECT> coObjects;
-	for (size_t i = 1; i < objects.size(); i++)
+	for (size_t i = 0; i < objects.size(); i++)
 	{
 		coObjects.push_back(objects[i]);
 	}
-
+	player->Update(dt, &coObjects);
 	for (size_t i = 0; i < objects.size(); i++)
 	{
 		objects[i]->Update(dt, &coObjects);
@@ -330,9 +330,9 @@ void CPlayScene::Update(DWORD dt)
 			for (size_t i = 0; i < objects.size(); i++)
 			{
 				if (objects[i] == e) objects.erase(objects.begin()+i);
-				e->~CGameObject();
 			}
 		}
+		for (auto e : earseobjects) delete e;
 		earseobjects.clear();
 	}
 
@@ -363,7 +363,7 @@ void CPlayScene::Render()
 	gamemap->Render(CGame::GetInstance());
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
-	
+	player->Render();
 }
 
 /*

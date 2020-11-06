@@ -7,6 +7,7 @@
 RaccoonMario::RaccoonMario() :CMario()
 {
 	collision = CCollision::Full;
+	tail = NULL;
 	timecooldown = RACCOONMARIO_TIMECOOLDOWN;
 	ani_timeattack = RACCOONMARIO_ANI_ATTACKTIME;
 	timeattack = RACCOONMARIO_TIMECOOLDOWN;
@@ -20,13 +21,13 @@ void RaccoonMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 			SetJumpState(JumpStates::Super);
 		if (Mariostate.jump == JumpStates::Jump && canHighjump)
 		{
-			vy -= MARIO_JUMP_SPEED_Y_SPEED * dt;
+			vy -= MARIO_JUMP_SPEED_Y_UP * dt;
 			if (vy < -MARIO_JUMP_SPEED_Y_HIGH)
 				canHighjump = FALSE;
 		}
 		else if (Mariostate.jump == JumpStates::Super && canHighjump)
 		{
-			vy -= MARIO_JUMP_SPEED_Y_SPEED * dt;
+			vy -= MARIO_JUMP_SPEED_Y_UP * dt;
 			if (vy < -MARIO_FLY_SPEED_Y)
 				canHighjump = FALSE;
 		}
@@ -40,14 +41,24 @@ void RaccoonMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	}
 	vy += MARIO_GRAVITY * dt;
 	CMario::Update(dt, colliable_objects);
-	if (CGame::GetInstance()->IsKeyDown(DIK_X))
+	if (CGame::GetInstance()->IsKeyDown(DIK_X) && player->holdobject == NULL)
 	{
 		SetMoveState(MoveStates::Attack);
 		
 	}
 	if (timeattack >= 0 && timeattack <= RACCOONMARIO_ATTACKTIME)
 	{
-		TailAttack(dt, colliable_objects);
+		if (tail == NULL) tail = new MarioTail(x, y);
+		tail->SetPosition(x - MARIO_BIG_BBOX_WIDTH / 2, y + MARIO_BIG_BBOX_HEIGHT / 2);
+		tail->Update(dt, colliable_objects);
+	}
+	else 
+	{
+		if (tail != NULL)
+		{
+			delete tail;
+			tail = NULL;
+		}
 	}
 	
 }
@@ -74,6 +85,8 @@ void  RaccoonMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(CROUCH, ani_set->Get("ani-raccoon-mario-crouch"));
 	animations->Add(ATTACK, ani_set->Get("ani-raccoon-mario-spin"));
 	animations->Add(HOLD, ani_set->Get("ani-raccoon-mario-hold"));
+	animations->Add(HOLD_IDLE, ani_set->Get("ani-raccoon-mario-hold-idle"));
+	animations->Add(HOLD_FALL, ani_set->Get("ani-raccoon-mario-hold-fall"));
 }
 void RaccoonMario::TailAttack(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {

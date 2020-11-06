@@ -10,6 +10,7 @@ CFireBullet::CFireBullet(float x, float y, int ax)
 	vx = ax * Bullet_SPEED;
 	SetAnimationSet(CAnimations::GetInstance());
 	typeobject = TypeObject::Bullet;
+	active = true;
 }
 void CFireBullet::SetAnimationSet(CAnimations* ani_set)
 {
@@ -68,11 +69,15 @@ void CFireBullet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			{
 				LPGAMEOBJECT obj = e->obj;
 				obj->CollisionObject(this,e->nx,e->ny);
+				active = false;
 			}
-			else if(e->nx != 0 && nx != 0 ) CGame::GetInstance()->GetCurrentScene()->delobject(this);
+			else if(e->nx != 0 && nx != 0 ) active = false;
 		}
 
 	}
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-
+	CGame* game = CGame::GetInstance();
+	if (y > game->GetScamY() + game->GetScreenHeight()) active = false;
+	if(x > game->GetScamX() + game->GetScreenWidth() || x < game->GetScamX() - Bullet_BBOX_WIDTH) 
+		active = false;
 }

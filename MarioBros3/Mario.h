@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
+class CPlayer;
 
 #define MARIO_WALKING_SPEED  0.2f
 #define MARIO_WALKING_SPEED_UP  0.0003f
@@ -9,10 +10,10 @@
 #define MARIO_MIN_SPEED  0.1f
 //0.1f
 #define MARIO_JUMP_SPEED_Y  0.02f
-#define MARIO_JUMP_SPEED_Y_SPEED  0.0035f
-#define MARIO_JUMP_SPEED_Y_HIGH  0.55f
-#define MARIO_JUMP_SPEED_Y_SUPER  0.7f
-#define MARIO_FLY_SPEED_Y  1.3f
+#define MARIO_JUMP_SPEED_Y_UP  0.004f
+#define MARIO_JUMP_SPEED_Y_HIGH  0.62f
+#define MARIO_JUMP_SPEED_Y_SUPER  0.75f
+#define MARIO_FLY_SPEED_Y  1.25f
 #define MARIO_JUMP_DEFLECT_SPEED  0.4f
 #define MARIO_GRAVITY  0.003f
 #define MARIO_DIE_DEFLECT_SPEED  0.5f
@@ -36,7 +37,8 @@
 #define FLOAT "float"
 #define ATTACK "attack"
 #define HOLD "hold"
-
+#define HOLD_IDLE "hold_idle"
+#define HOLD_FALL "hold_fall"
 
 #define MARIO_ANI_SMALL "-small-mario"
 #define MARIO_ANI_BIG "-big-mario"
@@ -106,9 +108,8 @@ protected:
 	float start_x;			// initial position of Mario at scene
 	float start_y; 
 	
-	bool hold;
-	LPGAMEOBJECT holdobject;
-
+	
+	CPlayer* player;
 public: 
 	CMario(float x = 0, float y = 0);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
@@ -122,6 +123,8 @@ public:
 	string GetLevel();
 	virtual void DownLevel() ;
 
+	CPlayer* getPlayer() { return player; }
+	void setPlayer(CPlayer* player) { this->player = player;}
 	void holdObj(LPGAMEOBJECT obj); 
 	void kickObj();
 

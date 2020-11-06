@@ -24,14 +24,15 @@ CMario::CMario(float x, float y) : CGameObject()
 	collision = CCollision::Full;
 	timecooldown = 0;
 	typeobject = TypeObject::player;
-	holdobject = NULL;
-	hold = false;
+	
+	
+	player = CGame::GetInstance()->GetCurrentScene()->GetPlayer();
 }
 void CMario::UpdateVx()
 {
 	if (Mariostate.movement == MoveStates::Run || Mariostate.movement == MoveStates::Walk)
 	{
-		if ((!CGame::GetInstance()->IsKeyDown(DIK_Z) && Mariostate.jump != JumpStates::Super) || hold ==true)
+		if ((!CGame::GetInstance()->IsKeyDown(DIK_Z) && Mariostate.jump != JumpStates::Super))
 		{
 			if (ax > 0)
 			{
@@ -222,24 +223,24 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		timeattack += dt;
 	}
-	if (hold)
+	if (player->holdobject != NULL)
 	{
 		float l, t, r, b;
 		float hl, ht, hr, hb;
 		GetBoundingBox(l, t, r, b);
 		if (ax >= 0)
 		{
-			holdobject->SetPosition(x + (r - l)- MARIO_HOLD, b - MARIO_BIG_BBOX_HEIGHT*0.6);
+			player->holdobject->SetPosition(x + (r - l)- MARIO_HOLD, b - MARIO_BIG_BBOX_HEIGHT*0.7);
 			
 		}
 		else
 		{
-			holdobject->GetBoundingBox(hl, ht, hr, hb);
-			holdobject->SetPosition(x - (hr - hl) + MARIO_HOLD, b - MARIO_BIG_BBOX_HEIGHT * 0.6);
+			player->holdobject->GetBoundingBox(hl, ht, hr, hb);
+			player->holdobject->SetPosition(x - (hr - hl) + MARIO_HOLD, b - MARIO_BIG_BBOX_HEIGHT * 0.7);
 			
 		}
-		holdobject->vx = vx;
-		holdobject->vy = vy;
+		player->holdobject->vx = vx;
+		player->holdobject->vy = vy;
 	}
 
 }
@@ -286,9 +287,11 @@ void CMario::Render()
 			if (Mariostate.movement == MoveStates::Run)
 				ani = RUN;
 		}
-		if (hold)
+		if (player->holdobject !=NULL)
 		{
 			ani = HOLD;
+			if (Mariostate.movement == MoveStates::Idle) ani = HOLD_IDLE;
+			if (Mariostate.jump == JumpStates::Fall) ani = HOLD_FALL;
 		}
 		if (ani_timeattack > timeattack)
 			ani = ATTACK;
@@ -378,7 +381,7 @@ void CMario::KeyState(BYTE* state)
 	}
 	else if(CGame::GetInstance()->IsKeyDown(DIK_DOWN))
 	{
-		if (Mariostate.jump ==  JumpStates::Stand)
+		if (Mariostate.jump ==  JumpStates::Stand && player->holdobject == NULL)
 		{
 			SetMoveState(MoveStates::Crouch);
 		}
@@ -467,18 +470,17 @@ void CMario::SetJumpState(JumpStates e)
 }
 void CMario::holdObj(LPGAMEOBJECT obj)
 {
-	holdobject = obj;
-	hold = true;  
-	holdobject->collision = CCollision::None;
+	player->holdobject = obj;
+	
+	player->holdobject->collision = CCollision::None;
 }
 void CMario::kickObj()
 {
-	if (hold)
+	if (player->holdobject != NULL)
 	{
-		holdobject->collision = CCollision::Full;
-		holdobject->CollisionObject(this, 0, 0);
-		hold = false;
-		holdobject = NULL;
+		player->holdobject->collision = CCollision::Full;
+		player->holdobject->CollisionObject(this, 0, 0);
+		player->holdobject = NULL;
 	}
 	
 }
@@ -500,7 +502,7 @@ string CMario::GetLevel()
 }
 void CMario::DownLevel()
 {
-	CGame::GetInstance()->GetCurrentScene()->GetPlayer()->Downlevel();
+	player->Downlevel();
 }
 /*
 	Reset Mario status to the beginning state of a scene

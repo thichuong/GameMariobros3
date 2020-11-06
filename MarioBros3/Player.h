@@ -18,9 +18,12 @@ class CPlayer : public CGameObject
     static  CPlayer* __instance;
     unordered_map<string, CMario*> ListMario;
     CMario* playMario;
+    
     string levelMario;
     DWORD downleveltime;
-public:
+public: 
+    LPGAMEOBJECT holdobject;
+    
     CPlayer();
     void SwitchToMario(string state);
     virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
@@ -32,6 +35,8 @@ public:
     virtual void SetAnimationSet(CAnimations* ani_set);
     void SetPosition(float x, float y);
     void Downlevel();
+
+
 
     static  CPlayer* GetInstance();
 };

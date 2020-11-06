@@ -8,6 +8,7 @@ FireMario::FireMario() : CMario()
 	timecooldown = FIREMARIO_TIMECOOLDOWN;
 	ani_timeattack = FIREMARIO_ANI_ATTACKTIME;
 	timeattack = FIREMARIO_TIMECOOLDOWN;
+	bullets.clear();
 }
 void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
@@ -18,20 +19,20 @@ void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 			SetJumpState(JumpStates::Super);
 		if (Mariostate.jump == JumpStates::Jump && canHighjump)
 		{
-			vy -= MARIO_JUMP_SPEED_Y_SPEED * dt;
+			vy -= MARIO_JUMP_SPEED_Y_UP * dt;
 			if (vy < -MARIO_JUMP_SPEED_Y_HIGH)
 				canHighjump = FALSE;
 
 		}
 		else if (Mariostate.jump == JumpStates::Super && canHighjump)
 		{
-			vy -= MARIO_JUMP_SPEED_Y_SPEED * dt;
+			vy -= MARIO_JUMP_SPEED_Y_UP * dt;
 			if (vy < -MARIO_JUMP_SPEED_Y_SUPER )
 				canHighjump = FALSE;
 		}
 		else if(Mariostate.movement == MoveStates::Attack && canHighjump)
 		{
-			vy -= MARIO_JUMP_SPEED_Y_SPEED * dt;
+			vy -= MARIO_JUMP_SPEED_Y_UP * dt;
 			if (vy < -MARIO_JUMP_SPEED_Y_HIGH)
 				canHighjump = FALSE;
 
@@ -39,15 +40,24 @@ void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	}
 	vy += MARIO_GRAVITY * dt;
 	CMario::Update(dt, colliable_objects);
-	if (CGame::GetInstance()->IsKeyDown(DIK_X))
+	if (CGame::GetInstance()->IsKeyDown(DIK_X) && player->holdobject == NULL && bullets.size() < 2)
 	{
 		SetMoveState(MoveStates::Attack);
-
+		if (timeattack == 0)
+		{
+			CFireBullet* firebullet = new CFireBullet(x, y, ax);
+			bullets.push_back(firebullet);
+			CGame::GetInstance()->GetCurrentScene()->addobject(firebullet);
+		}
+	
 	}
-	if (timeattack == 0)
+	for (int i = 0; i < bullets.size(); i++)
 	{
-		CFireBullet* firebullet =  new CFireBullet(x,y,ax);
-		CGame::GetInstance()->GetCurrentScene()->addobject(firebullet);
+		if (!bullets[i]->getactive())
+		{
+			CGame::GetInstance()->GetCurrentScene()->delobject(bullets[i]);
+			bullets.erase(bullets.begin() + i);
+		}
 	}
 	
 }
@@ -73,4 +83,6 @@ void FireMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(CROUCH, ani_set->Get("ani-fire-mario-crouch"));
 	animations->Add(ATTACK, ani_set->Get("ani-fire-mario-throw"));
 	animations->Add(HOLD, ani_set->Get("ani-fire-mario-hold"));
+	animations->Add(HOLD_IDLE, ani_set->Get("ani-fire-mario-hold-idle"));
+	animations->Add(HOLD_FALL, ani_set->Get("ani-fire-mario-hold-fall"));
 }

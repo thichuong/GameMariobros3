@@ -111,6 +111,9 @@
     <ClInclude Include="Player.h">
       <Filter>Source Files\GameObject\Mario\player</Filter>
     </ClInclude>
+    <ClInclude Include="MarioTail.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -193,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\GameObject\Mario\player</Filter>
+    </ClCompile>
+    <ClCompile Include="MarioTail.cpp">
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

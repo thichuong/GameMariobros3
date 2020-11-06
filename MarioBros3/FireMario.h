@@ -1,12 +1,14 @@
 #pragma once
 #include "Mario.h"
+#include "FireBullet.h"
 
-#define FIREMARIO_TIMECOOLDOWN 400
+#define FIREMARIO_TIMECOOLDOWN 200
 #define FIREMARIO_ANI_ATTACKTIME 200
 
 class FireMario :
     public CMario
 {
+	vector<CFireBullet*> bullets;
 public:
 	FireMario();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);

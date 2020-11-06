@@ -1,5 +1,6 @@
 #pragma once
 #include "Mario.h"
+#include "MarioTail.h"
 
 #define RACCOONMARIO_TIMECOOLDOWN 300
 #define RACCOONMARIO_ANI_ATTACKTIME 200
@@ -8,7 +9,7 @@
 class RaccoonMario :
     public CMario
 {
-
+	MarioTail* tail;
 public:
 	RaccoonMario();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);

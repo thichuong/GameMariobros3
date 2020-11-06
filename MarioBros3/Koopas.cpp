@@ -68,7 +68,8 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
 			LPGAMEOBJECT obj = e->obj;
-			obj->CollisionObject(this, e->nx, e->ny);
+			if(state == KOOPAS_STATE_SHELL_RUN || state == KOOPAS_STATE_SHELL_HOLD)
+				obj->CollisionObject(this, e->nx, e->ny);
 			if (e->nx != 0 && e->obj->typeobject == TypeObject::enemy) nx = 0;
 		}
 		if (ny != 0) {
@@ -138,7 +139,7 @@ void CKoopas::SetState(int state)
 		break;
 	case KOOPAS_STATE_SHELL_RUN:
 		collision = CCollision::Full;
-		typeobject = TypeObject::Bullet;
+		typeobject = TypeObject::enemy;
 		break;
 	case KOOPAS_STATE_SHELL_HOLD:
 		collision = CCollision::Full;
@@ -197,7 +198,7 @@ void CKoopas::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 	}
 	else
 	{
-		if (obj->typeobject == TypeObject::Bullet)
+		if (obj->typeobject == TypeObject::Bullet || obj->typeobject == TypeObject::enemy)
 		{
 			SetState(KOOPAS_STATE_DIE);
 			vy = -KOOPAS_FLY;

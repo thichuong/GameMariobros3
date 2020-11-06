@@ -10,14 +10,14 @@ void BigMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 			SetJumpState(JumpStates::Super);
 		if (Mariostate.jump == JumpStates::Jump && canHighjump)
 		{
-			vy -= MARIO_JUMP_SPEED_Y_SPEED * dt;
+			vy -= MARIO_JUMP_SPEED_Y_UP * dt;
 			if (vy < -MARIO_JUMP_SPEED_Y_HIGH)
 				canHighjump = FALSE;
 
 		}
 		else if (Mariostate.jump == JumpStates::Super && canHighjump)
 		{
-			vy -= MARIO_JUMP_SPEED_Y_SPEED * dt;
+			vy -= MARIO_JUMP_SPEED_Y_UP * dt;
 			if (vy < -MARIO_JUMP_SPEED_Y_SUPER)
 				canHighjump = FALSE;
 		}
@@ -47,4 +47,6 @@ void BigMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(SKID, ani_set->Get("ani-big-mario-skid"));
 	animations->Add(CROUCH, ani_set->Get("ani-big-mario-crouch"));
 	animations->Add(HOLD, ani_set->Get("ani-big-mario-hold"));
+	animations->Add(HOLD_IDLE, ani_set->Get("ani-big-mario-hold-idle"));
+	animations->Add(HOLD_FALL, ani_set->Get("ani-big-mario-hold-fall"));
 }
