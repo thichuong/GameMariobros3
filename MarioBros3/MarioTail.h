@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
-#define Tail_BBOX_WIDTH  240
+#define Tail_BBOX_WIDTH  120
 #define Tail_BBOX_HEIGHT 24
 
 class MarioTail :

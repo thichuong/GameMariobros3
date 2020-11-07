@@ -49,7 +49,7 @@ void RaccoonMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	if (timeattack >= 0 && timeattack <= RACCOONMARIO_ATTACKTIME)
 	{
 		if (tail == NULL) tail = new MarioTail(x, y);
-		tail->SetPosition(x - MARIO_BIG_BBOX_WIDTH / 2, y + MARIO_BIG_BBOX_HEIGHT / 2);
+		tail->SetPosition(x - MARIO_BIG_BBOX_WIDTH, y + MARIO_BIG_BBOX_HEIGHT / 2);
 		tail->Update(dt, colliable_objects);
 	}
 	else 
