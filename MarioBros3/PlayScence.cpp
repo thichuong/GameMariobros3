@@ -305,6 +305,8 @@ void CPlayScene::Load()
 
 	//CTextures::GetInstance()->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
 
+	camYdefault = camY;
+
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
 }
 
@@ -341,19 +343,23 @@ void CPlayScene::Update(DWORD dt)
 
 	// Update camera to follow mario
 	float cx, cy;
-	player->GetPosition(cx, cy);
+	float px, py;
+	player->GetPosition(px, py);
 	CGame *game = CGame::GetInstance();
-	cx -= game->GetScreenWidth() / 2;
-	cy -= (game->GetScreenHeight() / 2);
+	cx = px-game->GetScreenWidth() / 2;
+	cy = game->GetScamY();
 	if (cx < 0)
 		cx = 0;
-	if (cy < cy - game->GetScreenHeight() /2 )
+	if (cy > py - game->GetScreenHeight() /5 )
 	{
-		cy -= (game->GetScreenHeight() / 2);
+		cy = py - game->GetScreenHeight() / 5;
 		if (cy < 0)
 			cy = 0;
 	}
-	
+	if(cy + game->GetScreenHeight() < py + game->GetScreenHeight() / 2)
+		cy = py - game->GetScreenHeight() / 2;
+	if (cy > camYdefault)
+		cy = camYdefault;
 	CGame::GetInstance()->SetCamPos(cx, cy);
 	
 }

@@ -8,6 +8,8 @@
 #include "Goomba.h"
 #include "Koopas.h"
 
+#define camY 750
+
 using namespace std;
 
 //string MARIO_DB = "Textures/Sprites/MarioDB.xml";
@@ -31,6 +33,7 @@ protected:
 	vector<LPGAMEOBJECT> objects;
 	vector<LPGAMEOBJECT> earseobjects;
 	CGameMap* gamemap;
+	int camYdefault;
 
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);
