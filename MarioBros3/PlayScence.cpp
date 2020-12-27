@@ -90,7 +90,7 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 		TiXmlElement* root = doc.RootElement();
 		TiXmlElement* texture = root->FirstChildElement();
 		
-		string textureID = texture->Attribute("textureId");
+		string textureID = texture->Attribute("id");
 		LPDIRECT3DTEXTURE9 tex = CTextures::GetInstance()->Get(textureID);
 		
 		for (TiXmlElement* node = texture->FirstChildElement(); node != nullptr; node = node->NextSiblingElement())
@@ -239,6 +239,7 @@ void CPlayScene::Load()
 	//LoadSource();
 	/*playsprites = csprites::getinstance();
 	playani = canimations::getinstance();*/
+	
 	TiXmlDocument doc(sceneFilePath.c_str());
 	if (doc.LoadFile())
 	{
@@ -278,7 +279,7 @@ void CPlayScene::Load()
 		filepath = node->Attribute("filepath");
 		gamemap = new CGameMap();
 		gamemap->FromTMX(filepath, file);
-		objects = gamemap->MapOBJECTS(CAnimations::GetInstance());
+		objects = gamemap->MapOBJECTS(filepath, file);
 		DebugOut(L"[INFO]Staet load : %d \n", id);
 		
 		node = info->FirstChildElement("LoadLayer");
@@ -360,6 +361,7 @@ void CPlayScene::Update(DWORD dt)
 		cy = py - game->GetScreenHeight() / 2;
 	if (cy > camYdefault)
 		cy = camYdefault;
+	if (cy + game->GetScreenHeight() - py < YHUD) cy += YHUD;
 	CGame::GetInstance()->SetCamPos(cx, cy);
 	
 }

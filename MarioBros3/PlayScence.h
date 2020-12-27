@@ -9,20 +9,14 @@
 #include "Koopas.h"
 
 #define camY 750
+#define YHUD 200
+
 
 using namespace std;
 
-//string MARIO_DB = "Textures/Sprites/MarioDB.xml";
-//string ENEMY_DB = "Textures/Sprites/EnemyDB.xml";
-//string INTRO_DB = "Textures/Sprites/IntroDB.xml";
-//string MISC_DB = "Textures/Sprites/MiscDB.xml";
-//string UI_DB = "Textures/Sprites/UiDB.xml";
-//
-//string MARIO_ANIM = "Textures/Animations/MarioAnim.xml";
-//string ENEMY_ANIM = "Textures/Animations/EnemyAnim.xml";
-//string INTRO_ANIM = "Textures/Animations/IntroAnim.xml";
-//string MISC_ANIM = "Textures/Animations/MiscAnim.xml";
-//string UI_ANIM = "Textures/Animations/UiAnim.xml";
+
+
+
 
 class CPlayScene: public CScene
 {

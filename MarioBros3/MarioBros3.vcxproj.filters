@@ -34,6 +34,18 @@
     <Filter Include="Source Files\GameObject\Mario\player">
       <UniqueIdentifier>{42fcad28-f178-4795-a525-112d292e0b1c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObject\Enemy">
+      <UniqueIdentifier>{3603a757-e5de-4b8c-97db-a7edaee6010e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Blocks">
+      <UniqueIdentifier>{78d08d18-0d43-415b-b059-1716b0dcfb37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Weapon">
+      <UniqueIdentifier>{4e4a22c1-b7cd-44f1-897d-d79b3cb843d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Solid">
+      <UniqueIdentifier>{a9239b39-04dc-4e3b-9622-bec0f77b7688}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -75,22 +87,7 @@
     <ClInclude Include="TileSet.h">
       <Filter>Framework\Map</Filter>
     </ClInclude>
-    <ClInclude Include="Brick.h">
-      <Filter>Source Files\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Goomba.h">
-      <Filter>Source Files\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Koopas.h">
-      <Filter>Source Files\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Portal.h">
-      <Filter>Source Files\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionBox.h">
-      <Filter>Source Files\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="FireBullet.h">
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Mario.h">
@@ -111,8 +108,29 @@
     <ClInclude Include="Player.h">
       <Filter>Source Files\GameObject\Mario\player</Filter>
     </ClInclude>
+    <ClInclude Include="Goomba.h">
+      <Filter>Source Files\GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Koopas.h">
+      <Filter>Source Files\GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>Source Files\GameObject\Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionBox.h">
+      <Filter>Source Files\GameObject\Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="FireBullet.h">
+      <Filter>Source Files\GameObject\Weapon</Filter>
+    </ClInclude>
     <ClInclude Include="MarioTail.h">
-      <Filter>Source Files\GameObject</Filter>
+      <Filter>Source Files\GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Solid.h">
+      <Filter>Source Files\GameObject\Solid</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>Source Files\GameObject\Solid</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -161,22 +179,7 @@
     <ClCompile Include="Utils.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Brick.cpp">
-      <Filter>Source Files\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Goomba.cpp">
-      <Filter>Source Files\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Koopas.cpp">
-      <Filter>Source Files\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Portal.cpp">
-      <Filter>Source Files\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionBox.cpp">
-      <Filter>Source Files\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="FireBullet.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Mario.cpp">
@@ -197,8 +200,29 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\GameObject\Mario\player</Filter>
     </ClCompile>
+    <ClCompile Include="Goomba.cpp">
+      <Filter>Source Files\GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Koopas.cpp">
+      <Filter>Source Files\GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Source Files\GameObject\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionBox.cpp">
+      <Filter>Source Files\GameObject\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="FireBullet.cpp">
+      <Filter>Source Files\GameObject\Weapon</Filter>
+    </ClCompile>
     <ClCompile Include="MarioTail.cpp">
-      <Filter>Source Files\GameObject</Filter>
+      <Filter>Source Files\GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Solid.cpp">
+      <Filter>Source Files\GameObject\Solid</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Source Files\GameObject\Solid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

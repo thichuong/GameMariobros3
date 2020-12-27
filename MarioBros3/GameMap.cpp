@@ -1,5 +1,9 @@
 
 #include "GameMap.h"
+#include "Brick.h"
+#include "Solid.h"
+#include "Ghost.h"
+
 CLayer::CLayer()
 {
 	this->id = 0;
@@ -78,23 +82,121 @@ void CGameMap::Render(CGame* game)
 	}
 	
 }
-vector<LPGAMEOBJECT> CGameMap::MapOBJECTS( CAnimations* PlayAni)
+vector<LPGAMEOBJECT> CGameMap::MapOBJECTS(string filePath, string fileName)
 {
-	vector<LPGAMEOBJECT> objects;
-	for (int i = 0; i < width; i++) {
-		for (int j = 0; j < height ; j++) {
-			int x = i * tileWidth;
-			int y = j * tileHeight;
-			for (Layer layer : layers) {
-				
-					int id = layer->GetTileID(i % width, j % height);
-					if(this->GetTileSet(id))
-						if(this->GetTileSet(id)->GetBlockBoundingBox(id))
-							objects.push_back(CreatObject(this->GetTileSet(id)->GetBlockBoundingBox(id), x, y, PlayAni));
+	string fullPath = filePath + "/" + fileName;
+	TiXmlDocument doc(fullPath.c_str());
+
+	vector<LPGAMEOBJECT> obj;
+
+	if (doc.LoadFile()) {
+		TiXmlElement* root = doc.RootElement();
+		//shared_ptr<CGameMap> gameMap = shared_ptr<CGameMap>(new CGameMap());
+
+		for (TiXmlElement* TMXObjectsgroup = root->FirstChildElement("objectgroup"); TMXObjectsgroup != NULL; TMXObjectsgroup = TMXObjectsgroup->NextSiblingElement("objectgroup"))
+		{
+			for (TiXmlElement* TMXObject = TMXObjectsgroup->FirstChildElement("object"); TMXObject != NULL; TMXObject = TMXObject->NextSiblingElement("object"))
+			{
+
+				float x, y, width, height;
+				//LPGAMEOBJECT object{};
+				std::string name = TMXObjectsgroup->Attribute("name");
+				if (name == "Solid")
+				{
+
+
+					TMXObject->QueryFloatAttribute("x", &x);
+					TMXObject->QueryFloatAttribute("y", &y);
+					TMXObject->QueryFloatAttribute("width", &width);
+					TMXObject->QueryFloatAttribute("height", &height);
+
+					Solid* solid = new Solid(x, y, width, height);
+					obj.push_back(solid);
+					
+					//object = new InvisibleBrick();
+				}
+				else if (name == "Ghost")
+				{
+
+					TMXObject->QueryFloatAttribute("x", &x);
+					TMXObject->QueryFloatAttribute("y", &y);
+					TMXObject->QueryFloatAttribute("width", &width);
+					TMXObject->QueryFloatAttribute("height", &height);
+
+					Ghost* ghost = new Ghost(x, y, width, height);
+
+					obj.push_back(ghost);
+				}
+				/*else if (name == "Enemies")
+				{
+					continue;
+				}
+				else if (name == "Items")
+				{
+					Coin* coin = new Coin();
+
+					TMXObject->QueryFloatAttribute("x", &x);
+					TMXObject->QueryFloatAttribute("y", &y);
+
+					coin->setX(x);
+					coin->setY(y);
+
+					ScenceManager::GetInstance()->getCurrentScence()->AddObject(coin);
+				}
+				else if (name == "QuestionBlocks")
+				{
+					QuestionBlock* questionblock = new QuestionBlock();
+					int quantity = 0;
+					std::string blockname;
+
+					blockname = TMXObject->Attribute("name");
+					TMXObject->QueryFloatAttribute("x", &x);
+					TMXObject->QueryFloatAttribute("y", &y);
+					TMXObject->QueryIntAttribute("type", &quantity);
+
+					if (blockname == "bleaf")
+					{
+						questionblock->SetInBlockItem(Item::RaccoonLeaf);
+					}
+					else if (blockname == "bcoin")
+					{
+						questionblock->SetInBlockItem(Item::Coin);
+					}
+					else if (blockname == "bmushroom")
+					{
+						questionblock->SetInBlockItem(Item::RedShroom);
+					}
+
+
+					questionblock->SetQuantity(quantity);
+					questionblock->setX(x);
+					questionblock->setY(y);
+
+					if (quantity <= 0)
+						questionblock->SetDeflected(true);
+
+					ScenceManager::GetInstance()->getCurrentScence()->AddObject(questionblock);
+				}
+				else if (name == "Bricks")
+				{
+					Brick* brick = new Brick();
+
+					TMXObject->QueryFloatAttribute("x", &x);
+					TMXObject->QueryFloatAttribute("y", &y);
+
+					brick->setX(x);
+					brick->setY(y);
+
+					ScenceManager::GetInstance()->getCurrentScence()->AddObject(brick);
+				}
+				else
+				{
+					continue;
+				}*/
 			}
 		}
 	}
-	return objects;
+	return obj;
 }
 
 void CGameMap::FromTMX(string filePath, string fileName)
@@ -122,6 +224,8 @@ void CGameMap::FromTMX(string filePath, string fileName)
 			Layer layer = new CLayer(node);
 			this->layers.push_back(layer);
 		}
+
+		
 	}
 
 	//throw "Load map that bai!!";

@@ -156,6 +156,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="Goomba.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Koopas.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="RaccoonMario.h" />
     <ClInclude Include="Scence.h" />
     <ClInclude Include="SmallMario.h" />
+    <ClInclude Include="Solid.h" />
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="TileSet.h" />
@@ -184,6 +186,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Goomba.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="main.cpp" />
@@ -195,6 +198,7 @@
     <ClCompile Include="RaccoonMario.cpp" />
     <ClCompile Include="Scence.cpp" />
     <ClCompile Include="SmallMario.cpp" />
+    <ClCompile Include="Solid.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="TileSet.cpp" />
