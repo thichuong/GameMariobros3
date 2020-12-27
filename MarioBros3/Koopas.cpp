@@ -158,7 +158,7 @@ void CKoopas::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 	if (state == KOOPAS_STATE_DIE) return;
 	if (obj->typeobject == TypeObject::player)
 	{
-		if (state == KOOPAS_STATE_SHELL_HOLD && !CGame::GetInstance()->IsKeyDown(DIK_Z))
+		if (state == KOOPAS_STATE_SHELL_HOLD && !CGame::GetInstance()->IsKeyDown(DIK_A))
 		{
 			SetState(KOOPAS_STATE_SHELL);
 		}
@@ -180,7 +180,7 @@ void CKoopas::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 				obj->DownLevel();
 			else 
 			{
-				if (CGame::GetInstance()->IsKeyDown(DIK_Z))
+				if (CGame::GetInstance()->IsKeyDown(DIK_A))
 				{
 					SetState(KOOPAS_STATE_SHELL_HOLD);
 					CMario* mario = dynamic_cast<CMario*>(obj);

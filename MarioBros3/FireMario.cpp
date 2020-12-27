@@ -13,7 +13,7 @@ FireMario::FireMario() : CMario()
 void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
 	UpdateVx();
-	if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
+	if (CGame::GetInstance()->IsKeyDown(DIK_S))
 	{
 		if (Mariostate.movement == MoveStates::Run && Mariostate.jump == JumpStates::Jump && canHighjump)
 			SetJumpState(JumpStates::Super);
@@ -40,7 +40,7 @@ void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	}
 	vy += MARIO_GRAVITY * dt;
 	CMario::Update(dt, colliable_objects);
-	if (CGame::GetInstance()->IsKeyDown(DIK_X) && player->holdobject == NULL && bullets.size() < 2)
+	if ((CGame::GetInstance()->IsKeyDown(DIK_Z) || attack == TRUE) && player->holdobject == NULL && bullets.size() < 2)
 	{
 		SetMoveState(MoveStates::Attack);
 		if (timeattack == 0)
@@ -49,7 +49,7 @@ void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 			bullets.push_back(firebullet);
 			CGame::GetInstance()->GetCurrentScene()->addobject(firebullet);
 		}
-	
+
 	}
 	for (int i = 0; i < bullets.size(); i++)
 	{
@@ -64,11 +64,21 @@ void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 
 void FireMario::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	left = x;
-	top = y;
-	right = x + MARIO_BIG_BBOX_WIDTH;
-	if (Mariostate.movement != MoveStates::Crouch) bottom = y + MARIO_BIG_BBOX_HEIGHT;
-	else bottom = y + MARIO_BIG_BBOX_HEIGHT_CROUCHING;
+
+	if (Mariostate.movement != MoveStates::Crouch)
+	{
+		left = x;
+		top = y;
+		right = x + MARIO_BIG_BBOX_WIDTH;
+		bottom = y + MARIO_BIG_BBOX_HEIGHT;
+	}
+	else
+	{
+		left = x;
+		top = y + MARIO_BIG_BBOX_HEIGHT - MARIO_BIG_BBOX_HEIGHT_CROUCHING;
+		right = x + MARIO_BIG_BBOX_WIDTH;
+		bottom = y + MARIO_BIG_BBOX_HEIGHT_CROUCHING;
+	}
 }
 void FireMario::SetAnimationSet(CAnimations* ani_set)
 {

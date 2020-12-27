@@ -32,7 +32,7 @@ void CMario::UpdateVx()
 {
 	if (Mariostate.movement == MoveStates::Run || Mariostate.movement == MoveStates::Walk)
 	{
-		if ((!CGame::GetInstance()->IsKeyDown(DIK_Z) && Mariostate.jump != JumpStates::Super))
+		if ((!CGame::GetInstance()->IsKeyDown(DIK_A) && Mariostate.jump != JumpStates::Super))
 		{
 			if (ax > 0)
 			{
@@ -109,7 +109,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	// Calculate dx, dy 
 
-	if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
+	if (CGame::GetInstance()->IsKeyDown(DIK_S))
 	{
 		if (onGround && Mariostate.jump == JumpStates::Stand)
 		{
@@ -219,6 +219,9 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		SetJumpState(JumpStates::Fall);
 	}
 	
+	if (!CGame::GetInstance()->IsKeyDown(DIK_A))
+		attack = FALSE;
+
 	if (timeattack < timecooldown)
 	{
 		timeattack += dt;
@@ -249,6 +252,7 @@ void CMario::Render()
 {
 	string ani = IDLE;
 	bool ani_left = false;
+	
 	if (ax < 0)
 		ani_left = TRUE;
 	if (state == MARIO_STATE_DIE)
@@ -324,11 +328,11 @@ void CMario::SetState(int state)
 
 */
 void CMario::OnKeyUp(int keyCode) {
-	if (keyCode == DIK_SPACE)
+	if (keyCode == DIK_S)
 	{
 		canHighjump = FALSE;
 	}
-	if(keyCode == DIK_Z)
+	if(keyCode == DIK_A)
 	{
 		kickObj();
 	}
@@ -339,7 +343,7 @@ void CMario::OnKeyDown(int keyCode)
 {
 	switch (keyCode)
 	{
-	case DIK_SPACE:
+	case DIK_S:
 		//SetState(MARIO_STATE_JUMP);
 		 if (onGround)
 		{
@@ -350,6 +354,9 @@ void CMario::OnKeyDown(int keyCode)
 		}
 		break;
 	case DIK_A:
+		attack = TRUE;
+		break;
+	case DIK_Q:
 		Reset();
 		break;
 	case DIK_1: SetLevel(small);
@@ -389,7 +396,7 @@ void CMario::KeyState(BYTE* state)
 	}
 	else SetMoveState(MoveStates::Idle);
 
-	if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
+	if (CGame::GetInstance()->IsKeyDown(DIK_S))
 	{
 		if (onGround && Mariostate.jump == JumpStates::Stand)
 		{
@@ -458,6 +465,7 @@ void  CMario::SetMoveState(MoveStates e)
 	if (Mariostate.movement == MoveStates::Attack && timeattack >= timecooldown)
 	{
 		timeattack = 0;
+		attack = FALSE;
 	}
 		
 }

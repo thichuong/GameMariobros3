@@ -108,6 +108,7 @@ protected:
 	float start_x;			// initial position of Mario at scene
 	float start_y; 
 	
+	float attack;
 	
 	CPlayer* player;
 public: 

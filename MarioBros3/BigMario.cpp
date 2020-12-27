@@ -4,7 +4,7 @@
 void BigMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
 	UpdateVx();
-	if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
+	if (CGame::GetInstance()->IsKeyDown(DIK_S))
 	{
 		if (Mariostate.movement == MoveStates::Run && Mariostate.jump == JumpStates::Jump && canHighjump)
 			SetJumpState(JumpStates::Super);
@@ -29,11 +29,21 @@ void BigMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 
 void BigMario::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	left = x;
-	top = y;
-	right = x + MARIO_BIG_BBOX_WIDTH;
-	if (Mariostate.movement != MoveStates::Crouch) bottom = y + MARIO_BIG_BBOX_HEIGHT;
-	else bottom = y + MARIO_BIG_BBOX_HEIGHT_CROUCHING;
+
+	if (Mariostate.movement != MoveStates::Crouch)
+	{
+		left = x;
+		top = y;
+		right = x + MARIO_BIG_BBOX_WIDTH;
+		bottom = y + MARIO_BIG_BBOX_HEIGHT;
+	}
+	else
+	{
+		left = x;
+		top = y + MARIO_BIG_BBOX_HEIGHT - MARIO_BIG_BBOX_HEIGHT_CROUCHING;
+		right = x + MARIO_BIG_BBOX_WIDTH;
+		bottom = y + MARIO_BIG_BBOX_HEIGHT_CROUCHING;
+	}
 }
 void BigMario::SetAnimationSet(CAnimations* ani_set)
 {

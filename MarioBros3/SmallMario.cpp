@@ -4,7 +4,7 @@
 void SmallMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
 	UpdateVx();
-	if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
+	if (CGame::GetInstance()->IsKeyDown(DIK_S))
 	{
 		if (Mariostate.movement == MoveStates::Run && Mariostate.jump == JumpStates::Jump && canHighjump)
 			SetJumpState(JumpStates::Super);
@@ -77,7 +77,7 @@ void SmallMario::KeyState(BYTE* state)
 	}
 	else SetMoveState(MoveStates::Idle);
 
-	if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
+	if (CGame::GetInstance()->IsKeyDown(DIK_S))
 	{
 		if (onGround && Mariostate.jump == JumpStates::Stand)
 		{
