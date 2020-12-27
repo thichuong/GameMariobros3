@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="23" nextobjectid="188">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="23" nextobjectid="202">
  <editorsettings>
   <export target="../../../../../Resource/Xml/NewMap/BigMap/world-1-1-map.xml" format="tmx"/>
  </editorsettings>
@@ -302,6 +302,9 @@
   <object id="140" x="6672" y="1776" width="48" height="96"/>
   <object id="141" x="6624" y="1824" width="48" height="48"/>
   <object id="142" x="6336" y="1392" width="576" height="48"/>
+  <object id="190" x="8380" y="1.33333" width="65.3333" height="1246.67"/>
+  <object id="192" x="1.33333" y="474.667" width="9.33333" height="776"/>
+  <object id="196" x="1056" y="1108" width="90.6667" height="136"/>
  </objectgroup>
  <objectgroup id="14" name="Ghost" visible="0">
   <object id="143" x="720" y="1104" width="144" height="48"/>
@@ -321,7 +324,6 @@
  </objectgroup>
  <objectgroup id="15" name="Enemies">
   <object id="42" name="goomba" type="basic" x="1608" y="1224"/>
-  <object id="43" name="goomba" type="basic" x="696" y="1224"/>
   <object id="45" name="koopa" type="red" x="1744.5" y="1079.84"/>
   <object id="76" name="koopa" type="red" x="6264" y="1080">
    <point/>
@@ -354,6 +356,12 @@
    <point/>
   </object>
   <object id="158" name="venus-fire-trap" type="green" x="5568" y="1080">
+   <point/>
+  </object>
+  <object id="194" name="goomba" type="basic" x="696" y="1170.67">
+   <point/>
+  </object>
+  <object id="195" name="goomba" type="basic" x="741.333" y="1174.67">
    <point/>
   </object>
  </objectgroup>
@@ -554,13 +562,17 @@
  </objectgroup>
  <objectgroup id="21" name="Pipes">
   <object id="112" name="pipe" type="green-up" x="5328" y="1152" width="96" height="96"/>
-  <object id="113" name="pipe" type="green-up" x="5520" y="1104" width="96" height="144"/>
+  <object id="113" name="pipe" type="green-up" x="5520" y="1102.67" width="96" height="145.333"/>
   <object id="114" name="pipe" type="green-up" x="6720" y="480" width="96" height="480"/>
   <object id="115" name="pipe" type="green-vertical" x="6720" y="1152" width="96" height="96"/>
   <object id="116" name="pipe" type="green-up" x="6912" y="1152" width="96" height="96"/>
-  <object id="117" name="pipe" type="green-up" x="1056" y="1104" width="96" height="144"/>
+  <object id="117" name="pipe" type="green-up" x="1054.67" y="1104" width="96" height="144"/>
   <object id="162" name="pipe" type="green-down" x="6240" y="1392" width="96" height="96"/>
   <object id="164" name="pipe" type="green-down" x="6912" y="1392" width="96" height="96"/>
+  <object id="197" x="5328" y="1154.67" width="92" height="90.6667"/>
+  <object id="198" x="5518.67" y="1097.33" width="88" height="153.333"/>
+  <object id="200" x="6718.67" y="474.667" width="93.3333" height="484"/>
+  <object id="201" x="6721.33" y="1148" width="86.6667" height="101.333"/>
  </objectgroup>
  <objectgroup id="22" name="Warp">
   <object id="159" name="warp-entrance" type="down" x="6762" y="468" width="12" height="24"/>

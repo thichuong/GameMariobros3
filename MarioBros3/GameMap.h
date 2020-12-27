@@ -27,7 +27,7 @@ public:
 	int height;
 	CLayer();
 	CLayer(TiXmlElement* data);
-
+	int visible;
 	bool Hidden = false;
 
 	int GetTileID(int x, int y);

@@ -85,3 +85,10 @@ void CPlayer::Downlevel()
 	}
 	
 }
+int CPlayer::getMetter()
+{
+	int metter =playMario->getMetter();
+	
+	return metter / MIN_METTER;
+	
+}

@@ -12,6 +12,9 @@
 #define fire "fire"
 #define raccoon "raccoon"
 #define DOWN_LEVEL_TIME 1000
+
+
+
 using namespace std;
 class CPlayer : public CGameObject
 {
@@ -35,7 +38,7 @@ public:
     virtual void SetAnimationSet(CAnimations* ani_set);
     void SetPosition(float x, float y);
     void Downlevel();
-
+    int getMetter();
 
 
     static  CPlayer* GetInstance();

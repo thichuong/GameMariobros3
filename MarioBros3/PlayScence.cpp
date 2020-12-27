@@ -88,27 +88,29 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 	if (doc.LoadFile())
 	{
 		TiXmlElement* root = doc.RootElement();
-		TiXmlElement* texture = root->FirstChildElement();
-		
-		string textureID = texture->Attribute("id");
-		LPDIRECT3DTEXTURE9 tex = CTextures::GetInstance()->Get(textureID);
-		
-		for (TiXmlElement* node = texture->FirstChildElement(); node != nullptr; node = node->NextSiblingElement())
+	//	TiXmlElement* texture = root->FirstChildElement();
+		for (TiXmlElement* texture = root->FirstChildElement("Textures"); texture != NULL; texture = texture->NextSiblingElement("Textures"))
 		{
-			string spriteID = node->Attribute("id");
-			int left, top, width, height;
-			int xPivot = 0;
-			node->QueryIntAttribute("left", &left);
-			node->QueryIntAttribute("top", &top);
-			node->QueryIntAttribute("width", &width);
-			node->QueryIntAttribute("height", &height);
-			if (node->Attribute("xPivot") != NULL) node->QueryIntAttribute("xPivot", &xPivot);
-			left = left * 3 ;
-			top = top * 3 ;
-			width = width * 3;
-			height = height * 3;
+			string textureID = texture->Attribute("id");
+			LPDIRECT3DTEXTURE9 tex = CTextures::GetInstance()->Get(textureID);
 
-			CSprites::GetInstance()->Add(spriteID, left, top, left + width, top + height, tex, xPivot);
+			for (TiXmlElement* node = texture->FirstChildElement(); node != nullptr; node = node->NextSiblingElement())
+			{
+				string spriteID = node->Attribute("id");
+				int left, top, width, height;
+				int xPivot = 0;
+				node->QueryIntAttribute("left", &left);
+				node->QueryIntAttribute("top", &top);
+				node->QueryIntAttribute("width", &width);
+				node->QueryIntAttribute("height", &height);
+				if (node->Attribute("xPivot") != NULL) node->QueryIntAttribute("xPivot", &xPivot);
+				left = left * 3;
+				top = top * 3;
+				width = width * 3;
+				height = height * 3;
+
+				CSprites::GetInstance()->Add(spriteID, left, top, left + width, top + height, tex, xPivot);
+			}
 		}
 	}
 	DebugOut(L"[INFO] Loading aniId = : %s \n", ToLPCWSTR(line));
@@ -180,58 +182,60 @@ void CPlayScene::_ParseSection_ANIMATION_SETS(string line)
 */
 void CPlayScene::_ParseSection_OBJECTS(string line)
 {
-	vector<string> tokens = split(line);
+	//
+	//vector<string> tokens = split(line);
 
-	//DebugOut(L"--> %s\n",ToWSTR(line).c_str());
+	////DebugOut(L"--> %s\n",ToWSTR(line).c_str());
 
-	if (tokens.size() < 3) return; // skip invalid lines - an object set must have at least id, x, y
+	//if (tokens.size() < 3) return; // skip invalid lines - an object set must have at least id, x, y
 
-	int object_type = atoi(tokens[0].c_str());
-	float x = atof(tokens[1].c_str());
-	float y = atof(tokens[2].c_str());
+	//int object_type = atoi(tokens[0].c_str());
+	//float x = atof(tokens[1].c_str());
+	//float y = atof(tokens[2].c_str());
 
-	 
-	x = x * 3;
-	y = y * 3;
-	string ani_set_id = tokens[3].c_str();
+	// 
+	//x = x * 3;
+	//y = y * 3;
+	//string ani_set_id = tokens[3].c_str();
 
-	CGameObject *obj = NULL;
+	//CGameObject *obj = NULL;
 
-	switch (object_type)
-	{
-	case OBJECT_TYPE_MARIO:
-		if (player!=NULL) 
-		{
-			DebugOut(L"[ERROR] MARIO object was created before!\n");
-			return;
-		}
-		//obj = new CMario(100,290); 
-		//player = (CMario*)obj;  
+	//switch (object_type)
+	//{
+	//case OBJECT_TYPE_MARIO:
+	//	if (player!=NULL) 
+	//	{
+	//		DebugOut(L"[ERROR] MARIO object was created before!\n");
+	//		return;
+	//	}
+	//	//obj = new CMario(100,290); 
+	//	//player = (CMario*)obj;  
 
-		DebugOut(L"[INFO] Player object created!\n");
-		break;
-	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(); break;
-	case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
-	case OBJECT_TYPE_KOOPAS: obj = new CKoopas(); break;
-	case OBJECT_TYPE_PORTAL:
-		{	
-			float r = atof(tokens[4].c_str());
-			float b = atof(tokens[5].c_str());
-			int scene_id = atoi(tokens[6].c_str());
-			obj = new CPortal(x, y, r, b, scene_id);
-		}
-		break;
-	default:
-		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
-		return;
-	}
+	//	DebugOut(L"[INFO] Player object created!\n");
+	//	break;
+	//case OBJECT_TYPE_GOOMBA: obj = new CGoomba(); break;
+	//case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
+	//case OBJECT_TYPE_KOOPAS: obj = new CKoopas(); break;
+	//case OBJECT_TYPE_PORTAL:
+	//	{	
+	//		float r = atof(tokens[4].c_str());
+	//		float b = atof(tokens[5].c_str());
+	//		int scene_id = atoi(tokens[6].c_str());
+	//		obj = new CPortal(x, y, r, b, scene_id);
+	//	}
+	//	break;
+	//default:
+	//	DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
+	//	return;
+	//}
 
-	// General object setup
-	obj->SetPosition(x, y);
-	//CAnimations ani_set = CAnimationSets::GetInstance()->Get(ani_set_id);
+	//// General object setup
+	//obj->SetPosition(x, y);
+	////CAnimations ani_set = CAnimationSets::GetInstance()->Get(ani_set_id);
 
-	obj->SetAnimationSet(CAnimations::GetInstance());
-	objects.push_back(obj);
+	//obj->SetAnimationSet(CAnimations::GetInstance());
+	//objects.push_back(obj);
+
 }
 
 void CPlayScene::Load()
@@ -270,9 +274,7 @@ void CPlayScene::Load()
 		for (TiXmlElement* node = info->FirstChildElement("LoadANIMATIONS"); node != nullptr; node = node->NextSiblingElement("LoadANIMATIONS"))
 		{
 			string file = node->Attribute("file");
-			_ParseSection_ANIMATIONS(file);
-			
-			
+			_ParseSection_ANIMATIONS(file);	
 		}
 		node = info->FirstChildElement("LoadMAP");
 		file = node->Attribute("file");
@@ -292,6 +294,7 @@ void CPlayScene::Load()
 		//objects.push_back(player);
 		DebugOut(L"[INFO] GameMap:   \n");
 	}
+	hud = new HUD();
 	//ifstream f;
 	//f.open(sceneFilePath);
 
@@ -364,6 +367,8 @@ void CPlayScene::Update(DWORD dt)
 	if (cy + game->GetScreenHeight() - py < YHUD) cy += YHUD;
 	CGame::GetInstance()->SetCamPos(cx, cy);
 	
+	hud->Update(dt);
+
 }
 
 void CPlayScene::Render()
@@ -372,6 +377,8 @@ void CPlayScene::Render()
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
 	player->Render();
+
+	hud->Render();
 }
 
 /*

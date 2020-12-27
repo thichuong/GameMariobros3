@@ -8,7 +8,9 @@ CGoomba::CGoomba()
 	collision = CCollision::Full;
 	flydie = false;
 	timedie = 0;
+	SetAnimationSet(CAnimations::GetInstance());
 }
+
 
 void CGoomba::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {

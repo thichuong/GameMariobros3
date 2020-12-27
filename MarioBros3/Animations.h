@@ -30,8 +30,8 @@ class CAnimation
 public:
 	CAnimation(int defaultTime = 100) { this->defaultTime = defaultTime; lastFrameTime = -1; currentFrame = -1; }
 	void Add(LPSPRITE sprite, float time = 0);
-	void Render(float x, float y, DWORD timeRender, bool flipx = TRUE, int alpha = 255);
-	void Render(float x, float y, bool flipx = TRUE, int alpha = 255 );
+	void Render(float x, float y, DWORD timeRender, bool flipx = FALSE, int alpha = 255);
+	void Render(float x, float y, bool flipx = FALSE, int alpha = 255 );
 	void Render(float x, float y, D3DXVECTOR2 vectorflip, int alpha = 255);
 };
 

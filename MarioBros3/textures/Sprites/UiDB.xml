@@ -58,5 +58,6 @@
         <Sprite id="spr-super-mushroom-card-0" left="171" top="158"  width="24" height="29"/>
         <Sprite id="spr-fire-flower-card-0" left="202" top="158"  width="24" height="29"/>
         <Sprite id="spr-star-man-card-0" left="232" top="158"  width="24" height="30"/>
+		<Sprite id="spr-hud-0" left="11" top="127"  width="153" height="30"/>
 	</Textures>
 </Textures>

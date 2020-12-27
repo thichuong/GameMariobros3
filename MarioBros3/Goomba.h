@@ -24,6 +24,7 @@ class CGoomba : public CGameObject
 	DWORD timedie;
 public:
 	CGoomba();
+	
 	virtual void SetState(int state);
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	virtual void Render();

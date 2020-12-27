@@ -11,7 +11,7 @@ class CPlayer;
 //0.1f
 #define MARIO_JUMP_SPEED_Y  0.02f
 #define MARIO_JUMP_SPEED_Y_UP  0.004f
-#define MARIO_JUMP_SPEED_Y_HIGH  0.62f
+#define MARIO_JUMP_SPEED_Y_HIGH  0.65f
 #define MARIO_JUMP_SPEED_Y_SUPER  0.75f
 #define MARIO_FLY_SPEED_Y  1.25f
 #define MARIO_JUMP_DEFLECT_SPEED  0.4f
@@ -67,6 +67,8 @@ class CPlayer;
 #define MARIO_SMALL_BBOX_HEIGHT 45
 
 #define MARIO_UNTOUCHABLE_TIME 5000
+#define MAX_METTER 7000
+#define MIN_METTER 1000
 
 enum class MoveStates
 {
@@ -111,6 +113,8 @@ protected:
 	float attack;
 	
 	CPlayer* player;
+
+	int metter;
 public: 
 	CMario(float x = 0, float y = 0);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
@@ -137,4 +141,6 @@ public:
 	void Reset();
 	virtual void SetAnimationSet(CAnimations* ani_set);
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) =0;
+
+	int getMetter() { return metter; }
 };

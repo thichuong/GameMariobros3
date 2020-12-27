@@ -28,11 +28,12 @@ void MarioTail::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		LPGAMEOBJECT e = coObjectsResult[i];
 
-		if (e->typeobject == TypeObject::enemy) 
+		if (e->typeobject == TypeObject::enemy || e->typeobject == TypeObject::block)
 		{
 			float nx = this->x > e->x ? -1 : 1;
 			e->CollisionObject(this, nx, 0);
 		}
+		
 	}
 	coObjectsResult.clear();
 }

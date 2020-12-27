@@ -55,7 +55,8 @@ enum class TypeObject
 	normal,
 	enemy,
 	player,
-	Bullet
+	Bullet,
+	block
 };
 class CGameObject
 {

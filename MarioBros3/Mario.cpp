@@ -24,7 +24,7 @@ CMario::CMario(float x, float y) : CGameObject()
 	collision = CCollision::Full;
 	timecooldown = 0;
 	typeobject = TypeObject::player;
-	
+	metter = 0;
 	
 	player = CGame::GetInstance()->GetCurrentScene()->GetPlayer();
 }
@@ -245,7 +245,16 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		player->holdobject->vx = vx;
 		player->holdobject->vy = vy;
 	}
-
+	if (Mariostate.movement == MoveStates::Run)
+	{
+		if (metter + dt/2 < MAX_METTER) metter += dt;
+		else metter = MAX_METTER;
+	}
+	else 
+	{
+		if (metter - dt > 0) metter -= dt;
+		else metter = 0;
+	}
 }
 
 void CMario::Render()
@@ -467,13 +476,22 @@ void  CMario::SetMoveState(MoveStates e)
 		timeattack = 0;
 		attack = FALSE;
 	}
-		
+	
 }
 void CMario::SetJumpState(JumpStates e)
 {
+	if (e != JumpStates::Super)
+	{
+		preMariostate = Mariostate;
+		Mariostate.jump = e;
+	}
+	else if (metter >= MAX_METTER - MIN_METTER)
+	{
+		preMariostate = Mariostate;
+		Mariostate.jump = e;
+	}
+
 	
-	preMariostate = Mariostate; 
-	Mariostate.jump = e;
 
 }
 void CMario::holdObj(LPGAMEOBJECT obj)

@@ -46,6 +46,12 @@
     <Filter Include="Source Files\GameObject\Solid">
       <UniqueIdentifier>{a9239b39-04dc-4e3b-9622-bec0f77b7688}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\HUD">
+      <UniqueIdentifier>{0df0d4f6-eaed-4679-b998-18905b47a867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ITem">
+      <UniqueIdentifier>{681a5cc1-284b-4c27-8182-509fa04b8a18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -131,6 +137,21 @@
     </ClInclude>
     <ClInclude Include="Ghost.h">
       <Filter>Source Files\GameObject\Solid</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestionBlock.h">
+      <Filter>Source Files\GameObject\Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Source Files\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="PMetter.h">
+      <Filter>Source Files\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="UIObject.h">
+      <Filter>Source Files\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="Coin.h">
+      <Filter>Source Files\ITem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +244,21 @@
     </ClCompile>
     <ClCompile Include="Ghost.cpp">
       <Filter>Source Files\GameObject\Solid</Filter>
+    </ClCompile>
+    <ClCompile Include="QuestionBlock.cpp">
+      <Filter>Source Files\GameObject\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Source Files\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="PMetter.cpp">
+      <Filter>Source Files\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObject.cpp">
+      <Filter>Source Files\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="Coin.cpp">
+      <Filter>Source Files\ITem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

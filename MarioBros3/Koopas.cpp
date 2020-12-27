@@ -8,6 +8,7 @@ CKoopas::CKoopas()
 	typeobject = TypeObject::enemy;
 	collision = CCollision::Full;
 	FlipY = false;
+	SetAnimationSet(CAnimations::GetInstance());
 }
 
 void CKoopas::GetBoundingBox(float &left, float &top, float &right, float &bottom)

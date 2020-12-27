@@ -3,6 +3,12 @@
 #include "Brick.h"
 #include "Solid.h"
 #include "Ghost.h"
+#include "Brick.h"
+#include "Goomba.h"
+#include "Koopas.h"
+#include "QuestionBlock.h"
+#include "Coin.h"
+
 
 CLayer::CLayer()
 {
@@ -17,6 +23,8 @@ CLayer::CLayer(TiXmlElement* data)
 	data->QueryIntAttribute("id", &this->id);
 	data->QueryIntAttribute("width", &this->width);
 	data->QueryIntAttribute("height", &this->height);
+	if (data->QueryIntAttribute("visible", &this->visible))
+		this->visible = 1;
 
 	tiles = new int* [this->width];
 	const char* content = data->FirstChildElement()->GetText();
@@ -73,7 +81,7 @@ void CGameMap::Render(CGame* game)
 			int x = i * tileWidth ;
 			int y = j * tileHeight ;
 			for (Layer layer : layers) {
-				if (layer->Hidden) continue;
+				if (!layer->visible) continue;
 				int id = layer->GetTileID(i % width, j % height);
 				if(this->GetTileSet(id))
 					this->GetTileSet(id)->Draw(id, x, y);
@@ -99,8 +107,8 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS(string filePath, string fileName)
 			{
 
 				float x, y, width, height;
-				//LPGAMEOBJECT object{};
-				std::string name = TMXObjectsgroup->Attribute("name");
+				
+				string name = TMXObjectsgroup->Attribute("name");
 				if (name == "Solid")
 				{
 
@@ -113,7 +121,6 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS(string filePath, string fileName)
 					Solid* solid = new Solid(x, y, width, height);
 					obj.push_back(solid);
 					
-					//object = new InvisibleBrick();
 				}
 				else if (name == "Ghost")
 				{
@@ -126,73 +133,80 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS(string filePath, string fileName)
 					Ghost* ghost = new Ghost(x, y, width, height);
 
 					obj.push_back(ghost);
+
+					CKoopas* enemies = new CKoopas();
+					enemies->SetPosition(x, y);
+					obj.push_back(enemies);
 				}
-				/*else if (name == "Enemies")
+				 if (name == "Enemies")
 				{
-					continue;
+					string Enemiesname= TMXObject->Attribute("name");
+					string Type = TMXObject->Attribute("type");
+					TMXObject->QueryFloatAttribute("x", &x);
+					TMXObject->QueryFloatAttribute("y", &y);
+					//if (Enemiesname == "goomba")
+					//{
+						CKoopas* ene = new CKoopas();
+						ene->SetPosition(x , y-100);
+						obj.push_back(ene);
+					//}
+
+					
 				}
 				else if (name == "Items")
 				{
-					Coin* coin = new Coin();
+					
 
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
+					Coin* coin = new Coin(x,y);
+					
+					obj.push_back(coin);
 
-					coin->setX(x);
-					coin->setY(y);
-
-					ScenceManager::GetInstance()->getCurrentScence()->AddObject(coin);
 				}
 				else if (name == "QuestionBlocks")
 				{
-					QuestionBlock* questionblock = new QuestionBlock();
+					
 					int quantity = 0;
-					std::string blockname;
+					string blockname;
 
 					blockname = TMXObject->Attribute("name");
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
 					TMXObject->QueryIntAttribute("type", &quantity);
 
+					QuestionBlock* questionblock = new QuestionBlock(x,y);
+
 					if (blockname == "bleaf")
 					{
-						questionblock->SetInBlockItem(Item::RaccoonLeaf);
+						questionblock->SetItem(Item::RaccoonLeaf);
 					}
 					else if (blockname == "bcoin")
 					{
-						questionblock->SetInBlockItem(Item::Coin);
+						questionblock->SetItem(Item::Coin);
 					}
 					else if (blockname == "bmushroom")
 					{
-						questionblock->SetInBlockItem(Item::RedShroom);
+						questionblock->SetItem(Item::RedShroom);
 					}
 
-
+					questionblock->SetItem(Item::Coin);
 					questionblock->SetQuantity(quantity);
-					questionblock->setX(x);
-					questionblock->setY(y);
-
-					if (quantity <= 0)
-						questionblock->SetDeflected(true);
-
-					ScenceManager::GetInstance()->getCurrentScence()->AddObject(questionblock);
+					
+					obj.push_back(questionblock);
 				}
 				else if (name == "Bricks")
 				{
-					Brick* brick = new Brick();
-
+				
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
 
-					brick->setX(x);
-					brick->setY(y);
-
-					ScenceManager::GetInstance()->getCurrentScence()->AddObject(brick);
+					Brick* brick = new Brick(x,y);
+					
+				
+					obj.push_back(brick);	
 				}
-				else
-				{
-					continue;
-				}*/
+				
 			}
 		}
 	}

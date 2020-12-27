@@ -3,8 +3,13 @@
 	<Textures Game="MarioBros3" id="1">
 		<LoadSPRITES file ="textures/Sprites/MarioDB.xml" source ="Textures\\Mario\\mario_x3.png" textureId="tex-mario"/>
 		<LoadSPRITES file ="textures/Sprites/EnemyDB.xml" source ="Textures\\Enemy\\enemy_x3.png" textureId="tex-enemy"/>
+		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="Textures\\Misc\\misc_x3.png" textureId="tex-misc"/>
+		<LoadSPRITES file ="textures/Sprites/UiDB.xml" source ="Textures\\Misc\\ui_x3.png" textureId="tex-ui"/>
+		<LoadSPRITES file ="textures/Sprites/UiDB.xml" source ="Textures\\Misc\\box-small.png" textureId="tex-pannel"/>
 		<LoadANIMATIONS file ="Textures/Animations/MarioAnim.xml"/>
-		<LoadANIMATIONS file ="Textures/Animations/EnemyAnim.xml"/> 
+		<LoadANIMATIONS file ="Textures/Animations/EnemyAnim.xml"/>
+		<LoadANIMATIONS file ="Textures/Animations/MiscAnim.xml"/>
+		<LoadANIMATIONS file ="Textures/Animations/UiAnim.xml"/>
 		<LoadMAP filepath ="textures/Maps" file ="world-1-1-map.tmx"/>
 		<LoadLayer x ="100" y="900" />
 	</Textures>

@@ -7,6 +7,7 @@
 #include "Mario.h"
 #include "Goomba.h"
 #include "Koopas.h"
+#include "HUD.h"
 
 #define camY 750
 #define YHUD 200
@@ -28,6 +29,7 @@ protected:
 	vector<LPGAMEOBJECT> earseobjects;
 	CGameMap* gamemap;
 	int camYdefault;
+	HUD* hud;
 
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);
