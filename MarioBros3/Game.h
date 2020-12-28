@@ -12,6 +12,7 @@
 #include "Textures.h"
 #include "Scence.h"
 #include "tinyXML.h"
+#include "Font.h"
 using namespace std;
 
 #define KEYBOARD_BUFFER_SIZE 1024
@@ -64,7 +65,7 @@ public:
 	void SetKeyHandler(LPKEYEVENTHANDLER handler) { keyHandler = handler; }
 	void Init(HWND hWnd);
 	void Draw(int x, int y, int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha = 255);
-	void Draw(int x, int y, int xPivot, D3DXVECTOR2 vectorflip, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha = 255);
+	void Draw(int x, int y, int xPivot,D3DXVECTOR2 vectorflip, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha = 255);
 	void DrawFlipX(int x, int y, int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha = 255);
 	
 	int IsKeyDown(int KeyCode);

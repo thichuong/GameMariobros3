@@ -30,7 +30,7 @@ void CSprite::Draw(float x, float y, bool flipx, int alpha)
 		//game->Draw(x, y, texture, left, top, right, bottom, alpha);
 		game->DrawFlipX(x, y, xPivot, texture, left, top, right, bottom, alpha);
 }
-void CSprite::Draw(float x, float y, D3DXVECTOR2 vectorflip, int alpha)
+void CSprite::Draw(float x, float y,D3DXVECTOR2 vectorflip, int alpha)
 {
 	CGame* game = CGame::GetInstance();
 	game->Draw(x, y, xPivot, vectorflip, texture, left, top, right, bottom, alpha);
@@ -42,7 +42,10 @@ void CSprites::Add(string id, int left, int top, int right, int bottom, LPDIRECT
 
 	DebugOut(L"[INFO] sprite added: %d, %d, %d, %d, %d \n", id, left, top, right, bottom);
 }
-
+void CSprites::Add(string id, LPSPRITE sprite)
+{
+	sprites[id] = sprite;
+}
 LPSPRITE CSprites::Get(string id)
 {
 	return sprites[id];

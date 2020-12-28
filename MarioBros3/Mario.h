@@ -67,8 +67,8 @@ class CPlayer;
 #define MARIO_SMALL_BBOX_HEIGHT 45
 
 #define MARIO_UNTOUCHABLE_TIME 5000
-#define MAX_METTER 7000
-#define MIN_METTER 1000
+#define MAX_METTER 7
+#define MIN_METTER 0.004f
 
 enum class MoveStates
 {
@@ -114,7 +114,9 @@ protected:
 	
 	CPlayer* player;
 
-	int metter;
+	float metter;
+	DWORD time_metter;
+
 public: 
 	CMario(float x = 0, float y = 0);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
@@ -127,7 +129,7 @@ public:
 	void SetLevel(string l);
 	string GetLevel();
 	virtual void DownLevel() ;
-
+	virtual void SetLevel(int lv);
 	CPlayer* getPlayer() { return player; }
 	void setPlayer(CPlayer* player) { this->player = player;}
 	void holdObj(LPGAMEOBJECT obj); 

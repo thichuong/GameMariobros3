@@ -30,8 +30,14 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		vx = 0;
 		vy = 0;
 	}*/
-	CGameObject::Update(dt);
-	vy += KOOPAS_GRAVITY * dt;
+	int camx = CGame::GetInstance()->GetScamX();
+	int width = CGame::GetInstance()->GetScreenWidth();
+	if (x + KOOPAS_BBOX_WIDTH >= camx || x < camx + width)
+	{
+		CGameObject::Update(dt);
+		vy += KOOPAS_GRAVITY * dt;
+	}
+	
 	
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;

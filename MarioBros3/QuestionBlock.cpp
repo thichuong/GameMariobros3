@@ -1,7 +1,7 @@
 #include "QuestionBlock.h"
 #include "Game.h"
 #include "Coin.h"
-
+#include "Leaf.h"
 
 QuestionBlock::QuestionBlock(float l, float t)
 {
@@ -46,16 +46,33 @@ void QuestionBlock::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 		isBounce = TRUE;
 		y -= BOUNCE_VEL;
 		obj->vy += GRAVITY;
-		Coin* coin = new Coin(x,y - COIN_BBOX_HEIGHT,TRUE);
-		CGame::GetInstance()->GetCurrentScene()->addobject(coin);
+		if (item == Item::Coin)
+		{
+			Coin* coin = new Coin(x, y - COIN_BBOX_HEIGHT, TRUE);
+			CGame::GetInstance()->GetCurrentScene()->addobject(coin);
+		}
+		else
+		{
+			Leaf* leaf = new Leaf(x, y - COIN_BBOX_HEIGHT, TRUE);
+			CGame::GetInstance()->GetCurrentScene()->addobject(leaf);
+		}
 	}
 		
 	if (obj->typeobject == TypeObject::normal && isActive)
 	{
 		isBounce = TRUE;
 		y -= BOUNCE_VEL;
-		Coin* coin = new Coin(x, y - COIN_BBOX_HEIGHT,TRUE);
-		CGame::GetInstance()->GetCurrentScene()->addobject(coin);
+		if (item == Item::Coin)
+		{
+			Coin* coin= new Coin(x, y - COIN_BBOX_HEIGHT, TRUE);
+			CGame::GetInstance()->GetCurrentScene()->addobject(coin);
+		}
+		else
+		{
+			Leaf* leaf = new Leaf(x, y - COIN_BBOX_HEIGHT, TRUE);
+			CGame::GetInstance()->GetCurrentScene()->addobject(leaf);
+		}
+		
 	}
 		
 

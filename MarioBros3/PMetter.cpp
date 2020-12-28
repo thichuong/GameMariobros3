@@ -25,11 +25,14 @@ PMetter::~PMetter()
 
 void PMetter::Update(DWORD dt)
 {
+	level = CGame::GetInstance()->GetCurrentScene()->GetPlayer()->getMetter();
 }
 
 void PMetter::Render()
 {
+	
 	int x = 0;
+
 	for (int i = 0; i < 6; i++)
 	{
 		
@@ -39,7 +42,7 @@ void PMetter::Render()
 	P_Off->Draw(StaticPosition.x + x, StaticPosition.y, FALSE);
 
 	x = 0;
-	int level = CGame::GetInstance()->GetCurrentScene()->GetPlayer()->getMetter();
+	
 	//int level = 6;
 	int arrowlevel = level;
 

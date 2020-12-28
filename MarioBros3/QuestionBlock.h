@@ -1,10 +1,10 @@
 #pragma once
 #include "GameObject.h"
 
-#define BOUNCE_VEL	24.0f
+#define BOUNCE_VEL	12.0f
 #define QuestionBlock_BBOX_WIDTH 48
 #define QuestionBlock_BBOX_HEIGHT 48
-#define GRAVITY  0.5f
+#define GRAVITY  0.8f
 
 enum class Item
 {

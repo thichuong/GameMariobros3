@@ -60,7 +60,7 @@ void CAnimation::Render(float x, float y, DWORD timeRender, bool flipx, int alph
 	}
 	frames[currentFrame]->GetSprite()->Draw(x, y, flipx, alpha);
 }
-void CAnimation::Render(float x, float y, D3DXVECTOR2 vectorflip, int alpha)
+void CAnimation::Render(float x, float y,D3DXVECTOR2 vectorflip, int alpha)
 {
 	DWORD now = GetTickCount();
 	if (currentFrame == -1)

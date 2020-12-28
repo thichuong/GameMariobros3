@@ -10,7 +10,7 @@ class PMetter :
 {
 private: 
 	void LoadAnimation(); 
-
+	int level;
 	LPSPRITE ArrowOn, ArrowOff, P_On, P_Off;
 public:
 	PMetter(); 

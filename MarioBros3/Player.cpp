@@ -85,10 +85,15 @@ void CPlayer::Downlevel()
 	}
 	
 }
+void CPlayer::SetLevel(int lv)
+{
+	if (lv == 4)
+		playMario->SetLevel(raccoon);
+}
 int CPlayer::getMetter()
 {
 	int metter =playMario->getMetter();
 	
-	return metter / MIN_METTER;
+	return metter;
 	
 }

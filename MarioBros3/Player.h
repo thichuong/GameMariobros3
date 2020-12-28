@@ -38,6 +38,7 @@ public:
     virtual void SetAnimationSet(CAnimations* ani_set);
     void SetPosition(float x, float y);
     void Downlevel();
+    void SetLevel(int lv);
     int getMetter();
 
 

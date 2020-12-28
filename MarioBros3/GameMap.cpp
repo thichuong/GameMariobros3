@@ -187,10 +187,8 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS(string filePath, string fileName)
 					}
 					else if (blockname == "bmushroom")
 					{
-						questionblock->SetItem(Item::RedShroom);
+						questionblock->SetItem(Item::RaccoonLeaf);
 					}
-
-					questionblock->SetItem(Item::Coin);
 					questionblock->SetQuantity(quantity);
 					
 					obj.push_back(questionblock);

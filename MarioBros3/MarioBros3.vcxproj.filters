@@ -52,6 +52,9 @@
     <Filter Include="Source Files\ITem">
       <UniqueIdentifier>{681a5cc1-284b-4c27-8182-509fa04b8a18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\font">
+      <UniqueIdentifier>{d0b89e2a-8251-41cd-93c0-43a631072e96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -151,6 +154,12 @@
       <Filter>Source Files\HUD</Filter>
     </ClInclude>
     <ClInclude Include="Coin.h">
+      <Filter>Source Files\ITem</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Framework\font</Filter>
+    </ClInclude>
+    <ClInclude Include="Leaf.h">
       <Filter>Source Files\ITem</Filter>
     </ClInclude>
   </ItemGroup>
@@ -258,6 +267,12 @@
       <Filter>Source Files\HUD</Filter>
     </ClCompile>
     <ClCompile Include="Coin.cpp">
+      <Filter>Source Files\ITem</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Framework\font</Filter>
+    </ClCompile>
+    <ClCompile Include="Leaf.cpp">
       <Filter>Source Files\ITem</Filter>
     </ClCompile>
   </ItemGroup>

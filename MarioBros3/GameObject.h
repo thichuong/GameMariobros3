@@ -128,6 +128,7 @@ public:
 	virtual void Render() = 0;
 	virtual void SetState(int state) { this->state = state; }
 	virtual void DownLevel() {};
+	virtual void SetLevel(int lv) {};
 
 	~CGameObject();
 };

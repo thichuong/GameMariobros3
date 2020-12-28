@@ -26,8 +26,13 @@ void CGoomba::GetBoundingBox(float &left, float &top, float &right, float &botto
 
 void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
-	CGameObject::Update(dt);
-	vy += GOOMBA_GRAVITY * dt;
+	int camx = CGame::GetInstance()->GetScamX();
+	int width = CGame::GetInstance()->GetScreenWidth();
+	if (x + GOOMBA_BBOX_WIDTH >= camx || x < camx + width)
+	{
+		CGameObject::Update(dt);
+		vy += GOOMBA_GRAVITY * dt;
+	}
 
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;

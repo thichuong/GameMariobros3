@@ -4,7 +4,7 @@
 
 #include "UIObject.h"
 #include "PMetter.h"
-
+#include "Font.h"
 
 class HUD : public UIObject
 {
@@ -13,6 +13,7 @@ private:
 
 	PMetter* metter; 
 
+	Font* font;
 	CAnimations* animations;
 
 public:

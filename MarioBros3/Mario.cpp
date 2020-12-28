@@ -15,7 +15,7 @@ CMario::CMario(float x, float y) : CGameObject()
 	untouchable = 0;
 	SetState(MARIO_STATE_IDLE);
 	Mariostate.movement = MoveStates::Idle;
-	start_x = x; 
+	start_x = 100; 
 	start_y = y; 
 	this->x = x; 
 	this->y = y; 
@@ -245,14 +245,15 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		player->holdobject->vx = vx;
 		player->holdobject->vy = vy;
 	}
-	if (Mariostate.movement == MoveStates::Run)
+	if ((Mariostate.movement == MoveStates::Run || Mariostate.movement == MoveStates::Walk ) && CGame::GetInstance()->IsKeyDown(DIK_A))
 	{
-		if (metter + dt/2 < MAX_METTER) metter += dt;
-		else metter = MAX_METTER;
+		 metter += dt * MIN_METTER;
+		 if (metter > MAX_METTER) metter = MAX_METTER;
+		//else metter = MAX_METTER;
 	}
 	else 
 	{
-		if (metter - dt > 0) metter -= dt;
+		if (metter - dt * MIN_METTER > 0) metter -= dt * MIN_METTER;
 		else metter = 0;
 	}
 }
@@ -529,6 +530,10 @@ string CMario::GetLevel()
 void CMario::DownLevel()
 {
 	player->Downlevel();
+}
+void CMario::SetLevel(int lv)
+{
+	player->SetLevel(lv);
 }
 /*
 	Reset Mario status to the beginning state of a scene

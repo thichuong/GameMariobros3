@@ -2,7 +2,7 @@
 
 UIObject::UIObject()
 {
-	this->StaticPosition = D3DXVECTOR2(0,0);
+	this->StaticPosition =D3DXVECTOR2(0,0);
 }
 
 UIObject::~UIObject()

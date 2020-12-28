@@ -73,7 +73,7 @@ void CGame::Draw(int x, int y,int xPivot, LPDIRECT3DTEXTURE9 texture, int left, 
 	r.bottom = bottom;
 	spriteHandler->Draw(texture, &r, &pcenter3, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
-void CGame::Draw(int x, int y, int xPivot, D3DXVECTOR2 vectorflip, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
+void CGame::Draw(int x, int y, int xPivot,D3DXVECTOR2 vectorflip, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
 	D3DXVECTOR3 p(x - (int)cam_x + xPivot, y - (int)cam_y, 0);
 	RECT r;
