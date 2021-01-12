@@ -33,6 +33,7 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		CGameObject::Update(dt);
 		vy += GOOMBA_GRAVITY * dt;
 	}
+	else return;
 
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
@@ -58,7 +59,12 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	
 		y += min_ty * dy + ny * 0.4;
 		x += min_tx * dx + nx * 0.4;
-		//y += min_ty * dy + ny * 0.5;
+		
+		for (UINT i = 0; i < coEventsResult.size(); i++)
+		{
+			
+		}
+
 		if (ny != 0) vy = 0;
 		if (nx != 0)
 		{
@@ -76,7 +82,7 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			vy = 0;
 		}
 
-	if(y > game->GetScamY() + game->GetScreenHeight()) game->GetCurrentScene()->delobject(this);
+	if(y > game->GetScamY() + game->GetScreenHeight() && state == GOOMBA_STATE_DIE) game->GetCurrentScene()->delobject(this);
 }
 
 void CGoomba::Render()
@@ -120,7 +126,7 @@ void CGoomba::SetAnimationSet(CAnimations* ani_set)
 }
 void CGoomba::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 {
-	if (obj->typeobject == TypeObject::enemy) return;
+	//if (obj->typeobject == TypeObject::enemy) return;
 	if (obj->typeobject == TypeObject::player)
 	{
 		if (ny < 0)

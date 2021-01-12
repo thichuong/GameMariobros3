@@ -50,7 +50,7 @@ public:
 	CGameMap();
 	void Render(CGame* game);
 	void FromTMX(string filePath, string fileName);
-	vector<LPGAMEOBJECT> MapOBJECTS(string filePath, string fileName);
+	void MapOBJECTS(string filePath, string fileName);
 	TileSet GetTileSet(int id);
 	~CGameMap();
 

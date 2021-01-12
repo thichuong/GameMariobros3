@@ -48,7 +48,7 @@ void SmallMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(CROUCH, ani_set->Get("ani-small-mario-crouch"));
 	animations->Add(HOLD, ani_set->Get("ani-small-mario-hold"));
 	animations->Add(HOLD_IDLE, ani_set->Get("ani-small-mario-hold-idle"));
-	animations->Add(HOLD_FALL, ani_set->Get("ani-small-mario-hold-fall"));
+	animations->Add(HOLD_FALL, ani_set->Get("ani-small-mario-hold-idle"));
 }
 void SmallMario::KeyState(BYTE* state)
 {

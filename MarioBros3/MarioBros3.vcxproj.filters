@@ -162,6 +162,9 @@
     <ClInclude Include="Leaf.h">
       <Filter>Source Files\ITem</Filter>
     </ClInclude>
+    <ClInclude Include="RedKoopas.h">
+      <Filter>Source Files\GameObject\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -274,6 +277,9 @@
     </ClCompile>
     <ClCompile Include="Leaf.cpp">
       <Filter>Source Files\ITem</Filter>
+    </ClCompile>
+    <ClCompile Include="RedKoopas.cpp">
+      <Filter>Source Files\GameObject\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

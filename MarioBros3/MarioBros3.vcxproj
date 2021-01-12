@@ -172,6 +172,7 @@
     <ClInclude Include="Portal.h" />
     <ClInclude Include="QuestionBlock.h" />
     <ClInclude Include="RaccoonMario.h" />
+    <ClInclude Include="RedKoopas.h" />
     <ClInclude Include="Scence.h" />
     <ClInclude Include="SmallMario.h" />
     <ClInclude Include="Solid.h" />
@@ -209,6 +210,7 @@
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="QuestionBlock.cpp" />
     <ClCompile Include="RaccoonMario.cpp" />
+    <ClCompile Include="RedKoopas.cpp" />
     <ClCompile Include="Scence.cpp" />
     <ClCompile Include="SmallMario.cpp" />
     <ClCompile Include="Solid.cpp" />

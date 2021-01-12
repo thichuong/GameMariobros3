@@ -30,6 +30,8 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		vx = 0;
 		vy = 0;
 	}*/
+
+	OutputDebugStringW(L"[INFO] Object is still alive! \n");
 	int camx = CGame::GetInstance()->GetScamX();
 	int width = CGame::GetInstance()->GetScreenWidth();
 	if (x + KOOPAS_BBOX_WIDTH >= camx || x < camx + width)
@@ -37,7 +39,7 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		CGameObject::Update(dt);
 		vy += KOOPAS_GRAVITY * dt;
 	}
-	
+	else return;
 	
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
@@ -95,7 +97,7 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	CGame* game = CGame::GetInstance();
-	if (y > game->GetScamY() + game->GetScreenHeight()) game->GetCurrentScene()->delobject(this);
+	if (y > game->GetScamY() + game->GetScreenHeight() && state == KOOPAS_STATE_DIE) game->GetCurrentScene()->delobject(this);
 }
 
 void CKoopas::Render()

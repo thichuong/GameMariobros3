@@ -6,8 +6,10 @@
 #include "Brick.h"
 #include "Goomba.h"
 #include "Koopas.h"
+#include "RedKoopas.h"
 #include "QuestionBlock.h"
 #include "Coin.h"
+
 
 
 CLayer::CLayer()
@@ -90,12 +92,12 @@ void CGameMap::Render(CGame* game)
 	}
 	
 }
-vector<LPGAMEOBJECT> CGameMap::MapOBJECTS(string filePath, string fileName)
+void CGameMap::MapOBJECTS(string filePath, string fileName)
 {
 	string fullPath = filePath + "/" + fileName;
 	TiXmlDocument doc(fullPath.c_str());
 
-	vector<LPGAMEOBJECT> obj;
+	
 
 	if (doc.LoadFile()) {
 		TiXmlElement* root = doc.RootElement();
@@ -103,12 +105,13 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS(string filePath, string fileName)
 
 		for (TiXmlElement* TMXObjectsgroup = root->FirstChildElement("objectgroup"); TMXObjectsgroup != NULL; TMXObjectsgroup = TMXObjectsgroup->NextSiblingElement("objectgroup"))
 		{
+			string name = TMXObjectsgroup->Attribute("name");
 			for (TiXmlElement* TMXObject = TMXObjectsgroup->FirstChildElement("object"); TMXObject != NULL; TMXObject = TMXObject->NextSiblingElement("object"))
 			{
 
 				float x, y, width, height;
 				
-				string name = TMXObjectsgroup->Attribute("name");
+				
 				if (name == "Solid")
 				{
 
@@ -119,7 +122,7 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS(string filePath, string fileName)
 					TMXObject->QueryFloatAttribute("height", &height);
 
 					Solid* solid = new Solid(x, y, width, height);
-					obj.push_back(solid);
+					CGame::GetInstance()->GetCurrentScene()->addobject(solid);
 					
 				}
 				else if (name == "Ghost")
@@ -132,11 +135,8 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS(string filePath, string fileName)
 
 					Ghost* ghost = new Ghost(x, y, width, height);
 
-					obj.push_back(ghost);
-
-					CKoopas* enemies = new CKoopas();
-					enemies->SetPosition(x, y);
-					obj.push_back(enemies);
+					CGame::GetInstance()->GetCurrentScene()->addobject(ghost);
+	
 				}
 				 if (name == "Enemies")
 				{
@@ -144,13 +144,31 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS(string filePath, string fileName)
 					string Type = TMXObject->Attribute("type");
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
-					//if (Enemiesname == "goomba")
-					//{
-						CKoopas* ene = new CKoopas();
-						ene->SetPosition(x , y-100);
-						obj.push_back(ene);
-					//}
-
+					if (Enemiesname == "goomba")
+					{
+						CGoomba* enemies = new CGoomba();
+						enemies->SetAnimationSet(CAnimations::GetInstance());
+						enemies->SetPosition(x, y);
+						CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+					}
+					if (Enemiesname == "koopa")
+					{
+						if (Type == "green")
+						{
+							CKoopas* enemies = new CKoopas();
+							enemies->SetAnimationSet(CAnimations::GetInstance());
+							enemies->SetPosition(x, y);
+							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+						}
+						if (Type == "red")
+						{
+							RedKoopas* enemies = new RedKoopas();
+							enemies->SetAnimationSet(CAnimations::GetInstance());
+							enemies->SetPosition(x, y);
+							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+						}
+						
+					}
 					
 				}
 				else if (name == "Items")
@@ -160,8 +178,8 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS(string filePath, string fileName)
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
 					Coin* coin = new Coin(x,y);
-					
-					obj.push_back(coin);
+
+					CGame::GetInstance()->GetCurrentScene()->addobject(coin);
 
 				}
 				else if (name == "QuestionBlocks")
@@ -191,7 +209,9 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS(string filePath, string fileName)
 					}
 					questionblock->SetQuantity(quantity);
 					
-					obj.push_back(questionblock);
+					CGame::GetInstance()->GetCurrentScene()->addobject(questionblock);
+
+					
 				}
 				else if (name == "Bricks")
 				{
@@ -202,13 +222,13 @@ vector<LPGAMEOBJECT> CGameMap::MapOBJECTS(string filePath, string fileName)
 					Brick* brick = new Brick(x,y);
 					
 				
-					obj.push_back(brick);	
+					CGame::GetInstance()->GetCurrentScene()->addobject(brick);	
 				}
 				
 			}
 		}
 	}
-	return obj;
+	
 }
 
 void CGameMap::FromTMX(string filePath, string fileName)

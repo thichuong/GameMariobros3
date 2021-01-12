@@ -25,7 +25,7 @@
 
 class CKoopas : public CGameObject
 {
-
+public:
 	bool FlipY;
 public:
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);

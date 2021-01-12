@@ -94,5 +94,5 @@ void FireMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(ATTACK, ani_set->Get("ani-fire-mario-throw"));
 	animations->Add(HOLD, ani_set->Get("ani-fire-mario-hold"));
 	animations->Add(HOLD_IDLE, ani_set->Get("ani-fire-mario-hold-idle"));
-	animations->Add(HOLD_FALL, ani_set->Get("ani-fire-mario-hold-fall"));
+	animations->Add(HOLD_FALL, ani_set->Get("ani-fire-mario-hold-idle"));
 }

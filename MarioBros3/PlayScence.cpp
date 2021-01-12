@@ -243,7 +243,7 @@ void CPlayScene::Load()
 	//LoadSource();
 	/*playsprites = csprites::getinstance();
 	playani = canimations::getinstance();*/
-	
+
 	TiXmlDocument doc(sceneFilePath.c_str());
 	if (doc.LoadFile())
 	{
@@ -281,7 +281,7 @@ void CPlayScene::Load()
 		filepath = node->Attribute("filepath");
 		gamemap = new CGameMap();
 		gamemap->FromTMX(filepath, file);
-		objects = gamemap->MapOBJECTS(filepath, file);
+		gamemap->MapOBJECTS(filepath, file);
 		DebugOut(L"[INFO]Staet load : %d \n", id);
 		
 		node = info->FirstChildElement("LoadLayer");
