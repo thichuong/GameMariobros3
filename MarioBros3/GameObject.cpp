@@ -84,7 +84,7 @@ void CGameObject::CalcPotentialCollisions(
 	{
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
 
-		if (e->t > 0 && e->t <= 1.0f )
+		if (e->t >= 0 && e->t <= 1.0f )
 		{
 			float ml, mt, mr, mb;
 			e->obj->GetBoundingBox(ml, mt, mr, mb);
@@ -272,7 +272,7 @@ void CGameObject::RenderBoundingBox()
 	rect.right = (int)r - (int)l;
 	rect.bottom = (int)b - (int)t;
 
-	CGame::GetInstance()->Draw(x, y,0, bbox, rect.left, rect.top, rect.right, rect.bottom, 32);
+	CGame::GetInstance()->Draw(x, y,0, bbox, rect.left, rect.top, rect.right, rect.bottom, 128);
 }
 
 

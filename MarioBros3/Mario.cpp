@@ -188,6 +188,12 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				Mariostate.jump = JumpStates::Stand;
 				canHighjump = TRUE;
 			}	
+			else if (ny > 0)
+			{
+				onGround = FALSE;
+				canHighjump = FALSE;
+				Mariostate.jump = JumpStates::Fall;
+			}
 		}
  
 		

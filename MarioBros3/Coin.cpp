@@ -8,7 +8,7 @@ Coin::Coin(float l, float t, bool Fly)
 	collision = CCollision::Full;
 	SetAnimationSet(CAnimations::GetInstance());
 	this->Fly = Fly;
-	time = 1000;
+	time = COIN_BBOX_FLY_TIME;
 }
 void Coin::Render()
 {
@@ -38,7 +38,8 @@ void Coin::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	if (Fly)
 	{
 		CGameObject::Update(dt);
-		vy -= GRAVITY*2 * dt;
+		y += dy;
+		vy -= COIN_BBOX_FLY;
 		time -= dt;
 		if (time < 0) CGame::GetInstance()->GetCurrentScene()->delobject(this);
 	}
