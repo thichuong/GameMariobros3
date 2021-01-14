@@ -32,8 +32,8 @@ void Leaf::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 {
 	if (obj->typeobject == TypeObject::player)
 	{
-		CGame::GetInstance()->GetCurrentScene()->delobject(this);
-		obj->SetLevel(4);
+		//CGame::GetInstance()->GetCurrentScene()->delobject(this);
+		//obj->SetLevel(4);
 	}
 		
 }
@@ -49,12 +49,15 @@ void Leaf::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			time = 1;
 			vx = -vx;
 		}
-		vector<LPCOLLISIONEVENT> coEvents;
-		vector<LPCOLLISIONEVENT> coEventsResult;
+		vector<LPGAMEOBJECT> coEvents;
+		
+		vector<LPGAMEOBJECT> player;
+
+		player.clear();		
 		coEvents.clear();
 
-		
-			CalcPotentialCollisions(coObjects, coEvents);
+		player.push_back(CGame::GetInstance()->GetCurrentScene()->GetPlayer()->getMario());
+		CalcCollisions(&player, coEvents);
 
 		if (coEvents.size() == 0)
 		{
@@ -62,25 +65,17 @@ void Leaf::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 		else
 		{
-			float min_tx, min_ty, nx = 0, ny = 0;
-			float rdx = 0;
-			float rdy = 0;
-
-			// TODO: This is a very ugly designed function!!!!
-			FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
-
-
-			//y += min_ty * dy + ny * 0.5;
-
-			for (UINT i = 0; i < coEventsResult.size(); i++)
+			
+			for (UINT i = 0; i < coEvents.size(); i++)
 			{
-				LPCOLLISIONEVENT e = coEventsResult[i];
-				LPGAMEOBJECT obj = e->obj;
-				if (e->nx != 0 && e->obj->typeobject == TypeObject::player)
+				LPGAMEOBJECT obj = coEvents[i];
+
+				if (obj->typeobject == TypeObject::player)
 				{
 					CGame::GetInstance()->GetCurrentScene()->delobject(this);
 					obj->SetLevel(4);
 				}
 			}
 		}
+	
 }

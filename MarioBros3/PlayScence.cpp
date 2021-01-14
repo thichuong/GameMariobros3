@@ -341,7 +341,15 @@ void CPlayScene::Update(DWORD dt)
 		for (auto e : earseobjects) delete e;
 		earseobjects.clear();
 	}
-
+	if (addobjects.size() > 0)
+	{
+		for (auto e : addobjects)
+		{
+			objects.push_back(e);
+		}
+		
+		addobjects.clear();
+	}
 	// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)
 	if (player == NULL) return; 
 
@@ -377,6 +385,8 @@ void CPlayScene::Render()
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
 	player->Render();
+
+	gamemap->ReRender(CGame::GetInstance());
 
 	hud->Render();
 }

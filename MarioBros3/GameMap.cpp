@@ -27,7 +27,7 @@ CLayer::CLayer(TiXmlElement* data)
 	data->QueryIntAttribute("height", &this->height);
 	if (data->QueryIntAttribute("visible", &this->visible))
 		this->visible = 1;
-
+	Layername = data->Attribute("name");
 	tiles = new int* [this->width];
 	const char* content = data->FirstChildElement()->GetText();
 	vector<string> splitted = split(content, ",");
@@ -92,6 +92,33 @@ void CGameMap::Render(CGame* game)
 	}
 	
 }
+void  CGameMap::ReRender(CGame* game)
+{
+	int Width = game->GetScamX() / tileWidth;
+	int Height = game->GetScamY() / tileHeight;
+
+	if (Width > 0) Width--;
+	if (Height > 0) Height--;
+
+	//Vec2 camSize = Vec2(this->camera->GetCamSize().x / tileWidth, this->camera->GetCamSize().y / tileHeight);
+
+	int camWidth = game->GetScreenWidth() / tileWidth;
+	int camHeight = game->GetScreenHeight() / tileHeight;
+	for (int i = Width; i < camWidth + Width + 3; i++) {
+		for (int j = Height; j < camHeight + Height + 3; j++) {
+			int x = i * tileWidth;
+			int y = j * tileHeight;
+			for (Layer layer : layers) {
+				if (layer->Layername == "Foreground")
+				{
+					int id = layer->GetTileID(i % width, j % height);
+					if (this->GetTileSet(id))
+						this->GetTileSet(id)->Draw(id, x, y);
+				}
+			}
+		}
+	}
+}
 void CGameMap::MapOBJECTS(string filePath, string fileName)
 {
 	string fullPath = filePath + "/" + fileName;
@@ -138,7 +165,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					CGame::GetInstance()->GetCurrentScene()->addobject(ghost);
 	
 				}
-				 if (name == "Enemies")
+				 if (name == "Enemy")
 				{
 					string Enemiesname= TMXObject->Attribute("name");
 					string Type = TMXObject->Attribute("type");
@@ -213,7 +240,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 
 					
 				}
-				else if (name == "Bricks")
+				else if (name == "Brick")
 				{
 				
 					TMXObject->QueryFloatAttribute("x", &x);

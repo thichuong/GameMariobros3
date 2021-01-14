@@ -31,7 +31,7 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		vy = 0;
 	}*/
 
-	OutputDebugStringW(L"[INFO] Object is still alive! \n");
+	//OutputDebugStringW(L"[INFO] Object is still alive! \n");
 	int camx = CGame::GetInstance()->GetScamX();
 	int width = CGame::GetInstance()->GetScreenWidth();
 	if (x + KOOPAS_BBOX_WIDTH >= camx || x < camx + width)

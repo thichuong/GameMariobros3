@@ -40,7 +40,7 @@ public:
     void Downlevel();
     void SetLevel(int lv);
     int getMetter();
-
+    CMario* getMario() { return playMario; }
 
     static  CPlayer* GetInstance();
 };

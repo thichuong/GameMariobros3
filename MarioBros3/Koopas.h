@@ -3,9 +3,9 @@
 #include "GameObject.h"
 
 #define KOOPAS_WALKING_SPEED 0.03f;
-#define KOOPAS_RUN_SPEED 0.5f
+#define KOOPAS_RUN_SPEED 0.1f
 #define KOOPAS_GRAVITY  0.003f
-#define KOOPAS_FLY 0.9f
+#define KOOPAS_FLY 0.7f
 
 
 #define KOOPAS_BBOX_WIDTH 48

@@ -27,6 +27,7 @@ protected:
 	//CSprites* PlaySprites;
 	vector<LPGAMEOBJECT> objects;
 	vector<LPGAMEOBJECT> earseobjects;
+	vector<LPGAMEOBJECT> addobjects;
 	CGameMap* gamemap;
 	int camYdefault;
 	HUD* hud;
@@ -43,7 +44,7 @@ public:
 	virtual void Update(DWORD dt);
 	virtual void Render();
 	virtual void Unload();
-	virtual void addobject(LPGAMEOBJECT object) { objects.push_back(object); }
+	virtual void addobject(LPGAMEOBJECT object) { addobjects.push_back(object); }
 	virtual void delobject(LPGAMEOBJECT object) { earseobjects.push_back(object); }
 	void LoadSource();
 	virtual CPlayer* GetPlayer() { return player; }

@@ -46,7 +46,6 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		x += dx;
 		y += dy;
-		if (y > 1500) y = 1000;
 	}
 	else
 	{

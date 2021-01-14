@@ -275,19 +275,21 @@ void CMario::Render()
 		ani = MARIO_ANI_DIE;
 	else
 	{
-
-		if (Mariostate.jump == JumpStates::Jump)
+		if (Mariostate.movement == MoveStates::Crouch)
+			ani = CROUCH;
+		else if (Mariostate.jump == JumpStates::Jump)
 			ani = JUMP;
 		else if (Mariostate.jump == JumpStates::Super)
 		{
 			ani = FLY;
 		}
+		
 		else if (Mariostate.jump == JumpStates::Fall)
 		{
 			ani = FALL;
 			if (slowFall) ani = FLOAT;
 		}
-
+		
 		else
 		{
 			if (Mariostate.movement == MoveStates::Idle)
@@ -302,8 +304,7 @@ void CMario::Render()
 				else
 					ani = SKID;
 			}
-			if (Mariostate.movement == MoveStates::Crouch)
-				ani = CROUCH;
+			
 			if (Mariostate.movement == MoveStates::Run)
 				ani = RUN;
 		}
@@ -319,6 +320,10 @@ void CMario::Render()
 	if (animations->Get(ani) != NULL)
 		if (ani == ATTACK)
 			animations->Get(ani)->Render(x, y, MARIO_TIME_ATTACK, ani_left);
+		else if (Mariostate.movement == MoveStates::Crouch)
+		{
+			animations->Get(ani)->Render(x, y + MARIO_BIG_BBOX_CROUCHING, ani_left);
+		}
 		else
 			animations->Get(ani)->Render(x, y, ani_left);
 	
@@ -458,6 +463,7 @@ void CMario::ChangeState()
 	}
 		
 	}
+	DebugOut(L"	[MarioLocation] = : %f \n", y);
 }
 
 void  CMario::SetMoveState(MoveStates e) 
@@ -470,13 +476,13 @@ void  CMario::SetMoveState(MoveStates e)
 	Mariostate.movement = e; 
 	if (Mariostate.movement == MoveStates::Crouch)
 	{
-		if (preMariostate.movement != MoveStates::Crouch)
-			y += (MARIO_BIG_BBOX_HEIGHT - MARIO_BIG_BBOX_HEIGHT_CROUCHING - 0.5);
+		//if (preMariostate.movement != MoveStates::Crouch)
+		//	y += (MARIO_BIG_BBOX_HEIGHT - MARIO_BIG_BBOX_HEIGHT_CROUCHING - 0.5);
 	}
 	else
 	{
-		if (preMariostate.movement == MoveStates::Crouch)
-			y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_BIG_BBOX_HEIGHT_CROUCHING + 0.4);
+		//if (preMariostate.movement == MoveStates::Crouch)
+		//	y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_BIG_BBOX_HEIGHT_CROUCHING + 0.4);
 	}
 	if (Mariostate.movement == MoveStates::Attack && timeattack >= timecooldown)
 	{

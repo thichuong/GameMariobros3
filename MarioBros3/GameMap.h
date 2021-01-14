@@ -21,6 +21,7 @@ class CLayer
 
 	//int tiles[500][500];
 public:
+	string Layername;
 	int id;
 
 	int width;
@@ -28,7 +29,7 @@ public:
 	CLayer();
 	CLayer(TiXmlElement* data);
 	int visible;
-	bool Hidden = false;
+	
 
 	int GetTileID(int x, int y);
 
@@ -49,6 +50,7 @@ class CGameMap
 public:
 	CGameMap();
 	void Render(CGame* game);
+	void ReRender(CGame* game);
 	void FromTMX(string filePath, string fileName);
 	void MapOBJECTS(string filePath, string fileName);
 	TileSet GetTileSet(int id);

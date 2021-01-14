@@ -21,7 +21,7 @@ void RedKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		vy = 0;
 	}*/
 
-	OutputDebugStringW(L"[INFO] Object is still alive! \n");
+	//OutputDebugStringW(L"[INFO] Object is still alive! \n");
 	int camx = CGame::GetInstance()->GetScamX();
 	int width = CGame::GetInstance()->GetScreenWidth();
 	if (x + KOOPAS_BBOX_WIDTH >= camx || x < camx + width)
@@ -97,7 +97,7 @@ void RedKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			{
 				float l, t, r, b;
 				obj->GetBoundingBox(l, t, r, b);
-				if (l > x || x + KOOPAS_BBOX_WIDTH > r) vx = -vx;
+				if (l - KOOPAS_BBOX_WIDTH/2 > x  || x + KOOPAS_BBOX_WIDTH > r + KOOPAS_BBOX_WIDTH/2) vx = -vx;
 			}
 
 		}

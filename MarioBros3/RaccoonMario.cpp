@@ -78,7 +78,7 @@ void RaccoonMario::GetBoundingBox(float& left, float& top, float& right, float& 
 		left = x;
 		top = y + MARIO_BIG_BBOX_HEIGHT - MARIO_BIG_BBOX_HEIGHT_CROUCHING;
 		right = x + MARIO_BIG_BBOX_WIDTH;
-		bottom = y + MARIO_BIG_BBOX_HEIGHT_CROUCHING;
+		bottom = y + MARIO_BIG_BBOX_HEIGHT;
 	}
 }
 void  RaccoonMario::SetAnimationSet(CAnimations* ani_set)
