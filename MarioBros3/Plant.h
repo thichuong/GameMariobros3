@@ -6,7 +6,7 @@
 #define TIME_GROW	200
 #define PLANT_SPEED 0.14f
 #define TIME_LIFE 500
-#define DIE_ANI "ani-mario-damaged"
+#define DIE_ANI "ani-mario-damaged" 
 
 enum class PlantState
 {

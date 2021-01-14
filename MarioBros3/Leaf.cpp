@@ -4,7 +4,7 @@ Leaf::Leaf(float l, float t, bool Fly)
 {
 	x = l;
 	y = t;
-	typeobject = TypeObject::normal;
+	typeobject = TypeObject::item;
 	collision = CCollision::Full;
 	SetAnimationSet(CAnimations::GetInstance());
 	time = 0;

@@ -6,18 +6,23 @@
 #define QuestionBlock_BBOX_HEIGHT 48
 #define GRAVITY  0.8f
 
+#define ANI_ACTIVE "ani-question-block"
+#define ANI_EMPTY "ani-empty-block"
+
 enum class Item
 {
 	RedShroom,
-	RaccoonLeaf,
+	Leaf,
 	FireFlower,
 	GreenShroom,
-	Coin
+	Coin,
+	PSwitch
 };
 
 class QuestionBlock :
     public CGameObject
 {
+protected:
 	bool isBounce;
 	bool isActive;
 	int quantity;
@@ -25,6 +30,7 @@ class QuestionBlock :
 	Item item;
 public:
 	QuestionBlock(float l, float t);
+	QuestionBlock();
 	virtual void Render();
 	virtual void GetBoundingBox(float& l, float& t, float& r, float& b);
 	virtual void SetAnimationSet(CAnimations* ani_set);
@@ -32,5 +38,6 @@ public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
 	void SetItem(Item inblockitem) { this->item = inblockitem; }
 	void SetQuantity(int quantity);
+	void Bounce();
 };
 

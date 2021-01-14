@@ -5,7 +5,6 @@
 Redvenus::Redvenus()
 {
 	Plant::setPlant();
-
 	tempHeight = 0;
 	maxHeight = -VENUS_HEIGHT;
 	with = VENUS_WIDTH;

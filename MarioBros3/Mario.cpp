@@ -554,7 +554,7 @@ void CMario::Reset()
 {
 	SetState(MARIO_STATE_IDLE);
 	//SetLevel(MARIO_LEVEL_BIG);
-	SetPosition(start_x, start_y);
+	SetPosition(5520.00, start_y);
 	SetSpeed(0, 0);
 }
 

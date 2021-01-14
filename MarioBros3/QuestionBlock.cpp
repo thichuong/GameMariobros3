@@ -2,7 +2,20 @@
 #include "Game.h"
 #include "Coin.h"
 #include "Leaf.h"
+#include "PSwitch.h"
 
+QuestionBlock::QuestionBlock()
+{
+	tempx = 0;
+	tempy = 0;
+	typeobject = TypeObject::block;
+	collision = CCollision::Full;
+	SetAnimationSet(CAnimations::GetInstance());
+	isBounce = FALSE;
+	isActive = TRUE;
+	vx = 0;
+	vy = 0;
+}
 QuestionBlock::QuestionBlock(float l, float t)
 {
 	x = l;
@@ -19,8 +32,8 @@ QuestionBlock::QuestionBlock(float l, float t)
 }
 void QuestionBlock::Render()
 {
-	string ani = "ani-question-block";
-	if (!isActive) ani = "ani-empty-block";
+	string ani = ANI_ACTIVE;
+	if (!isActive) ani = ANI_EMPTY;
 	if (animations->Get(ani) != NULL)
 		animations->Get(ani)->Render(x, y + tempy);
 	RenderBoundingBox();
@@ -44,7 +57,10 @@ void QuestionBlock::GetBoundingBox(float& l, float& t, float& r, float& b)
 }
 void QuestionBlock::SetAnimationSet(CAnimations* ani_set)
 {
-	animations = ani_set;
+	animations = new CAnimations();
+
+	animations->Add(ANI_ACTIVE, ani_set->Get("ani-question-block"));
+	animations->Add(ANI_EMPTY, ani_set->Get("ani-empty-block"));
 
 }
 void QuestionBlock::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
@@ -56,35 +72,42 @@ void QuestionBlock::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 		isBounce = TRUE;
 		tempy -= BOUNCE_VEL;
 		obj->vy += GRAVITY;
-		if (item == Item::Coin)
-		{
-			Coin* coin = new Coin(x, y - COIN_BBOX_HEIGHT, TRUE);
-			CGame::GetInstance()->GetCurrentScene()->addobject(coin);
-		}
-		else
-		{
-			Leaf* leaf = new Leaf(x, y - COIN_BBOX_HEIGHT, TRUE);
-			CGame::GetInstance()->GetCurrentScene()->addobject(leaf);
-		}
+		Bounce();
 	}
 		
 	if (obj->typeobject == TypeObject::normal && isActive && !isBounce)
 	{
 		isBounce = TRUE;
 		tempy -= BOUNCE_VEL;
-		if (item == Item::Coin)
+		Bounce();	
+	}		
+
+}
+void QuestionBlock::Bounce()
+{
+	switch (item)
+	{
+		case Item::Coin:
 		{
-			Coin* coin= new Coin(x, y - COIN_BBOX_HEIGHT, TRUE);
+			Coin* coin = new Coin(x, y - COIN_BBOX_HEIGHT, TRUE);
 			CGame::GetInstance()->GetCurrentScene()->addobject(coin);
 		}
-		else
+		break;
+		case Item::Leaf:
 		{
 			Leaf* leaf = new Leaf(x, y - COIN_BBOX_HEIGHT, TRUE);
 			CGame::GetInstance()->GetCurrentScene()->addobject(leaf);
 		}
-		
+		break;
+
+		case Item::PSwitch:
+		{
+			PSwitch* pswitch = new PSwitch(x, y);
+			CGame::GetInstance()->GetCurrentScene()->addobject(pswitch);
+		}
+		break;
 	}
-		
+	
 
 }
 void QuestionBlock::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)

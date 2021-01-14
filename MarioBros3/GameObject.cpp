@@ -86,16 +86,20 @@ void CGameObject::CalcPotentialCollisions(
 
 		if (e->t >= 0 && e->t <= 1.0f )
 		{
-			float ml, mt, mr, mb;
-			e->obj->GetBoundingBox(ml, mt, mr, mb);
-			if(e->obj->collision == CCollision::Full)
-				coEvents.push_back(e);
-			else if(e->ny < 0 && e->obj->collision== CCollision::Top)
-				coEvents.push_back(e);
-			else if (e->nx < 0 && e->obj->collision == CCollision::Left)
-				coEvents.push_back(e);
-			else if (e->nx > 0 && e->obj->collision == CCollision::Right)
-				coEvents.push_back(e);
+			if (e->obj->typeobject != TypeObject::item || this->typeobject == TypeObject::player)
+			{
+				float ml, mt, mr, mb;
+				e->obj->GetBoundingBox(ml, mt, mr, mb);
+				if (e->obj->collision == CCollision::Full)
+					coEvents.push_back(e);
+				else if (e->ny < 0 && e->obj->collision == CCollision::Top)
+					coEvents.push_back(e);
+				else if (e->nx < 0 && e->obj->collision == CCollision::Left)
+					coEvents.push_back(e);
+				else if (e->nx > 0 && e->obj->collision == CCollision::Right)
+					coEvents.push_back(e);
+			}
+			
 		}
 		else
 			delete e;

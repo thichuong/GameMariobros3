@@ -56,7 +56,9 @@ enum class TypeObject
 	enemy,
 	player,
 	Bullet,
-	block
+	block,
+	brick,
+	item
 };
 class CGameObject
 {
@@ -125,7 +127,7 @@ public:
 	virtual void SetAnimationSet(CAnimations* ani_set) {};
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom) = 0;
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects = NULL);
-	virtual void Render() = 0;
+	virtual void Render() {};
 	virtual void SetState(int state) { this->state = state; }
 	virtual void DownLevel() {};
 	virtual void SetLevel(int lv) {};

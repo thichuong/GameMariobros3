@@ -192,6 +192,12 @@
     <ClInclude Include="FireBall.h">
       <Filter>Source Files\GameObject\Enemy\Plant\venus</Filter>
     </ClInclude>
+    <ClInclude Include="ItemBrick.h">
+      <Filter>Source Files\GameObject\Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="PSwitch.h">
+      <Filter>Source Files\ITem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -316,6 +322,12 @@
     </ClCompile>
     <ClCompile Include="FireBall.cpp">
       <Filter>Source Files\GameObject\Enemy\Plant\venus</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBrick.cpp">
+      <Filter>Source Files\GameObject\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="PSwitch.cpp">
+      <Filter>Source Files\ITem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

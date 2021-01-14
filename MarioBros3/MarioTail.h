@@ -2,7 +2,7 @@
 #include "GameObject.h"
 
 #define Tail_BBOX_WIDTH  120
-#define Tail_BBOX_HEIGHT 24
+#define Tail_BBOX_HEIGHT 12
 
 class MarioTail :
     public CGameObject

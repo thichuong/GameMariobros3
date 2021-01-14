@@ -4,7 +4,7 @@ Coin::Coin(float l, float t, bool Fly)
 {
 	x = l;
 	y = t;
-	typeobject = TypeObject::block;
+	typeobject = TypeObject::item;
 	collision = CCollision::Full;
 	SetAnimationSet(CAnimations::GetInstance());
 	this->Fly = Fly;

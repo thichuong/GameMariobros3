@@ -148,7 +148,7 @@ void CKoopas::SetState(int state)
 		break;
 	case KOOPAS_STATE_SHELL_RUN:
 		collision = CCollision::Full;
-		typeobject = TypeObject::enemy;
+		typeobject = TypeObject::normal;
 		break;
 	case KOOPAS_STATE_SHELL_HOLD:
 		collision = CCollision::Full;
@@ -215,8 +215,8 @@ void CKoopas::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 		else if(obj->typeobject != TypeObject::enemy)
 		{
 			SetState(KOOPAS_STATE_SHELL);
-			if (obj->x < this->x) vx = KOOPAS_RUN_SPEED;
-			else vx = -KOOPAS_RUN_SPEED;
+			if (obj->x < this->x) vx = KOOPAS_FLY_SPEED;
+			else vx = -KOOPAS_FLY_SPEED;
 			vy = -KOOPAS_FLY;
 			FlipY = TRUE;
 		}

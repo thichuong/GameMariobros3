@@ -10,6 +10,7 @@
 #include "Redvenus.h"
 #include "QuestionBlock.h"
 #include "Coin.h"
+#include "ItemBrick.h"
 
 
 
@@ -234,7 +235,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 
 					if (blockname == "bleaf")
 					{
-						questionblock->SetItem(Item::RaccoonLeaf);
+						questionblock->SetItem(Item::Leaf);
 					}
 					else if (blockname == "bcoin")
 					{
@@ -242,7 +243,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					}
 					else if (blockname == "bmushroom")
 					{
-						questionblock->SetItem(Item::RaccoonLeaf);
+						questionblock->SetItem(Item::Leaf);
 					}
 					questionblock->SetQuantity(quantity);
 					
@@ -255,11 +256,26 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 				
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
-
-					Brick* brick = new Brick(x,y);
 					
-				
-					CGame::GetInstance()->GetCurrentScene()->addobject(brick);	
+					if (TMXObject->Attribute("name") == NULL)
+					{
+						Brick* brick = new Brick(x, y);
+						CGame::GetInstance()->GetCurrentScene()->addobject(brick);
+					}
+					else
+					{
+						string name;
+						name = TMXObject->Attribute("name");
+						string type = TMXObject->Attribute("type");
+						if (name == "item")
+						{
+							ItemBrick* brick = new ItemBrick();
+							brick->SetPosition(x, y);
+							if (type == "p-switch")
+								brick->SetItem(Item::PSwitch);
+							CGame::GetInstance()->GetCurrentScene()->addobject(brick);
+						}
+					}
 				}
 				
 			}

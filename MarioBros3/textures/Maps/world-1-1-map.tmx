@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="25" nextobjectid="270">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="25" nextobjectid="272">
  <editorsettings>
   <export target="world-1-1-map.xml" format="tmx"/>
  </editorsettings>
@@ -407,7 +407,7 @@
   <object id="30" x="1200.45" y="1104.34" width="239.337" height="47.1135"/>
   <object id="31" x="1392.68" y="1008.23" width="190.967" height="47.1135"/>
   <object id="32" x="1537.16" y="912.118" width="189.71" height="47.7417"/>
-  <object id="33" x="1537.16" y="1152.71" width="285.194" height="48.3699"/>
+  <object id="33" x="1537.16" y="1152.71" width="140.194" height="48.3699"/>
   <object id="34" x="3889.06" y="433.444" width="190.967" height="45.229"/>
   <object id="35" x="4176.77" y="576.041" width="190.967" height="47.1135"/>
   <object id="36" x="4418" y="529.339" width="667.487" height="43.7697"/>
@@ -416,17 +416,18 @@
   <object id="39" x="3745.09" y="1152.82" width="333.545" height="46.9245"/>
   <object id="40" x="3841.47" y="1056.44" width="334.813" height="48.1928"/>
   <object id="41" x="3936.59" y="960.051" width="333.545" height="46.9245"/>
+  <object id="271" x="1678.9" y="1152.71" width="140.194" height="48.3699"/>
  </objectgroup>
  <objectgroup id="18" name="QuestionBlocks">
   <object id="47" name="bcoin" type="3" x="552" y="1080"/>
-  <object id="49" name="powerup" type="1" x="600" y="1080"/>
+  <object id="49" name="bcoin" type="1" x="600" y="1080"/>
   <object id="50" name="bcoin" type="1" x="700" y="895"/>
-  <object id="51" name="powerup" type="1" x="748" y="895"/>
+  <object id="51" name="bleaf" type="1" x="748" y="895"/>
   <object id="53" name="bcoin" type="1" x="1271" y="935"/>
-  <object id="104" name="powerup" type="1" x="1979.88" y="1150.68"/>
-  <object id="105" name="powerup" type="1" x="2131.94" y="1018.24"/>
-  <object id="106" name="powerup" type="1" x="4391.88" y="1126.88"/>
-  <object id="213" name="powerup" type="1" x="4295" y="406"/>
+  <object id="104" name="bleaf" type="1" x="1979.88" y="1150.68"/>
+  <object id="105" name="bcoin" type="1" x="2131.94" y="1018.24"/>
+  <object id="106" name="bleaf" type="1" x="4391.88" y="1126.88"/>
+  <object id="213" name="bleaf" type="1" x="4295" y="406"/>
  </objectgroup>
  <objectgroup id="15" name="Coin">
   <object id="59" x="3236.5" y="983.5"/>
@@ -511,7 +512,7 @@
   <object id="264" x="6028" y="1103">
    <point/>
   </object>
-  <object id="265" x="6076" y="1103">
+  <object id="265" name="item" type="p-switch" x="6076" y="1103">
    <point/>
   </object>
   <object id="266" x="6268" y="1151">
@@ -560,11 +561,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="22" name="SwitchBlocks">
-  <object id="206" x="6074" y="1060">
-   <point/>
-  </object>
- </objectgroup>
+ <objectgroup id="22" name="SwitchBlocks"/>
  <objectgroup id="23" name="Block"/>
  <objectgroup id="24" name="Card">
   <object id="202" x="8063.5" y="1056">

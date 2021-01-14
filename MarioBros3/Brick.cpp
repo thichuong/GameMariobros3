@@ -4,7 +4,7 @@ Brick::Brick(float l, float t)
 {
 	x = l;
 	y = t;
-	typeobject = TypeObject::block;
+	typeobject = TypeObject::brick;
 	collision = CCollision::Full;
 	SetAnimationSet(CAnimations::GetInstance());
 }
@@ -27,7 +27,9 @@ void Brick::GetBoundingBox(float &l, float &t, float &r, float &b)
 }
 void Brick::SetAnimationSet(CAnimations* ani_set)
 {
-	animations = ani_set;
+	animations = new CAnimations();
+
+	animations->Add("ani-brick", ani_set->Get("ani-brick"));
 
 }
 void Brick::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)

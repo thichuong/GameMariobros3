@@ -13,7 +13,7 @@ void MarioTail::GetBoundingBox(float& l, float& t, float& r, float& b)
 	l = x;
 	t = y;
 	r = x + Tail_BBOX_WIDTH;
-	b = y + Tail_BBOX_WIDTH;
+	b = y + Tail_BBOX_HEIGHT;
 }
 
 void MarioTail::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -28,7 +28,7 @@ void MarioTail::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		LPGAMEOBJECT e = coObjectsResult[i];
 
-		if (e->typeobject == TypeObject::enemy || e->typeobject == TypeObject::block)
+		if (e->typeobject == TypeObject::enemy || e->typeobject == TypeObject::block || e->typeobject == TypeObject::brick)
 		{
 			float nx = this->x > e->x ? -1 : 1;
 			e->CollisionObject(this, nx, 0);

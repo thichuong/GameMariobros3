@@ -162,6 +162,7 @@
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="Goomba.h" />
     <ClInclude Include="HUD.h" />
+    <ClInclude Include="ItemBrick.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="Leaf.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="PlayScence.h" />
     <ClInclude Include="PMetter.h" />
     <ClInclude Include="Portal.h" />
+    <ClInclude Include="PSwitch.h" />
     <ClInclude Include="QuestionBlock.h" />
     <ClInclude Include="RaccoonMario.h" />
     <ClInclude Include="RedKoopas.h" />
@@ -203,6 +205,7 @@
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Goomba.cpp" />
     <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="ItemBrick.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Leaf.cpp" />
     <ClCompile Include="main.cpp" />
@@ -213,6 +216,7 @@
     <ClCompile Include="PlayScence.cpp" />
     <ClCompile Include="PMetter.cpp" />
     <ClCompile Include="Portal.cpp" />
+    <ClCompile Include="PSwitch.cpp" />
     <ClCompile Include="QuestionBlock.cpp" />
     <ClCompile Include="RaccoonMario.cpp" />
     <ClCompile Include="RedKoopas.cpp" />
