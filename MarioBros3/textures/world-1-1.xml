@@ -7,6 +7,7 @@
 		<LoadSPRITES file ="textures/Sprites/UiDB.xml" source ="Textures\\Misc\\ui_x3.png" textureId="tex-ui"/>
 		<LoadSPRITES file ="textures/Sprites/UiDB.xml" source ="Textures\\Misc\\box-small.png" textureId="tex-pannel"/>
 		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="textures\\Misc\\fire-ball.png" textureId="tex-fire-ball"/>
+		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="textures\\Misc\\effect_white_x3.png" textureId="tex-effect"/>
 		<LoadANIMATIONS file ="Textures/Animations/MarioAnim.xml"/>
 		<LoadANIMATIONS file ="Textures/Animations/EnemyAnim.xml"/>
 		<LoadANIMATIONS file ="Textures/Animations/MiscAnim.xml"/>

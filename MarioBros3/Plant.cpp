@@ -6,11 +6,17 @@
 
 Plant::Plant()
 {
+	setPlant();
+}
+void Plant::setPlant()
+{
 	SetState(PlantState::hide);
 	typeobject = TypeObject::enemy;
 	collision = CCollision::Full;
 	SetAnimationSet(CAnimations::GetInstance());
 	tempHeight = 0;
+	live = true;
+	timeLive = TIME_LIFE;
 }
 
 void Plant::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -24,37 +30,46 @@ void Plant::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 
 void Plant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	CGameObject::Update(dt, coObjects);
-	if (idleTime < 0) SetState(PlantState::slidedown);
-	if (hideTime < 0) SetState(PlantState::slideup);
-	//DebugOut(L"	[Vy] = : %f \n", vy);
-	if (plantstate == PlantState::hide) hideTime -= dt;
-	if (plantstate == PlantState::idle) idleTime -= dt;
-
-	growTime += dt;
-	if (plantstate == PlantState::slidedown || plantstate == PlantState::slideup)
+	if (live)
 	{
+		CGameObject::Update(dt, coObjects);
+		if (idleTime < 0) SetState(PlantState::slidedown);
+		if (hideTime < 0) SetState(PlantState::slideup);
+		//DebugOut(L"	[Vy] = : %f \n", vy);
+		if (plantstate == PlantState::hide) hideTime -= dt;
+		if (plantstate == PlantState::idle) idleTime -= dt;
 
-		if (growTime >= TIME_GROW)
+		growTime += dt;
+		if (plantstate == PlantState::slidedown || plantstate == PlantState::slideup)
 		{
-			if (tempHeight <= maxHeight && plantstate == PlantState::slideup)
+
+			if (growTime >= TIME_GROW)
 			{
-				//tempHeight = maxHeight;
-				SetState(PlantState::idle);
+				if (tempHeight <= maxHeight && plantstate == PlantState::slideup)
+				{
+					tempHeight = maxHeight;
+					SetState(PlantState::idle);
+				}
+				else if (tempHeight >= 0 && plantstate == PlantState::slidedown)
+				{
+					tempHeight = 0;
+					SetState(PlantState::hide);
+				}
 			}
-			else if (tempHeight >= 0 && plantstate == PlantState::slidedown)
-			{
-				//tempHeight = 0;
-				SetState(PlantState::hide);
-			}
+
 		}
 
+		tempHeight += dy;
+		//DebugOut(L"	[Venus] = : %f \n", tempHeight);
+		//DebugOut(L"	[Time] = : %f \n", hideTime);
+
 	}
-	//vy = -PLANT_SPEED;
-	tempHeight += dy;
-	//DebugOut(L"	[Venus] = : %f \n", tempHeight);
-	//DebugOut(L"	[Time] = : %f \n", hideTime);
-	//DebugOut(L"	[State] = : %f \n", plantstate);
+	else
+	{
+		timeLive -= dt;
+		if (timeLive < 0) CGame::GetInstance()->GetCurrentScene()->delobject(this);
+	}
+		
 	
 }
 
@@ -86,7 +101,7 @@ void Plant::SetState(PlantState state)
 	if (state == PlantState::slideup)
 		vy = -PLANT_SPEED;
 
-	
+	//DebugOut(L"	[State] = : %d \n", plantstate);
 
 }
 void Plant::SetAnimationSet(CAnimations* ani_set)
@@ -100,6 +115,10 @@ void Plant::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 	if (obj->typeobject == TypeObject::player)
 	{
 		obj->DownLevel();	
+	}
+	if (obj->typeobject != TypeObject::player)
+	{
+		DelObject();
 	}
 	
 }

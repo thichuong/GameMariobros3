@@ -123,33 +123,36 @@ void CPlayScene::_ParseSection_ANIMATIONS(string line)
 	if (doc.LoadFile())
 	{
 		TiXmlElement* root = doc.RootElement();
-		TiXmlElement* info = root->FirstChildElement();
-
-		string gameObjectID = info->Attribute("gameObjectId");
-		string textureID = info->Attribute("textureId");
-		
-		
-
-		for (TiXmlElement* node = info->FirstChildElement(); node != nullptr; node = node->NextSiblingElement())
+		for (TiXmlElement* texture = root->FirstChildElement("Textures"); texture != NULL; texture = texture->NextSiblingElement("Textures"))
 		{
-			string aniId = node->Attribute("aniId");
-			float frameTime;
-			node->QueryFloatAttribute("frameTime", &frameTime);
-			//string name = node->Attribute("id");
 			
-			LPANIMATION ani = new CAnimation(frameTime);
-			DebugOut(L"[INFO] Loading aniId = : %s \n", ToLPCWSTR(aniId));
-			for (TiXmlElement* sprNode = node->FirstChildElement(); sprNode != nullptr; sprNode = sprNode->NextSiblingElement())
+
+			string gameObjectID = texture->Attribute("gameObjectId");
+			string textureID = texture->Attribute("textureId");
+			DebugOut(L"	[Amni] = : %s \n", ToLPCWSTR(textureID));
+
+
+			for (TiXmlElement* node = texture->FirstChildElement(); node != nullptr; node = node->NextSiblingElement())
 			{
-				string id = sprNode->Attribute("id");
-				LPSPRITE sprite = CSprites::GetInstance()->Get(id);
-				ani->Add(sprite, frameTime);
-				DebugOut(L"					 Loading Id = : %s \n", ToLPCWSTR(id));
+				string aniId = node->Attribute("aniId");
+				float frameTime;
+				node->QueryFloatAttribute("frameTime", &frameTime);
+				//string name = node->Attribute("id");
+
+				LPANIMATION ani = new CAnimation(frameTime);
+				DebugOut(L"[INFO] Loading aniId = : %s \n", ToLPCWSTR(aniId));
+				for (TiXmlElement* sprNode = node->FirstChildElement(); sprNode != nullptr; sprNode = sprNode->NextSiblingElement())
+				{
+					string id = sprNode->Attribute("id");
+					LPSPRITE sprite = CSprites::GetInstance()->Get(id);
+					ani->Add(sprite, frameTime);
+					//DebugOut(L"					 Loading Id = : %s \n", ToLPCWSTR(id));
+				}
+
+				CAnimations::GetInstance()->Add(aniId, ani);
+
+
 			}
-			
-			CAnimations::GetInstance()->Add(aniId, ani);
-			
-			
 		}
 	}
 }

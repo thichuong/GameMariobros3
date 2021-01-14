@@ -64,31 +64,22 @@
     <Filter Include="Source Files\GameObject\Enemy\Plant\venus">
       <UniqueIdentifier>{b3d526ec-43da-4445-9991-db6b8c8c3380}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Scence">
+      <UniqueIdentifier>{1eb4d84d-252b-45fa-a850-aeae0b087549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Textures">
+      <UniqueIdentifier>{b05f0e06-5971-460a-8c28-ca24fedf712b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Objects">
+      <UniqueIdentifier>{2bca0c80-3271-4280-b7f2-d4691b60f4c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
       <Filter>Framework</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayScence.h">
-      <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Textures.h">
-      <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyEventHandler.h">
-      <Filter>Framework</Filter>
-    </ClInclude>
     <ClInclude Include="Sprites.h">
       <Filter>Framework\Animations</Filter>
-    </ClInclude>
-    <ClInclude Include="Scence.h">
-      <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="Animations.h">
       <Filter>Framework\Animations</Filter>
@@ -156,9 +147,6 @@
     <ClInclude Include="PMetter.h">
       <Filter>Source Files\HUD</Filter>
     </ClInclude>
-    <ClInclude Include="UIObject.h">
-      <Filter>Source Files\HUD</Filter>
-    </ClInclude>
     <ClInclude Include="Coin.h">
       <Filter>Source Files\ITem</Filter>
     </ClInclude>
@@ -180,18 +168,33 @@
     <ClInclude Include="Redvenus.h">
       <Filter>Source Files\GameObject\Enemy\Plant\venus</Filter>
     </ClInclude>
+    <ClInclude Include="KeyEventHandler.h">
+      <Filter>Framework\Scence</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScence.h">
+      <Filter>Framework\Scence</Filter>
+    </ClInclude>
+    <ClInclude Include="Scence.h">
+      <Filter>Framework\Scence</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures.h">
+      <Filter>Framework\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Framework\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="UIObject.h">
+      <Filter>Framework\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Framework\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="FireBall.h">
+      <Filter>Source Files\GameObject\Enemy\Plant\venus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
-      <Filter>Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayScence.cpp">
-      <Filter>Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Textures.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -199,9 +202,6 @@
     </ClCompile>
     <ClCompile Include="Sprites.cpp">
       <Filter>Framework\Animations</Filter>
-    </ClCompile>
-    <ClCompile Include="Scence.cpp">
-      <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="Animations.cpp">
       <Filter>Framework\Animations</Filter>
@@ -223,9 +223,6 @@
     </ClCompile>
     <ClCompile Include="TileSet.cpp">
       <Filter>Framework\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils.cpp">
-      <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="Portal.cpp">
       <Filter>Source Files\GameObject</Filter>
@@ -278,9 +275,6 @@
     <ClCompile Include="PMetter.cpp">
       <Filter>Source Files\HUD</Filter>
     </ClCompile>
-    <ClCompile Include="UIObject.cpp">
-      <Filter>Source Files\HUD</Filter>
-    </ClCompile>
     <ClCompile Include="Coin.cpp">
       <Filter>Source Files\ITem</Filter>
     </ClCompile>
@@ -300,6 +294,27 @@
       <Filter>Source Files\GameObject\Enemy\koopa</Filter>
     </ClCompile>
     <ClCompile Include="Redvenus.cpp">
+      <Filter>Source Files\GameObject\Enemy\Plant\venus</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScence.cpp">
+      <Filter>Framework\Scence</Filter>
+    </ClCompile>
+    <ClCompile Include="Scence.cpp">
+      <Filter>Framework\Scence</Filter>
+    </ClCompile>
+    <ClCompile Include="Textures.cpp">
+      <Filter>Framework\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Framework\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Framework\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObject.cpp">
+      <Filter>Framework\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="FireBall.cpp">
       <Filter>Source Files\GameObject\Enemy\Plant\venus</Filter>
     </ClCompile>
   </ItemGroup>

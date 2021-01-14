@@ -151,6 +151,7 @@
     <ClInclude Include="BigMario.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Coin.h" />
+    <ClInclude Include="FireBall.h" />
     <ClInclude Include="FireBullet.h" />
     <ClInclude Include="CollisionBox.h" />
     <ClInclude Include="FireMario.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="BigMario.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Coin.cpp" />
+    <ClCompile Include="FireBall.cpp" />
     <ClCompile Include="FireBullet.cpp" />
     <ClCompile Include="CollisionBox.cpp" />
     <ClCompile Include="FireMario.cpp" />
