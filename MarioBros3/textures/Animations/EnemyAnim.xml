@@ -78,7 +78,7 @@
     <Animation aniId="ani-red-venus-fire-trap-headdown-idle" frameTime="100">
       <Sprite id="spr-red-venus-head-down-0"  frameTime="100"/>
     </Animation>
-    <Animation aniId="ani-red-venus-fire-trap-headdown" frameTime="300">
+    <Animation aniId="ani-red-venus-fire-trap-headdown" frameTime="600">
       <Sprite id="spr-red-venus-head-down-0"  frameTime="300"/>
       <Sprite id="spr-red-venus-head-down-1"  frameTime="300"/>
     </Animation>
@@ -87,7 +87,7 @@
       <Sprite id="spr-red-venus-head-up-0"  frameTime="100"/>
     </Animation>
     
-    <Animation aniId="ani-red-venus-fire-trap-headup" frameTime="300">
+    <Animation aniId="ani-red-venus-fire-trap-headup" frameTime="600">
       <Sprite id="spr-red-venus-head-up-0"  frameTime="300"/>
       <Sprite id="spr-red-venus-head-up-1"  frameTime="300"/>
     </Animation>

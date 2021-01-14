@@ -61,6 +61,9 @@
     <Filter Include="Source Files\GameObject\Enemy\koopa">
       <UniqueIdentifier>{865cb673-6e2f-420c-a6f0-b8edf7e4e15f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObject\Enemy\Plant\venus">
+      <UniqueIdentifier>{b3d526ec-43da-4445-9991-db6b8c8c3380}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -173,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="RedKoopas.h">
       <Filter>Source Files\GameObject\Enemy\koopa</Filter>
+    </ClInclude>
+    <ClInclude Include="Redvenus.h">
+      <Filter>Source Files\GameObject\Enemy\Plant\venus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +298,9 @@
     </ClCompile>
     <ClCompile Include="RedKoopas.cpp">
       <Filter>Source Files\GameObject\Enemy\koopa</Filter>
+    </ClCompile>
+    <ClCompile Include="Redvenus.cpp">
+      <Filter>Source Files\GameObject\Enemy\Plant\venus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

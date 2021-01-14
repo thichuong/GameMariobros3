@@ -137,13 +137,13 @@ void CPlayScene::_ParseSection_ANIMATIONS(string line)
 			node->QueryFloatAttribute("frameTime", &frameTime);
 			//string name = node->Attribute("id");
 			
-			LPANIMATION ani = new CAnimation();
+			LPANIMATION ani = new CAnimation(frameTime);
 			DebugOut(L"[INFO] Loading aniId = : %s \n", ToLPCWSTR(aniId));
 			for (TiXmlElement* sprNode = node->FirstChildElement(); sprNode != nullptr; sprNode = sprNode->NextSiblingElement())
 			{
 				string id = sprNode->Attribute("id");
 				LPSPRITE sprite = CSprites::GetInstance()->Get(id);
-				ani->Add(sprite);
+				ani->Add(sprite, frameTime);
 				DebugOut(L"					 Loading Id = : %s \n", ToLPCWSTR(id));
 			}
 			

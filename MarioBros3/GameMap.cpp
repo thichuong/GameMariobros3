@@ -7,6 +7,7 @@
 #include "Goomba.h"
 #include "Koopas.h"
 #include "RedKoopas.h"
+#include "Redvenus.h"
 #include "QuestionBlock.h"
 #include "Coin.h"
 
@@ -141,8 +142,6 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 				
 				if (name == "Solid")
 				{
-
-
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
 					TMXObject->QueryFloatAttribute("width", &width);
@@ -154,7 +153,6 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 				}
 				else if (name == "Ghost")
 				{
-
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
 					TMXObject->QueryFloatAttribute("width", &width);
@@ -195,6 +193,18 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
 						}
 						
+					}
+					if (Enemiesname == "venus")
+					{
+
+						if (Type == "red")
+						{
+							Redvenus* enemies = new Redvenus();
+							enemies->SetAnimationSet(CAnimations::GetInstance());
+							enemies->SetPosition(x, y);
+							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+						}
+
 					}
 					
 				}

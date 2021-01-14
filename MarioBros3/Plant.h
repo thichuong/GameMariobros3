@@ -1,9 +1,10 @@
 #pragma once
 #include "GameObject.h"
 
-#define TIME_HIDE  2500;
-#define TIME_IDLE  800;
-#define PLANT_SPEED 0.14f;
+#define TIME_HIDE  3000
+#define TIME_IDLE  900
+#define TIME_GROW	200
+#define PLANT_SPEED 0.14f
 #define PLANT_ANI 
 
 enum class PlantState
@@ -19,7 +20,7 @@ class Plant :
 {
 protected:
 
-    int idleTime, hideTime;
+    int idleTime, hideTime, growTime;
     int maxHeight;
 	int tempHeight;
 	PlantState plantstate;

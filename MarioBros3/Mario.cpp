@@ -463,7 +463,7 @@ void CMario::ChangeState()
 	}
 		
 	}
-	DebugOut(L"	[MarioLocation] = : %f \n", y);
+//	DebugOut(L"	[MarioLocation] = : %f \n", y);
 }
 
 void  CMario::SetMoveState(MoveStates e) 
