@@ -11,8 +11,8 @@
 #include "QuestionBlock.h"
 #include "Coin.h"
 #include "ItemBrick.h"
-
-
+#include "WarpPipe.h"
+#include "WarpMark.h"
 
 CLayer::CLayer()
 {
@@ -209,7 +209,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					}
 					
 				}
-				else if (name == "Items")
+				else if (name == "Coin")
 				{
 					
 
@@ -277,7 +277,77 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 						}
 					}
 				}
-				
+				else if (name == "Warp")
+				{
+
+				 string Warpname;
+
+				 Warpname = TMXObject->Attribute("name");
+				 TMXObject->QueryFloatAttribute("x", &x);
+				 TMXObject->QueryFloatAttribute("y", &y);
+				 TMXObject->QueryFloatAttribute("width", &width);
+				 TMXObject->QueryFloatAttribute("height", &height);
+				 
+				 if (Warpname == "warp-pipe")
+				 {
+					 string typeWarp = TMXObject->Attribute("type");
+					 WarpPipe* warppipe = new WarpPipe(x, y, width, height);
+					 if (typeWarp == "down")
+					 {
+						 warppipe->setWarp(TypeWarp::down);
+					 }
+					 if (typeWarp == "up")
+					 {
+						 warppipe->setWarp(TypeWarp::up);
+					 }
+					 DebugOut(L"[warp-pipe] = %f \n", 1);
+					 CGame::GetInstance()->GetCurrentScene()->addobject(warppipe);
+				 }
+				 if (Warpname == "warp-mark")
+				 {
+					 WarpMark* warpmark = new WarpMark(x, y, width, height);
+					 string markname ;
+					 int cameraid;
+					 string typeWarp;
+					 int destx;
+					 int desty;
+					 int block;
+					 TiXmlElement* props = TMXObject->FirstChildElement("properties");
+					 for (TiXmlElement* node = props->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
+					 {
+						 markname = node->Attribute("name");
+						
+						 if (markname == "camera-bound-id") node->QueryIntAttribute("value", &cameraid);
+						 if(markname == "dest-x")	node->QueryIntAttribute("value", &destx);
+						 if(markname == "dest-y")	node->QueryIntAttribute("value", &desty);
+						 if (markname == "lock")
+						 {
+							 node->QueryIntAttribute("value", &block);
+							 if (block == 1) warpmark->Block();
+							 else warpmark->UnBlock();
+						 }
+						 if (markname == "out-direction")
+						 {
+							 typeWarp = node->Attribute("value");
+							
+						 }
+						
+						 DebugOut(L"[warp-mark] = %f \n", 1);
+					 }
+					 warpmark->set(cameraid, destx, desty);
+					 if (typeWarp == "down")
+					 {
+						 warpmark->setWarp(TypeWarp::down);
+					 }
+					 if (typeWarp == "up")
+					 {
+						 warpmark->setWarp(TypeWarp::up);
+					 }
+					// DebugOut(L"[warp-mark] = %f \n", 1);
+					 CGame::GetInstance()->GetCurrentScene()->addobject(warpmark);
+				 }
+
+				}
 			}
 		}
 	}

@@ -2,7 +2,7 @@
 #include <fstream>
 
 #include "Game.h"
-#include "Utils.h"
+
 #include "PlayScence.h"
 
 CGame * CGame::__instance = NULL;
@@ -34,9 +34,10 @@ void CGame::Init(HWND hWnd)
 	d3dpp.BackBufferHeight = r.bottom + 1;
 	d3dpp.BackBufferWidth = r.right + 1;
 
-	screen_height = r.bottom + 1 ;
-	screen_width = r.right + 1;
-
+	
+	camera = new Camera(r.right + 1,r.bottom + 1);
+	//camera->camXdefault = r.right + 1;
+	//camera->camYdefault = r.bottom + 1;
 	d3d->CreateDevice(
 		D3DADAPTER_DEFAULT,
 		D3DDEVTYPE_HAL,
@@ -64,7 +65,7 @@ void CGame::Init(HWND hWnd)
 */
 void CGame::Draw(int x, int y,int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
-	D3DXVECTOR3 p(x -(int) cam_x - xPivot, y -(int) cam_y, 0);
+	D3DXVECTOR3 p(x -(int) camera->cam_x - xPivot, y -(int) camera->cam_y, 0);
 	D3DXVECTOR3 pcenter3((right - left + xPivot) / 2 , 0, 0);
 	RECT r; 
 	r.left = left;
@@ -75,7 +76,7 @@ void CGame::Draw(int x, int y,int xPivot, LPDIRECT3DTEXTURE9 texture, int left, 
 }
 void CGame::Draw(int x, int y, int xPivot,D3DXVECTOR2 vectorflip, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
-	D3DXVECTOR3 p(x - (int)cam_x + xPivot, y - (int)cam_y, 0);
+	D3DXVECTOR3 p(x - (int) camera->cam_x + xPivot, y - (int)camera->cam_y, 0);
 	RECT r;
 	r.left = left;
 	r.top = top;
@@ -98,7 +99,7 @@ void CGame::Draw(int x, int y, int xPivot,D3DXVECTOR2 vectorflip, LPDIRECT3DTEXT
 }
 void CGame::DrawFlipX(int x, int y, int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
-	D3DXVECTOR3 p(x - (int)cam_x + xPivot, y - (int)cam_y, 0);
+	D3DXVECTOR3 p(x - (int)camera->cam_x + xPivot, y - (int)camera->cam_y, 0);
 	RECT r;
 	r.left = left;
 	r.top = top;

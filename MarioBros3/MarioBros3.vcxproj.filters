@@ -73,6 +73,12 @@
     <Filter Include="Framework\Objects">
       <UniqueIdentifier>{2bca0c80-3271-4280-b7f2-d4691b60f4c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Camera">
+      <UniqueIdentifier>{8d8c4efe-7c46-4031-baac-748b66f000c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Warp">
+      <UniqueIdentifier>{4ca1df87-450e-491c-ae28-be98a3c4c73c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -197,6 +203,18 @@
     </ClInclude>
     <ClInclude Include="PSwitch.h">
       <Filter>Source Files\ITem</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Framework\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WarpMark.h">
+      <Filter>Source Files\GameObject\Warp</Filter>
+    </ClInclude>
+    <ClInclude Include="WarpPipe.h">
+      <Filter>Source Files\GameObject\Warp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -328,6 +346,15 @@
     </ClCompile>
     <ClCompile Include="PSwitch.cpp">
       <Filter>Source Files\ITem</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Framework\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="WarpMark.cpp">
+      <Filter>Source Files\GameObject\Warp</Filter>
+    </ClCompile>
+    <ClCompile Include="WarpPipe.cpp">
+      <Filter>Source Files\GameObject\Warp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -13,6 +13,8 @@
 #include "Scence.h"
 #include "tinyXML.h"
 #include "Font.h"
+#include "Camera.h"
+#include "Utils.h"
 using namespace std;
 
 #define KEYBOARD_BUFFER_SIZE 1024
@@ -47,11 +49,7 @@ class CGame
 
 	LPKEYEVENTHANDLER keyHandler;
 
-	float cam_x = 0.0f;
-	float cam_y = 0.0f;
-
-	int screen_width;
-	int screen_height; 
+	LPCamera camera;
 
 	unordered_map<int, LPSCENE> scenes;
 	int current_scene; 
@@ -76,11 +74,15 @@ public:
 	LPSCENE GetCurrentScene() { return scenes[current_scene]; }
 	void SwitchScene(int scene_id);
 
-	int GetScreenWidth() { return screen_width; }
-	int GetScreenHeight() { return screen_height; }
-	int GetScamX() { return cam_x; }
-	int GetScamY() { return cam_y; }
-
+	LPCamera getCamera() { return camera; }
+	int GetScreenWidth() { return camera->screen_width; }
+	int GetScreenHeight() { return camera->screen_height;}
+	int GetScamX() { return camera->cam_x; }
+	int GetScamY() { return camera->cam_y; }
+	void SetCam(LPCamera newCamera) { 
+		camera = newCamera; 
+		DebugOut(L"camera null = %d\n", newCamera == nullptr);
+	}
 	static void SweptAABB(
 		float ml,			// move left 
 		float mt,			// move top
@@ -100,7 +102,7 @@ public:
 	LPDIRECT3DSURFACE9 GetBackBuffer() { return backBuffer; }
 	LPD3DXSPRITE GetSpriteHandler() { return this->spriteHandler; }
 
-	void SetCamPos(float x, float y) { cam_x = x; cam_y = y; }
+	void SetCamPos(float x, float y) { camera->setCam(x, y); }
 
 	static CGame * GetInstance();
 

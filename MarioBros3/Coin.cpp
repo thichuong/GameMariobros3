@@ -5,7 +5,7 @@ Coin::Coin(float l, float t, bool Fly)
 	x = l;
 	y = t;
 	typeobject = TypeObject::item;
-	collision = CCollision::Full;
+	collision = CCollision::None;
 	SetAnimationSet(CAnimations::GetInstance());
 	this->Fly = Fly;
 	time = COIN_BBOX_FLY_TIME;
@@ -30,8 +30,7 @@ void Coin::SetAnimationSet(CAnimations* ani_set)
 }
 void Coin::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 {
-	if (obj->typeobject == TypeObject::player)
-		CGame::GetInstance()->GetCurrentScene()->delobject(this);
+	
 }
 void Coin::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
@@ -43,4 +42,37 @@ void Coin::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 		time -= dt;
 		if (time < 0) CGame::GetInstance()->GetCurrentScene()->delobject(this);
 	}
+	else
+	{
+		vector<LPGAMEOBJECT> coEvents;
+
+		vector<LPGAMEOBJECT> player;
+
+		player.clear();
+		coEvents.clear();
+
+		player.push_back(CGame::GetInstance()->GetCurrentScene()->GetPlayer()->getMario());
+		CalcCollisions(&player, coEvents);
+
+		if (coEvents.size() == 0)
+		{
+
+		}
+		else
+		{
+
+			for (UINT i = 0; i < coEvents.size(); i++)
+			{
+				LPGAMEOBJECT obj = coEvents[i];
+
+				if (obj->typeobject == TypeObject::player)
+				{
+					CGame::GetInstance()->GetCurrentScene()->delobject(this);
+
+				}
+			}
+		}
+	}
+	
+
 }

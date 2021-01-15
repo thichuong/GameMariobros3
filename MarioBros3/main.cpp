@@ -25,15 +25,7 @@
 #include "Goomba.h"
 
 #include "PlayScence.h"
-
-#define WINDOW_CLASS_NAME L"SampleWindow"
-#define MAIN_WINDOW_TITLE L"Mario"
-
-#define BACKGROUND_COLOR D3DCOLOR_XRGB(181, 235, 242)
-#define SCREEN_WIDTH 700
-#define SCREEN_HEIGHT 700
-
-#define MAX_FRAME_RATE 120
+#include "Resource.h"
 
 CGame *game;
 
@@ -149,7 +141,7 @@ int Run()
 			DispatchMessage(&msg);
 		}
 
-		DWORD now = GetTickCount();
+		DWORD now = GetTickCount64();
 
 		// dt: the time between (beginning of last frame) and now
 		// this frame: the frame we are about to render

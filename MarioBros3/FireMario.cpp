@@ -95,4 +95,5 @@ void FireMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(HOLD, ani_set->Get("ani-fire-mario-hold"));
 	animations->Add(HOLD_IDLE, ani_set->Get("ani-fire-mario-hold-idle"));
 	animations->Add(HOLD_FALL, ani_set->Get("ani-fire-mario-hold-idle"));
+	animations->Add(WARP_HOR_IDLE, ani_set->Get("ani-fire-mario-idle-front"));
 }

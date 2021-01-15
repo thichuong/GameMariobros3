@@ -94,6 +94,9 @@ int CPlayer::getMetter()
 {
 	int metter =playMario->getMetter();
 	
-	return metter;
-	
+	return metter;	
+}
+void CPlayer::Warp(TypeWarp warp)
+{
+	playMario->Warp(warp);
 }

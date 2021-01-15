@@ -6,6 +6,7 @@
 #include "FireMario.h"
 #include "RaccoonMario.h"
 #include <unordered_map>
+#include "WarpPipe.h"
 
 #define small "small"
 #define big "big"
@@ -41,7 +42,7 @@ public:
     void SetLevel(int lv);
     int getMetter();
     CMario* getMario() { return playMario; }
-
+    void Warp(TypeWarp warp);
     static  CPlayer* GetInstance();
 };
 

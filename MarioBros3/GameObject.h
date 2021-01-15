@@ -7,7 +7,7 @@
 
 #include "Sprites.h"
 #include "Animations.h"
-
+#include "Resource.h"
 
 using namespace std;
 
@@ -131,7 +131,7 @@ public:
 	virtual void SetState(int state) { this->state = state; }
 	virtual void DownLevel() {};
 	virtual void SetLevel(int lv) {};
-
+	virtual void Warp(TypeWarp warp) {};
 	~CGameObject();
 };
 

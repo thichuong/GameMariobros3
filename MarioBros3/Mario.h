@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-
+#include "Resource.h"
 class CPlayer;
 
 #define MARIO_WALKING_SPEED  0.2f
@@ -17,6 +17,7 @@ class CPlayer;
 #define MARIO_JUMP_DEFLECT_SPEED  0.4f
 #define MARIO_GRAVITY  0.003f
 #define MARIO_DIE_DEFLECT_SPEED  0.5f
+#define WARP_SPEED 0.2f
 
 #define MARIO_TIME_ATTACK 200
 #define MARIO_TIME_COOLDOWN 400
@@ -39,6 +40,8 @@ class CPlayer;
 #define HOLD "hold"
 #define HOLD_IDLE "hold_idle"
 #define HOLD_FALL "hold_fall"
+#define WARP_HOR_IDLE "Warp-hor"
+
 
 #define MARIO_ANI_SMALL "-small-mario"
 #define MARIO_ANI_BIG "-big-mario"
@@ -64,9 +67,11 @@ class CPlayer;
 #define MARIO_BIG_BBOX_CROUCHING 26
 #define MARIO_HOLD 15
 
+
 #define MARIO_SMALL_BBOX_WIDTH  39
 #define MARIO_SMALL_BBOX_HEIGHT 45
 
+#define TIME_WARP 700
 #define MARIO_UNTOUCHABLE_TIME 5000
 #define MAX_METTER 7
 #define MIN_METTER 0.004f
@@ -103,10 +108,12 @@ protected:
 	DWORD timeattack;
 	DWORD  timecooldown;
 	DWORD  ani_timeattack;
+	DWORD time_wrap;
 	bool walking;
 	bool onGround; 
 	bool canHighjump;
 	MarioStateSet Mariostate, preMariostate;
+	TypeWarp marioWarp;
 	bool slowFall;
 	float start_x;			// initial position of Mario at scene
 	float start_y; 
@@ -123,6 +130,7 @@ public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
 	void UpdateVx();
+	void UpdateCollisions(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
 	virtual void OnKeyUp(int keyCode);
 	virtual void OnKeyDown(int keyCode);
 	virtual void KeyState(BYTE* state);
@@ -136,7 +144,7 @@ public:
 	void holdObj(LPGAMEOBJECT obj); 
 	void kickObj();
 
-	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
+	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount64(); }
 	void ChangeState();
 
 	virtual void SetMoveState(MoveStates e) ;
@@ -146,4 +154,6 @@ public:
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) =0;
 
 	int getMetter() { return metter; }
+
+	void Warp(TypeWarp warp);
 };

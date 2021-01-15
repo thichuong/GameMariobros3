@@ -9,8 +9,7 @@
 #include "Koopas.h"
 #include "HUD.h"
 
-#define camY 750
-#define YHUD 200
+#include "Resource.h"
 
 
 using namespace std;
@@ -23,14 +22,13 @@ class CPlayScene: public CScene
 {
 protected: 
 	CPlayer *player;					// A play scene has to have player, right? 
-	//CAnimations* PlayAni;
-	//CSprites* PlaySprites;
 	vector<LPGAMEOBJECT> objects;
 	vector<LPGAMEOBJECT> earseobjects;
 	vector<LPGAMEOBJECT> addobjects;
+	unordered_map<int, LPCamera> cameras;
 	CGameMap* gamemap;
-	int camYdefault;
 	HUD* hud;
+
 
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);
@@ -48,6 +46,7 @@ public:
 	virtual void delobject(LPGAMEOBJECT object) { earseobjects.push_back(object); }
 	void LoadSource();
 	virtual CPlayer* GetPlayer() { return player; }
+	virtual LPCamera getCamera(int id_camera) { return cameras[id_camera]; }
 
 	//friend class CPlayScenceKeyHandler;
 };

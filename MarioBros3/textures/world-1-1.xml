@@ -14,5 +14,10 @@
 		<LoadANIMATIONS file ="Textures/Animations/UiAnim.xml"/>
 		<LoadMAP filepath ="textures/Maps" file ="world-1-1-map.tmx"/>
 		<LoadLayer x ="100" y="900" />
+		<Camera name="Camera" start="0" main="1">
+			 <Boundary id="0" pos_x="0" pos_y="750" left="0" top="672" right="8448" bottom="1296"/>
+			 <Boundary id="2" pos_x="0" pos_y="750" left="0" top="0" right="8448" bottom="1296"/>
+			<Boundary id="1" pos_x="5856" pos_y="1392" left="5856" top="1392" right="7392" bottom="1968"/>
+		 </Camera> 
 	</Textures>
 </Textures>

@@ -14,6 +14,7 @@ CGameObject::CGameObject()
 	vx = vy = 0;
 	nx = 1;	
 	collision = CCollision::Full;
+	state = 0;
 }
 
 void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -86,8 +87,7 @@ void CGameObject::CalcPotentialCollisions(
 
 		if (e->t >= 0 && e->t <= 1.0f )
 		{
-			if (e->obj->typeobject != TypeObject::item || this->typeobject == TypeObject::player)
-			{
+			
 				float ml, mt, mr, mb;
 				e->obj->GetBoundingBox(ml, mt, mr, mb);
 				if (e->obj->collision == CCollision::Full)
@@ -98,7 +98,7 @@ void CGameObject::CalcPotentialCollisions(
 					coEvents.push_back(e);
 				else if (e->nx > 0 && e->obj->collision == CCollision::Right)
 					coEvents.push_back(e);
-			}
+			
 			
 		}
 		else

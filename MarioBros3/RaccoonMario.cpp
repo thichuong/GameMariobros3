@@ -97,6 +97,7 @@ void  RaccoonMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(HOLD, ani_set->Get("ani-raccoon-mario-hold"));
 	animations->Add(HOLD_IDLE, ani_set->Get("ani-raccoon-mario-hold-idle"));
 	animations->Add(HOLD_FALL, ani_set->Get("ani-raccoon-mario-hold-idle"));
+	animations->Add(WARP_HOR_IDLE, ani_set->Get("ani-raccoon-mario-idle-front"));
 }
 void RaccoonMario::TailAttack(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {

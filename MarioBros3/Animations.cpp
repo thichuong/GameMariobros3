@@ -21,7 +21,7 @@ void CAnimation::Add(LPSPRITE sprite, float time)
 // NOTE: sometimes Animation object is NULL ??? HOW ??? 
 void CAnimation::Render(float x, float y, bool flipx, int alpha)
 {
-	DWORD now = GetTickCount();
+	DWORD now = GetTickCount64();
 	if (currentFrame == -1)
 	{
 		currentFrame = 0;
@@ -41,7 +41,7 @@ void CAnimation::Render(float x, float y, bool flipx, int alpha)
 }
 void CAnimation::Render(float x, float y, DWORD timeRender, bool flipx, int alpha)
 {
-	DWORD now = GetTickCount();
+	DWORD now = GetTickCount64();
 	if (currentFrame == -1)
 	{
 		currentFrame = 0;
@@ -62,7 +62,7 @@ void CAnimation::Render(float x, float y, DWORD timeRender, bool flipx, int alph
 }
 void CAnimation::Render(float x, float y,D3DXVECTOR2 vectorflip, int alpha)
 {
-	DWORD now = GetTickCount();
+	DWORD now = GetTickCount64();
 	if (currentFrame == -1)
 	{
 		currentFrame = 0;

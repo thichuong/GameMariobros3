@@ -33,7 +33,7 @@ HUD::~HUD()
 void HUD::Update(DWORD dt)
 {
 	int screenHeight = CGame::GetInstance()->GetScreenHeight();
-	setStaticPosition(D3DXVECTOR2(CGame::GetInstance()->GetScamX() + 20, CGame::GetInstance()->GetScamY() + screenHeight - 100));
+	setStaticPosition(D3DXVECTOR2(CGame::GetInstance()->GetScamX() + 20, CGame::GetInstance()->GetScamY() + screenHeight - 150));
 	metter->setStaticPosition(D3DXVECTOR2(StaticPosition.x + 190 , StaticPosition.y+25));
 	metter->Update(dt);
 	world = D3DXVECTOR2(StaticPosition.x + 150, StaticPosition.y + 24);

@@ -279,6 +279,33 @@ void CPlayScene::Load()
 			string file = node->Attribute("file");
 			_ParseSection_ANIMATIONS(file);	
 		}
+
+		for (TiXmlElement* node = info->FirstChildElement("Camera"); node != nullptr; node = node->NextSiblingElement("Camera"))
+		{
+			int start;
+			node->QueryIntAttribute("start", &start);
+			for (TiXmlElement* detail = node->FirstChildElement("Boundary"); detail != nullptr; detail = detail->NextSiblingElement("Boundary"))
+			{
+				int id;
+				int pos_x, pos_y, left, top, right, bottom;
+				detail->QueryIntAttribute("id", &id);
+				detail->QueryIntAttribute("pos_x", &pos_x);
+				detail->QueryIntAttribute("pos_y", &pos_y);
+				detail->QueryIntAttribute("left", &left);
+				detail->QueryIntAttribute("top", &top);
+				detail->QueryIntAttribute("right", &right);
+				detail->QueryIntAttribute("bottom", &bottom);
+				Camera* camera = new Camera();
+				camera->setCam(pos_x, pos_y);
+				camera->setBoundBox(left, top, right, bottom);
+				camera->setCamdefault(pos_x, pos_y);
+				cameras.insert(make_pair(id, camera));
+				
+				//CGame::GetInstance()->SetCam(cameras[start]);
+				DebugOut(L"cameras size = %d\n", cameras.size());
+			}
+			CGame::GetInstance()->SetCam(cameras[start]);
+		}
 		node = info->FirstChildElement("LoadMAP");
 		file = node->Attribute("file");
 		filepath = node->Attribute("filepath");
@@ -298,21 +325,9 @@ void CPlayScene::Load()
 		DebugOut(L"[INFO] GameMap:   \n");
 	}
 	hud = new HUD();
-	//ifstream f;
-	//f.open(sceneFilePath);
+	
 
-	// current resource section flag
-	
-	
-	//CAnimations ani_set = CAnimationSets::GetInstance()->Get(ani_set_id);
-	
-	
-	
-	//f.close();
-
-	//CTextures::GetInstance()->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
-
-	camYdefault = camY;
+	CGame::GetInstance()->GetInstance()->getCamera()->setCamdefault(0, 750);
 
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
 }
@@ -360,23 +375,7 @@ void CPlayScene::Update(DWORD dt)
 	float cx, cy;
 	float px, py;
 	player->GetPosition(px, py);
-	CGame *game = CGame::GetInstance();
-	cx = px-game->GetScreenWidth() / 2;
-	cy = game->GetScamY();
-	if (cx < 0)
-		cx = 0;
-	if (cy > py - game->GetScreenHeight() /5 )
-	{
-		cy = py - game->GetScreenHeight() / 5;
-		if (cy < 0)
-			cy = 0;
-	}
-	if(cy + game->GetScreenHeight() < py + game->GetScreenHeight() / 2)
-		cy = py - game->GetScreenHeight() / 2;
-	if (cy > camYdefault)
-		cy = camYdefault;
-	if (cy + game->GetScreenHeight() - py < YHUD) cy += YHUD;
-	CGame::GetInstance()->SetCamPos(cx, cy);
+	CGame::GetInstance()->GetInstance()->getCamera()->update(px, py);
 	
 	hud->Update(dt);
 
@@ -438,6 +437,11 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 		object->SetAnimationSet(CAnimations::GetInstance());
 		object->SetPosition(x + camw / 2, y - camh / 2);
 		((CPlayScene*)scence)->addobject(object);
+	}
+	if (KeyCode == DIK_E)
+	{
+		mario->SetPosition(6503, 1723);
+		CGame::GetInstance()->SetCam(((CPlayScene*)scence)->getCamera(1));
 	}
 }
 

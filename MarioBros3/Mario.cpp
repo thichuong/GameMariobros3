@@ -25,7 +25,8 @@ CMario::CMario(float x, float y) : CGameObject()
 	timecooldown = 0;
 	typeobject = TypeObject::player;
 	metter = 0;
-	
+	marioWarp = TypeWarp::noWarp;
+	time_wrap = 0;
 	player = CGame::GetInstance()->GetCurrentScene()->GetPlayer();
 }
 void CMario::UpdateVx()
@@ -105,6 +106,94 @@ void CMario::UpdateVx()
 	slowFall = FALSE;
 
 }
+void  CMario::UpdateCollisions(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
+{
+	vector<LPCOLLISIONEVENT> coEvents;
+	vector<LPCOLLISIONEVENT> coEventsResult;
+	coEvents.clear();
+
+
+	// turn off collision when die 
+	if (state != MARIO_STATE_DIE)
+	{
+		CalcPotentialCollisions(colliable_objects, coEvents);
+		//		for (UINT i = 0; i < coEvents.size(); i++)  coObjectsResult.push_back(coEvents[i]->obj);
+	}
+
+
+	// reset untouchable timer if untouchable time has passed
+	if (GetTickCount64() - untouchable_start > MARIO_UNTOUCHABLE_TIME)
+	{
+		untouchable_start = 0;
+		untouchable = 0;
+	}
+
+	// No collision occured, proceed normally
+	if (coEvents.size() == 0)
+	{
+		x += dx;
+		y += dy;
+		
+	}
+	else
+	{
+		float min_tx, min_ty, nx = 0, ny = 0;
+		float rdx = 0;
+		float rdy = 0;
+
+		// TODO: This is a very ugly designed function!!!!
+		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
+
+		x += min_tx * dx + nx * 0.4;
+		y += min_ty * dy + ny * 0.4;
+
+		if (nx != 0)
+		{
+			vx = 0;
+			if (Mariostate.movement != MoveStates::Crouch)
+				Mariostate.movement = MoveStates::Idle;
+		}
+
+		if (ny != 0) {
+			vy = 0;
+			if (ny < 0)
+			{
+				onGround = TRUE;
+				Mariostate.jump = JumpStates::Stand;
+				canHighjump = TRUE;
+			}
+			else if (ny > 0)
+			{
+				onGround = FALSE;
+				canHighjump = FALSE;
+				Mariostate.jump = JumpStates::Fall;
+			}
+		}
+
+
+		//
+		// Collision logic with other objects
+		//
+
+		for (UINT i = 0; i < coEventsResult.size(); i++)
+		{
+			LPCOLLISIONEVENT e = coEventsResult[i];
+			LPGAMEOBJECT obj = e->obj;
+			// jump on top >> kill Goomba and deflect a bit 					
+			obj->CollisionObject(this, e->nx, e->ny);
+			if (e->obj->typeobject == TypeObject::enemy) // if e->obj is Goomba 
+			{
+				if (e->ny < 0)
+					vy = -MARIO_JUMP_DEFLECT_SPEED;
+			}
+		}
+
+	}
+
+	// clean up collision events
+	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+
+}
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	// Calculate dx, dy 
@@ -123,102 +212,38 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	//dx = vx * dt;
 
 	// Simple fall down
-
-	
-	vector<LPCOLLISIONEVENT> coEvents;
-	vector<LPCOLLISIONEVENT> coEventsResult;
-	coEvents.clear();
-	
 	if (x + dx <= 1)
 	{
 		dx = 0;
 		x = 2;
 		//DebugOut(L"[INFO] mario position %d, \n", x);
 	}
-	// turn off collision when die 
-	if (state != MARIO_STATE_DIE)
+	
+	if (marioWarp == TypeWarp::noWarp)
 	{
-		CalcPotentialCollisions(coObjects, coEvents);
-//		for (UINT i = 0; i < coEvents.size(); i++)  coObjectsResult.push_back(coEvents[i]->obj);
-	}
-		
-
-	// reset untouchable timer if untouchable time has passed
-	if ( GetTickCount() - untouchable_start > MARIO_UNTOUCHABLE_TIME) 
-	{
-		untouchable_start = 0;
-		untouchable = 0;
-	}
-
-	// No collision occured, proceed normally
-	if (coEvents.size()==0)
-	{
-		x += dx; 
-		y += dy;
-		if (y > 1500)
-		{
-			y = 1000;
-			vy = 0;
-		}		
+		UpdateCollisions(dt, coObjects);
 	}
 	else
 	{
-		float min_tx, min_ty, nx = 0, ny = 0;
-		float rdx = 0; 
-		float rdy = 0;
-
-		// TODO: This is a very ugly designed function!!!!
-		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
-		
-		x += min_tx * dx + nx * 0.4;
-		y += min_ty * dy + ny * 0.4;
-
-		if (nx != 0)
+		if(marioWarp == TypeWarp::down)
+			vy = WARP_SPEED;
+		else vy =-WARP_SPEED;
+		vx = 0;
+		CGameObject::Update(dt);
+		x += dx;
+		y += dy;
+		if (time_wrap + dt < TIME_WARP)
 		{
-			vx = 0;
-			if(Mariostate.movement != MoveStates::Crouch)
-				Mariostate.movement = MoveStates::Idle;
+			time_wrap += dt;
 		}
-
-		if (ny != 0) {
-			vy = 0;
-			if (ny < 0)
-			{
-				onGround = TRUE;
-				Mariostate.jump = JumpStates::Stand;
-				canHighjump = TRUE;
-			}	
-			else if (ny > 0)
-			{
-				onGround = FALSE;
-				canHighjump = FALSE;
-				Mariostate.jump = JumpStates::Fall;
-			}
-		}
- 
-		
-		//
-		// Collision logic with other objects
-		//
-		
-		for (UINT i = 0; i < coEventsResult.size(); i++)
+		else
 		{
-			LPCOLLISIONEVENT e = coEventsResult[i];
-			LPGAMEOBJECT obj = e->obj;
-			// jump on top >> kill Goomba and deflect a bit 					
-			obj->CollisionObject(this, e->nx, e->ny);
-			if (e->obj->typeobject == TypeObject::enemy) // if e->obj is Goomba 
-			{	
-				if(e->ny < 0)
-					vy = -MARIO_JUMP_DEFLECT_SPEED;
-			}
+			time_wrap = 0;
+			marioWarp = TypeWarp::noWarp;
 		}
 		
 	}
 	
-	// clean up collision events
-	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-
 	if (vy > 0)
 	{
 		onGround = FALSE;
@@ -317,7 +342,13 @@ void CMario::Render()
 		if (ani_timeattack > timeattack)
 			ani = ATTACK;
 	}
+	if (marioWarp != TypeWarp::noWarp)
+	{
+		ani = WARP_HOR_IDLE;
+	}
 	if (animations->Get(ani) != NULL)
+	{
+		
 		if (ani == ATTACK)
 			animations->Get(ani)->Render(x, y, MARIO_TIME_ATTACK, ani_left);
 		else if (Mariostate.movement == MoveStates::Crouch)
@@ -326,6 +357,8 @@ void CMario::Render()
 		}
 		else
 			animations->Get(ani)->Render(x, y, ani_left);
+	}
+		
 	
 }
 
@@ -546,6 +579,12 @@ void CMario::DownLevel()
 void CMario::SetLevel(int lv)
 {
 	player->SetLevel(lv);
+}
+
+void  CMario::Warp(TypeWarp warp)
+{
+	marioWarp = warp;
+	time_wrap = 0;
 }
 /*
 	Reset Mario status to the beginning state of a scene
