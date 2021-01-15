@@ -1,6 +1,6 @@
 #include "CoinFX.h"
-
-
+#include "ScoreFx.h"
+#include "Player.h"
 CoinFX::CoinFX()
 {
 	time_FX = GetTickCount64();
@@ -29,5 +29,10 @@ void CoinFX::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 }
 void CoinFX::Explosion()
 {
+	ScoreFx* fx = new ScoreFx(1);
+	fx->SetPosition(x, y);
 	CGame::GetInstance()->GetCurrentScene()->delobject(this);
+	CGame::GetInstance()->GetCurrentScene()->addobject(fx);
+	CPlayer::GetInstance()->AddCoin(1);
+	CPlayer::GetInstance()->AddScore(100);
 }

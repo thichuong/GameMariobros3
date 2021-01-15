@@ -1,5 +1,7 @@
 #include "Leaf.h"
 #include "Game.h"
+#include "Player.h"
+#include "ScoreFx.h"
 Leaf::Leaf(float l, float t, bool Fly)
 {
 	x = l;
@@ -12,8 +14,12 @@ Leaf::Leaf(float l, float t, bool Fly)
 }
 void Leaf::Render()
 {
-	if (animations->Get("ani-super-leaf-red") != NULL)
-		animations->Get("ani-super-leaf-red")->Render(x, y);
+	string ani = "ani-super-leaf-red";
+	D3DXVECTOR2 pScale(1, 1);
+	if (vx > 0) pScale.x = 1;
+	else pScale.x = -1;
+	if (animations->Get(ani) != NULL)
+		animations->Get(ani)->Render(x, y, pScale);
 }
 
 void Leaf::GetBoundingBox(float& l, float& t, float& r, float& b)
@@ -32,8 +38,7 @@ void Leaf::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 {
 	if (obj->typeobject == TypeObject::player)
 	{
-		//CGame::GetInstance()->GetCurrentScene()->delobject(this);
-		//obj->SetLevel(4);
+		
 	}
 		
 }
@@ -56,7 +61,7 @@ void Leaf::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		player.clear();		
 		coEvents.clear();
 
-		player.push_back(CGame::GetInstance()->GetCurrentScene()->GetPlayer()->getMario());
+		player.push_back(CPlayer::GetInstance()->getMario());
 		CalcCollisions(&player, coEvents);
 
 		if (coEvents.size() == 0)
@@ -74,6 +79,10 @@ void Leaf::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				{
 					CGame::GetInstance()->GetCurrentScene()->delobject(this);
 					obj->SetLevel(4);
+					CPlayer::GetInstance()->AddScore(1000);
+					ScoreFx* fx = new ScoreFx(5);
+					fx->SetPosition(x, y);
+					CGame::GetInstance()->GetCurrentScene()->addobject(fx);
 				}
 			}
 		}

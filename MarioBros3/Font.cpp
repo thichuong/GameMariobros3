@@ -14,22 +14,22 @@ void Font::LoadFont()
 	for (char c = '0'; c <= '9'; ++c)
 	{
 		string s =""+ c;
-		data->Add(s, sprite->Get(prefix + c));
+		data->Add(prefix + c, sprite->Get(prefix + c));
 	}
 		
 	for (char c = 'A'; c <= 'Z'; ++c)
 	{
 		string s = "" + c;
-		data->Add(s, sprite->Get(prefix + c));
+		data->Add(prefix + c, sprite->Get(prefix + c));
 	}
 }
 
 LPSPRITE Font::GetChar(char c)
 {
-	return this->data->Get(c+"");
+	return this->data->Get(prefix + c);
 }
 
-void Font::setXMLprefix(std::string prefix)
+void Font::setXMLprefix(string prefix)
 {
 	this->prefix = prefix;
 }

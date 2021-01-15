@@ -1,7 +1,7 @@
 #include "HUD.h"
 #include "Textures.h"
 #include "Game.h"
-
+#include "Player.h"
 
 
 HUD::HUD()
@@ -53,8 +53,8 @@ void HUD::Render()
 
 	font->RenderText("1", world);
 	font->RenderText("4", life);
-	font->RenderText("0000000", score);
-	font->RenderText("00", coin);
+	font->RenderText(CPlayer::GetInstance()->GetScore(), score);
+	font->RenderText(CPlayer::GetInstance()->Getcoin(), coin);
 	font->RenderText("999", timer);
 
 	metter->Render();

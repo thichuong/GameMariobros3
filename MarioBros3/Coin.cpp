@@ -1,6 +1,7 @@
 #include "Coin.h"
 #include "Game.h"
 #include "CoinFX.h"
+#include "ScoreFx.h"
 Coin::Coin(float l, float t, bool Fly)
 {
 	x = l;
@@ -67,7 +68,12 @@ void Coin::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 
 				if (obj->typeobject == TypeObject::player)
 				{
-					Fly = true;
+					ScoreFx* fx = new ScoreFx(1);
+					fx->SetPosition(x, y);
+					CGame::GetInstance()->GetCurrentScene()->delobject(this);
+					CGame::GetInstance()->GetCurrentScene()->addobject(fx);
+					CPlayer::GetInstance()->AddCoin(1);
+					CPlayer::GetInstance()->AddScore(100);
 
 				}
 			}

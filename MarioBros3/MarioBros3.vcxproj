@@ -183,6 +183,7 @@
     <ClInclude Include="Redvenus.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scence.h" />
+    <ClInclude Include="ScoreFx.h" />
     <ClInclude Include="SmallMario.h" />
     <ClInclude Include="Solid.h" />
     <ClInclude Include="Sprites.h" />
@@ -231,6 +232,7 @@
     <ClCompile Include="RedKoopas.cpp" />
     <ClCompile Include="Redvenus.cpp" />
     <ClCompile Include="Scence.cpp" />
+    <ClCompile Include="ScoreFx.cpp" />
     <ClCompile Include="SmallMario.cpp" />
     <ClCompile Include="Solid.cpp" />
     <ClCompile Include="Sprites.cpp" />
