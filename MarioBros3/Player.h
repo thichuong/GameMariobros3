@@ -26,8 +26,20 @@ class CPlayer : public CGameObject
     string levelMario;
     DWORD downleveltime;
 public: 
-    LPGAMEOBJECT holdobject;
+    long score;
+
+    int life, coin;
     
+    LPGAMEOBJECT holdobject;
+
+    string GetScore();
+    string Getcoin();
+    string GetLife();
+    
+    void AddScore(long x);
+    void AddCoin(int x);
+    void AddLife(int x);
+
     CPlayer();
     void SwitchToMario(string state);
     virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);

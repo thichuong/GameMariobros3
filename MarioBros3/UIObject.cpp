@@ -2,7 +2,7 @@
 
 UIObject::UIObject()
 {
-	this->StaticPosition =D3DXVECTOR2(0,0);
+	this->Position =D3DXVECTOR2(0,0);
 }
 
 UIObject::~UIObject()
@@ -10,14 +10,14 @@ UIObject::~UIObject()
 	animation_set.clear();
 }
 
-void UIObject::setStaticPosition(D3DXVECTOR2 position)
+void UIObject::setPosition(D3DXVECTOR2 position)
 {
-	this->StaticPosition = position; 
+	this->Position = position; 
 }
 
-D3DXVECTOR2 UIObject::getStaticPosition()
+D3DXVECTOR2 UIObject::getPosition()
 {
-	return this->StaticPosition; 
+	return this->Position; 
 }
 
 void UIObject::AddAnimation(std::string name, LPANIMATION animation)

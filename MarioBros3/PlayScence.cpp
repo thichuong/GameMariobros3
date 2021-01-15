@@ -318,7 +318,7 @@ void CPlayScene::Load()
 		float x, y;
 		node->QueryFloatAttribute("x", &x);
 		node->QueryFloatAttribute("y", &y);
-		player = new CPlayer();
+		player = CPlayer::GetInstance();
 		player->SetPosition(x, y);
 		player->SetAnimationSet(CAnimations::GetInstance());
 		//objects.push_back(player);

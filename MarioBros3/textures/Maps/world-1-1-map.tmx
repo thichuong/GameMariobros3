@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="25" nextobjectid="278">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="25" nextobjectid="282">
  <editorsettings>
   <export target="world-1-1-map.xml" format="tmx"/>
  </editorsettings>
@@ -538,10 +538,10 @@
   <object id="196" name="koopa" type="red" x="6266.5" y="1030"/>
  </objectgroup>
  <objectgroup id="20" name="Warp">
-  <object id="273" name="warp-mark" x="5143" y="1151" width="79" height="48">
+  <object id="273" name="warp-mark" x="5143" y="1173" width="79" height="48">
    <properties>
     <property name="camera-bound-id" type="int" value="1"/>
-    <property name="dest-x" type="int" value="6242"/>
+    <property name="dest-x" type="int" value="6252"/>
     <property name="dest-y" type="int" value="1440"/>
     <property name="lock" type="int" value="1"/>
     <property name="out-direction" value="down"/>
@@ -550,14 +550,24 @@
   <object id="275" name="warp-mark" x="6912" y="1391" width="96" height="48">
    <properties>
     <property name="camera-bound-id" type="int" value="0"/>
-    <property name="dest-x" type="int" value="6930"/>
+    <property name="dest-x" type="int" value="6940"/>
     <property name="dest-y" type="int" value="1200"/>
     <property name="lock" type="int" value="0"/>
     <property name="out-direction" value="up"/>
    </properties>
   </object>
-  <object id="276" name="warp-pipe" type="down" x="5157" y="1092" width="51" height="24"/>
+  <object id="276" name="warp-pipe" type="down" x="5173" y="1092" width="24" height="24"/>
   <object id="277" name="warp-pipe" type="up" x="6939.5" y="1477" width="36" height="31"/>
+  <object id="280" name="warp-pipe" type="down" x="6753.5" y="468" width="24" height="24"/>
+  <object id="281" name="warp-mark" x="6725.5" y="558" width="79" height="48">
+   <properties>
+    <property name="camera-bound-id" type="int" value="1"/>
+    <property name="dest-x" type="int" value="6252"/>
+    <property name="dest-y" type="int" value="1440"/>
+    <property name="lock" type="int" value="1"/>
+    <property name="out-direction" value="down"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="21" name="Portal"/>
  <objectgroup id="22" name="SwitchBlocks"/>

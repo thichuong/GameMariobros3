@@ -20,6 +20,10 @@ CPlayer::CPlayer()
 	collision = CCollision::Full;
 	typeobject = TypeObject::player;
 	downleveltime = DOWN_LEVEL_TIME;
+
+	score = 0;
+	life = 4;
+	coin = 0;
 }
 
 CPlayer* CPlayer::__instance = NULL;
@@ -99,4 +103,40 @@ int CPlayer::getMetter()
 void CPlayer::Warp(TypeWarp warp)
 {
 	playMario->Warp(warp);
+}
+
+void CPlayer::AddScore(long x)
+{
+	this->score += x;
+}
+
+void CPlayer::AddCoin(int x)
+{
+	this->coin += x;
+}
+
+void CPlayer::AddLife(int x)
+{
+	this->life += x;
+}
+
+string CPlayer::GetScore()
+{
+	string string_score = to_string(score);
+
+	while (string_score.length() < 7)
+	{
+		string_score = "0" + string_score;
+	}
+	return string_score;
+}
+
+string CPlayer::Getcoin()
+{
+	return to_string(coin);
+}
+
+string CPlayer::GetLife()
+{
+	return to_string(life);
 }

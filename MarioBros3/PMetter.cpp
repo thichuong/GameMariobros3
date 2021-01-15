@@ -36,10 +36,10 @@ void PMetter::Render()
 	for (int i = 0; i < 6; i++)
 	{
 		
-		ArrowOff->Draw(StaticPosition.x + x, StaticPosition.y,FALSE);
+		ArrowOff->Draw(Position.x + x, Position.y,FALSE);
 		x += 30;
 	}
-	P_Off->Draw(StaticPosition.x + x, StaticPosition.y, FALSE);
+	P_Off->Draw(Position.x + x, Position.y, FALSE);
 
 	x = 0;
 	
@@ -50,7 +50,7 @@ void PMetter::Render()
 
 	for (int i = 0; i < arrowlevel; i++)
 	{
-		ArrowOn->Draw(StaticPosition.x + x, StaticPosition.y, FALSE);
+		ArrowOn->Draw(Position.x + x, Position.y, FALSE);
 		x += 30;
 	}
 	x = 0;
@@ -58,10 +58,10 @@ void PMetter::Render()
 	{
 		for (int i = 0; i < arrowlevel; i++)
 		{
-			animation_set["Arrow-blink"]->Render(StaticPosition.x + x, StaticPosition.y,false);
+			animation_set["Arrow-blink"]->Render(Position.x + x, Position.y,false);
 			x += 30;
 		}
-		animation_set["P-blink"]->Render(StaticPosition.x + x, StaticPosition.y);
+		animation_set["P-blink"]->Render(Position.x + x, Position.y);
 	}
 	
 		

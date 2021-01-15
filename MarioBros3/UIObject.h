@@ -10,7 +10,7 @@
 class UIObject
 {
 protected:
-	D3DXVECTOR2 StaticPosition;
+	D3DXVECTOR2 Position;
 
 	DWORD dt; 
 
@@ -20,8 +20,8 @@ public:
 	UIObject(); 
 	~UIObject(); 
 
-	void setStaticPosition(D3DXVECTOR2 position);
-	D3DXVECTOR2 getStaticPosition();
+	void setPosition(D3DXVECTOR2 position);
+	D3DXVECTOR2 getPosition();
 
 	void AddAnimation(std::string name, LPANIMATION animation);
 

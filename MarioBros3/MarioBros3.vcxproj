@@ -152,11 +152,13 @@
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Coin.h" />
+    <ClInclude Include="CoinFX.h" />
     <ClInclude Include="FireBall.h" />
     <ClInclude Include="FireBullet.h" />
     <ClInclude Include="CollisionBox.h" />
     <ClInclude Include="FireMario.h" />
     <ClInclude Include="Font.h" />
+    <ClInclude Include="FXObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameObject.h" />
@@ -199,11 +201,13 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Coin.cpp" />
+    <ClCompile Include="CoinFX.cpp" />
     <ClCompile Include="FireBall.cpp" />
     <ClCompile Include="FireBullet.cpp" />
     <ClCompile Include="CollisionBox.cpp" />
     <ClCompile Include="FireMario.cpp" />
     <ClCompile Include="Font.cpp" />
+    <ClCompile Include="FXObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameObject.cpp" />

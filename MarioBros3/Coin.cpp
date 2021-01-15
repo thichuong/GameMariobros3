@@ -1,5 +1,6 @@
 #include "Coin.h"
 #include "Game.h"
+#include "CoinFX.h"
 Coin::Coin(float l, float t, bool Fly)
 {
 	x = l;
@@ -36,11 +37,10 @@ void Coin::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
 	if (Fly)
 	{
-		CGameObject::Update(dt);
-		y += dy;
-		vy -= COIN_BBOX_FLY;
-		time -= dt;
-		if (time < 0) CGame::GetInstance()->GetCurrentScene()->delobject(this);
+		CoinFX* fx = new CoinFX();
+		fx->SetPosition(x, y);
+		CGame::GetInstance()->GetCurrentScene()->delobject(this);
+		CGame::GetInstance()->GetCurrentScene()->addobject(fx);
 	}
 	else
 	{
@@ -67,7 +67,7 @@ void Coin::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 
 				if (obj->typeobject == TypeObject::player)
 				{
-					CGame::GetInstance()->GetCurrentScene()->delobject(this);
+					Fly = true;
 
 				}
 			}
