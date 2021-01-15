@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="25" nextobjectid="282">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="25" nextobjectid="286">
  <editorsettings>
   <export target="world-1-1-map.xml" format="tmx"/>
  </editorsettings>
@@ -528,14 +528,21 @@
  <objectgroup id="15" name="Enemy">
   <object id="55" name="goomba" type="tan" x="1510" y="1189.33"/>
   <object id="91" name="koopa" type="red" x="1641.33" y="1034.66"/>
-  <object id="95" name="piranha" type="basic" x="5375" y="1212.53"/>
+  <object id="95" name="piranha" type="basic" x="5354" y="1177.53"/>
   <object id="96" name="venus" type="green" x="5568" y="1189.64"/>
   <object id="98" name="venus" type="red" x="1078.82" y="1112.64" width="48" height="24"/>
   <object id="186" name="para-goomba" type="tan" x="2663.82" y="1105.5"/>
   <object id="187" name="goomba" type="tan" x="2251.33" y="1108.67"/>
-  <object id="190" name="para-koopa" type="red" x="3893" y="958"/>
-  <object id="192" name="koopa" type="green" x="4320" y="1122"/>
   <object id="196" name="koopa" type="red" x="6266.5" y="1030"/>
+  <object id="282" name="koopa" type="green-para" x="4030" y="759">
+   <point/>
+  </object>
+  <object id="283" name="koopa" type="green-para" x="4155" y="733">
+   <point/>
+  </object>
+  <object id="284" name="koopa" type="green-para" x="4272" y="739">
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="20" name="Warp">
   <object id="273" name="warp-mark" x="5143" y="1173" width="79" height="48">

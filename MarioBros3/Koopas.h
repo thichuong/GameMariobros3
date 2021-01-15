@@ -18,13 +18,13 @@
 #define KOOPAS_STATE_SHELL 300
 #define KOOPAS_STATE_SHELL_RUN 400
 #define KOOPAS_STATE_SHELL_HOLD 500
-#define KOOPAS_STATE_FLY 600
+#define KOOPAS_STATE_TROOPA 600
 
 #define KOOPAS_ANI_WALKING "ani-green-koopa-troopa-move"
 #define KOOPAS_ANI_DIE "ani-green-koopa-troopa-crouch"
 #define KOOPAS_ANI_SHELL "ani-green-koopa-troopa-crouch"
 #define KOOPAS_ANI_SHELL_RUN "ani-green-koopa-troopa-shell-run"
-#define KOOPAS_ANI_FLY ""
+
 
 class CKoopas : public CGameObject
 {

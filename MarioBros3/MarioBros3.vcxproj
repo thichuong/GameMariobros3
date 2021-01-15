@@ -171,6 +171,8 @@
     <ClInclude Include="Leaf.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="MarioTail.h" />
+    <ClInclude Include="Paratroopa.h" />
+    <ClInclude Include="Piranha.h" />
     <ClInclude Include="Plant.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScence.h" />
@@ -185,6 +187,7 @@
     <ClInclude Include="Scence.h" />
     <ClInclude Include="ScoreFx.h" />
     <ClInclude Include="SmallMario.h" />
+    <ClInclude Include="SmokeFx.h" />
     <ClInclude Include="Solid.h" />
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="Textures.h" />
@@ -221,6 +224,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="MarioTail.cpp" />
+    <ClCompile Include="Paratroopa.cpp" />
+    <ClCompile Include="Piranha.cpp" />
     <ClCompile Include="Plant.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScence.cpp" />
@@ -234,6 +239,7 @@
     <ClCompile Include="Scence.cpp" />
     <ClCompile Include="ScoreFx.cpp" />
     <ClCompile Include="SmallMario.cpp" />
+    <ClCompile Include="SmokeFx.cpp" />
     <ClCompile Include="Solid.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Textures.cpp" />

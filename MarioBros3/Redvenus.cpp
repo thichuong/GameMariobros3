@@ -1,7 +1,7 @@
 #include "Redvenus.h"
 #include "Player.h"
 #include "Game.h"
-
+#include "ScoreFx.h"
 Redvenus::Redvenus()
 {
 	Plant::setPlant();
@@ -102,4 +102,7 @@ void Redvenus::DelObject()
 		fireBalls = NULL;
 	}
 	live = false;
+	ScoreFx* fx = new ScoreFx(1);
+	fx->SetPosition(x, y);
+	CGame::GetInstance()->GetCurrentScene()->addobject(fx);
 }

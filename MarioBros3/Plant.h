@@ -40,6 +40,6 @@ public:
 	virtual void SetState(PlantState state);
 	virtual void SetAnimationSet(CAnimations* ani_set);
 	virtual void CollisionObject(LPGAMEOBJECT obj, int nx, int ny);
-	virtual void DelObject() =0;
+	virtual void DelObject() {};
 };
 

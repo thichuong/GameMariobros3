@@ -8,6 +8,8 @@
 #include "Koopas.h"
 #include "RedKoopas.h"
 #include "Redvenus.h"
+#include "Piranha.h"
+#include "Paratroopa.h"
 #include "QuestionBlock.h"
 #include "Coin.h"
 #include "ItemBrick.h"
@@ -193,6 +195,13 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 							enemies->SetPosition(x, y);
 							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
 						}
+						if (Type == "green-para")
+						{
+							Paratroopa* enemies = new Paratroopa();
+							enemies->SetAnimationSet(CAnimations::GetInstance());
+							enemies->SetPosition(x, y);
+							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+						}
 						
 					}
 					if (Enemiesname == "venus")
@@ -206,6 +215,13 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
 						}
 
+					}
+					if (Enemiesname == "piranha")
+					{					
+							Piranha* enemies = new Piranha();
+							enemies->SetAnimationSet(CAnimations::GetInstance());
+							enemies->SetPosition(x, y);
+							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
 					}
 					
 				}

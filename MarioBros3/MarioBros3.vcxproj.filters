@@ -228,6 +228,15 @@
     <ClInclude Include="ScoreFx.h">
       <Filter>Source Files\GameObject\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Paratroopa.h">
+      <Filter>Source Files\GameObject\Enemy\koopa</Filter>
+    </ClInclude>
+    <ClInclude Include="Piranha.h">
+      <Filter>Source Files\GameObject\Enemy\Plant</Filter>
+    </ClInclude>
+    <ClInclude Include="SmokeFx.h">
+      <Filter>Framework\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -376,6 +385,15 @@
     </ClCompile>
     <ClCompile Include="ScoreFx.cpp">
       <Filter>Source Files\GameObject\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Paratroopa.cpp">
+      <Filter>Source Files\GameObject\Enemy\koopa</Filter>
+    </ClCompile>
+    <ClCompile Include="Piranha.cpp">
+      <Filter>Source Files\GameObject\Enemy\Plant</Filter>
+    </ClCompile>
+    <ClCompile Include="SmokeFx.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

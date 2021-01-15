@@ -116,7 +116,7 @@ void Plant::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 	{
 		obj->DownLevel();	
 	}
-	if (obj->typeobject != TypeObject::player)
+	else 
 	{
 		DelObject();
 	}

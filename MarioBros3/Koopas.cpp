@@ -154,6 +154,7 @@ void CKoopas::SetState(int state)
 		collision = CCollision::Full;
 		typeobject = TypeObject::Bullet;
 		break;
+
 	}
 
 }
