@@ -235,7 +235,16 @@
       <Filter>Source Files\GameObject\Enemy\Plant</Filter>
     </ClInclude>
     <ClInclude Include="SmokeFx.h">
-      <Filter>Framework\Header Files</Filter>
+      <Filter>Source Files\GameObject\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="DebrisFx.h">
+      <Filter>Source Files\GameObject\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Reward.h">
+      <Filter>Source Files\GameObject\ITem</Filter>
+    </ClInclude>
+    <ClInclude Include="RewardFX.h">
+      <Filter>Source Files\GameObject\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -393,7 +402,16 @@
       <Filter>Source Files\GameObject\Enemy\Plant</Filter>
     </ClCompile>
     <ClCompile Include="SmokeFx.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObject\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="DebrisFx.cpp">
+      <Filter>Source Files\GameObject\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Reward.cpp">
+      <Filter>Source Files\GameObject\ITem</Filter>
+    </ClCompile>
+    <ClCompile Include="RewardFX.cpp">
+      <Filter>Source Files\GameObject\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,7 @@
 		<LoadSPRITES file ="textures/Sprites/UiDB.xml" source ="Textures\\Misc\\box-small.png" textureId="tex-pannel"/>
 		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="textures\\Misc\\fire-ball.png" textureId="tex-fire-ball"/>
 		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="textures\\Misc\\effect_white_x3.png" textureId="tex-effect"/>
+		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="textures\\Misc\\reward_x3.png" textureId="tex-goal" a="255"/>
 		<LoadANIMATIONS file ="Textures/Animations/MarioAnim.xml"/>
 		<LoadANIMATIONS file ="Textures/Animations/EnemyAnim.xml"/>
 		<LoadANIMATIONS file ="Textures/Animations/MiscAnim.xml"/>
@@ -15,8 +16,8 @@
 		<LoadMAP filepath ="textures/Maps" file ="world-1-1-map.tmx"/>
 		<LoadLayer x ="100" y="900" />
 		<Camera name="Camera" start="0" main="1">
-			 <Boundary id="0" pos_x="0" pos_y="750" left="0" top="672" right="8448" bottom="1296"/>
-			 <Boundary id="2" pos_x="0" pos_y="750" left="0" top="0" right="8448" bottom="1296"/>
+			 <Boundary id="0" pos_x="0" pos_y="750" left="0" top="672" right="8440" bottom="1296"/>
+			 <Boundary id="2" pos_x="0" pos_y="750" left="0" top="0" right="8440" bottom="1296"/>
 			<Boundary id="1" pos_x="5856" pos_y="1392" left="5856" top="1392" right="7392" bottom="1968"/>
 		 </Camera> 
 	</Textures>

@@ -267,8 +267,17 @@ void CPlayScene::Load()
 			string source = node->Attribute("source");
 			string textureId = node->Attribute("textureId");
 			CTextures* textures = CTextures::GetInstance();
-
-			textures->Add(textureId, ToLPCWSTR(source), D3DCOLOR_ARGB(0,255, 255, 255));
+			int a;
+			if (node->QueryIntAttribute("a", &a))
+			{
+				textures->Add(textureId, ToLPCWSTR(source), D3DCOLOR_ARGB(0, 255, 255, 255));
+			}
+			else
+			{
+				node->QueryIntAttribute("a", &a);
+				textures->Add(textureId, ToLPCWSTR(source), D3DCOLOR_ARGB(a, 255, 255, 255));
+			}
+				
 			//_ParseSection_SPRITES("file");
 			DebugOut(L"[INFO]Start load : %d \n", id);
 			_ParseSection_SPRITES(file);

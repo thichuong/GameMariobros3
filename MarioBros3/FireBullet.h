@@ -19,5 +19,6 @@ public:
 	virtual void GetBoundingBox(float& l, float& t, float& r, float& b);
 	virtual void SetAnimationSet(CAnimations* ani_set);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
+	void Explosion();
 };
 

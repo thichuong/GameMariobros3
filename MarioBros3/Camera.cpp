@@ -27,8 +27,7 @@ void Camera::update(float mariox, float marioy)
 
 	cx = px - screen_width / 2;
 	cy = cam_y;
-	if (cx < 0)
-		cx = 0;
+	
 	if (cy > py - screen_height / 5)
 	{
 		cy = py - screen_height / 5;
@@ -40,6 +39,9 @@ void Camera::update(float mariox, float marioy)
 	if (cy > camYdefault)
 		cy = camYdefault;
 	if (cy + screen_height - py < YHUD) cy += YHUD;
+	if (cy <= top) cy = top;
+	if (cx + screen_width >= right) cx = right - screen_width;
+	if (cx <= left) cx = left;
 	if(blockcam)
 		setCam(cx, cam_y);
 	else

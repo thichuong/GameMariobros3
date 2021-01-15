@@ -2,6 +2,7 @@
 #include "Animations.h"
 #include "Game.h"
 #include "Goomba.h"
+#include "SmokeFx.h"
 
 CFireBullet::CFireBullet(float x, float y, int ax)
 {
@@ -80,4 +81,11 @@ void CFireBullet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (y > game->GetScamY() + game->GetScreenHeight()) active = false;
 	if(x > game->GetScamX() + game->GetScreenWidth() || x < game->GetScamX() - Bullet_BBOX_WIDTH) 
 		active = false;
+}
+void CFireBullet::Explosion()
+{
+	CGame::GetInstance()->GetCurrentScene()->delobject(this);
+	SmokeFx* fx = new SmokeFx();
+	fx->SetPosition(x, y);
+	CGame::GetInstance()->GetCurrentScene()->addobject(fx);
 }

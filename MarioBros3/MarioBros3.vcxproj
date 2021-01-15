@@ -153,6 +153,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Coin.h" />
     <ClInclude Include="CoinFX.h" />
+    <ClInclude Include="DebrisFx.h" />
     <ClInclude Include="FireBall.h" />
     <ClInclude Include="FireBullet.h" />
     <ClInclude Include="CollisionBox.h" />
@@ -184,6 +185,8 @@
     <ClInclude Include="RedKoopas.h" />
     <ClInclude Include="Redvenus.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Reward.h" />
+    <ClInclude Include="RewardFX.h" />
     <ClInclude Include="Scence.h" />
     <ClInclude Include="ScoreFx.h" />
     <ClInclude Include="SmallMario.h" />
@@ -206,6 +209,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="CoinFX.cpp" />
+    <ClCompile Include="DebrisFx.cpp" />
     <ClCompile Include="FireBall.cpp" />
     <ClCompile Include="FireBullet.cpp" />
     <ClCompile Include="CollisionBox.cpp" />
@@ -236,6 +240,8 @@
     <ClCompile Include="RaccoonMario.cpp" />
     <ClCompile Include="RedKoopas.cpp" />
     <ClCompile Include="Redvenus.cpp" />
+    <ClCompile Include="Reward.cpp" />
+    <ClCompile Include="RewardFX.cpp" />
     <ClCompile Include="Scence.cpp" />
     <ClCompile Include="ScoreFx.cpp" />
     <ClCompile Include="SmallMario.cpp" />

@@ -1,5 +1,6 @@
 #include "Brick.h"
 #include "Game.h"
+#include "DebrisFx.h"
 Brick::Brick(float l, float t)
 {
 	x = l;
@@ -34,8 +35,23 @@ void Brick::SetAnimationSet(CAnimations* ani_set)
 }
 void Brick::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 {
-	if(obj->typeobject == TypeObject::player && ny >0 )
-		CGame::GetInstance()->GetCurrentScene()->delobject(this);
-	if(obj->typeobject == TypeObject::normal)
-		CGame::GetInstance()->GetCurrentScene()->delobject(this);
+	if (obj->typeobject == TypeObject::player && ny > 0)
+		Explosion();
+		
+	if (obj->typeobject == TypeObject::normal)
+		Explosion();
+}
+void Brick::Explosion()
+{
+	float velx[4] = { +0.15f, +0.20f, -0.20f, -0.15f };
+	float vely[4] = { -0.30f, -0.60f, -0.60f, -0.30f };
+
+	for (int i = 0; i < 4; i++)
+	{
+		DebrisFx* fx = new DebrisFx();
+		fx->SetPosition(x, y);
+		fx->setForce(velx[i] * 1.25f, vely[i] * 1.25f);
+		CGame::GetInstance()->GetCurrentScene()->addobject(fx);
+	}
+	CGame::GetInstance()->GetCurrentScene()->delobject(this);
 }

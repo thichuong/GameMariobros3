@@ -1,6 +1,7 @@
 #include "FireMario.h"
 #include "Game.h"
 #include "FireBullet.h"
+#include "SmokeFx.h"
 
 FireMario::FireMario() : CMario()
 {
@@ -55,8 +56,10 @@ void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	{
 		if (!bullets[i]->getactive())
 		{
-			CGame::GetInstance()->GetCurrentScene()->delobject(bullets[i]);
+			
+			bullets[i]->Explosion();
 			bullets.erase(bullets.begin() + i);
+			
 		}
 	}
 	

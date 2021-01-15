@@ -15,4 +15,5 @@ public:
 	virtual void GetBoundingBox(float &l, float &t, float &r, float &b);
 	virtual void SetAnimationSet(CAnimations* ani_set);
 	virtual void CollisionObject(LPGAMEOBJECT obj, int nx, int ny);
+	void Explosion();
 };

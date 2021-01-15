@@ -15,6 +15,7 @@
 #include "ItemBrick.h"
 #include "WarpPipe.h"
 #include "WarpMark.h"
+#include "Reward.h"
 
 CLayer::CLayer()
 {
@@ -363,6 +364,20 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					 CGame::GetInstance()->GetCurrentScene()->addobject(warpmark);
 				 }
 
+				}
+				else if (name == "Card")
+				{
+					string Cardname;
+
+					Cardname = TMXObject->Attribute("name");
+					TMXObject->QueryFloatAttribute("x", &x);
+					TMXObject->QueryFloatAttribute("y", &y);
+					if (Cardname == "reward")
+					{
+						Reward* reward = new Reward(x,y);
+						CGame::GetInstance()->GetCurrentScene()->addobject(reward);
+					}
+				
 				}
 			}
 		}

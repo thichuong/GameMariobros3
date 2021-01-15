@@ -1,14 +1,15 @@
 #pragma once
 #include "FXObject.h"
 
-#define ANI_SMOKE "ani-fireball-damaged"
-#define TIME_SMOKE 400
+#define REWARD_TIME 1000
+#define REWARD_SPEED 0.4f
 
-class SmokeFx :
+class RewardFX :
     public FXObject
 {
+    int reWard;
 public:
-    SmokeFx();
+    RewardFX(int reWard);
     virtual void SetAnimationSet(CAnimations* ani_set);
     virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
     virtual void Explosion();
