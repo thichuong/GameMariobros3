@@ -67,8 +67,8 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
 		if (state != KOOPAS_STATE_SHELL_HOLD)
 		{
-			y += min_ty * dy + ny * 0.4;
-			x += min_tx * dx + nx * 0.4;
+			y += min_ty * dy + ny * 0.4f;
+			x += min_tx * dx + nx * 0.4f;
 		}
 		
 		//y += min_ty * dy + ny * 0.5;

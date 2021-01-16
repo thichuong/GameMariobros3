@@ -67,8 +67,8 @@ void CPlayer::SetPosition(float x, float y)
 }
 void CPlayer::SwitchToMario(string state)
 {
-	if (levelMario == small) this->y -= MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT + 0.4;
-	if(state == small) this->y += MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT - 0.4;
+	if (levelMario == small) this->y -= MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT + 0.4f;
+	if(state == small) this->y += MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT - 0.4f;
 	levelMario = state;
 	ListMario[levelMario]->ax = playMario->ax;
 	playMario->SetLevel(none);

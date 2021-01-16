@@ -166,7 +166,7 @@ void CGameObject::FilterCollision(
 			min_tx = 1;
 		}
 		dy = vy * dt;
-		y -= min_ty * dy + ny * 0.4;
+		y -= min_ty * dy + ny * 0.4f;
 		x -= min_ty * dx;
 
 	}
@@ -232,7 +232,7 @@ void CGameObject::FilterCollisionY(
 	float& min_ty,
 	float& ny,  float& rdy)
 {
-	float tempx, tempy;
+	
 	min_ty = 1.0f;
 	int min_ix = -1;
 	int min_iy = -1;

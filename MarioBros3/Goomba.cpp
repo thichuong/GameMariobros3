@@ -56,8 +56,8 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		// TODO: This is a very ugly designed function!!!!
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
 	
-		y += min_ty * dy + ny * 0.4;
-		x += min_tx * dx + nx * 0.4;
+		y += min_ty * dy + ny * 0.4f;
+		x += min_tx * dx + nx * 0.4f;
 		
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
@@ -112,7 +112,7 @@ void CGoomba::SetState(int state)
 		case GOOMBA_STATE_DIE:
 			vx = 0;
 			collision = CCollision::None;
-			y += GOOMBA_BBOX_HEIGHT - GOOMBA_BBOX_HEIGHT_DIE - 0.4;
+			y += GOOMBA_BBOX_HEIGHT - GOOMBA_BBOX_HEIGHT_DIE - 0.4f;
 			break;
 		case GOOMBA_STATE_WALKING: 
 			vx = -GOOMBA_WALKING_SPEED;

@@ -144,7 +144,7 @@ public:
 	void holdObj(LPGAMEOBJECT obj); 
 	void kickObj();
 
-	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount64(); }
+	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
 	void ChangeState();
 
 	virtual void SetMoveState(MoveStates e) ;

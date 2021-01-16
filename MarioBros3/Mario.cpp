@@ -144,8 +144,8 @@ void  CMario::UpdateCollisions(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects
 		// TODO: This is a very ugly designed function!!!!
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
 
-		x += min_tx * dx + nx * 0.4;
-		y += min_ty * dy + ny * 0.4;
+		x += min_tx * dx + nx * 0.4f;
+		y += min_ty * dy + ny * 0.4f;
 
 		if (nx != 0)
 		{
@@ -515,7 +515,7 @@ void  CMario::SetMoveState(MoveStates e)
 	else
 	{
 		//if (preMariostate.movement == MoveStates::Crouch)
-		//	y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_BIG_BBOX_HEIGHT_CROUCHING + 0.4);
+		//	y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_BIG_BBOX_HEIGHT_CROUCHING + 0.4f);
 	}
 	if (Mariostate.movement == MoveStates::Attack && timeattack >= timecooldown)
 	{
@@ -561,7 +561,7 @@ void CMario::SetLevel(string l)
 	
 	if (l == small)
 	{
-		y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT + 0.4);
+		y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT + 0.4f);
 	}
 	
 	changeMario = l;
