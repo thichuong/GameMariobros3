@@ -3,6 +3,7 @@
 UIObject::UIObject()
 {
 	this->Position =D3DXVECTOR2(0,0);
+	dt = 0;
 }
 
 UIObject::~UIObject()

@@ -15,6 +15,10 @@ CGameObject::CGameObject()
 	nx = 1;	
 	collision = CCollision::Full;
 	state = 0;
+	dx = 0; dy = 0;
+	dt = 0;
+	ax = 0;
+	animations = CAnimations::GetInstance();
 }
 
 void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)

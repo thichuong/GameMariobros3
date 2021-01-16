@@ -14,6 +14,9 @@ CPlayScene::CPlayScene(int id, string filePath):
 	CScene(id, filePath)
 {
 	key_handler = new CPlayScenceKeyHandler(this);
+	
+	gamemap = NULL;
+	hud = new HUD();
 }
 
 /*
@@ -185,59 +188,7 @@ void CPlayScene::_ParseSection_ANIMATION_SETS(string line)
 */
 void CPlayScene::_ParseSection_OBJECTS(string line)
 {
-	//
-	//vector<string> tokens = split(line);
-
-	////DebugOut(L"--> %s\n",ToWSTR(line).c_str());
-
-	//if (tokens.size() < 3) return; // skip invalid lines - an object set must have at least id, x, y
-
-	//int object_type = atoi(tokens[0].c_str());
-	//float x = atof(tokens[1].c_str());
-	//float y = atof(tokens[2].c_str());
-
-	// 
-	//x = x * 3;
-	//y = y * 3;
-	//string ani_set_id = tokens[3].c_str();
-
-	//CGameObject *obj = NULL;
-
-	//switch (object_type)
-	//{
-	//case OBJECT_TYPE_MARIO:
-	//	if (player!=NULL) 
-	//	{
-	//		DebugOut(L"[ERROR] MARIO object was created before!\n");
-	//		return;
-	//	}
-	//	//obj = new CMario(100,290); 
-	//	//player = (CMario*)obj;  
-
-	//	DebugOut(L"[INFO] Player object created!\n");
-	//	break;
-	//case OBJECT_TYPE_GOOMBA: obj = new CGoomba(); break;
-	//case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
-	//case OBJECT_TYPE_KOOPAS: obj = new CKoopas(); break;
-	//case OBJECT_TYPE_PORTAL:
-	//	{	
-	//		float r = atof(tokens[4].c_str());
-	//		float b = atof(tokens[5].c_str());
-	//		int scene_id = atoi(tokens[6].c_str());
-	//		obj = new CPortal(x, y, r, b, scene_id);
-	//	}
-	//	break;
-	//default:
-	//	DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
-	//	return;
-	//}
-
-	//// General object setup
-	//obj->SetPosition(x, y);
-	////CAnimations ani_set = CAnimationSets::GetInstance()->Get(ani_set_id);
-
-	//obj->SetAnimationSet(CAnimations::GetInstance());
-	//objects.push_back(obj);
+	
 
 }
 
@@ -308,6 +259,7 @@ void CPlayScene::Load()
 				camera->setCam(pos_x, pos_y);
 				camera->setBoundBox(left, top, right, bottom);
 				camera->setCamdefault(pos_x, pos_y);
+				
 				cameras.insert(make_pair(id, camera));
 				
 				//CGame::GetInstance()->SetCam(cameras[start]);

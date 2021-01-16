@@ -16,7 +16,7 @@ class CTileSet
 	int columns;
 	float sizex;
 	float sizey;
-	RECT r;
+	//RECT r;
 	LPDIRECT3DTEXTURE9 texture;
 
 	unordered_map<int, PRECT> blocks;

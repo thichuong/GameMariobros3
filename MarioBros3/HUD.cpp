@@ -14,7 +14,7 @@ HUD::HUD()
 	font->setXMLprefix("spr-font-");
 	font->LoadFont();
 
-	int screenHeight = CGame::GetInstance()->GetScreenHeight();
+	float screenHeight = CGame::GetInstance()->GetScreenHeight();
 
 	world =D3DXVECTOR2(32 + 110, screenHeight - 150 + 24);
 	life =D3DXVECTOR2(32 + 110 - 4, screenHeight - 150 + 48);

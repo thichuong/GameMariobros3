@@ -21,13 +21,13 @@ using namespace std;
 class CPlayScene: public CScene
 {
 protected: 
-	CPlayer *player;					// A play scene has to have player, right? 
+	CPlayer *player = NULL;					// A play scene has to have player, right? 
 	vector<LPGAMEOBJECT> objects;
 	vector<LPGAMEOBJECT> earseobjects;
 	vector<LPGAMEOBJECT> addobjects;
 	unordered_map<int, LPCamera> cameras;
-	CGameMap* gamemap;
-	HUD* hud;
+	CGameMap* gamemap = NULL;
+	HUD* hud = NULL;
 
 
 	void _ParseSection_TEXTURES(string line);

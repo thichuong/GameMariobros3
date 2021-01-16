@@ -4,7 +4,7 @@
 #define PIRANHA_WIDTH 48
 #define PIRANHA_HEIGHT 92
 
-#define ANI "ani-red-piranha-plant-attack"
+#define ANI_PIRANHA "ani-red-piranha-plant-attack"
 class Piranha :
     public Plant
 {

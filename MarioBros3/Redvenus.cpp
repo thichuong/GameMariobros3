@@ -11,6 +11,8 @@ Redvenus::Redvenus()
 	height = VENUS_HEIGHT;
 	HeadVenus =  D3DXVECTOR2(1, 1);
 	growTime = 0;
+	canShot = false;
+	fireBalls = NULL;
 }
 
 void Redvenus::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -105,4 +107,5 @@ void Redvenus::DelObject()
 	ScoreFx* fx = new ScoreFx(1);
 	fx->SetPosition(x, y);
 	CGame::GetInstance()->GetCurrentScene()->addobject(fx);
+	
 }

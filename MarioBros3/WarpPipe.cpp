@@ -9,6 +9,7 @@ WarpPipe::WarpPipe(float l, float t, float w, float h)
 	box_height = h;
 	collision = CCollision::None;
 	typeobject = TypeObject::normal;
+	typewarp = TypeWarp::noWarp;
 }
 
 void  WarpPipe::GetBoundingBox(float& l, float& t, float& r, float& b)

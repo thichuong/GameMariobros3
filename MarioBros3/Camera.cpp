@@ -6,11 +6,13 @@ Camera::Camera()
 {
 	screen_height = SCREEN_HEIGHT + 1;
 	screen_width = SCREEN_WIDTH + 1;
+	blockcam = false;
 }
 Camera::Camera(float width, float height)
 {
 	screen_height = height;
 	screen_width = width;
+	blockcam = false;
 }
 void Camera::setCam(float x, float y)
 {
@@ -39,7 +41,7 @@ void Camera::update(float mariox, float marioy)
 	if (cy > camYdefault)
 		cy = camYdefault;
 	if (cy + screen_height - py < YHUD) cy += YHUD;
-	if (cy <= top) cy = top;
+	//if (cy <= top) cy = top;
 	if (cx + screen_width >= right) cx = right - screen_width;
 	if (cx <= left) cx = left;
 	if(blockcam)

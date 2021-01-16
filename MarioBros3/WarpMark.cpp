@@ -10,6 +10,11 @@ WarpMark::WarpMark(float l, float t, float w, float h)
 	box_height = h;
 	collision = CCollision::None;
 	typeobject = TypeObject::normal;
+	block_camera = false;
+	dest_x = 1;
+	dest_y = 1;
+	typewarp = TypeWarp::noWarp;
+	cameraID = 0;
 }
 
 void  WarpMark::GetBoundingBox(float& l, float& t, float& r, float& b)

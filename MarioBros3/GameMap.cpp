@@ -22,6 +22,8 @@ CLayer::CLayer()
 	this->id = 0;
 	this->width = 1;
 	this->height = 1;
+	this->visible = 1;
+	tiles = new int* [1];
 }
 
 //,  = 44
@@ -428,7 +430,7 @@ LPGAMEOBJECT CreatObject(PRECT Box, int x, int y, CAnimations* Ani)
 	if(Box !=NULL)
 	{
 		obj = new CCollisionBox(Box->left, Box->top, Box->right, Box->bottom);
-		obj->SetPosition(x, y);
+		obj->SetPosition((float)x, (float)y);
 		obj->SetAnimationSet(Ani);
 		DebugOut(L"		[Load BOX] CTileSet = : %d \n", Box->bottom);
 	}
