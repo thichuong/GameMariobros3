@@ -37,58 +37,59 @@ void Paratroopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		CGameObject::Update(dt);
 		vy += KOOPAS_GRAVITY * dt;
+		vector<LPCOLLISIONEVENT> coEvents;
+		vector<LPCOLLISIONEVENT> coEventsResult;
+		coEvents.clear();
+
+		if (state != KOOPAS_STATE_DIE)
+			CalcPotentialCollisions(coObjects, coEvents);
+
+		if (coEvents.size() == 0)
+		{
+			if (state != KOOPAS_STATE_SHELL_HOLD)
+			{
+				x += dx;
+				y += dy;
+			}
+
+		}
+		else
+		{
+			float min_tx, min_ty, nx = 0, ny = 0;
+			float rdx = 0;
+			float rdy = 0;
+
+			// TODO: This is a very ugly designed function!!!!
+			FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
+			if (state != KOOPAS_STATE_SHELL_HOLD)
+			{
+				y += min_ty * dy + ny * 0.4f;
+				x += min_tx * dx + nx * 0.4f;
+			}
+
+			//y += min_ty * dy + ny * 0.5;
+
+			for (UINT i = 0; i < coEventsResult.size(); i++)
+			{
+				LPCOLLISIONEVENT e = coEventsResult[i];
+				LPGAMEOBJECT obj = e->obj;
+				if (e->nx != 0 && e->obj->typeobject == TypeObject::enemy) nx = 0;
+			}
+			if (ny != 0) {
+				vy = -TROOPA_LFY;
+			}
+
+			if (nx != 0)
+			{
+				vx = -vx;
+			}
+		}
+
+		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+		
 	}
 	else return;
 
-	vector<LPCOLLISIONEVENT> coEvents;
-	vector<LPCOLLISIONEVENT> coEventsResult;
-	coEvents.clear();
-
-	if (state != KOOPAS_STATE_DIE)
-		CalcPotentialCollisions(coObjects, coEvents);
-
-	if (coEvents.size() == 0)
-	{
-		if (state != KOOPAS_STATE_SHELL_HOLD)
-		{
-			x += dx;
-			y += dy;
-		}
-
-	}
-	else
-	{
-		float min_tx, min_ty, nx = 0, ny = 0;
-		float rdx = 0;
-		float rdy = 0;
-
-		// TODO: This is a very ugly designed function!!!!
-		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
-		if (state != KOOPAS_STATE_SHELL_HOLD)
-		{
-			y += min_ty * dy + ny * 0.4f;
-			x += min_tx * dx + nx * 0.4f;
-		}
-
-		//y += min_ty * dy + ny * 0.5;
-
-		for (UINT i = 0; i < coEventsResult.size(); i++)
-		{
-			LPCOLLISIONEVENT e = coEventsResult[i];
-			LPGAMEOBJECT obj = e->obj;
-			if (e->nx != 0 && e->obj->typeobject == TypeObject::enemy) nx = 0;
-		}
-		if (ny != 0) {
-			vy = -TROOPA_LFY;
-		}
-
-		if (nx != 0)
-		{
-			vx = -vx;
-		}
-	}
-
-	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	CGame* game = CGame::GetInstance();
 	if (y > game->GetScamY() + game->GetScreenHeight() && state == KOOPAS_STATE_DIE) game->GetCurrentScene()->delobject(this);
 }

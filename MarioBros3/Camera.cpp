@@ -1,6 +1,7 @@
 #include "Camera.h"
 #include "Game.h"
 #include "Resource.h"
+#include "Mario.h"
 
 Camera::Camera()
 {
@@ -22,6 +23,7 @@ void Camera::setCam(float x, float y)
 
 void Camera::update(float mariox, float marioy)
 {
+	CPlayer* player = CPlayer::GetInstance();
 	float cx, cy;
 	float px, py;
 	px = mariox;
@@ -41,13 +43,21 @@ void Camera::update(float mariox, float marioy)
 	if (cy > camYdefault)
 		cy = camYdefault;
 	if (cy + screen_height - py < YHUD) cy += YHUD;
-	//if (cy <= top) cy = top;
+	
 	if (cx + screen_width >= right) cx = right - screen_width;
 	if (cx <= left) cx = left;
-	if(blockcam)
-		setCam(cx, cam_y);
+	setCam(cx, cam_y);
+	
+	if (player->getMario()->GetJumpState() == JumpStates::Super)
+	{
+			setCam(cx, cy);
+	}
 	else
-		setCam(cx, cy);
+	{
+		if (cam_y < camYdefault)
+			setCam(cx, cy);
+	}
+	
 }
 
 void Camera::setCamdefault(float x, float y)

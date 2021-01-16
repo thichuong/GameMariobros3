@@ -149,6 +149,8 @@ public:
 
 	virtual void SetMoveState(MoveStates e) ;
 	virtual void SetJumpState(JumpStates e) ;
+
+	JumpStates GetJumpState() { return Mariostate.jump; }
 	void Reset();
 	virtual void SetAnimationSet(CAnimations* ani_set);
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) =0;

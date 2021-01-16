@@ -50,7 +50,7 @@ void Brick::Explosion()
 	{
 		DebrisFx* fx = new DebrisFx();
 		fx->SetPosition(x, y);
-		fx->setForce(velx[i] * 1.25f, vely[i] * 1.25f);
+		fx->setForce(velx[i] , vely[i] );
 		CGame::GetInstance()->GetCurrentScene()->addobject(fx);
 	}
 	CGame::GetInstance()->GetCurrentScene()->delobject(this);

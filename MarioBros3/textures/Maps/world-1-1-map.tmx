@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="25" nextobjectid="286">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="25" nextobjectid="291">
  <editorsettings>
   <export target="world-1-1-map.xml" format="tmx"/>
  </editorsettings>
@@ -524,6 +524,15 @@
   <object id="268" x="6316" y="1199">
    <point/>
   </object>
+  <object id="288" x="7297" y="1096">
+   <point/>
+  </object>
+  <object id="289" x="7345" y="1098">
+   <point/>
+  </object>
+  <object id="290" x="7252" y="1094">
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="15" name="Enemy">
   <object id="55" name="goomba" type="tan" x="1510" y="1189.33"/>
@@ -533,7 +542,7 @@
   <object id="98" name="venus" type="red" x="1078.82" y="1112.64" width="48" height="24"/>
   <object id="186" name="para-goomba" type="tan" x="2663.82" y="1105.5"/>
   <object id="187" name="goomba" type="tan" x="2251.33" y="1108.67"/>
-  <object id="196" name="koopa" type="red" x="6266.5" y="1030"/>
+  <object id="196" name="koopa" type="red" x="5995.5" y="1024"/>
   <object id="282" name="koopa" type="green-para" x="4030" y="759">
    <point/>
   </object>

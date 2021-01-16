@@ -97,7 +97,18 @@ void RedKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			{
 				float l, t, r, b;
 				obj->GetBoundingBox(l, t, r, b);
-				if (l - KOOPAS_BBOX_WIDTH/2 > x  || x + KOOPAS_BBOX_WIDTH > r + KOOPAS_BBOX_WIDTH/2) vx = -vx;
+				if (l - KOOPAS_BBOX_WIDTH / 3 > x || x + KOOPAS_BBOX_WIDTH > r + KOOPAS_BBOX_WIDTH / 3)
+				{
+					if (l - KOOPAS_BBOX_WIDTH / 3 > x)
+					{
+						vx = KOOPAS_WALKING_SPEED;
+					}
+						
+					else
+					{  
+						vx = -KOOPAS_WALKING_SPEED;
+					}
+				}
 			}
 
 		}

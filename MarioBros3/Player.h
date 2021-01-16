@@ -56,5 +56,6 @@ public:
     CMario* getMario() { return playMario; }
     void Warp(TypeWarp warp);
     static  CPlayer* GetInstance();
+    string GetlevelMario() { return levelMario; }
 };
 
