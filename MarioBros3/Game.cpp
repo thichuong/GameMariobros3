@@ -65,8 +65,8 @@ void CGame::Init(HWND hWnd)
 */
 void CGame::Draw(int x, int y,int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
-	D3DXVECTOR3 p(x -(int) camera->cam_x - xPivot, y -(int) camera->cam_y, 0);
-	D3DXVECTOR3 pcenter3((right - left + xPivot) / 2 , 0, 0);
+	D3DXVECTOR3 p(x -(int) camera->cam_x , y -(int) camera->cam_y, 0);
+	D3DXVECTOR3 pcenter3((right - left ) / 2 + xPivot, 0, 0);
 	RECT r; 
 	r.left = left;
 	r.top = top;
@@ -76,15 +76,15 @@ void CGame::Draw(int x, int y,int xPivot, LPDIRECT3DTEXTURE9 texture, int left, 
 }
 void CGame::Draw(int x, int y, int xPivot,D3DXVECTOR2 vectorflip, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
-	D3DXVECTOR3 p(x - (int) camera->cam_x + xPivot, y - (int)camera->cam_y, 0);
+	D3DXVECTOR3 p(x - (int) camera->cam_x, y - (int)camera->cam_y, 0);
 	RECT r;
 	r.left = left;
 	r.top = top;
 	r.right = right;
 	r.bottom = bottom;
 
-	D3DXVECTOR2 pcenter2(p.x + (right - left + xPivot) / 2, p.y + (bottom - top) / 2);
-	D3DXVECTOR3 pcenter3(((right - left + xPivot) / 2)* vectorflip.x,0, 0);
+	D3DXVECTOR2 pcenter2(p.x  + (right - left) / 2, p.y + (bottom - top) / 2);
+	D3DXVECTOR3 pcenter3(((right - left) / 2)* vectorflip.x - xPivot *vectorflip.x,0, 0);
 	D3DXVECTOR2 pScale(vectorflip.x, vectorflip.y);
 	D3DXMATRIX oldMatrix, newMatrix;
 	spriteHandler->GetTransform(&oldMatrix);
@@ -99,15 +99,15 @@ void CGame::Draw(int x, int y, int xPivot,D3DXVECTOR2 vectorflip, LPDIRECT3DTEXT
 }
 void CGame::DrawFlipX(int x, int y, int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
-	D3DXVECTOR3 p(x - (int)camera->cam_x + xPivot, y - (int)camera->cam_y, 0);
+	D3DXVECTOR3 p(x - (int)camera->cam_x , y - (int)camera->cam_y, 0);
 	RECT r;
 	r.left = left;
 	r.top = top;
 	r.right = right;
 	r.bottom = bottom;
 
-	D3DXVECTOR2 pcenter2(p.x + (right - left + xPivot) / 2, p.y + (bottom - top) / 2);
-	D3DXVECTOR3 pcenter3(-((right - left + xPivot) / 2) , 0, 0);
+	D3DXVECTOR2 pcenter2(p.x  + (right - left ) / 2, p.y + (bottom - top) / 2);
+	D3DXVECTOR3 pcenter3(-((right - left ) / 2) + xPivot, 0, 0);
 	D3DXVECTOR2 pScale(-1.0f, 1.0f);
 	D3DXMATRIX oldMatrix, newMatrix;
 	spriteHandler->GetTransform(&oldMatrix);
