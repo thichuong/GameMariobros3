@@ -75,16 +75,16 @@ TileSet CGameMap::GetTileSet(int id)
 }
 void CGameMap::Render(CGame* game)
 {
-	int Width = game->GetScamX() / tileWidth;
-	int Height = game->GetScamY() / tileHeight;
+	int Width =(int)game->GetScamX() / tileWidth;
+	int Height =(int)game->GetScamY() / tileHeight;
 
 	if (Width > 0) Width--;
 	if (Height > 0) Height--;
 
 	//Vec2 camSize = Vec2(this->camera->GetCamSize().x / tileWidth, this->camera->GetCamSize().y / tileHeight);
 	
-	int camWidth = game->GetScreenWidth() / tileWidth;
-	int camHeight = game->GetScreenHeight() / tileHeight;
+	int camWidth = (int)game->GetScreenWidth() / tileWidth;
+	int camHeight = (int)game->GetScreenHeight() / tileHeight;
 	for (int i = Width; i < camWidth + Width + 3; i++) {
 		for (int j = Height; j < camHeight + Height + 3; j++) {
 			int x = i * tileWidth ;
@@ -101,16 +101,16 @@ void CGameMap::Render(CGame* game)
 }
 void  CGameMap::ReRender(CGame* game)
 {
-	int Width = game->GetScamX() / tileWidth;
-	int Height = game->GetScamY() / tileHeight;
+	int Width =(int) game->GetScamX() / tileWidth;
+	int Height = (int)game->GetScamY() / tileHeight;
 
 	if (Width > 0) Width--;
 	if (Height > 0) Height--;
 
 	//Vec2 camSize = Vec2(this->camera->GetCamSize().x / tileWidth, this->camera->GetCamSize().y / tileHeight);
 
-	int camWidth = game->GetScreenWidth() / tileWidth;
-	int camHeight = game->GetScreenHeight() / tileHeight;
+	int camWidth = (int)game->GetScreenWidth() / tileWidth;
+	int camHeight = (int)game->GetScreenHeight() / tileHeight;
 	for (int i = Width; i < camWidth + Width + 3; i++) {
 		for (int j = Height; j < camHeight + Height + 3; j++) {
 			int x = i * tileWidth;

@@ -34,9 +34,6 @@
     <Filter Include="Source Files\GameObject\Blocks">
       <UniqueIdentifier>{78d08d18-0d43-415b-b059-1716b0dcfb37}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObject\Weapon">
-      <UniqueIdentifier>{4e4a22c1-b7cd-44f1-897d-d79b3cb843d4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\GameObject\Solid">
       <UniqueIdentifier>{a9239b39-04dc-4e3b-9622-bec0f77b7688}</UniqueIdentifier>
     </Filter>
@@ -81,6 +78,9 @@
     </Filter>
     <Filter Include="Source Files\Mario\player">
       <UniqueIdentifier>{42fcad28-f178-4795-a525-112d292e0b1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Mario\Weapon">
+      <UniqueIdentifier>{4e4a22c1-b7cd-44f1-897d-d79b3cb843d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -130,10 +130,10 @@
       <Filter>Source Files\GameObject\Blocks</Filter>
     </ClInclude>
     <ClInclude Include="FireBullet.h">
-      <Filter>Source Files\GameObject\Weapon</Filter>
+      <Filter>Source Files\Mario\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="MarioTail.h">
-      <Filter>Source Files\GameObject\Weapon</Filter>
+      <Filter>Source Files\Mario\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="Solid.h">
       <Filter>Source Files\GameObject\Solid</Filter>
@@ -297,10 +297,10 @@
       <Filter>Source Files\GameObject\Blocks</Filter>
     </ClCompile>
     <ClCompile Include="FireBullet.cpp">
-      <Filter>Source Files\GameObject\Weapon</Filter>
+      <Filter>Source Files\Mario\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="MarioTail.cpp">
-      <Filter>Source Files\GameObject\Weapon</Filter>
+      <Filter>Source Files\Mario\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="Solid.cpp">
       <Filter>Source Files\GameObject\Solid</Filter>

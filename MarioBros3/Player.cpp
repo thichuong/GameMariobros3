@@ -42,6 +42,16 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 
 	playMario->Update(dt, colliable_objects);
 	playMario->GetPosition(this->x, this->y);
+
+	for (unsigned int i = 0; i < bullets.size(); i++)
+	{
+		if (!bullets[i]->getactive())
+		{
+
+			bullets[i]->Explosion();
+			bullets.erase(bullets.begin() + i);
+		}
+	}
 }
 void CPlayer::Render()
 {
@@ -75,6 +85,8 @@ void CPlayer::SwitchToMario(string state)
 	if(state == small) this->y += MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT - 0.4f;
 	levelMario = state;
 	ListMario[levelMario]->ax = playMario->ax;
+	ListMario[levelMario]->vx = playMario->vx;
+	ListMario[levelMario]->vy = playMario->vy;
 	playMario->SetLevel(none);
 	playMario = ListMario[levelMario];
 	playMario->SetPosition(this->x, this->y);

@@ -95,7 +95,7 @@ void Redvenus::addFireBall(float fireBallvy)
 
 
 
-	fireBalls = new FireBall(fireBallx, fireBally, -HeadVenus.x, fireBallvy);
+	fireBalls = new FireBall(fireBallx, fireBally, (int)-HeadVenus.x, fireBallvy);
 	CGame::GetInstance()->GetCurrentScene()->addobject(fireBalls);
 }
 void Redvenus::DelObject()

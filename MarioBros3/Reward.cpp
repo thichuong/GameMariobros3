@@ -49,7 +49,7 @@ void Reward::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	
 	if (GetTickCount64() - time_switch > SWITCH_TIME)
 	{
-		time_switch = GetTickCount64();
+		time_switch =(float) GetTickCount64();
 		reward += 1;
 		if (reward == 3) reward = 0;
 	}

@@ -28,6 +28,8 @@ public:
     int life, coin;
     
     LPGAMEOBJECT holdobject;
+    vector<CFireBullet*> bullets;
+
 
     string GetScore();
     string Getcoin();

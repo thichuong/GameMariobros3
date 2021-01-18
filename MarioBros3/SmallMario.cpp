@@ -38,7 +38,7 @@ void SmallMario::SetAnimationSet(CAnimations* ani_set)
 {
 	animations = new CAnimations();
 	animations->Add(MARIO_ANI_DIE, ani_set->Get("ani-small-mario-die"));
-	animations->Add(RUN, ani_set->Get("ani-small-mario-high-speed"));
+	animations->Add(RUN, ani_set->Get("ani-small-mario-run"));
 	animations->Add(WALK, ani_set->Get("ani-small-mario-walk"));
 	animations->Add(JUMP, ani_set->Get("ani-small-mario-jump"));
 	animations->Add(FLY, ani_set->Get("ani-small-mario-high-jump"));

@@ -9,7 +9,8 @@ FireMario::FireMario() : CMario()
 	timecooldown = FIREMARIO_TIMECOOLDOWN;
 	ani_timeattack = FIREMARIO_ANI_ATTACKTIME;
 	timeattack = FIREMARIO_TIMECOOLDOWN;
-	bullets.clear();
+	
+	
 }
 void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
@@ -41,26 +42,18 @@ void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	}
 	vy += MARIO_GRAVITY * dt;
 	CMario::Update(dt, colliable_objects);
-	if ((CGame::GetInstance()->IsKeyDown(DIK_Z) || attack == TRUE) && player->holdobject == NULL && bullets.size() < 2)
+
+	int bullets = CPlayer::GetInstance()->bullets.size();
+	if ((CGame::GetInstance()->IsKeyDown(DIK_Z) || attack == TRUE) && player->holdobject == NULL && bullets < 2)
 	{
 		SetMoveState(MoveStates::Attack);
 		if (timeattack == 0)
 		{
 			CFireBullet* firebullet = new CFireBullet(x, y, ax);
-			bullets.push_back(firebullet);
+			CPlayer::GetInstance()->bullets.push_back(firebullet);
 			CGame::GetInstance()->GetCurrentScene()->addobject(firebullet);
 		}
 
-	}
-	for (unsigned int i = 0; i < bullets.size(); i++)
-	{
-		if (!bullets[i]->getactive())
-		{
-			
-			bullets[i]->Explosion();
-			bullets.erase(bullets.begin() + i);
-			
-		}
 	}
 	
 }

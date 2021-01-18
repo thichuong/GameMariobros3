@@ -144,8 +144,8 @@ void  CMario::UpdateCollisions(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects
 		// TODO: This is a very ugly designed function!!!!
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
 
-		x += min_tx * dx + nx * 0.4f;
-		y += min_ty * dy + ny * 0.4f;
+		x += min_tx * dx + nx * 0.2f;
+		y += min_ty * dy + ny * 0.2f;
 
 		if (nx != 0)
 		{
@@ -264,13 +264,13 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		GetBoundingBox(l, t, r, b);
 		if (ax >= 0)
 		{
-			player->holdobject->SetPosition(x + (r - l)- MARIO_HOLD, b - MARIO_BIG_BBOX_HEIGHT*0.7);
+			player->holdobject->SetPosition(x + (r - l)- MARIO_HOLD, b - MARIO_BIG_BBOX_HEIGHT*0.7f);
 			
 		}
 		else
 		{
 			player->holdobject->GetBoundingBox(hl, ht, hr, hb);
-			player->holdobject->SetPosition(x - (hr - hl) + MARIO_HOLD, b - MARIO_BIG_BBOX_HEIGHT * 0.7);
+			player->holdobject->SetPosition(x - (hr - hl) + MARIO_HOLD, b - MARIO_BIG_BBOX_HEIGHT * 0.7f);
 			
 		}
 		player->holdobject->vx = vx;

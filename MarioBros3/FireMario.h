@@ -8,7 +8,7 @@
 class FireMario :
     public CMario
 {
-	vector<CFireBullet*> bullets;
+	
 public:
 	FireMario();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);

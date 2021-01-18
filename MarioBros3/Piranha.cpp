@@ -15,13 +15,14 @@ Piranha::Piranha()
 
 void Piranha::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	int camx = CGame::GetInstance()->GetScamX();
-	int width = CGame::GetInstance()->GetScreenWidth();
-	if (x + PIRANHA_WIDTH >= camx * 0.8 || x < camx + width * 1.2)
+	float camx = (float)CGame::GetInstance()->GetScamX();
+	float width = (float)CGame::GetInstance()->GetScreenWidth();
+	Plant::Update(dt, coObjects);
+	if (x >= camx && x < camx + width)
 	{
 	}
 	else return;
-	Plant::Update(dt, coObjects);
+	
 
 }
 void Piranha::Pre_Render()
