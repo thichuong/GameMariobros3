@@ -30,10 +30,7 @@ void Coin::SetAnimationSet(CAnimations* ani_set)
 	animations = ani_set;
 
 }
-void Coin::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
-{
-	
-}
+
 void Coin::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
 	if (Fly)

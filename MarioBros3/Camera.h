@@ -10,22 +10,22 @@ public:
 	float cam_x = 0.0f;
 	float cam_y = 0.0f;
 
-	int screen_width;
-	int screen_height;
+	float screen_width;
+	float screen_height;
 
-	int camYdefault;
-	int camXdefault;
+	float camYdefault =0;
+	float camXdefault =0;
 
 	bool blockcam;
 
-	int left, top, right, bottom;
+	float left, top, right, bottom;
 
 public:
 	Camera();
 	Camera(float width, float height);
 	void Load();
 	void setCam(float x, float y);
-	void setBoundBox(int l, int t, int r, int b);
+	void setBoundBox(float l, float t, float r, float b);
 	void update(float mariox, float marioy);
 	void setCamdefault(float x, float y);
 	void BlockCam() { blockcam = true; }

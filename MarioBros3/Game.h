@@ -75,10 +75,10 @@ public:
 	void SwitchScene(int scene_id);
 
 	LPCamera getCamera() { return camera; }
-	int GetScreenWidth() { return camera->screen_width; }
-	int GetScreenHeight() { return camera->screen_height;}
-	int GetScamX() { return camera->cam_x; }
-	int GetScamY() { return camera->cam_y; }
+	float GetScreenWidth() { return (float)camera->screen_width; }
+	float GetScreenHeight() { return (float)camera->screen_height;}
+	float GetScamX() { return camera->cam_x; }
+	float GetScamY() { return camera->cam_y; }
 	void SetCam(LPCamera newCamera) { 
 		camera = newCamera; 
 		DebugOut(L"camera null = %d\n", newCamera == nullptr);

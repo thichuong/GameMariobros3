@@ -17,7 +17,7 @@ public:
 	virtual void Render();
 	virtual void GetBoundingBox(float& l, float& t, float& r, float& b);
 	virtual void SetAnimationSet(CAnimations* ani_set);
-	virtual void CollisionObject(LPGAMEOBJECT obj, int nx, int ny);
+
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
 };
 

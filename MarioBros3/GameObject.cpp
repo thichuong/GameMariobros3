@@ -19,6 +19,8 @@ CGameObject::CGameObject()
 	dt = 0;
 	ax = 0;
 	animations = CAnimations::GetInstance();
+	wx = 0;
+	typeobject = TypeObject::normal;
 }
 
 void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -240,7 +242,6 @@ void CGameObject::FilterCollisionY(
 	min_ty = 1.0f;
 	int min_ix = -1;
 	int min_iy = -1;
-	nx = 0.0f;
 	ny = 0.0f;
 
 
@@ -280,7 +281,7 @@ void CGameObject::RenderBoundingBox()
 	rect.right = (int)r - (int)l;
 	rect.bottom = (int)b - (int)t;
 
-	CGame::GetInstance()->Draw(x, y,0, bbox, rect.left, rect.top, rect.right, rect.bottom, 128);
+	CGame::GetInstance()->Draw((int)x,(int) y,0, bbox, rect.left, rect.top, rect.right, rect.bottom, 128);
 }
 
 

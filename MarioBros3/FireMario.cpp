@@ -52,7 +52,7 @@ void FireMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 		}
 
 	}
-	for (int i = 0; i < bullets.size(); i++)
+	for (unsigned int i = 0; i < bullets.size(); i++)
 	{
 		if (!bullets[i]->getactive())
 		{

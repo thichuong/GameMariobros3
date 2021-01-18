@@ -8,10 +8,7 @@
 #include <unordered_map>
 #include "WarpPipe.h"
 
-#define small "small"
-#define big "big"
-#define fire "fire"
-#define raccoon "raccoon"
+
 #define DOWN_LEVEL_TIME 1000
 
 
@@ -44,6 +41,7 @@ public:
     void SwitchToMario(string state);
     virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
     virtual void Render();
+    virtual void Pre_Render() ;
     void OnKeyUp(int keyCode) { playMario->OnKeyUp(keyCode); }
     void OnKeyDown(int keyCode) { playMario->OnKeyDown(keyCode); }
     void KeyState(BYTE* state) { playMario->KeyState(state); }

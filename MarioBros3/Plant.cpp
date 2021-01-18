@@ -17,6 +17,7 @@ void Plant::setPlant()
 	tempHeight = 0;
 	live = true;
 	timeLive = TIME_LIFE;
+	growTimeMax = TIME_GROW;
 }
 
 void Plant::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -43,7 +44,7 @@ void Plant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		if (plantstate == PlantState::slidedown || plantstate == PlantState::slideup)
 		{
 
-			if (growTime >= TIME_GROW)
+			if (growTime >= growTimeMax)
 			{
 				if (tempHeight <= maxHeight && plantstate == PlantState::slideup)
 				{
@@ -78,10 +79,6 @@ void Plant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 }
 
-void Plant::Render()
-{
-	
-}
 
 void Plant::SetState(PlantState state)
 {
@@ -114,7 +111,7 @@ void Plant::SetAnimationSet(CAnimations* ani_set)
 	animations = ani_set;
 }
 
-void Plant::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
+void Plant::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 {
 	if (plantstate == PlantState::hide) return;
 	if (obj->typeobject == TypeObject::player)
@@ -123,7 +120,7 @@ void Plant::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 	}
 	else 
 	{
-		plantstate == PlantState::hide;
+		plantstate = PlantState::hide;
 		DelObject();
 	}
 	

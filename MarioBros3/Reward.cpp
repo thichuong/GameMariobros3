@@ -9,7 +9,7 @@ Reward::Reward(float l, float t)
 	typeobject = TypeObject::item;
 	collision = CCollision::Full;
 	SetAnimationSet(CAnimations::GetInstance());
-	time_switch = GetTickCount64();
+	time_switch =(float) GetTickCount64();
 	reward = 0;
 }
 void Reward::Render()
@@ -34,7 +34,7 @@ void Reward::SetAnimationSet(CAnimations* ani_set)
 	items[2] = sprite->Get("spr-star-man-0");
 
 }
-void Reward::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
+void Reward::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 {
 	if (obj->typeobject == TypeObject::player)
 	{

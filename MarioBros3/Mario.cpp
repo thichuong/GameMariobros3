@@ -346,7 +346,7 @@ void CMario::Render()
 	{
 		ani = WARP_HOR_IDLE;
 	}
-	if (animations->Get(ani) != NULL)
+	if (animations->Get(ani) != NULL && marioWarp == TypeWarp::noWarp)
 	{
 		
 		if (ani == ATTACK)
@@ -361,7 +361,20 @@ void CMario::Render()
 		
 	
 }
+void CMario::Pre_Render()
+{
+	string ani = IDLE;
+	if (marioWarp != TypeWarp::noWarp)
+	{
+		ani = WARP_HOR_IDLE;
+	}
+	if (animations->Get(ani) != NULL && marioWarp != TypeWarp::noWarp)
+	{
 
+			animations->Get(ani)->Render(x, y, false);
+	}
+
+}
 void CMario::SetAnimationSet(CAnimations* ani_set)
 {
 	animations = new CAnimations();

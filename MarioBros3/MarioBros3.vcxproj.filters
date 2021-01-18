@@ -28,12 +28,6 @@
     <Filter Include="Source Files\GameObject">
       <UniqueIdentifier>{2e387356-2742-4388-9037-b92682ff5d48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObject\Mario">
-      <UniqueIdentifier>{d7e07c8d-667a-4341-9554-d5f40e2fa768}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameObject\Mario\player">
-      <UniqueIdentifier>{42fcad28-f178-4795-a525-112d292e0b1c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\GameObject\Enemy">
       <UniqueIdentifier>{3603a757-e5de-4b8c-97db-a7edaee6010e}</UniqueIdentifier>
     </Filter>
@@ -82,6 +76,12 @@
     <Filter Include="Source Files\GameObject\ITem">
       <UniqueIdentifier>{681a5cc1-284b-4c27-8182-509fa04b8a18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Mario">
+      <UniqueIdentifier>{d7e07c8d-667a-4341-9554-d5f40e2fa768}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Mario\player">
+      <UniqueIdentifier>{42fcad28-f178-4795-a525-112d292e0b1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -93,12 +93,6 @@
     <ClInclude Include="Animations.h">
       <Filter>Framework\Animations</Filter>
     </ClInclude>
-    <ClInclude Include="tinystr.h">
-      <Filter>Framework\tinyXML</Filter>
-    </ClInclude>
-    <ClInclude Include="tinyxml.h">
-      <Filter>Framework\tinyXML</Filter>
-    </ClInclude>
     <ClInclude Include="GameMap.h">
       <Filter>Framework\Map</Filter>
     </ClInclude>
@@ -109,22 +103,22 @@
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Mario.h">
-      <Filter>Source Files\GameObject\Mario</Filter>
+      <Filter>Source Files\Mario</Filter>
     </ClInclude>
     <ClInclude Include="BigMario.h">
-      <Filter>Source Files\GameObject\Mario</Filter>
+      <Filter>Source Files\Mario</Filter>
     </ClInclude>
     <ClInclude Include="RaccoonMario.h">
-      <Filter>Source Files\GameObject\Mario</Filter>
+      <Filter>Source Files\Mario</Filter>
     </ClInclude>
     <ClInclude Include="FireMario.h">
-      <Filter>Source Files\GameObject\Mario</Filter>
+      <Filter>Source Files\Mario</Filter>
     </ClInclude>
     <ClInclude Include="SmallMario.h">
-      <Filter>Source Files\GameObject\Mario</Filter>
+      <Filter>Source Files\Mario</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Source Files\GameObject\Mario\player</Filter>
+      <Filter>Source Files\Mario\player</Filter>
     </ClInclude>
     <ClInclude Include="Goomba.h">
       <Filter>Source Files\GameObject\Enemy</Filter>
@@ -246,6 +240,12 @@
     <ClInclude Include="RewardFX.h">
       <Filter>Source Files\GameObject\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="tinyXML\tinystr.h">
+      <Filter>Framework\tinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyXML\tinyxml.h">
+      <Filter>Framework\tinyXML</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -260,18 +260,6 @@
     <ClCompile Include="Animations.cpp">
       <Filter>Framework\Animations</Filter>
     </ClCompile>
-    <ClCompile Include="tinystr.cpp">
-      <Filter>Framework\tinyXML</Filter>
-    </ClCompile>
-    <ClCompile Include="tinyxml.cpp">
-      <Filter>Framework\tinyXML</Filter>
-    </ClCompile>
-    <ClCompile Include="tinyxmlparser.cpp">
-      <Filter>Framework\tinyXML</Filter>
-    </ClCompile>
-    <ClCompile Include="tinyXML\tinyxmlerror.cpp">
-      <Filter>Framework\tinyXML</Filter>
-    </ClCompile>
     <ClCompile Include="GameMap.cpp">
       <Filter>Framework\Map</Filter>
     </ClCompile>
@@ -282,22 +270,22 @@
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Mario.cpp">
-      <Filter>Source Files\GameObject\Mario</Filter>
+      <Filter>Source Files\Mario</Filter>
     </ClCompile>
     <ClCompile Include="BigMario.cpp">
-      <Filter>Source Files\GameObject\Mario</Filter>
+      <Filter>Source Files\Mario</Filter>
     </ClCompile>
     <ClCompile Include="FireMario.cpp">
-      <Filter>Source Files\GameObject\Mario</Filter>
+      <Filter>Source Files\Mario</Filter>
     </ClCompile>
     <ClCompile Include="RaccoonMario.cpp">
-      <Filter>Source Files\GameObject\Mario</Filter>
+      <Filter>Source Files\Mario</Filter>
     </ClCompile>
     <ClCompile Include="SmallMario.cpp">
-      <Filter>Source Files\GameObject\Mario</Filter>
+      <Filter>Source Files\Mario</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files\GameObject\Mario\player</Filter>
+      <Filter>Source Files\Mario\player</Filter>
     </ClCompile>
     <ClCompile Include="Goomba.cpp">
       <Filter>Source Files\GameObject\Enemy</Filter>
@@ -412,6 +400,21 @@
     </ClCompile>
     <ClCompile Include="RewardFX.cpp">
       <Filter>Source Files\GameObject\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyXML\tinystr.cpp">
+      <Filter>Framework\tinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyXML\tinyxml.cpp">
+      <Filter>Framework\tinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyXML\tinyxmlerror.cpp">
+      <Filter>Framework\tinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyXML\tinyxmlparser.cpp">
+      <Filter>Framework\tinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyXML\xmltest.cpp">
+      <Filter>Framework\tinyXML</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

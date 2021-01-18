@@ -17,38 +17,40 @@ Redvenus::Redvenus()
 
 void Redvenus::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	int camx = CGame::GetInstance()->GetScamX();
-	int width = CGame::GetInstance()->GetScreenWidth();
-	if (x + VENUS_WIDTH >= camx*0.8  || x < camx + width*1.2)
-	{
-	}
-	else return;
+	float camx =(float) CGame::GetInstance()->GetScamX();
+	float width =(float) CGame::GetInstance()->GetScreenWidth();
 	Plant::Update(dt, coObjects);
-	CPlayer* player = CGame::GetInstance()->GetCurrentScene()->GetPlayer();
-	float mariox ;
-	float marioy;
-	player->getMario()->GetPosition(mariox, marioy);
-
-	if (mariox < x) HeadVenus.x = 1;
-	else HeadVenus.x = -1;
-
-	if (marioy < y + tempHeight) HeadVenus.y = 1;
-	else HeadVenus.y = -1;
-
-	float fireBallvy;
-	float tempx = abs(mariox - (x + fireBallLocation));
-	float tempy = abs(marioy - (y + fireBallLocation + tempHeight));
-	fireBallvy = (tempy / tempx);
-	if (HeadVenus.y == 1) fireBallvy = -fireBallvy;
-	if (idleTime < 400 && canShot)
+	if ( x >= camx && x < camx + width)
 	{
-		addFireBall(fireBallvy);
-		canShot = false;
-	}
-	if (plantstate == PlantState::hide) canShot = true;
+		
+		CPlayer* player = CGame::GetInstance()->GetCurrentScene()->GetPlayer();
+		float mariox;
+		float marioy;
+		player->getMario()->GetPosition(mariox, marioy);
 
+		if (mariox < x) HeadVenus.x = 1;
+		else HeadVenus.x = -1;
+
+		if (marioy < y + tempHeight) HeadVenus.y = 1;
+		else HeadVenus.y = -1;
+
+		float fireBallvy;
+		float tempx = abs(mariox - (x + fireBallLocation));
+		float tempy = abs(marioy - (y + fireBallLocation + tempHeight));
+		fireBallvy = (tempy / tempx);
+		if (HeadVenus.y == 1) fireBallvy = -fireBallvy;
+		if (idleTime < 400 && canShot)
+		{
+			addFireBall(fireBallvy);
+			canShot = false;
+		}
+		if (plantstate == PlantState::hide) canShot = true;
+
+	}
+	
+	
 }
-void Redvenus::Render()
+void Redvenus::Pre_Render()
 {
 	string ani ;
 	if (plantstate == PlantState::idle || plantstate == PlantState::hide)
@@ -87,7 +89,7 @@ void Redvenus::addFireBall(float fireBallvy)
 		CGame::GetInstance()->GetCurrentScene()->delobject(fireBalls);
 		fireBalls = NULL;
 	}
-	int fireBallx, fireBally;
+	float fireBallx, fireBally;
 	fireBallx = x + fireBallLocation;
 	fireBally = y + fireBallLocation + tempHeight;
 

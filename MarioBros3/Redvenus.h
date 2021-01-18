@@ -2,8 +2,8 @@
 #include "Plant.h"
 #include "FireBall.h"
 
-#define VENUS_WIDTH 48
-#define VENUS_HEIGHT 92
+#define VENUS_WIDTH 48.0f
+#define VENUS_HEIGHT 92.0f
 
 #define HeadUp "ani-red-venus-fire-trap-headup"
 #define HeadDown "ani-red-venus-fire-trap-headdown"
@@ -24,7 +24,7 @@ public:
    
     void addFireBall(float fireBallvy);
     virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
-    virtual void Render();
+    virtual void Pre_Render();
     virtual void DelObject();
 };
 

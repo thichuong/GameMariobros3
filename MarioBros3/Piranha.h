@@ -2,7 +2,7 @@
 #include "Plant.h"
 
 #define PIRANHA_WIDTH 48
-#define PIRANHA_HEIGHT 92
+#define PIRANHA_HEIGHT 70
 
 #define ANI_PIRANHA "ani-red-piranha-plant-attack"
 class Piranha :
@@ -13,7 +13,7 @@ public:
 
    
     virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
-    virtual void Render();
+    virtual void Pre_Render();
     virtual void DelObject();
 };
 

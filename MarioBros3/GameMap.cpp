@@ -326,10 +326,10 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 				 {
 					 WarpMark* warpmark = new WarpMark(x, y, width, height);
 					 string markname ;
-					 int cameraid;
+					 int cameraid = 0;
 					 string typeWarp;
-					 int destx;
-					 int desty;
+					 float destx = 0;
+					 float desty = 0;
 					 int block;
 					 TiXmlElement* props = TMXObject->FirstChildElement("properties");
 					 for (TiXmlElement* node = props->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
@@ -337,8 +337,8 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 						 markname = node->Attribute("name");
 						
 						 if (markname == "camera-bound-id") node->QueryIntAttribute("value", &cameraid);
-						 if(markname == "dest-x")	node->QueryIntAttribute("value", &destx);
-						 if(markname == "dest-y")	node->QueryIntAttribute("value", &desty);
+						 if(markname == "dest-x")	node->QueryFloatAttribute("value", &destx);
+						 if(markname == "dest-y")	node->QueryFloatAttribute("value", &desty);
 						 if (markname == "lock")
 						 {
 							 node->QueryIntAttribute("value", &block);
@@ -423,16 +423,4 @@ CGameMap::~CGameMap()
 {
 	layers.clear();
 	tilesets.clear();
-}
-LPGAMEOBJECT CreatObject(PRECT Box, int x, int y, CAnimations* Ani)
-{
-	CGameObject* obj = NULL;
-	if(Box !=NULL)
-	{
-		obj = new CCollisionBox(Box->left, Box->top, Box->right, Box->bottom);
-		obj->SetPosition((float)x, (float)y);
-		obj->SetAnimationSet(Ani);
-		DebugOut(L"		[Load BOX] CTileSet = : %d \n", Box->bottom);
-	}
-	return obj;
 }

@@ -24,7 +24,7 @@ void Piranha::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	Plant::Update(dt, coObjects);
 
 }
-void Piranha::Render()
+void Piranha::Pre_Render()
 {
 	string ani = "ani-green-piranha-plant-attack";
 	

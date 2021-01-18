@@ -172,7 +172,7 @@ void CPlayScene::_ParseSection_ANIMATION_SETS(string line)
 
 	CAnimations *animations = CAnimations::GetInstance();
 
-	for (int i = 1; i < tokens.size(); i++)
+	for (unsigned int i = 1; i < tokens.size(); i++)
 	{
 		string ani_id = tokens[i].c_str();
 		
@@ -247,14 +247,14 @@ void CPlayScene::Load()
 			for (TiXmlElement* detail = node->FirstChildElement("Boundary"); detail != nullptr; detail = detail->NextSiblingElement("Boundary"))
 			{
 				int id;
-				int pos_x, pos_y, left, top, right, bottom;
+				float pos_x, pos_y, left, top, right, bottom;
 				detail->QueryIntAttribute("id", &id);
-				detail->QueryIntAttribute("pos_x", &pos_x);
-				detail->QueryIntAttribute("pos_y", &pos_y);
-				detail->QueryIntAttribute("left", &left);
-				detail->QueryIntAttribute("top", &top);
-				detail->QueryIntAttribute("right", &right);
-				detail->QueryIntAttribute("bottom", &bottom);
+				detail->QueryFloatAttribute("pos_x", &pos_x);
+				detail->QueryFloatAttribute("pos_y", &pos_y);
+				detail->QueryFloatAttribute("left", &left);
+				detail->QueryFloatAttribute("top", &top);
+				detail->QueryFloatAttribute("right", &right);
+				detail->QueryFloatAttribute("bottom", &bottom);
 				Camera* camera = new Camera();
 				camera->setCam(pos_x, pos_y);
 				camera->setBoundBox(left, top, right, bottom);
@@ -333,7 +333,6 @@ void CPlayScene::Update(DWORD dt)
 	if (player == NULL) return; 
 
 	// Update camera to follow mario
-	float cx, cy;
 	float px, py;
 	player->GetPosition(px, py);
 	CGame::GetInstance()->GetInstance()->getCamera()->update(px, py);
@@ -345,11 +344,15 @@ void CPlayScene::Update(DWORD dt)
 void CPlayScene::Render()
 {
 	gamemap->Render(CGame::GetInstance());
-	for (int i = 0; i < objects.size(); i++)
+	for (unsigned int i = 0; i < objects.size(); i++)
+		objects[i]->Pre_Render();
+	player->Pre_Render();
+	gamemap->ReRender(CGame::GetInstance());
+	for (unsigned int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
 	player->Render();
 
-	gamemap->ReRender(CGame::GetInstance());
+	
 
 	hud->Render();
 }
@@ -359,7 +362,7 @@ void CPlayScene::Render()
 */
 void CPlayScene::Unload()
 {
-	for (int i = 0; i < objects.size(); i++)
+	for (unsigned int i = 0; i < objects.size(); i++)
 		delete objects[i];
 
 	objects.clear();

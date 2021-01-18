@@ -15,10 +15,7 @@ void FXObject::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (GetTickCount64() - time_FX > time_explosion)
 		this->Explosion();
 }
-void FXObject::Explosion()
-{
 
-}
 void FXObject::Render()
 {
 	string ani = ANI_FX;

@@ -2,8 +2,8 @@
 #include <unordered_map>
 #include "Utils.h"
 #include "TileSet.h"
-#include "TinyXML/tinyxml.h"
-#include "TinyXML/tinystr.h"
+//#include "TinyXML/tinyxml.h"
+//#include "TinyXML/tinystr.h"
 #include "Game.h"
 #include "GameObject.h"
 #include "Brick.h"
@@ -40,10 +40,10 @@ typedef CLayer* Layer;
 
 class CGameMap
 {
-	int width;
-	int height;
-	int tileWidth;
-	int tileHeight;
+	int width = 0;
+	int height =0;
+	int tileWidth =0;
+	int tileHeight =0;
 
 	vector< Layer> layers;
 	unordered_map<int, TileSet> tilesets;
@@ -58,4 +58,3 @@ public:
 
 };
   
-LPGAMEOBJECT CreatObject(PRECT Box, int x, int y, CAnimations* Ani);

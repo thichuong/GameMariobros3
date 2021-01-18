@@ -47,6 +47,10 @@ void CPlayer::Render()
 {
 	playMario->Render();
 }
+void CPlayer::Pre_Render()
+{
+	playMario->Pre_Render();
+}
 void CPlayer::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	playMario->GetBoundingBox(left, top, right, bottom);

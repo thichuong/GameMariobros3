@@ -124,20 +124,20 @@ void RedKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 void RedKoopas::Render()
 {
 	D3DXVECTOR2 pScale(1, 1);
-	string ani = KOOPAS_ANI_WALKING;
+	string ani = KOOPAS_RED_ANI_WALKING;
 	if (vx > 0)
 		pScale.x = -pScale.x;
 	if (state == KOOPAS_STATE_DIE) {
-		ani = KOOPAS_ANI_DIE;
+		ani = KOOPAS_RED_ANI_DIE;
 
 	}
 	if (FlipY) pScale.y = -pScale.y;
 	if (state == KOOPAS_STATE_SHELL)
-		ani = KOOPAS_ANI_SHELL;
+		ani = KOOPAS_RED_ANI_SHELL;
 	if (state == KOOPAS_STATE_SHELL_RUN)
-		ani = KOOPAS_ANI_SHELL_RUN;
+		ani = KOOPAS_RED_ANI_SHELL_RUN;
 	if (state == KOOPAS_STATE_SHELL_HOLD)
-		ani = KOOPAS_ANI_SHELL;
+		ani = KOOPAS_RED_ANI_SHELL;
 	//CAnimations::GetInstance()->Get(ani)->Render(x, y);
 	if (animations->Get(ani) != NULL)
 		animations->Get(ani)->Render(x, y, pScale);

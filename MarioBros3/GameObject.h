@@ -123,11 +123,12 @@ public:
 		float& ny,
 		float& rdy);
 	CGameObject();
-	virtual void CollisionObject(LPGAMEOBJECT obj, int nx, int ny) {};
+	virtual void CollisionObject(LPGAMEOBJECT obj, float nx, float ny) {};
 	virtual void SetAnimationSet(CAnimations* ani_set) {};
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) {};
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects = NULL);
 	virtual void Render() {};
+	virtual void Pre_Render() {};
 	virtual void SetState(int state) { this->state = state; }
 	virtual void DownLevel() {};
 	virtual void SetLevel(int lv) {};

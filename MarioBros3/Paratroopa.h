@@ -18,7 +18,7 @@ public:
 	Paratroopa();
 	virtual void SetState(int state);
 	virtual void SetAnimationSet(CAnimations* ani_set);
-	virtual void CollisionObject(LPGAMEOBJECT obj, int nx, int ny);
+	virtual void CollisionObject(LPGAMEOBJECT obj, float nx, float ny);
 
 	void swicth(int state ,float vx);
 };

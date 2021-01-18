@@ -34,7 +34,7 @@ void Leaf::SetAnimationSet(CAnimations* ani_set)
 	animations = ani_set;
 
 }
-void Leaf::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
+void Leaf::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 {
 	if (obj->typeobject == TypeObject::player)
 	{

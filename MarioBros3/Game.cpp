@@ -35,7 +35,7 @@ void CGame::Init(HWND hWnd)
 	d3dpp.BackBufferWidth = r.right + 1;
 
 	
-	camera = new Camera(r.right + 1,r.bottom + 1);
+	camera = new Camera((float) r.right + 1, (float) r.bottom + 1);
 	//camera->camXdefault = r.right + 1;
 	//camera->camYdefault = r.bottom + 1;
 	d3d->CreateDevice(
@@ -65,8 +65,8 @@ void CGame::Init(HWND hWnd)
 */
 void CGame::Draw(int x, int y,int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
-	D3DXVECTOR3 p(x -(int) camera->cam_x , y -(int) camera->cam_y, 0);
-	D3DXVECTOR3 pcenter3((right - left ) / 2 + xPivot, 0, 0);
+	D3DXVECTOR3 p((float)(x -(int) camera->cam_x ),(float) (y -(int) camera->cam_y), 0);
+	D3DXVECTOR3 pcenter3((float)(right - left ) / 2 + xPivot, 0, 0);
 	RECT r; 
 	r.left = left;
 	r.top = top;
@@ -76,7 +76,7 @@ void CGame::Draw(int x, int y,int xPivot, LPDIRECT3DTEXTURE9 texture, int left, 
 }
 void CGame::Draw(int x, int y, int xPivot,D3DXVECTOR2 vectorflip, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
-	D3DXVECTOR3 p(x - (int) camera->cam_x, y - (int)camera->cam_y, 0);
+	D3DXVECTOR3 p((float)(x - (int)camera->cam_x), (float)(y - (int)camera->cam_y), 0);
 	RECT r;
 	r.left = left;
 	r.top = top;
@@ -99,7 +99,7 @@ void CGame::Draw(int x, int y, int xPivot,D3DXVECTOR2 vectorflip, LPDIRECT3DTEXT
 }
 void CGame::DrawFlipX(int x, int y, int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
-	D3DXVECTOR3 p(x - (int)camera->cam_x , y - (int)camera->cam_y, 0);
+	D3DXVECTOR3 p((float)(x - (int)camera->cam_x), (float)(y - (int)camera->cam_y), 0);
 	RECT r;
 	r.left = left;
 	r.top = top;
@@ -107,7 +107,7 @@ void CGame::DrawFlipX(int x, int y, int xPivot, LPDIRECT3DTEXTURE9 texture, int 
 	r.bottom = bottom;
 
 	D3DXVECTOR2 pcenter2(p.x  + (right - left ) / 2, p.y + (bottom - top) / 2);
-	D3DXVECTOR3 pcenter3(-((right - left ) / 2) + xPivot, 0, 0);
+	D3DXVECTOR3 pcenter3(-((float)(right - left ) / 2) + xPivot, 0, 0);
 	D3DXVECTOR2 pScale(-1.0f, 1.0f);
 	D3DXMATRIX oldMatrix, newMatrix;
 	spriteHandler->GetTransform(&oldMatrix);
@@ -401,7 +401,7 @@ void CGame::Load(string gameFile)
 	TiXmlDocument doc(gameFile.c_str());
 
 
-	char str[MAX_GAME_LINE];
+	//char str[MAX_GAME_LINE];
 
 	// current resource section flag
 	int section = GAME_FILE_SECTION_UNKNOWN;

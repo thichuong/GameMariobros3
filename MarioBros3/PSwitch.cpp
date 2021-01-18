@@ -37,9 +37,9 @@ void PSwitch::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(ANI_DEFAULT, ani_set->Get("ani-switch-block-blue-active"));
 	animations->Add(ANI_PRESSED, ani_set->Get("ani-switch-block-blue-inactive"));
 }
-void PSwitch::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
+void PSwitch::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 {
-	if (obj->typeobject == TypeObject::player && isActive)
+	if (obj->typeobject == TypeObject::player && isActive && ny < 0)
 	{
 		Bounce = true;
 		y += PSWITCH_BBOX_HEIGHT - PSWITCH_BBOX_PRESSED_HEIGHT;

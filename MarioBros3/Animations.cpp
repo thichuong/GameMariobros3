@@ -6,7 +6,7 @@ CAnimationSets * CAnimationSets::__instance = NULL;
 
 void CAnimation::Add(LPSPRITE sprite, float time)
 {
-	int t = time;
+	float t = time;
 	if (time == 0) t = this->defaultTime;
 
 	if (sprite == NULL)

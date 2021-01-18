@@ -123,7 +123,7 @@ void CGoomba::SetAnimationSet(CAnimations* ani_set)
 {
 	animations = ani_set;
 }
-void CGoomba::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
+void CGoomba::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 {
 	//if (obj->typeobject == TypeObject::enemy) return;
 	if (obj->typeobject == TypeObject::player)

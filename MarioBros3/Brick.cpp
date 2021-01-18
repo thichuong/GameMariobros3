@@ -33,7 +33,7 @@ void Brick::SetAnimationSet(CAnimations* ani_set)
 	animations->Add("ani-brick", ani_set->Get("ani-brick"));
 
 }
-void Brick::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
+void Brick::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 {
 	if (obj->typeobject == TypeObject::player && ny > 0)
 		Explosion();

@@ -4,7 +4,7 @@
 #include "Goomba.h"
 #include "SmokeFx.h"
 
-CFireBullet::CFireBullet(float x, float y, int ax)
+CFireBullet::CFireBullet(float x, float y, float ax)
 {
 	this->x = x;
 	this->y = y;

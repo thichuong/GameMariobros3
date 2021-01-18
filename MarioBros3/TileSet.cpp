@@ -61,13 +61,13 @@ void CTileSet::Draw(int gid, int x, int y)
 {
 	if (gid < firstgid) return;
 
-	int left, top, right, bottom;
+	float left, top, right, bottom;
 	top = ((gid - firstgid) / columns) * sizey;
 	left = ((gid - firstgid) % columns) * sizex;
 	bottom = top + sizey;
 	right = left + sizex;
 	CGame* game = CGame::GetInstance();
-	game->Draw(x, y, 0, texture, left, top, right, bottom);
+	game->Draw(x, y, 0, texture,(int) left,(int) top,(int) right,(int) bottom);
 }
 
 CTileSet::~CTileSet()

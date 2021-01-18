@@ -61,8 +61,8 @@ class CPlayer;
 
 
 
-#define MARIO_BIG_BBOX_WIDTH  42
-#define MARIO_BIG_BBOX_HEIGHT 80
+#define MARIO_BIG_BBOX_WIDTH  42.0f
+#define MARIO_BIG_BBOX_HEIGHT 80.0f
 #define MARIO_BIG_BBOX_HEIGHT_CROUCHING 54
 #define MARIO_BIG_BBOX_CROUCHING 26
 #define MARIO_HOLD 15
@@ -104,11 +104,11 @@ class CMario : public CGameObject
 protected:
 	string changeMario;
 	int untouchable;
-	DWORD untouchable_start;
-	DWORD timeattack;
-	DWORD  timecooldown;
-	DWORD  ani_timeattack;
-	DWORD time_wrap;
+	ULONGLONG untouchable_start;
+	ULONGLONG timeattack;
+	ULONGLONG  timecooldown;
+	ULONGLONG  ani_timeattack;
+	ULONGLONG time_wrap;
 	bool walking;
 	bool onGround; 
 	bool canHighjump;
@@ -129,6 +129,7 @@ public:
 	CMario(float x = 0, float y = 0);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
+	virtual void Pre_Render();
 	void UpdateVx();
 	void UpdateCollisions(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
 	virtual void OnKeyUp(int keyCode);
@@ -144,7 +145,7 @@ public:
 	void holdObj(LPGAMEOBJECT obj); 
 	void kickObj();
 
-	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
+	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount64(); }
 	void ChangeState();
 
 	virtual void SetMoveState(MoveStates e) ;
@@ -155,7 +156,7 @@ public:
 	virtual void SetAnimationSet(CAnimations* ani_set);
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) =0;
 
-	int getMetter() { return metter; }
+	float getMetter() { return metter; }
 
 	void Warp(TypeWarp warp);
 };

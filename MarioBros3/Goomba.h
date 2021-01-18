@@ -30,5 +30,5 @@ public:
 	virtual void Render();
 	virtual void SetAnimationSet(CAnimations* ani_set);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
-	virtual void CollisionObject(LPGAMEOBJECT obj, int nx, int ny);
+	virtual void CollisionObject(LPGAMEOBJECT obj, float nx, float ny);
 };

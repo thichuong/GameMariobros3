@@ -8,12 +8,14 @@ Camera::Camera()
 	screen_height = SCREEN_HEIGHT + 1;
 	screen_width = SCREEN_WIDTH + 1;
 	blockcam = false;
+	left = 0; top = 0; right = 0; bottom = 0;
 }
 Camera::Camera(float width, float height)
 {
 	screen_height = height;
 	screen_width = width;
 	blockcam = false;
+	left = 0; top = 0; right = 0; bottom = 0;
 }
 void Camera::setCam(float x, float y)
 {
@@ -46,6 +48,7 @@ void Camera::update(float mariox, float marioy)
 	
 	if (cx + screen_width >= right) cx = right - screen_width;
 	if (cx <= left) cx = left;
+	if (cam_y > camYdefault) cam_y = camYdefault;
 	setCam(cx, cam_y);
 	
 	if (player->getMario()->GetJumpState() == JumpStates::Super)
@@ -56,6 +59,7 @@ void Camera::update(float mariox, float marioy)
 	{
 		if (cam_y < camYdefault)
 			setCam(cx, cy);
+		
 	}
 	
 }
@@ -65,7 +69,7 @@ void Camera::setCamdefault(float x, float y)
 	camXdefault = x;
 	camYdefault = y;
 }
-void Camera::setBoundBox(int l, int t, int r, int b)
+void Camera::setBoundBox(float l, float t, float r, float b)
 {
 	left = l;
 	top = t;

@@ -63,7 +63,7 @@ void QuestionBlock::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(ANI_EMPTY, ani_set->Get("ani-empty-block"));
 
 }
-void QuestionBlock::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
+void QuestionBlock::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 {
 	
 
@@ -71,7 +71,7 @@ void QuestionBlock::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
 	{
 		isBounce = TRUE;
 		tempy -= BOUNCE_VEL;
-		obj->vy += GRAVITY;
+		obj->vy += GRAVITY_QUESTIONBLOCK;
 		Bounce();
 	}
 		
@@ -115,7 +115,7 @@ void QuestionBlock::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	if (isBounce)
 	{
 		CGameObject::Update(dt);
-		vy += GRAVITY * dt;
+		vy += GRAVITY_QUESTIONBLOCK * dt;
 		if (tempy + vy*dt >= 0)
 		{
 			vy = 0;

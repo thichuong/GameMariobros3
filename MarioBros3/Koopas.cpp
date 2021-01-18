@@ -163,7 +163,7 @@ void CKoopas::SetAnimationSet(CAnimations* ani_set)
 	animations = ani_set;
 }
 
-void CKoopas::CollisionObject(LPGAMEOBJECT obj, int nx, int ny)
+void CKoopas::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 {
 	if (state == KOOPAS_STATE_DIE) return;
 	if (obj->typeobject == TypeObject::player)

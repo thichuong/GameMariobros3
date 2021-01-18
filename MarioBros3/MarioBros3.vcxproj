@@ -195,8 +195,8 @@
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="TileSet.h" />
-    <ClInclude Include="tinystr.h" />
-    <ClInclude Include="tinyxml.h" />
+    <ClInclude Include="tinyXML\tinystr.h" />
+    <ClInclude Include="tinyXML\tinyxml.h" />
     <ClInclude Include="UIObject.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="WarpMark.h" />
@@ -250,10 +250,11 @@
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="TileSet.cpp" />
-    <ClCompile Include="tinystr.cpp" />
-    <ClCompile Include="tinyxml.cpp" />
-    <ClCompile Include="tinyxmlparser.cpp" />
+    <ClCompile Include="tinyXML\tinystr.cpp" />
+    <ClCompile Include="tinyXML\tinyxml.cpp" />
     <ClCompile Include="tinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="tinyXML\tinyxmlparser.cpp" />
+    <ClCompile Include="tinyXML\xmltest.cpp" />
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WarpMark.cpp" />
