@@ -6,6 +6,7 @@
 #include "KeyEventHandler.h"
 #include "Player.h"
 #include "Camera.h"
+#include "Canvas.h"
 
 using namespace std;
 
@@ -27,6 +28,7 @@ public:
 	virtual void delobject(LPGAMEOBJECT object) = 0;
 	virtual CPlayer* GetPlayer() { return NULL; }
 	virtual LPCamera getCamera(int id_camera) = 0;
+	virtual void addCanvas(Canvas* canvas) {};
 };
 typedef CScene * LPSCENE;
 

@@ -3,6 +3,9 @@
 Font::Font()
 {
 	Space = 24;
+	prefix = "";
+	this->data = new CSprites();
+	this->prefix = FONT_SPR;
 }
 
 void Font::LoadFont()
@@ -22,6 +25,7 @@ void Font::LoadFont()
 		string s = "" + c;
 		data->Add(prefix + c, sprite->Get(prefix + c));
 	}
+	data->Add(prefix + "!", sprite->Get(prefix + "exclamation-point"));
 }
 
 LPSPRITE Font::GetChar(char c)

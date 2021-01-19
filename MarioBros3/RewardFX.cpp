@@ -41,5 +41,6 @@ void RewardFX::Explosion()
 {
 	
 	CGame::GetInstance()->GetCurrentScene()->delobject(this);
+
 	
 }

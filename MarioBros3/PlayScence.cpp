@@ -16,6 +16,7 @@ CPlayScene::CPlayScene(int id, string filePath):
 	key_handler = new CPlayScenceKeyHandler(this);
 	
 	gamemap = NULL;
+	canvas = NULL;
 	hud = new HUD();
 }
 
@@ -338,7 +339,7 @@ void CPlayScene::Update(DWORD dt)
 	CGame::GetInstance()->GetInstance()->getCamera()->update(px, py);
 	
 	hud->Update(dt);
-
+	if (canvas != NULL) canvas->Update(dt);
 }
 
 void CPlayScene::Render()
@@ -353,7 +354,7 @@ void CPlayScene::Render()
 	player->Render();
 
 	
-
+	if (canvas != NULL) canvas->Render();
 	hud->Render();
 }
 
@@ -406,6 +407,11 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	{
 		mario->SetPosition(6503, 1723);
 		CGame::GetInstance()->SetCam(((CPlayScene*)scence)->getCamera(1));
+	}
+	if (KeyCode == DIK_R)
+	{
+		mario->SetPosition(6903, 500);
+		CGame::GetInstance()->SetCam(((CPlayScene*)scence)->getCamera(0));
 	}
 }
 

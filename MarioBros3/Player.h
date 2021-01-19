@@ -7,7 +7,7 @@
 #include "RaccoonMario.h"
 #include <unordered_map>
 #include "WarpPipe.h"
-
+#include "ItemCard.h"
 
 #define DOWN_LEVEL_TIME 1000
 
@@ -27,6 +27,7 @@ public:
 
     int life, coin;
     
+    Card cards[3];
     LPGAMEOBJECT holdobject;
     vector<CFireBullet*> bullets;
 

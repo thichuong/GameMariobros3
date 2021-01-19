@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Sprites.h"
+#include "ItemCard.h"
 
 #define SWITCH_TIME 200
 #define REWARD_BBOX_X 48

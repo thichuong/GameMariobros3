@@ -26,9 +26,9 @@ protected:
 	vector<LPGAMEOBJECT> earseobjects;
 	vector<LPGAMEOBJECT> addobjects;
 	unordered_map<int, LPCamera> cameras;
-	CGameMap* gamemap = NULL;
-	HUD* hud = NULL;
-
+	CGameMap* gamemap ;
+	HUD* hud ;
+	Canvas* canvas ;
 
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);
@@ -47,7 +47,7 @@ public:
 	void LoadSource();
 	virtual CPlayer* GetPlayer() { return player; }
 	virtual LPCamera getCamera(int id_camera) { return cameras[id_camera]; }
-
+	virtual void addCanvas(Canvas* canvas) { this->canvas = canvas; }
 	//friend class CPlayScenceKeyHandler;
 };
 

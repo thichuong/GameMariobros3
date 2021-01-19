@@ -37,9 +37,6 @@
     <Filter Include="Source Files\GameObject\Solid">
       <UniqueIdentifier>{a9239b39-04dc-4e3b-9622-bec0f77b7688}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\HUD">
-      <UniqueIdentifier>{0df0d4f6-eaed-4679-b998-18905b47a867}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\font">
       <UniqueIdentifier>{d0b89e2a-8251-41cd-93c0-43a631072e96}</UniqueIdentifier>
     </Filter>
@@ -81,6 +78,12 @@
     </Filter>
     <Filter Include="Source Files\Mario\Weapon">
       <UniqueIdentifier>{4e4a22c1-b7cd-44f1-897d-d79b3cb843d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{0df0d4f6-eaed-4679-b998-18905b47a867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Effect\Misc">
+      <UniqueIdentifier>{78f000b0-d18e-478b-a597-90cbb230f5dd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -145,10 +148,10 @@
       <Filter>Source Files\GameObject\Blocks</Filter>
     </ClInclude>
     <ClInclude Include="HUD.h">
-      <Filter>Source Files\HUD</Filter>
+      <Filter>Source Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="PMetter.h">
-      <Filter>Source Files\HUD</Filter>
+      <Filter>Source Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="Coin.h">
       <Filter>Source Files\GameObject\ITem</Filter>
@@ -216,12 +219,6 @@
     <ClInclude Include="FXObject.h">
       <Filter>Source Files\GameObject\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="CoinFX.h">
-      <Filter>Source Files\GameObject\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreFx.h">
-      <Filter>Source Files\GameObject\Effect</Filter>
-    </ClInclude>
     <ClInclude Include="Paratroopa.h">
       <Filter>Source Files\GameObject\Enemy\koopa</Filter>
     </ClInclude>
@@ -229,9 +226,6 @@
       <Filter>Source Files\GameObject\Enemy\Plant</Filter>
     </ClInclude>
     <ClInclude Include="SmokeFx.h">
-      <Filter>Source Files\GameObject\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="DebrisFx.h">
       <Filter>Source Files\GameObject\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Reward.h">
@@ -245,6 +239,24 @@
     </ClInclude>
     <ClInclude Include="tinyXML\tinyxml.h">
       <Filter>Framework\tinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemCard.h">
+      <Filter>Source Files\GameObject\ITem</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Framework\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CoinFX.h">
+      <Filter>Source Files\GameObject\Effect\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="DebrisFx.h">
+      <Filter>Source Files\GameObject\Effect\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreFx.h">
+      <Filter>Source Files\GameObject\Effect\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="RewardCanvas.h">
+      <Filter>Source Files\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -312,10 +324,10 @@
       <Filter>Source Files\GameObject\Blocks</Filter>
     </ClCompile>
     <ClCompile Include="HUD.cpp">
-      <Filter>Source Files\HUD</Filter>
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="PMetter.cpp">
-      <Filter>Source Files\HUD</Filter>
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="Coin.cpp">
       <Filter>Source Files\GameObject\ITem</Filter>
@@ -377,12 +389,6 @@
     <ClCompile Include="FXObject.cpp">
       <Filter>Source Files\GameObject\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="CoinFX.cpp">
-      <Filter>Source Files\GameObject\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreFx.cpp">
-      <Filter>Source Files\GameObject\Effect</Filter>
-    </ClCompile>
     <ClCompile Include="Paratroopa.cpp">
       <Filter>Source Files\GameObject\Enemy\koopa</Filter>
     </ClCompile>
@@ -390,9 +396,6 @@
       <Filter>Source Files\GameObject\Enemy\Plant</Filter>
     </ClCompile>
     <ClCompile Include="SmokeFx.cpp">
-      <Filter>Source Files\GameObject\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="DebrisFx.cpp">
       <Filter>Source Files\GameObject\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Reward.cpp">
@@ -415,6 +418,21 @@
     </ClCompile>
     <ClCompile Include="tinyXML\xmltest.cpp">
       <Filter>Framework\tinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Framework\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CoinFX.cpp">
+      <Filter>Source Files\GameObject\Effect\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="DebrisFx.cpp">
+      <Filter>Source Files\GameObject\Effect\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreFx.cpp">
+      <Filter>Source Files\GameObject\Effect\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="RewardCanvas.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

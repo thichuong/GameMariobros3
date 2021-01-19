@@ -151,6 +151,7 @@
     <ClInclude Include="BigMario.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Canvas.h" />
     <ClInclude Include="Coin.h" />
     <ClInclude Include="CoinFX.h" />
     <ClInclude Include="DebrisFx.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Goomba.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="ItemBrick.h" />
+    <ClInclude Include="ItemCard.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="Leaf.h" />
@@ -186,6 +188,7 @@
     <ClInclude Include="Redvenus.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Reward.h" />
+    <ClInclude Include="RewardCanvas.h" />
     <ClInclude Include="RewardFX.h" />
     <ClInclude Include="Scence.h" />
     <ClInclude Include="ScoreFx.h" />
@@ -207,6 +210,7 @@
     <ClCompile Include="BigMario.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="CoinFX.cpp" />
     <ClCompile Include="DebrisFx.cpp" />
@@ -241,6 +245,7 @@
     <ClCompile Include="RedKoopas.cpp" />
     <ClCompile Include="Redvenus.cpp" />
     <ClCompile Include="Reward.cpp" />
+    <ClCompile Include="RewardCanvas.cpp" />
     <ClCompile Include="RewardFX.cpp" />
     <ClCompile Include="Scence.cpp" />
     <ClCompile Include="ScoreFx.cpp" />

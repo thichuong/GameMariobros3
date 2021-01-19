@@ -2,6 +2,8 @@
 
 #include "Sprites.h"
 
+#define FONT_SPR "spr-font-"
+
 class Font
 {
 	string prefix;
