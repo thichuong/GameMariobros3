@@ -16,7 +16,8 @@
 class Redvenus :
     public Plant
 {
-   D3DXVECTOR2 HeadVenus;
+ protected:
+    D3DXVECTOR2 HeadVenus;
    FireBall* fireBalls;
    bool canShot;
 public:
@@ -26,5 +27,6 @@ public:
     virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
     virtual void Pre_Render();
     virtual void DelObject();
+    virtual void SetAnimationSet(CAnimations* ani_set);
 };
 

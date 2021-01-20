@@ -8,6 +8,7 @@
 #include "Koopas.h"
 #include "RedKoopas.h"
 #include "Redvenus.h"
+#include "GreenVenus.h"
 #include "Piranha.h"
 #include "Paratroopa.h"
 #include "QuestionBlock.h"
@@ -169,7 +170,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					CGame::GetInstance()->GetCurrentScene()->addobject(ghost);
 	
 				}
-				 if (name == "Enemy")
+				else if (name == "Enemy")
 				{
 					string Enemiesname= TMXObject->Attribute("name");
 					string Type = TMXObject->Attribute("type");
@@ -213,6 +214,13 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 						if (Type == "red")
 						{
 							Redvenus* enemies = new Redvenus();
+							enemies->SetAnimationSet(CAnimations::GetInstance());
+							enemies->SetPosition(x, y);
+							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+						}
+						if (Type == "green")
+						{
+							GreenVenus* enemies = new GreenVenus();
 							enemies->SetAnimationSet(CAnimations::GetInstance());
 							enemies->SetPosition(x, y);
 							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);

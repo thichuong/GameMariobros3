@@ -166,6 +166,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="Goomba.h" />
+    <ClInclude Include="GreenVenus.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="ItemBrick.h" />
     <ClInclude Include="ItemCard.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Goomba.cpp" />
+    <ClCompile Include="GreenVenus.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="ItemBrick.cpp" />
     <ClCompile Include="Koopas.cpp" />

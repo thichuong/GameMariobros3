@@ -5,7 +5,7 @@
 #define BRICK_BBOX_WIDTH  48
 #define BRICK_BBOX_HEIGHT 48
 #define TIME_SWITCH 10000
-#
+
 
 #define STATE_BRICK 100
 #define STATE_COIN 200

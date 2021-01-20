@@ -8,6 +8,7 @@ CKoopas::CKoopas()
 	typeobject = TypeObject::enemy;
 	collision = CCollision::Full;
 	FlipY = false;
+	time_shell = 0;
 	SetAnimationSet(CAnimations::GetInstance());
 }
 
@@ -97,6 +98,12 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	CGame* game = CGame::GetInstance();
+
+	if (state == KOOPAS_STATE_SHELL || state == KOOPAS_STATE_SHELL_HOLD)
+	{
+		if (GetTickCount64() - time_shell >= TIME_RESTORE_MOVE) SetState(KOOPAS_STATE_WALKING);
+	}
+
 	if (y > game->GetScamY() + game->GetScreenHeight() && state == KOOPAS_STATE_DIE) game->GetCurrentScene()->delobject(this);
 }
 
@@ -113,10 +120,15 @@ void CKoopas::Render()
 	if(FlipY) pScale.y = -pScale.y;
 	if (state == KOOPAS_STATE_SHELL)
 		ani = KOOPAS_ANI_SHELL;
-	if(state == KOOPAS_STATE_SHELL_RUN)
+	else if(state == KOOPAS_STATE_SHELL_RUN)
 		ani = KOOPAS_ANI_SHELL_RUN;
-	if (state == KOOPAS_STATE_SHELL_HOLD)
+	else if (state == KOOPAS_STATE_SHELL_HOLD)
 		ani = KOOPAS_ANI_SHELL;
+	if (state == KOOPAS_STATE_SHELL || state == KOOPAS_STATE_SHELL_HOLD)
+	{
+		if (GetTickCount64() - time_shell >= TIME_RESTORE_MOVE / 2)
+			ani = KOOPAS_ANI_SHELL_CROUCH;
+	}
 	//CAnimations::GetInstance()->Get(ani)->Render(x, y);
 	if (animations->Get(ani) != NULL)
 		animations->Get(ani)->Render(x, y, pScale);
@@ -125,7 +137,7 @@ void CKoopas::Render()
 
 void CKoopas::SetState(int state)
 {
-	CGameObject::SetState(state);
+	
 	switch (state)
 	{
 	case KOOPAS_STATE_DIE:
@@ -139,12 +151,22 @@ void CKoopas::SetState(int state)
 		vx = -KOOPAS_WALKING_SPEED;
 		collision = CCollision::Full;
 		typeobject = TypeObject::enemy;
+		if (this->state == KOOPAS_STATE_SHELL_HOLD)
+		{
+			CPlayer::GetInstance()->getMario()->kickObj();
+		}
+		if (this->state == KOOPAS_STATE_SHELL || this->state == KOOPAS_STATE_SHELL_HOLD)
+		{
+			y -= KOOPAS_BBOX_HEIGHT - KOOPAS_BBOX_HEIGHT_DIE;
+		}
+		FlipY = false;
 		break;
 	case KOOPAS_STATE_SHELL:
 		typeobject = TypeObject::enemy;
 		collision = CCollision::Full;
 		vx = 0;
 		collision = CCollision::Full;
+		if (this->state == KOOPAS_STATE_WALKING || this->state == KOOPAS_STATE_SHELL_RUN) time_shell = GetTickCount64();
 		break;
 	case KOOPAS_STATE_SHELL_RUN:
 		collision = CCollision::Full;
@@ -156,6 +178,8 @@ void CKoopas::SetState(int state)
 		break;
 
 	}
+
+	CGameObject::SetState(state);
 
 }
 void CKoopas::SetAnimationSet(CAnimations* ani_set)

@@ -4,12 +4,12 @@
 
 CPlayer::CPlayer()
 {
-	ListMario[small] = new SmallMario();
+	ListMario[Mario_small] = new SmallMario();
 	ListMario[big] = new BigMario();
 	ListMario[fire] = new FireMario();
 	ListMario[raccoon] = new RaccoonMario();
 	
-	ListMario[small]->setPlayer(this);
+	ListMario[Mario_small]->setPlayer(this);
 	ListMario[big]->setPlayer(this);
 	ListMario[fire]->setPlayer(this);
 	ListMario[raccoon]->setPlayer(this);
@@ -67,7 +67,7 @@ void CPlayer::GetBoundingBox(float& left, float& top, float& right, float& botto
 }
 void CPlayer::SetAnimationSet(CAnimations* ani_set)
 {
-	ListMario[small]->SetAnimationSet(ani_set);
+	ListMario[Mario_small]->SetAnimationSet(ani_set);
 	ListMario[big]->SetAnimationSet(ani_set);
 	ListMario[fire]->SetAnimationSet(ani_set);
 	ListMario[raccoon]->SetAnimationSet(ani_set);
@@ -81,8 +81,8 @@ void CPlayer::SetPosition(float x, float y)
 }
 void CPlayer::SwitchToMario(string state)
 {
-	if (levelMario == small) this->y -= MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT + 0.4f;
-	if(state == small) this->y += MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT - 0.4f;
+	if (levelMario == Mario_small) this->y -= MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT + 0.4f;
+	if(state == Mario_small) this->y += MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT - 0.4f;
 	levelMario = state;
 	ListMario[levelMario]->ax = playMario->ax;
 	ListMario[levelMario]->vx = playMario->vx;
@@ -97,8 +97,8 @@ void CPlayer::Downlevel()
 {
 	if (downleveltime >= DOWN_LEVEL_TIME)
 	{
-		if (levelMario == small) playMario->SetState(MARIO_STATE_DIE);
-		else if (levelMario == big) playMario->SetLevel(small);
+		if (levelMario == Mario_small) playMario->SetState(MARIO_STATE_DIE);
+		else if (levelMario == big) playMario->SetLevel(Mario_small);
 		else playMario->SetLevel(big);
 		
 		DebugOut(L"[:Downlevel playMario]   %s \n", ToLPCWSTR(levelMario));

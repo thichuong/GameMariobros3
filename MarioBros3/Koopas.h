@@ -21,15 +21,18 @@
 #define KOOPAS_STATE_TROOPA 600
 
 #define KOOPAS_ANI_WALKING "ani-green-koopa-troopa-move"
-#define KOOPAS_ANI_DIE "ani-green-koopa-troopa-crouch"
-#define KOOPAS_ANI_SHELL "ani-green-koopa-troopa-crouch"
+#define KOOPAS_ANI_DIE "ani-green-koopa-troopa-shell-idle"
+#define KOOPAS_ANI_SHELL "ani-green-koopa-troopa-shell-idle"
 #define KOOPAS_ANI_SHELL_RUN "ani-green-koopa-troopa-shell-run"
+#define KOOPAS_ANI_SHELL_CROUCH "ani-green-koopa-troopa-crouch"
 
+#define TIME_RESTORE_MOVE 4000
 
 class CKoopas : public CGameObject
 {
 public:
 	bool FlipY;
+	ULONGLONG time_shell;
 public:
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);

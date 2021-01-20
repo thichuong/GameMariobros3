@@ -258,6 +258,9 @@
     <ClInclude Include="RewardCanvas.h">
       <Filter>Source Files\UI</Filter>
     </ClInclude>
+    <ClInclude Include="GreenVenus.h">
+      <Filter>Source Files\GameObject\Enemy\Plant\venus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -433,6 +436,9 @@
     </ClCompile>
     <ClCompile Include="RewardCanvas.cpp">
       <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenVenus.cpp">
+      <Filter>Source Files\GameObject\Enemy\Plant\venus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

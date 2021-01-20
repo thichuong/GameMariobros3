@@ -114,7 +114,10 @@ void RedKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 	}
 
-	
+	if (state == KOOPAS_STATE_SHELL || state == KOOPAS_STATE_SHELL_HOLD)
+	{
+		if (GetTickCount64() - time_shell >= TIME_RESTORE_MOVE) SetState(KOOPAS_STATE_WALKING);
+	}
 
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	CGame* game = CGame::GetInstance();
@@ -138,6 +141,11 @@ void RedKoopas::Render()
 		ani = KOOPAS_RED_ANI_SHELL_RUN;
 	if (state == KOOPAS_STATE_SHELL_HOLD)
 		ani = KOOPAS_RED_ANI_SHELL;
+	if (state == KOOPAS_STATE_SHELL || state == KOOPAS_STATE_SHELL_HOLD)
+	{
+		if (GetTickCount64() - time_shell >= TIME_RESTORE_MOVE / 2)
+			ani = KOOPAS_RED_ANI_SHELL_CROUCH;
+	}
 	//CAnimations::GetInstance()->Get(ani)->Render(x, y);
 	if (animations->Get(ani) != NULL)
 		animations->Get(ani)->Render(x, y, pScale);

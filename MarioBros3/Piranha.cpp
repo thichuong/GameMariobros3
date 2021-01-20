@@ -53,5 +53,7 @@ void Piranha::DelObject()
 	ScoreFx* fx = new ScoreFx(1);
 	fx->SetPosition(x, y);
 	CGame::GetInstance()->GetCurrentScene()->addobject(fx);
+	CGame::GetInstance()->GetCurrentScene()->delobject(this);
+	CPlayer::GetInstance()->AddScore(100);
 	
 }

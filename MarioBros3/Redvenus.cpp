@@ -78,9 +78,7 @@ void Redvenus::Pre_Render()
 		ani = DIE_ANI;
 		if (animations->Get(ani) != NULL)
 			animations->Get(ani)->Render(x, y + tempHeight, (DWORD)TIME_LIFE);
-	}
-	
-	
+	}	
 }
 void Redvenus::addFireBall(float fireBallvy)
 {
@@ -109,5 +107,15 @@ void Redvenus::DelObject()
 	ScoreFx* fx = new ScoreFx(1);
 	fx->SetPosition(x, y);
 	CGame::GetInstance()->GetCurrentScene()->addobject(fx);
+	CGame::GetInstance()->GetCurrentScene()->delobject(this);
+	CPlayer::GetInstance()->AddScore(100);
 	
+}
+void Redvenus::SetAnimationSet(CAnimations* ani_set)
+{
+	animations = new CAnimations();
+	animations->Add(HeadUp, ani_set->Get("ani-red-venus-fire-trap-headup"));
+	animations->Add(HeadDown, ani_set->Get("ani-red-venus-fire-trap-headdown"));
+	animations->Add(IdleHeadUp, ani_set->Get("ani-red-venus-fire-trap-headup-idle"));
+	animations->Add(IdleHeadDown, ani_set->Get("ani-red-venus-fire-trap-headdown-idle"));
 }

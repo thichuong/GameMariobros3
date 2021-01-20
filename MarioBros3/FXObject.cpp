@@ -5,6 +5,7 @@ FXObject::FXObject()
 {
 	time_FX = GetTickCount64();
 	collision = CCollision::None;
+	time_explosion = 0;
 }
 void FXObject::SetAnimationSet(CAnimations* ani_set)
 {

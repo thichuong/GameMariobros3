@@ -71,8 +71,7 @@ void Plant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		
 		if (timeLive < 0)
 		{
-			CGame::GetInstance()->GetCurrentScene()->delobject(this);
-			CPlayer::GetInstance()->AddScore(100);
+			
 		}
 	}
 		
@@ -109,6 +108,7 @@ void Plant::SetState(PlantState state)
 void Plant::SetAnimationSet(CAnimations* ani_set)
 {
 	animations = ani_set;
+
 }
 
 void Plant::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)

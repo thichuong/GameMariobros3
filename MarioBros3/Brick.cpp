@@ -87,7 +87,7 @@ void Brick::SetState(int state)
 	else 
 	{
 		isSwitch = true;
-		timeSwitch = 0;
+		timeSwitch = GetTickCount64();
 	}
 	if(state == STATE_BRICK) collision = CCollision::Full;
 	else if(state == STATE_COIN) collision = CCollision::None;
@@ -96,14 +96,13 @@ void Brick::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
 	if (isSwitch == true)
 	{
-		if (timeSwitch + dt >= TIME_SWITCH)
+		if ( GetTickCount64() - timeSwitch >= TIME_SWITCH)
 		{
 			if(state == STATE_COIN)
 				SetState(STATE_BRICK);
 			else if (state == STATE_BRICK)
 				SetState(STATE_BRICK);
 		}
-		else timeSwitch += dt;
 	}
 	if (state == STATE_COIN)
 	{

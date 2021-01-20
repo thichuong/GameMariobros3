@@ -48,7 +48,7 @@ class CPlayer;
 #define MARIO_ANI_FIRE "-fire-mario"
 #define MARIO_ANI_RACCOON "-raccoon-mario"
 
-#define small "small"
+#define Mario_small "small"
 #define big "big"
 #define fire "fire"
 #define raccoon "raccoon"
@@ -135,6 +135,7 @@ public:
 	virtual void OnKeyUp(int keyCode);
 	virtual void OnKeyDown(int keyCode);
 	virtual void KeyState(BYTE* state);
+	
 	void SetState(int state);
 	void SetLevel(string l);
 	string GetLevel();

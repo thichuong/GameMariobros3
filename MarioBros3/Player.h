@@ -45,9 +45,11 @@ public:
     virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
     virtual void Render();
     virtual void Pre_Render() ;
+   
     void OnKeyUp(int keyCode) { playMario->OnKeyUp(keyCode); }
     void OnKeyDown(int keyCode) { playMario->OnKeyDown(keyCode); }
     void KeyState(BYTE* state) { playMario->KeyState(state); }
+    
     virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
     virtual void SetAnimationSet(CAnimations* ani_set);
     void SetPosition(float x, float y);

@@ -426,7 +426,7 @@ void CMario::OnKeyDown(int keyCode)
 	case DIK_Q:
 		Reset();
 		break;
-	case DIK_1: SetLevel(small);
+	case DIK_1: SetLevel(Mario_small);
 		break;
 	case DIK_2: SetLevel(big);
 		break;
@@ -572,7 +572,7 @@ void CMario::kickObj()
 void CMario::SetLevel(string l)
 {
 	
-	if (l == small)
+	if (l == Mario_small)
 	{
 		y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT + 0.4f);
 	}
