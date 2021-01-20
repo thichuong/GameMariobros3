@@ -173,6 +173,7 @@
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="Leaf.h" />
+    <ClInclude Include="MapScene.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="MarioDamageFX.h" />
     <ClInclude Include="MarioTail.h" />
@@ -234,6 +235,7 @@
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Leaf.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MapScene.cpp" />
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="MarioDamageFX.cpp" />
     <ClCompile Include="MarioTail.cpp" />

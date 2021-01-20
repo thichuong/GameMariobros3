@@ -4,6 +4,7 @@
 #include "Game.h"
 
 #include "PlayScence.h"
+#include "MapScene.h"
 
 CGame * CGame::__instance = NULL;
 
@@ -417,7 +418,7 @@ void CGame::Load(string gameFile)
 		current_scene = start;
 		node = info->FirstChildElement("SCENES");
 		string path = node->Attribute("filepath");
-		for (TiXmlElement* sprNode = node->FirstChildElement(); sprNode != nullptr; sprNode = sprNode->NextSiblingElement())
+		for (TiXmlElement* sprNode = node->FirstChildElement("playscene"); sprNode != nullptr; sprNode = sprNode->NextSiblingElement("playscene"))
 		{
 			string line = sprNode->Attribute("file");
 			int id;

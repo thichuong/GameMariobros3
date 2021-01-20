@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Textures>
 	<Textures Game="MarioBros3">
-		<SETTINGS start = "1" />
+		<SETTINGS start = "2" />
 		<SCENES filepath ="Textures/scene">
-			<scene id="1" file="/world-1-1.xml"/>
+			<playscene id="2" file="/world-1-1.xml"/>
 		</SCENES> 	
 	</Textures>
 </Textures>

@@ -20,10 +20,7 @@
 #include "GameObject.h"
 #include "Textures.h"
 
-#include "Mario.h"
-#include "Brick.h"
-#include "Goomba.h"
-
+#include "Player.h"
 #include "PlayScence.h"
 #include "Resource.h"
 

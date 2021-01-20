@@ -270,6 +270,9 @@
     <ClInclude Include="RedGoomba.h">
       <Filter>Source Files\GameObject\Enemy\Goomba</Filter>
     </ClInclude>
+    <ClInclude Include="MapScene.h">
+      <Filter>Framework\Scence</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -454,6 +457,9 @@
     </ClCompile>
     <ClCompile Include="RedGoomba.cpp">
       <Filter>Source Files\GameObject\Enemy\Goomba</Filter>
+    </ClCompile>
+    <ClCompile Include="MapScene.cpp">
+      <Filter>Framework\Scence</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

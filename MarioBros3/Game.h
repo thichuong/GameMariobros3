@@ -15,6 +15,7 @@
 #include "Font.h"
 #include "Camera.h"
 #include "Utils.h"
+
 using namespace std;
 
 #define KEYBOARD_BUFFER_SIZE 1024
@@ -80,8 +81,9 @@ public:
 	float GetScamX() { return camera->cam_x; }
 	float GetScamY() { return camera->cam_y; }
 	void SetCam(LPCamera newCamera) { 
-		camera = newCamera; 
-		DebugOut(L"camera null = %d\n", newCamera == nullptr);
+		camera = newCamera;
+		if(newCamera == NULL)
+			DebugOut(L"camera null = %d\n", newCamera == nullptr);
 	}
 	static void SweptAABB(
 		float ml,			// move left 
