@@ -65,13 +65,9 @@ void Coin::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 
 				if (obj->typeobject == TypeObject::player)
 				{
-					ScoreFx* fx = new ScoreFx(1);
-					fx->SetPosition(x, y);
 					CGame::GetInstance()->GetCurrentScene()->delobject(this);
-					CGame::GetInstance()->GetCurrentScene()->addobject(fx);
 					CPlayer::GetInstance()->AddCoin(1);
-					CPlayer::GetInstance()->AddScore(100);
-
+					CPlayer::GetInstance()->AddScore(50);
 				}
 			}
 		}

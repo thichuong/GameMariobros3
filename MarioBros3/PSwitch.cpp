@@ -1,6 +1,8 @@
 #include "PSwitch.h"
 #include "Game.h"
 #include "Coin.h"
+#include "Brick.h"
+
 PSwitch::PSwitch(float l, float t)
 {
 	x = l ;
@@ -56,11 +58,9 @@ void PSwitch::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			LPGAMEOBJECT obj = coObjects->at(i);
 			if (obj->typeobject == TypeObject::brick)
 			{
-				float bx, by;
-				obj->GetPosition(bx, by);
-				Coin* coin = new Coin(bx, by);
-				CGame::GetInstance()->GetCurrentScene()->addobject(coin);
-				CGame::GetInstance()->GetCurrentScene()->delobject(obj);
+				if (obj->GetState() == STATE_BRICK)	obj->SetState(STATE_COIN);
+				else if(obj->GetState() == STATE_COIN) obj->SetState(STATE_BRICK);
+				
 			}
 		}
 		Bounce = false;

@@ -1,6 +1,8 @@
 #include "Brick.h"
 #include "Game.h"
 #include "DebrisFx.h"
+#include "Player.h"
+
 Brick::Brick(float l, float t)
 {
 	x = l;
@@ -8,15 +10,25 @@ Brick::Brick(float l, float t)
 	typeobject = TypeObject::brick;
 	collision = CCollision::Full;
 	SetAnimationSet(CAnimations::GetInstance());
+	isSwitch = false;
+	timeSwitch = 0;
+	state = STATE_BRICK;
+
+	CSprites* sprites = CSprites::GetInstance();
+	sprite = sprites->Get("spr-coin-3");
+
 }
 void Brick::Render()
 {
-	if (state != Break)
+	if (state == STATE_BRICK)
 	{
 		if (animations->Get("ani-brick") != NULL)
 			animations->Get("ani-brick")->Render(x, y);
 	}
-	
+	else if (state == STATE_COIN)
+	{
+		sprite->Draw(x, y, FALSE);
+	}
 }
 
 void Brick::GetBoundingBox(float &l, float &t, float &r, float &b)
@@ -43,15 +55,85 @@ void Brick::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 }
 void Brick::Explosion()
 {
-	float velx[4] = { +0.15f, +0.20f, -0.20f, -0.15f };
-	float vely[4] = { -0.30f, -0.60f, -0.60f, -0.30f };
-
-	for (int i = 0; i < 4; i++)
+	if (state == STATE_BRICK)
 	{
-		DebrisFx* fx = new DebrisFx();
-		fx->SetPosition(x, y);
-		fx->setForce(velx[i] , vely[i] );
-		CGame::GetInstance()->GetCurrentScene()->addobject(fx);
+		float velx[4] = { +0.15f, +0.20f, -0.20f, -0.15f };
+		float vely[4] = { -0.30f, -0.60f, -0.60f, -0.30f };
+
+		for (int i = 0; i < 4; i++)
+		{
+			DebrisFx* fx = new DebrisFx();
+			fx->SetPosition(x, y);
+			fx->setForce(velx[i], vely[i]);
+			CGame::GetInstance()->GetCurrentScene()->addobject(fx);
+		}
+		CGame::GetInstance()->GetCurrentScene()->delobject(this);
 	}
-	CGame::GetInstance()->GetCurrentScene()->delobject(this);
+	else if (state == STATE_COIN)
+	{
+		CPlayer::GetInstance()->AddCoin(1);
+		CPlayer::GetInstance()->AddScore(50);
+		CGame::GetInstance()->GetCurrentScene()->delobject(this);
+	}
+}
+void Brick::SetState(int state)
+{
+	this->state = state;
+	if (isSwitch)
+	{
+		isSwitch = false;
+		timeSwitch = 0;
+	}
+	else 
+	{
+		isSwitch = true;
+		timeSwitch = 0;
+	}
+	if(state == STATE_BRICK) collision = CCollision::Full;
+	else if(state == STATE_COIN) collision = CCollision::None;
+}
+void Brick::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
+{
+	if (isSwitch == true)
+	{
+		if (timeSwitch + dt >= TIME_SWITCH)
+		{
+			if(state == STATE_COIN)
+				SetState(STATE_BRICK);
+			else if (state == STATE_BRICK)
+				SetState(STATE_BRICK);
+		}
+		else timeSwitch += dt;
+	}
+	if (state == STATE_COIN)
+	{
+		
+		vector<LPGAMEOBJECT> coEvents;
+
+		vector<LPGAMEOBJECT> player;
+
+		player.clear();
+		coEvents.clear();
+
+		player.push_back(CGame::GetInstance()->GetCurrentScene()->GetPlayer()->getMario());
+		CalcCollisions(&player, coEvents);
+
+		if (coEvents.size() == 0)
+		{
+
+		}
+		else
+		{
+
+			for (UINT i = 0; i < coEvents.size(); i++)
+			{
+				LPGAMEOBJECT obj = coEvents[i];
+
+				if (obj->typeobject == TypeObject::player)
+				{
+					this->Explosion();
+				}
+			}
+		}
+	}
 }
