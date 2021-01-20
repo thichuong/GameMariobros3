@@ -14,6 +14,6 @@ public:
    
     virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
     virtual void Pre_Render();
-    virtual void DelObject();
+  
 };
 

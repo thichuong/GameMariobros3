@@ -261,6 +261,9 @@
     <ClInclude Include="GreenVenus.h">
       <Filter>Source Files\GameObject\Enemy\Plant\venus</Filter>
     </ClInclude>
+    <ClInclude Include="MarioDamageFX.h">
+      <Filter>Source Files\GameObject\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -439,6 +442,9 @@
     </ClCompile>
     <ClCompile Include="GreenVenus.cpp">
       <Filter>Source Files\GameObject\Enemy\Plant\venus</Filter>
+    </ClCompile>
+    <ClCompile Include="MarioDamageFX.cpp">
+      <Filter>Source Files\GameObject\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

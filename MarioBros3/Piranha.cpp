@@ -1,7 +1,6 @@
 #include "Piranha.h"
 #include "Player.h"
 #include "Game.h"
-#include "ScoreFx.h"
 
 Piranha::Piranha()
 {
@@ -46,14 +45,4 @@ void Piranha::Pre_Render()
 
 }
 
-void Piranha::DelObject()
-{
-	
-	live = false;
-	ScoreFx* fx = new ScoreFx(1);
-	fx->SetPosition(x, y);
-	CGame::GetInstance()->GetCurrentScene()->addobject(fx);
-	CGame::GetInstance()->GetCurrentScene()->delobject(this);
-	CPlayer::GetInstance()->AddScore(100);
-	
-}
+

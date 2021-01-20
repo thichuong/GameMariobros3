@@ -1,7 +1,7 @@
 #include "Redvenus.h"
 #include "Player.h"
 #include "Game.h"
-#include "ScoreFx.h"
+
 Redvenus::Redvenus()
 {
 	Plant::setPlant();
@@ -103,12 +103,8 @@ void Redvenus::DelObject()
 		CGame::GetInstance()->GetCurrentScene()->delobject(fireBalls);
 		fireBalls = NULL;
 	}
-	live = false;
-	ScoreFx* fx = new ScoreFx(1);
-	fx->SetPosition(x, y);
-	CGame::GetInstance()->GetCurrentScene()->addobject(fx);
-	CGame::GetInstance()->GetCurrentScene()->delobject(this);
-	CPlayer::GetInstance()->AddScore(100);
+	
+	Plant::DelObject();
 	
 }
 void Redvenus::SetAnimationSet(CAnimations* ani_set)

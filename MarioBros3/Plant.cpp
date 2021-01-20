@@ -1,4 +1,5 @@
 #include "Plant.h"
+#include "ScoreFx.h"
 
 #include "Game.h"
 #include "Mario.h"
@@ -124,4 +125,19 @@ void Plant::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 		DelObject();
 	}
 	
+}
+
+void Plant::DelObject()
+{
+
+	live = false;
+	ScoreFx* fx = new ScoreFx(1);
+	fx->SetPosition(x, y + tempHeight);
+	CGame::GetInstance()->GetCurrentScene()->addobject(fx);
+	CGame::GetInstance()->GetCurrentScene()->delobject(this);
+	CPlayer::GetInstance()->AddScore(100);
+
+	MarioDamageFX* DamageFX = new MarioDamageFX();
+	DamageFX->SetPosition(x, y + tempHeight);
+	CGame::GetInstance()->GetCurrentScene()->addobject(DamageFX);
 }

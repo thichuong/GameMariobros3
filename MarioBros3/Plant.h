@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "MarioDamageFX.h"
 
 #define TIME_HIDE  3000
 #define TIME_IDLE  800
@@ -41,6 +42,6 @@ public:
 	virtual void SetState(PlantState state);
 	virtual void SetAnimationSet(CAnimations* ani_set);
 	virtual void CollisionObject(LPGAMEOBJECT obj, float nx, float ny);
-	virtual void DelObject() {};
+	virtual void DelObject();
 };
 
