@@ -63,10 +63,10 @@ void CGame::Init(HWND hWnd)
 /*
 	Utility function to wrap LPD3DXSPRITE::Draw 
 */
-void CGame::Draw(int x, int y,int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
+void CGame::Draw(int x, int y,int xPivot, int yPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
 	D3DXVECTOR3 p((float)(x -(int) camera->cam_x ),(float) (y -(int) camera->cam_y), 0);
-	D3DXVECTOR3 pcenter3((float)(right - left ) / 2 + xPivot, 0, 0);
+	D3DXVECTOR3 pcenter3((float)(right - left ) / 2 + xPivot, 0 - yPivot, 0);
 	RECT r; 
 	r.left = left;
 	r.top = top;
@@ -74,7 +74,7 @@ void CGame::Draw(int x, int y,int xPivot, LPDIRECT3DTEXTURE9 texture, int left, 
 	r.bottom = bottom;
 	spriteHandler->Draw(texture, &r, &pcenter3, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
-void CGame::Draw(int x, int y, int xPivot,D3DXVECTOR2 vectorflip, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
+void CGame::Draw(int x, int y, int xPivot, int yPivot, D3DXVECTOR2 vectorflip, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
 	D3DXVECTOR3 p((float)(x - (int)camera->cam_x), (float)(y - (int)camera->cam_y), 0);
 	RECT r;
@@ -84,9 +84,10 @@ void CGame::Draw(int x, int y, int xPivot,D3DXVECTOR2 vectorflip, LPDIRECT3DTEXT
 	r.bottom = bottom;
 
 	D3DXVECTOR2 pcenter2(p.x  + (right - left) / 2, p.y + (bottom - top) / 2);
-	D3DXVECTOR3 pcenter3(((right - left) / 2)* vectorflip.x - xPivot *vectorflip.x,0, 0);
+	D3DXVECTOR3 pcenter3(((right - left) / 2)* vectorflip.x - xPivot *vectorflip.x, 0, 0);
 	D3DXVECTOR2 pScale(vectorflip.x, vectorflip.y);
 	D3DXMATRIX oldMatrix, newMatrix;
+	if(yPivot!= 0) p = D3DXVECTOR3((float)(x - (int)camera->cam_x), (float)(y - (int)camera->cam_y - yPivot), 0);
 	spriteHandler->GetTransform(&oldMatrix);
 
 	D3DXMatrixTransformation2D(&newMatrix, &pcenter2, 0.0f, &pScale, NULL, 0.0f, NULL);
@@ -97,7 +98,7 @@ void CGame::Draw(int x, int y, int xPivot,D3DXVECTOR2 vectorflip, LPDIRECT3DTEXT
 	spriteHandler->SetTransform(&oldMatrix);
 
 }
-void CGame::DrawFlipX(int x, int y, int xPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
+void CGame::DrawFlipX(int x, int y, int xPivot, int yPivot, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
 	D3DXVECTOR3 p((float)(x - (int)camera->cam_x), (float)(y - (int)camera->cam_y), 0);
 	RECT r;
@@ -107,7 +108,7 @@ void CGame::DrawFlipX(int x, int y, int xPivot, LPDIRECT3DTEXTURE9 texture, int 
 	r.bottom = bottom;
 
 	D3DXVECTOR2 pcenter2(p.x  + (right - left ) / 2, p.y + (bottom - top) / 2);
-	D3DXVECTOR3 pcenter3(-((float)(right - left ) / 2) + xPivot, 0, 0);
+	D3DXVECTOR3 pcenter3(-((float)(right - left ) / 2) + xPivot, 0 - yPivot, 0);
 	D3DXVECTOR2 pScale(-1.0f, 1.0f);
 	D3DXMATRIX oldMatrix, newMatrix;
 	spriteHandler->GetTransform(&oldMatrix);

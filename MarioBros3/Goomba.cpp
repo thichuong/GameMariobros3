@@ -9,6 +9,8 @@ CGoomba::CGoomba()
 	flydie = false;
 	timedie = 0;
 	SetAnimationSet(CAnimations::GetInstance());
+	jumpcount = 0;
+	time_jump = 0;
 }
 
 
@@ -64,7 +66,28 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			
 		}
 
-		if (ny != 0) vy = 0;
+		if (ny != 0)
+		{
+			vy = 0;
+			if (state == GOOMBA_STATE_FLY)
+			{
+
+				if (jumpcount < 3 && (GetTickCount() - time_jump) > TIME_JUMP)
+				{
+					vy += -PARAGOOMBA_LOW_JUMP;
+					jumpcount++;
+					time_jump = GetTickCount();
+				}
+				if (jumpcount == 3)
+				{
+					vy +=-PARAGOOMBA_HIGH_JUMP;
+
+					time_jump = GetTickCount();
+
+					jumpcount = 0;
+				}
+			}
+		}
 		if (nx != 0)
 		{
 			vx = -vx;
@@ -94,19 +117,21 @@ void CGoomba::Render()
 			ani = GOOMBA_ANI_DIE;
 		else
 		{
-			ani = GOOMBE_ANI_IDLE;
+			ani = GOOMBA_ANI_IDLE;
 			pScale.y = -pScale.y;
 		}
 	}
+	
+
 	if(animations->Get( ani)!=NULL)
 		animations->Get(ani)->Render(x, y, pScale);
-		//animations->Get(ani)->Render(x, y);
+		
 
 }
 
 void CGoomba::SetState(int state)
 {
-	CGameObject::SetState(state);
+	
 	switch (state)
 	{
 		case GOOMBA_STATE_DIE:
@@ -117,7 +142,13 @@ void CGoomba::SetState(int state)
 		case GOOMBA_STATE_WALKING: 
 			vx = -GOOMBA_WALKING_SPEED;
 			break;
+		case GOOMBA_STATE_FLY:
+			jumpcount = 0;
+			time_jump = GetTickCount64();
+			vx = -GOOMBA_WALKING_SPEED;
+			break;
 	}
+	CGameObject::SetState(state);
 }
 void CGoomba::SetAnimationSet(CAnimations* ani_set)
 {
@@ -130,7 +161,9 @@ void CGoomba::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 	{
 		if (ny < 0)
 		{
-			SetState(GOOMBA_STATE_DIE);
+			if(state == GOOMBA_STATE_WALKING)
+				SetState(GOOMBA_STATE_DIE);
+			else if(state == GOOMBA_STATE_FLY) SetState(GOOMBA_STATE_WALKING);
 			vy = 0;
 		}			
 		else

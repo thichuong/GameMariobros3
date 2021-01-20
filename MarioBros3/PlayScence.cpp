@@ -103,21 +103,23 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 				string spriteID = node->Attribute("id");
 				int left, top, width, height;
 				int xPivot = 0;
+				int yPivot = 0;
 				node->QueryIntAttribute("left", &left);
 				node->QueryIntAttribute("top", &top);
 				node->QueryIntAttribute("width", &width);
 				node->QueryIntAttribute("height", &height);
 				if (node->Attribute("xPivot") != NULL) node->QueryIntAttribute("xPivot", &xPivot);
+				if (node->Attribute("yPivot") != NULL) node->QueryIntAttribute("yPivot", &yPivot);
 				left = left * 3;
 				top = top * 3;
 				width = width * 3;
 				height = height * 3;
 
-				CSprites::GetInstance()->Add(spriteID, left, top, left + width, top + height, tex, xPivot);
+				CSprites::GetInstance()->Add(spriteID, left, top, left + width, top + height, tex, xPivot, yPivot);
 			}
 		}
 	}
-	DebugOut(L"[INFO] Loading aniId = : %s \n", ToLPCWSTR(line));
+	//DebugOut(L"[INFO] Loading aniId = : %s \n", ToLPCWSTR(line));
 }
 void CPlayScene::_ParseSection_ANIMATIONS(string line)
 {
@@ -133,7 +135,7 @@ void CPlayScene::_ParseSection_ANIMATIONS(string line)
 
 			string gameObjectID = texture->Attribute("gameObjectId");
 			string textureID = texture->Attribute("textureId");
-			DebugOut(L"	[Amni] = : %s \n", ToLPCWSTR(textureID));
+			//DebugOut(L"	[Amni] = : %s \n", ToLPCWSTR(textureID));
 
 
 			for (TiXmlElement* node = texture->FirstChildElement(); node != nullptr; node = node->NextSiblingElement())
@@ -144,7 +146,7 @@ void CPlayScene::_ParseSection_ANIMATIONS(string line)
 				//string name = node->Attribute("id");
 
 				LPANIMATION ani = new CAnimation(frameTime);
-				DebugOut(L"[INFO] Loading aniId = : %s \n", ToLPCWSTR(aniId));
+				//DebugOut(L"[INFO] Loading aniId = : %s \n", ToLPCWSTR(aniId));
 				for (TiXmlElement* sprNode = node->FirstChildElement(); sprNode != nullptr; sprNode = sprNode->NextSiblingElement())
 				{
 					string id = sprNode->Attribute("id");

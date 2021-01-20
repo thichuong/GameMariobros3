@@ -186,6 +186,7 @@
     <ClInclude Include="PSwitch.h" />
     <ClInclude Include="QuestionBlock.h" />
     <ClInclude Include="RaccoonMario.h" />
+    <ClInclude Include="RedGoomba.h" />
     <ClInclude Include="RedKoopas.h" />
     <ClInclude Include="Redvenus.h" />
     <ClInclude Include="Resource.h" />
@@ -246,6 +247,7 @@
     <ClCompile Include="PSwitch.cpp" />
     <ClCompile Include="QuestionBlock.cpp" />
     <ClCompile Include="RaccoonMario.cpp" />
+    <ClCompile Include="RedGoomba.cpp" />
     <ClCompile Include="RedKoopas.cpp" />
     <ClCompile Include="Redvenus.cpp" />
     <ClCompile Include="Reward.cpp" />

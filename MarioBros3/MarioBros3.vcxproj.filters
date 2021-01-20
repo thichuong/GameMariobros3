@@ -85,6 +85,9 @@
     <Filter Include="Source Files\GameObject\Effect\Misc">
       <UniqueIdentifier>{78f000b0-d18e-478b-a597-90cbb230f5dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObject\Enemy\Goomba">
+      <UniqueIdentifier>{8106a8b8-0e4e-48ea-8fc8-88ebf1bb24ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -122,9 +125,6 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Source Files\Mario\player</Filter>
-    </ClInclude>
-    <ClInclude Include="Goomba.h">
-      <Filter>Source Files\GameObject\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Brick.h">
       <Filter>Source Files\GameObject\Blocks</Filter>
@@ -264,6 +264,12 @@
     <ClInclude Include="MarioDamageFX.h">
       <Filter>Source Files\GameObject\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Goomba.h">
+      <Filter>Source Files\GameObject\Enemy\Goomba</Filter>
+    </ClInclude>
+    <ClInclude Include="RedGoomba.h">
+      <Filter>Source Files\GameObject\Enemy\Goomba</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -304,9 +310,6 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Mario\player</Filter>
-    </ClCompile>
-    <ClCompile Include="Goomba.cpp">
-      <Filter>Source Files\GameObject\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Brick.cpp">
       <Filter>Source Files\GameObject\Blocks</Filter>
@@ -445,6 +448,12 @@
     </ClCompile>
     <ClCompile Include="MarioDamageFX.cpp">
       <Filter>Source Files\GameObject\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Goomba.cpp">
+      <Filter>Source Files\GameObject\Enemy\Goomba</Filter>
+    </ClCompile>
+    <ClCompile Include="RedGoomba.cpp">
+      <Filter>Source Files\GameObject\Enemy\Goomba</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

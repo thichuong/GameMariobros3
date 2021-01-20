@@ -531,7 +531,7 @@
   <object id="95" name="piranha" type="basic" x="5353" y="1155.53"/>
   <object id="96" name="venus" type="green" x="5549" y="1124.64"/>
   <object id="98" name="venus" type="red" x="1078.82" y="1112.64" width="48" height="24"/>
-  <object id="186" name="para-goomba" type="tan" x="2663.82" y="1105.5"/>
+  <object id="186" name="para-goomba" type="red" x="2663.82" y="1105.5"/>
   <object id="187" name="goomba" type="tan" x="2251.33" y="1108.67"/>
   <object id="196" name="koopa" type="red" x="5995.5" y="1024"/>
   <object id="282" name="koopa" type="green-para" x="4030" y="759">

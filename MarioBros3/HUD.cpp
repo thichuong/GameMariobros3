@@ -60,7 +60,7 @@ void HUD::Update(DWORD dt)
 
 void HUD::Render()
 {
-	CGame::GetInstance()->Draw(Position.x + 300, Position.y - 10,0, CTextures::GetInstance()->Get("tex-pannel"), 0, 0, 950, 150);
+	CGame::GetInstance()->Draw((int)Position.x + 300, (int)Position.y - 10,0,0, CTextures::GetInstance()->Get("tex-pannel"), 0, 0, 950, 150);
 	int screenHeight = CGame::GetInstance()->GetScreenHeight();
 	
 	if (animations->Get("ani-hud") != NULL)

@@ -11,6 +11,7 @@ Leaf::Leaf(float l, float t, bool Fly)
 	SetAnimationSet(CAnimations::GetInstance());
 	time = 0;
 	vx = LFY_X;
+	vy = -LFY_Y_NEW;
 }
 void Leaf::Render()
 {
@@ -45,7 +46,10 @@ void Leaf::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 void Leaf::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {	
 		CGameObject::Update(dt);
-		vy = LFY_Y;
+		if (vy + LFY_Y * dt >= LFY_Y_NEW)
+			vy = LFY_Y;
+		else
+			vy += LFY_Y * dt;
 		x += dx;
 		y += dy;
 		time += dt;

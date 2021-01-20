@@ -13,7 +13,7 @@
 class Brick : 
 	public CGameObject
 {
-	int timeSwitch;
+	ULONGLONG timeSwitch;
 	bool isSwitch;
 
 	CSprite* sprite;

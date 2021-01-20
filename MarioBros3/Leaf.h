@@ -6,6 +6,7 @@
 #define TIME 800
 #define LFY_X 0.08f
 #define LFY_Y 0.06f
+#define	LFY_Y_NEW 0.6f
 class Leaf :
     public CGameObject
 {

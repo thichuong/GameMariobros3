@@ -11,6 +11,7 @@
 #include "GreenVenus.h"
 #include "Piranha.h"
 #include "Paratroopa.h"
+#include "RedGoomba.h"
 #include "QuestionBlock.h"
 #include "Coin.h"
 #include "ItemBrick.h"
@@ -179,6 +180,13 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					if (Enemiesname == "goomba")
 					{
 						CGoomba* enemies = new CGoomba();
+						enemies->SetAnimationSet(CAnimations::GetInstance());
+						enemies->SetPosition(x, y);
+						CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+					}
+					if (Enemiesname == "para-goomba")
+					{
+						RedGoomba* enemies = new RedGoomba();
 						enemies->SetAnimationSet(CAnimations::GetInstance());
 						enemies->SetPosition(x, y);
 						CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
