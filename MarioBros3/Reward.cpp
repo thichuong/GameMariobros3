@@ -3,6 +3,7 @@
 #include "RewardFX.h"
 #include "ScoreFx.h"
 #include "RewardCanvas.h"
+#include "Player.h"
 Reward::Reward(float l, float t)
 {
 	x = l;
@@ -39,16 +40,30 @@ void Reward::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 {
 	if (obj->typeobject == TypeObject::player)
 	{
+		ItemCard itemcard = ItemCard::empty;
 		RewardFX* rewardFX = new RewardFX(reward);
 		rewardFX->SetPosition(x, y);
 		CGame::GetInstance()->GetCurrentScene()->addobject(rewardFX);
 		CGame::GetInstance()->GetCurrentScene()->delobject(this);
 		RewardCanvas* rewardcanvas = new RewardCanvas();
 		if (reward == 0)
-			rewardcanvas->setCard(ItemCard::mushroom);
-		if(reward==1) rewardcanvas->setCard(ItemCard::flower);
-		if(reward == 2) rewardcanvas->setCard(ItemCard::star);
+			itemcard = ItemCard::mushroom;
+		if(reward==1) itemcard = ItemCard::flower;
+		if(reward == 2) itemcard = ItemCard::star;
+
+		rewardcanvas->setCard(itemcard);
 		CGame::GetInstance()->GetCurrentScene()->addCanvas(rewardcanvas);
+
+		CPlayer* player = CPlayer::GetInstance();
+		for (int i = 0; i < 3; i++)
+		{
+			if (player->cards[i].card == ItemCard::empty)
+			{
+				player->cards[i].card = itemcard;
+				break;
+			}
+		}
+		
 	}
 }
 void Reward::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)

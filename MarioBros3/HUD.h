@@ -5,6 +5,8 @@
 #include "UIObject.h"
 #include "PMetter.h"
 #include "Font.h"
+#include "ItemCard.h"
+#include "Sprites.h"
 
 class HUD : public UIObject
 {
@@ -16,6 +18,8 @@ private:
 	Font* font;
 	CAnimations* animations;
 
+	CSprite* items[4];
+	D3DXVECTOR2 cards[3];
 public:
 
 	HUD();
