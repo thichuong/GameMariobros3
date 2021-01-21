@@ -9,6 +9,8 @@ CNode::CNode()
 	down = false;
 	left = false;
 	right = false;
+	collision = collision = CCollision::Full;
+	typeobject = TypeObject::node;
 	SetAnimationSet(CAnimations::GetInstance());
 }
 void CNode::Render()
@@ -40,7 +42,7 @@ void CNode::SetAnimationSet(CAnimations* ani_set)
 	spritesNode[5] = sprite->Get("spr-gate-5");
 	spritesNode[6] = sprite->Get("spr-gate-6");
 	spritesNode[7] = sprite->Get("spr-M-0");
-		
+	spritesNode[8] = sprite->Get("spr-spade-0");
 }
 void CNode::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 {
@@ -64,4 +66,5 @@ void CNode::SetTypeNode(string type)
 	if (type == "num-4") typenode = TypeNode::num4;
 	if (type == "num-5") typenode = TypeNode::num5;
 	if (type == "num-6") typenode = TypeNode::num6;
+	if (type == "bonus-slot") typenode = TypeNode::bonus;
 }

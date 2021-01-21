@@ -444,6 +444,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 								else if (adjacent_weight[i] == "u") cnode->up = true;
 								else if (adjacent_weight[i] == "d") cnode->down = true;
 							}
+							DebugOut(L"[NODE_MAP] = %f \n", 1);
 						}
 
 						

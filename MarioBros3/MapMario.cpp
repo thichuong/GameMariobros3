@@ -1,5 +1,6 @@
 #include "MapMario.h"
 #include "Game.h"
+#include "CNode.h"
 
 MapMario::MapMario() : CMario()
 {
@@ -37,28 +38,32 @@ void MapMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 				x += dx;
 				y += dy;
 				
-				vector<LPGAMEOBJECT> coObjectsResult;
-
-				CalcCollisions(colliable_objects, coObjectsResult);
-				DebugOut(L"	[coObjectsResult] = : %d \n", coObjectsResult.size());
-				//DebugOut(L"	[coObjectsResult] MArio  : %f \n", x);
-				//DebugOut(L"	[coObjectsResult] taik  : %f \n", tail->x);
-				for (UINT i = 0; i < coObjectsResult.size(); i++)
-				{
-					LPGAMEOBJECT e = coObjectsResult[i];
-
-					if (e->typeobject == TypeObject::node)
-					{
-						
-					}
-
-				}
-				coObjectsResult.clear();
+				
 			}
 
 		}
 	}
-	
+	vector<LPGAMEOBJECT> coObjectsResult;
+
+	CalcCollisions(colliable_objects, coObjectsResult);
+	DebugOut(L"	[coObjectsResult] = : %d \n", coObjectsResult.size());
+	//DebugOut(L"	[coObjectsResult] MArio  : %f \n", x);
+	//DebugOut(L"	[coObjectsResult] taik  : %f \n", tail->x);
+	for (UINT i = 0; i < coObjectsResult.size(); i++)
+	{
+		LPGAMEOBJECT e = coObjectsResult[i];
+
+		if (e->typeobject == TypeObject::node)
+		{
+			CNode* node = dynamic_cast<CNode*>(e);
+			up = node->up;
+			down = node->down;
+			left = node->left;
+			right = node->right;
+		}
+
+	}
+	coObjectsResult.clear();
 
 }
 

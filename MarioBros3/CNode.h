@@ -25,8 +25,10 @@ enum class TypeNode
     num4,
     num5,
     num6,
-    numM,
+    numM, 
+    bonus,
     Nodenone
+    
 };
 
 class CNode :
@@ -36,7 +38,7 @@ class CNode :
     TypeNode typenode;
     int IDscene;
    
-    CSprite* spritesNode[8];
+    CSprite* spritesNode[9];
 public:
 
     bool up, down, left, right;
