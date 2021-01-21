@@ -428,6 +428,16 @@ void CGame::Load(string gameFile)
 			scenes[id] = scene;
 			DebugOut(L"[INFO] start scene %d \n", id);
 		}
+		for (TiXmlElement* sprNode = node->FirstChildElement("mapscene"); sprNode != nullptr; sprNode = sprNode->NextSiblingElement("mapscene"))
+		{
+			string line = sprNode->Attribute("file");
+			int id;
+			sprNode->QueryIntAttribute("id", &id);
+			//_ParseSection_SCENES(path + line);
+			LPSCENE scene = new MapScene(id, path + line);
+			scenes[id] = scene;
+			DebugOut(L"[INFO] start scene %d \n", id);
+		}
 	}
 		//
 		// data section

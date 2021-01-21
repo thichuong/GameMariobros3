@@ -88,6 +88,12 @@
     <Filter Include="Source Files\GameObject\Enemy\Goomba">
       <UniqueIdentifier>{8106a8b8-0e4e-48ea-8fc8-88ebf1bb24ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Mario\StateMario">
+      <UniqueIdentifier>{3591961a-b2af-4776-8030-73539159188d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\MapObject">
+      <UniqueIdentifier>{b99b3785-1530-4ff7-97d2-44f0c8d35938}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -109,18 +115,6 @@
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Mario.h">
-      <Filter>Source Files\Mario</Filter>
-    </ClInclude>
-    <ClInclude Include="BigMario.h">
-      <Filter>Source Files\Mario</Filter>
-    </ClInclude>
-    <ClInclude Include="RaccoonMario.h">
-      <Filter>Source Files\Mario</Filter>
-    </ClInclude>
-    <ClInclude Include="FireMario.h">
-      <Filter>Source Files\Mario</Filter>
-    </ClInclude>
-    <ClInclude Include="SmallMario.h">
       <Filter>Source Files\Mario</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -273,6 +267,27 @@
     <ClInclude Include="MapScene.h">
       <Filter>Framework\Scence</Filter>
     </ClInclude>
+    <ClInclude Include="BigMario.h">
+      <Filter>Source Files\Mario\StateMario</Filter>
+    </ClInclude>
+    <ClInclude Include="FireMario.h">
+      <Filter>Source Files\Mario\StateMario</Filter>
+    </ClInclude>
+    <ClInclude Include="RaccoonMario.h">
+      <Filter>Source Files\Mario\StateMario</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallMario.h">
+      <Filter>Source Files\Mario\StateMario</Filter>
+    </ClInclude>
+    <ClInclude Include="MapMario.h">
+      <Filter>Source Files\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="CTree.h">
+      <Filter>Source Files\GameObject\MapObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CNode.h">
+      <Filter>Source Files\GameObject\MapObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -297,18 +312,6 @@
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Mario.cpp">
-      <Filter>Source Files\Mario</Filter>
-    </ClCompile>
-    <ClCompile Include="BigMario.cpp">
-      <Filter>Source Files\Mario</Filter>
-    </ClCompile>
-    <ClCompile Include="FireMario.cpp">
-      <Filter>Source Files\Mario</Filter>
-    </ClCompile>
-    <ClCompile Include="RaccoonMario.cpp">
-      <Filter>Source Files\Mario</Filter>
-    </ClCompile>
-    <ClCompile Include="SmallMario.cpp">
       <Filter>Source Files\Mario</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
@@ -460,6 +463,27 @@
     </ClCompile>
     <ClCompile Include="MapScene.cpp">
       <Filter>Framework\Scence</Filter>
+    </ClCompile>
+    <ClCompile Include="BigMario.cpp">
+      <Filter>Source Files\Mario\StateMario</Filter>
+    </ClCompile>
+    <ClCompile Include="FireMario.cpp">
+      <Filter>Source Files\Mario\StateMario</Filter>
+    </ClCompile>
+    <ClCompile Include="RaccoonMario.cpp">
+      <Filter>Source Files\Mario\StateMario</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallMario.cpp">
+      <Filter>Source Files\Mario\StateMario</Filter>
+    </ClCompile>
+    <ClCompile Include="MapMario.cpp">
+      <Filter>Source Files\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="CTree.cpp">
+      <Filter>Source Files\GameObject\MapObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CNode.cpp">
+      <Filter>Source Files\GameObject\MapObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

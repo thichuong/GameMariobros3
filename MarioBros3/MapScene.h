@@ -8,6 +8,8 @@ class MapScene :
 {
     CPlayer* player = NULL;					
     vector<LPGAMEOBJECT> objects;
+    vector<LPGAMEOBJECT> earseobjects;
+    vector<LPGAMEOBJECT> addobjects;
     CGameMap* gamemap;
     HUD* hud;
     Canvas* canvas;
@@ -24,5 +26,16 @@ public:
     void LoadSource();
     virtual CPlayer* GetPlayer() { return player; }
     virtual void addCanvas(Canvas* canvas) { this->canvas = canvas; }
+    virtual void addobject(LPGAMEOBJECT object) { addobjects.push_back(object); }
+    virtual void delobject(LPGAMEOBJECT object) { earseobjects.push_back(object); }
+    virtual LPCamera getCamera(int id_camera) { return cameras[id_camera]; }
 };
 
+class CMapScenceKeyHandler : public CScenceKeyHandler
+{
+public:
+    virtual void KeyState(BYTE* states);
+    virtual void OnKeyDown(int KeyCode);
+    virtual void OnKeyUp(int KeyCode);
+    CMapScenceKeyHandler(CScene* s) :CScenceKeyHandler(s) {};
+};

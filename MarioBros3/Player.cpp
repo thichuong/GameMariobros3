@@ -8,7 +8,9 @@ CPlayer::CPlayer()
 	ListMario[big] = new BigMario();
 	ListMario[fire] = new FireMario();
 	ListMario[raccoon] = new RaccoonMario();
-	
+	mapmario = new MapMario();
+
+	mapmario->setPlayer(this);
 	ListMario[Mario_small]->setPlayer(this);
 	ListMario[big]->setPlayer(this);
 	ListMario[fire]->setPlayer(this);
@@ -17,6 +19,7 @@ CPlayer::CPlayer()
 	holdobject = NULL;
 	levelMario = big;
 	playMario = ListMario[levelMario];
+	mapmario->levelMario = this->levelMario;
 	collision = CCollision::Full;
 	typeobject = TypeObject::player;
 	downleveltime = DOWN_LEVEL_TIME;
@@ -71,6 +74,8 @@ void CPlayer::SetAnimationSet(CAnimations* ani_set)
 	ListMario[big]->SetAnimationSet(ani_set);
 	ListMario[fire]->SetAnimationSet(ani_set);
 	ListMario[raccoon]->SetAnimationSet(ani_set);
+
+	mapmario->SetAnimationSet(ani_set);
 	//playMario->SetAnimationSet(ani_set);
 }
 void CPlayer::SetPosition(float x, float y)

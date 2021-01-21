@@ -58,7 +58,8 @@ enum class TypeObject
 	Bullet,
 	block,
 	brick,
-	item
+	item,
+	node
 };
 class CGameObject
 {

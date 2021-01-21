@@ -152,8 +152,10 @@
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Canvas.h" />
+    <ClInclude Include="CNode.h" />
     <ClInclude Include="Coin.h" />
     <ClInclude Include="CoinFX.h" />
+    <ClInclude Include="CTree.h" />
     <ClInclude Include="DebrisFx.h" />
     <ClInclude Include="FireBall.h" />
     <ClInclude Include="FireBullet.h" />
@@ -202,6 +204,7 @@
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="TileSet.h" />
+    <ClInclude Include="MapMario.h" />
     <ClInclude Include="tinyXML\tinystr.h" />
     <ClInclude Include="tinyXML\tinyxml.h" />
     <ClInclude Include="UIObject.h" />
@@ -215,8 +218,10 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="CNode.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="CoinFX.cpp" />
+    <ClCompile Include="CTree.cpp" />
     <ClCompile Include="DebrisFx.cpp" />
     <ClCompile Include="FireBall.cpp" />
     <ClCompile Include="FireBullet.cpp" />
@@ -263,6 +268,7 @@
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="TileSet.cpp" />
+    <ClCompile Include="MapMario.cpp" />
     <ClCompile Include="tinyXML\tinystr.cpp" />
     <ClCompile Include="tinyXML\tinyxml.cpp" />
     <ClCompile Include="tinyXML\tinyxmlerror.cpp" />

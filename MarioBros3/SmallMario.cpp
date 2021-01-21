@@ -45,7 +45,7 @@ void SmallMario::SetAnimationSet(CAnimations* ani_set)
 	animations->Add(FALL, ani_set->Get("ani-small-mario-jump"));
 	animations->Add(IDLE, ani_set->Get("ani-small-mario-idle"));
 	animations->Add(SKID, ani_set->Get("ani-small-mario-skid"));
-	animations->Add(CROUCH, ani_set->Get("ani-small-mario-crouch"));
+	//animations->Add(CROUCH, ani_set->Get("ani-small-mario-crouch"));
 	animations->Add(HOLD, ani_set->Get("ani-small-mario-hold"));
 	animations->Add(HOLD_IDLE, ani_set->Get("ani-small-mario-hold-idle"));
 	animations->Add(HOLD_FALL, ani_set->Get("ani-small-mario-hold-idle"));

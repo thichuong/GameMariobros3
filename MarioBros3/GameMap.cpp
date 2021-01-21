@@ -18,6 +18,9 @@
 #include "WarpPipe.h"
 #include "WarpMark.h"
 #include "Reward.h"
+#include "CTree.h"
+#include "CNode.h"
+
 
 CLayer::CLayer()
 {
@@ -396,6 +399,57 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 						CGame::GetInstance()->GetCurrentScene()->addobject(reward);
 					}
 				
+				}
+				else if (name == "AnimatedBG")
+				{
+
+					CTree* tree = new CTree();
+					TMXObject->QueryFloatAttribute("x", &x);
+					TMXObject->QueryFloatAttribute("y", &y);
+				
+					tree->SetPosition(x, y);
+					CGame::GetInstance()->GetCurrentScene()->addobject(tree);
+
+				}
+				else if (name == "WorldGraph")
+				{
+					CNode* cnode = new CNode();
+					TMXObject->QueryFloatAttribute("x", &x);
+					TMXObject->QueryFloatAttribute("y", &y);
+					cnode->SetPosition(x, y);
+					string typeNode = "";
+					string nameproperty = "";
+					if (TMXObject->Attribute("type"))
+					{
+						typeNode = TMXObject->Attribute("type");
+						cnode->SetTypeNode(typeNode);
+					}
+					else
+					{
+						//typeNode = TMXObject->Attribute("type");
+						cnode->SetTypeNode(typeNode);
+					}
+					TiXmlElement* props = TMXObject->FirstChildElement("properties");
+					for (TiXmlElement* node = props->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
+					{
+						nameproperty = node->Attribute("name");
+
+						if (nameproperty == "adjacent_weight") 
+						{
+							vector<string> adjacent_weight = split(node->Attribute("value"), ",");
+							for (int i = 0; i < adjacent_weight.size(); i++)
+							{
+								if (adjacent_weight[i] == "l") cnode->left = true ;
+								else if (adjacent_weight[i] == "r") cnode->right = true;
+								else if (adjacent_weight[i] == "u") cnode->up = true;
+								else if (adjacent_weight[i] == "d") cnode->down = true;
+							}
+						}
+
+						
+					}
+					DebugOut(L"[NODE_MAP] = %f \n", 1);
+					CGame::GetInstance()->GetCurrentScene()->addobject(cnode);
 				}
 			}
 		}

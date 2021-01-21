@@ -4,7 +4,7 @@
 MapScene::MapScene(int id, string filePath) :
 	CScene(id, filePath)
 {
-	key_handler = new CPlayScenceKeyHandler(this);
+	key_handler = new CMapScenceKeyHandler(this);
 
 	gamemap = NULL;
 	canvas = NULL;
@@ -177,7 +177,7 @@ void MapScene::Load()
 		node->QueryFloatAttribute("x", &x);
 		node->QueryFloatAttribute("y", &y);
 		player = CPlayer::GetInstance();
-		player->SetPosition(x, y);
+		player->getMapMario()->SetPosition(x, y);
 		player->SetAnimationSet(CAnimations::GetInstance());
 		//objects.push_back(player);
 		DebugOut(L"[INFO] GameMap:   \n");
@@ -185,7 +185,7 @@ void MapScene::Load()
 	hud = new HUD();
 
 
-	CGame::GetInstance()->GetInstance()->getCamera()->setCamdefault(0, 750);
+	CGame::GetInstance()->GetInstance()->getCamera()->setCamdefault(0, 0);
 
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
 }
@@ -200,12 +200,32 @@ void MapScene::Update(DWORD dt)
 	{
 		coObjects.push_back(objects[i]);
 	}
-	player->Update(dt, &coObjects);
+	player->getMapMario()->Update(dt, &coObjects);
 	for (size_t i = 0; i < objects.size(); i++)
 	{
 		objects[i]->Update(dt, &coObjects);
 	}
-	
+	if (earseobjects.size() > 0)
+	{
+		for (auto e : earseobjects)
+		{
+			for (size_t i = 0; i < objects.size(); i++)
+			{
+				if (objects[i] == e) objects.erase(objects.begin() + i);
+			}
+		}
+		for (auto e : earseobjects) delete e;
+		earseobjects.clear();
+	}
+	if (addobjects.size() > 0)
+	{
+		for (auto e : addobjects)
+		{
+			objects.push_back(e);
+		}
+
+		addobjects.clear();
+	}
 	// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)
 	if (player == NULL) return;
 
@@ -222,13 +242,8 @@ void MapScene::Render()
 {
 	gamemap->Render(CGame::GetInstance());
 	for (unsigned int i = 0; i < objects.size(); i++)
-		objects[i]->Pre_Render();
-	player->Pre_Render();
-	gamemap->ReRender(CGame::GetInstance());
-	for (unsigned int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
-	player->Render();
-
+	player->getMapMario()->Render();
 
 	if (canvas != NULL) canvas->Render();
 	hud->Render();
@@ -244,4 +259,28 @@ void MapScene::Unload()
 	player = NULL;
 
 	DebugOut(L"[INFO] Scene %s unloaded! \n", sceneFilePath);
+}
+
+
+
+void CMapScenceKeyHandler::OnKeyDown(int KeyCode)
+{
+	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
+
+	MapMario* mario = ((CPlayScene*)scence)->GetPlayer()->getMapMario();
+	mario->OnKeyDown(KeyCode);
+}
+
+void CMapScenceKeyHandler::KeyState(BYTE* states)
+{
+	CGame* game = CGame::GetInstance();
+	MapMario* mario = ((CPlayScene*)scence)->GetPlayer()->getMapMario();
+	mario->KeyState(states);
+
+	// disable control key when Mario die 
+}
+void CMapScenceKeyHandler::OnKeyUp(int KeyCode)
+{
+	CPlayer* mario = ((CPlayScene*)scence)->GetPlayer();
+	mario->OnKeyUp(KeyCode);
 }

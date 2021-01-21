@@ -5,6 +5,7 @@
 #include "BigMario.h"
 #include "FireMario.h"
 #include "RaccoonMario.h"
+#include "MapMario.h"
 #include <unordered_map>
 #include "WarpPipe.h"
 #include "ItemCard.h"
@@ -20,6 +21,7 @@ class CPlayer : public CGameObject
     unordered_map<string, CMario*> ListMario;
     CMario* playMario;
     
+    MapMario* mapmario;
     string levelMario;
     DWORD downleveltime;
 public: 
@@ -57,6 +59,8 @@ public:
     void SetLevel(int lv);
     int getMetter();
     CMario* getMario() { return playMario; }
+    MapMario* getMapMario() { return mapmario; }
+
     void Warp(TypeWarp warp);
     static  CPlayer* GetInstance();
     string GetlevelMario() { return levelMario; }

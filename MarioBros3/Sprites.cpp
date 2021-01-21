@@ -49,6 +49,7 @@ void CSprites::Add(string id, LPSPRITE sprite)
 }
 LPSPRITE CSprites::Get(string id)
 {
+	
 	return sprites[id];
 }
 

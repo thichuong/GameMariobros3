@@ -9,14 +9,16 @@
 		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="textures\\Misc\\fire-ball.png" textureId="tex-fire-ball"/>
 		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="textures\\Misc\\effect_white_x3.png" textureId="tex-effect"/>
 		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="textures\\Misc\\reward_x3.png" textureId="tex-goal" a="255"/>
+		<LoadSPRITES file ="textures/Sprites/OverworldMapDB.xml" source ="textures\\OverWorld\\overworld_x3.png" textureId="tex-overworld"/>
 		<LoadANIMATIONS file ="Textures/Animations/MarioAnim.xml"/>
 		<LoadANIMATIONS file ="Textures/Animations/EnemyAnim.xml"/>
 		<LoadANIMATIONS file ="Textures/Animations/MiscAnim.xml"/>
 		<LoadANIMATIONS file ="Textures/Animations/UiAnim.xml"/>
+		<LoadANIMATIONS file ="Textures/Animations/OverworldMapAnim.xml"/>
 		<LoadMAP filepath ="textures/Maps" file ="overworld-1-map.tmx"/>
-		<LoadLayer x ="100" y="900" />
+		<LoadLayer x ="96.00" y="144.00" />
 		<Camera name="Camera" start="0" main="1">
-			 <Boundary id="0" pos_x="0" pos_y="750" left="0" top="0" right="8440" bottom="1296"/>
+			 <Boundary id="0" pos_x="0" pos_y="0" left="0" top="0" right="8440" bottom="1296"/>
 		 </Camera> 
 	</Textures>
 </Textures>
