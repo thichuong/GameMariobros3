@@ -9,7 +9,7 @@ RedKoopas::RedKoopas()
 	SetState(KOOPAS_STATE_WALKING);
 	typeobject = TypeObject::enemy;
 	collision = CCollision::Full;
-	FlipY = false;
+	
 	SetAnimationSet(CAnimations::GetInstance());
 }
 
@@ -58,8 +58,11 @@ void RedKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
 		if (state != KOOPAS_STATE_SHELL_HOLD)
 		{
-			y += min_ty * dy + ny * 0.4f;
-			x += min_tx * dx + nx * 0.4f;
+			if(ny < 0)
+				y += min_ty * dy - 0.4f;
+			else
+				y += min_ty * dy -  0.4f;
+				x += min_tx * dx + nx * 0.4f;
 		}
 
 		//y += min_ty * dy + ny * 0.5;

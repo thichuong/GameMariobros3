@@ -12,6 +12,8 @@
 #include "Resource.h"
 
 
+#define BREAK_UPDATE 1000
+
 using namespace std;
 
 
@@ -29,7 +31,7 @@ protected:
 	CGameMap* gamemap ;
 	HUD* hud ;
 	Canvas* canvas ;
-
+	ULONGLONG break_Update;
 	int start_x, start_y;
 
 	void _ParseSection_TEXTURES(string line);

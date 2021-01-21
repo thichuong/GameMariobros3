@@ -288,6 +288,12 @@
     <ClInclude Include="CNode.h">
       <Filter>Source Files\GameObject\MapObject</Filter>
     </ClInclude>
+    <ClInclude Include="Platform.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RedParatroopa.h">
+      <Filter>Source Files\GameObject\Enemy\koopa</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -484,6 +490,12 @@
     </ClCompile>
     <ClCompile Include="CNode.cpp">
       <Filter>Source Files\GameObject\MapObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RedParatroopa.cpp">
+      <Filter>Source Files\GameObject\Enemy\koopa</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

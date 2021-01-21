@@ -245,10 +245,7 @@ void MapScene::Update(DWORD dt)
 	hud->Update(dt);
 	if (canvas != NULL) canvas->Update(dt);
 
-	float pos_x, pos_y;
-	pos_x = CGame::GetInstance()->GetInstance()->getCamera()->cam_x;
-	pos_y = CGame::GetInstance()->GetInstance()->getCamera()->cam_y;
-	DebugOut(L"[cameras position] = %f   %f\n", pos_x, pos_y);
+	
 }
 
 void MapScene::Render()

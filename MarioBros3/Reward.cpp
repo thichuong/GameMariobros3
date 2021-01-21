@@ -67,7 +67,7 @@ void Reward::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 		
 	}
 }
-void Reward::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
+void Reward::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	
 	if (GetTickCount64() - time_switch > SWITCH_TIME)

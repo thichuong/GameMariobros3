@@ -17,11 +17,13 @@ void CKoopas::GetBoundingBox(float &left, float &top, float &right, float &botto
 	left = x;
 	top = y;
 	right = x + KOOPAS_BBOX_WIDTH;
-
+	if (state == KOOPAS_STATE_SHELL_RUN || state == KOOPAS_STATE_SHELL_HOLD)
+		right = x + KOOPAS_BBOX__SHELL_WIDTH;
 	if (state != KOOPAS_STATE_WALKING)
 		bottom = y + KOOPAS_BBOX_HEIGHT_DIE;
 	else
 		bottom = y + KOOPAS_BBOX_HEIGHT;
+	
 }
 
 void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -35,7 +37,7 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	//OutputDebugStringW(L"[INFO] Object is still alive! \n");
 	int camx = CGame::GetInstance()->GetScamX();
 	int width = CGame::GetInstance()->GetScreenWidth();
-	if (x + KOOPAS_BBOX_WIDTH >= camx || x < camx + width)
+	if (x + KOOPAS_BBOX_WIDTH >= camx && x < camx + width)
 	{
 		CGameObject::Update(dt);
 		vy += KOOPAS_GRAVITY * dt;
@@ -79,7 +81,8 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			LPCOLLISIONEVENT e = coEventsResult[i];
 			LPGAMEOBJECT obj = e->obj;
 			if(state == KOOPAS_STATE_SHELL_RUN || state == KOOPAS_STATE_SHELL_HOLD)
-				obj->CollisionObject(this, e->nx, e->ny);
+				if(e->nx != 0)
+					obj->CollisionObject(this, e->nx, e->ny);
 			if (e->nx != 0 && e->obj->typeobject == TypeObject::enemy) nx = 0;
 		}
 		if (ny != 0) {

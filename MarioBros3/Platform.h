@@ -1,23 +1,22 @@
 #pragma once
 #include "GameObject.h"
 
-#define COIN_BBOX_WIDTH		42
-#define COIN_BBOX_HEIGHT	48
-#define COIN_BBOX_FLY	0.06f
-#define COIN_BBOX_FLY_TIME	250
+#define PLATFORM_ANI "ani-platform"
+#define PLATFORM_GRAVITTY 0.3f
 
-
-class Coin :
+class Platform :
     public CGameObject
 {
-	bool Fly;
-	int time;
+    float width, height;
+	bool isGravity;
 public:
-	Coin(float l, float t, bool Fly = FALSE);
+	Platform();
 	virtual void Render();
 	virtual void GetBoundingBox(float& l, float& t, float& r, float& b);
 	virtual void SetAnimationSet(CAnimations* ani_set);
-
+	virtual void CollisionObject(LPGAMEOBJECT obj, float nx, float ny);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
+	void setWidthHeight(float w, float h) { width = w; height = h; }
+	
 };
 

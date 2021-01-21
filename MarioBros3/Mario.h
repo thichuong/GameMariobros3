@@ -101,7 +101,7 @@ struct MarioStateSet
 };
 class CMario : public CGameObject
 {
-protected:
+public:
 	string changeMario;
 	int untouchable;
 	ULONGLONG untouchable_start;
@@ -127,11 +127,11 @@ protected:
 
 public: 
 	CMario(float x = 0, float y = 0);
-	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
+	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects = NULL);
 	virtual void Render();
 	virtual void Pre_Render();
 	void UpdateVx(DWORD dt);
-	void UpdateCollisions(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
+	void UpdateCollisions(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
 	void UpdateReward(DWORD dt);
 
 	virtual void OnKeyUp(int keyCode);

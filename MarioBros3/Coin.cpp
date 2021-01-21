@@ -31,7 +31,7 @@ void Coin::SetAnimationSet(CAnimations* ani_set)
 
 }
 
-void Coin::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
+void Coin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	if (Fly)
 	{

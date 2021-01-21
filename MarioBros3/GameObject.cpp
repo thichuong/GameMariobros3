@@ -91,7 +91,7 @@ void CGameObject::CalcPotentialCollisions(
 	{
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
 
-		if (e->t >= 0 && e->t <= 1.0f )
+		if (e->t > 0 && e->t <= 1.0f )
 		{
 			
 				float ml, mt, mr, mb;
@@ -138,11 +138,11 @@ void CGameObject::FilterCollision(
 			
 		LPCOLLISIONEVENT c = coEvents[i];
 		
-			if (c->t < min_tx && c->nx != 0) {
+			if (c->t <= min_tx && c->nx != 0) {
 				min_tx = c->t; nx = c->nx; min_ix = i; rdx = c->dx;
 			}
 
-			if (c->t < min_ty && c->ny != 0) {
+			if (c->t <= min_ty && c->ny != 0) {
 				min_ty = c->t; ny = c->ny; min_iy = i; rdy = c->dy;
 			}
 	}

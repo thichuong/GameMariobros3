@@ -106,7 +106,7 @@ void CMario::UpdateVx(DWORD dt)
 	slowFall = FALSE;
 
 }
-void  CMario::UpdateCollisions(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
+void  CMario::UpdateCollisions(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
@@ -116,7 +116,7 @@ void  CMario::UpdateCollisions(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects
 	// turn off collision when die 
 	if (state != MARIO_STATE_DIE)
 	{
-		CalcPotentialCollisions(colliable_objects, coEvents);
+		CalcPotentialCollisions(coObjects, coEvents);
 		//		for (UINT i = 0; i < coEvents.size(); i++)  coObjectsResult.push_back(coEvents[i]->obj);
 	}
 
@@ -212,10 +212,14 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	//dx = vx * dt;
 
 	// Simple fall down
-	if (x + dx <= 1)
+	if (x + dx <= CGame::GetInstance()->GetScamX() + 1)
 	{
-		dx = 0;
-		x = 2;
+		
+		vx = CGame::GetInstance()->getCamera()->vx;
+		CGameObject::Update(dt);
+		ax = 1;
+		
+		SetMoveState(MoveStates::Walk);
 		//DebugOut(L"[INFO] mario position %d, \n", x);
 	}
 	
@@ -232,21 +236,24 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		CGameObject::Update(dt);
 		x += dx;
 		y += dy;
-		if (time_wrap + dt < TIME_WARP)
-		{
-			time_wrap += dt;
-		}
-		else
+		vector<LPGAMEOBJECT> coObjectsResult;
+
+		CalcCollisions(coObjects, coObjectsResult);
+		if (coObjectsResult.size() == 0)
 		{
 			time_wrap = 0;
 			marioWarp = TypeWarp::noWarp;
+		}
+		if (time_wrap + dt < TIME_WARP)
+		{
+			time_wrap += dt;
 		}
 		
 	}
 	
 	if (vy > 0)
 	{
-		onGround = FALSE;
+		//onGround = FALSE;
 		SetJumpState(JumpStates::Fall);
 	}
 	

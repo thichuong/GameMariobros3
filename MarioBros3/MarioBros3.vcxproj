@@ -182,6 +182,7 @@
     <ClInclude Include="Paratroopa.h" />
     <ClInclude Include="Piranha.h" />
     <ClInclude Include="Plant.h" />
+    <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScence.h" />
     <ClInclude Include="PMetter.h" />
@@ -191,6 +192,7 @@
     <ClInclude Include="RaccoonMario.h" />
     <ClInclude Include="RedGoomba.h" />
     <ClInclude Include="RedKoopas.h" />
+    <ClInclude Include="RedParatroopa.h" />
     <ClInclude Include="Redvenus.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Reward.h" />
@@ -247,6 +249,7 @@
     <ClCompile Include="Paratroopa.cpp" />
     <ClCompile Include="Piranha.cpp" />
     <ClCompile Include="Plant.cpp" />
+    <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScence.cpp" />
     <ClCompile Include="PMetter.cpp" />
@@ -256,6 +259,7 @@
     <ClCompile Include="RaccoonMario.cpp" />
     <ClCompile Include="RedGoomba.cpp" />
     <ClCompile Include="RedKoopas.cpp" />
+    <ClCompile Include="RedParatroopa.cpp" />
     <ClCompile Include="Redvenus.cpp" />
     <ClCompile Include="Reward.cpp" />
     <ClCompile Include="RewardCanvas.cpp" />

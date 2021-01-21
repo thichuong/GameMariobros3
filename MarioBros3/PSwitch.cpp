@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "Coin.h"
 #include "Brick.h"
-
 PSwitch::PSwitch(float l, float t)
 {
 	x = l ;

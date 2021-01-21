@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objecttypes>
+ <objecttype name="BigMario" color="#a0a0a4">
+  <property name="height" type="float" default="81"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="Brick" color="#a0a0a4">
+  <property name="height" type="float" default="48"/>
+  <property name="width" type="float" default="48"/>
+ </objecttype>
+ <objecttype name="Coin" color="#a0a0a4">
+  <property name="height" type="float" default="48"/>
+  <property name="width" type="float" default="48"/>
+ </objecttype>
+ <objecttype name="EndmapReward" color="#a0a0a4">
+  <property name="height" type="float" default="48"/>
+  <property name="width" type="float" default="48"/>
+ </objecttype>
+ <objecttype name="FireMario" color="#a0a0a4">
+  <property name="height" type="float" default="81"/>
+  <property name="width" type="float" default="48"/>
+ </objecttype>
+ <objecttype name="GhostBlock" color="#a0a0a4"/>
+ <objecttype name="Goomba" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="GreenMushroom" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="Koopas" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="KoopasCrouch" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="KoopasImposter" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="KoopasJumping" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="KoopasPassenger" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="MarioFireBall" color="#a0a0a4">
+  <property name="height" type="float" default="24"/>
+  <property name="width" type="float" default="24"/>
+ </objecttype>
+ <objecttype name="MarioTailed" color="#a0a0a4">
+  <property name="height" type="float" default="12"/>
+  <property name="width" type="float" default="12"/>
+ </objecttype>
+ <objecttype name="Pipe" color="#a0a0a4">
+  <property name="Direction" type="int" default="1"/>
+  <property name="Length" type="int" default="3"/>
+  <property name="Type" type="int" default="1"/>
+ </objecttype>
+ <objecttype name="Piranha" color="#a0a0a4">
+  <property name="height" type="float" default="69"/>
+  <property name="width" type="float" default="48"/>
+ </objecttype>
+ <objecttype name="PSwitch" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="pressed_height" type="float" default="15"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="QuestionBlock" color="#a0a0a4">
+  <property name="height" type="float" default="48"/>
+  <property name="width" type="float" default="48"/>
+ </objecttype>
+ <objecttype name="QuestionCoin" color="#a0a0a4">
+  <property name="height" type="float" default="48"/>
+  <property name="width" type="float" default="48"/>
+ </objecttype>
+ <objecttype name="RaccoonLeaf" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="RaccoonMario" color="#a0a0a4">
+  <property name="height" type="float" default="81"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="RedGoomba" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="RedKoopas" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="RedKoopasCrouch" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="RedKoopasImposter" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="RedKoopasJumping" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="RedKoopasPassenger" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="RedMushroom" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="45"/>
+ </objecttype>
+ <objecttype name="RedVenus" color="#a0a0a4">
+  <property name="height" type="float" default="96"/>
+  <property name="width" type="float" default="48"/>
+ </objecttype>
+ <objecttype name="SmallMario" color="#a0a0a4">
+  <property name="height" type="float" default="45"/>
+  <property name="width" type="float" default="36"/>
+ </objecttype>
+ <objecttype name="SolidBlock" color="#a0a0a4"/>
+ <objecttype name="Spawner" color="#a0a0a4">
+  <property name="height" type="float" default="1"/>
+  <property name="width" type="float" default="1"/>
+ </objecttype>
+ <objecttype name="Venus" color="#a0a0a4">
+  <property name="height" type="float" default="96"/>
+  <property name="width" type="float" default="48"/>
+ </objecttype>
+ <objecttype name="VenusFireBall" color="#a0a0a4">
+  <property name="height" type="float" default="24"/>
+  <property name="width" type="float" default="24"/>
+ </objecttype>
+ <objecttype name="VoidBlock" color="#a0a0a4"/>
+</objecttypes>

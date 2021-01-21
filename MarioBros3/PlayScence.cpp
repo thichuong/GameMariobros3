@@ -20,7 +20,7 @@ CPlayScene::CPlayScene(int id, string filePath):
 	hud = new HUD();
 	start_x = 0;
 	start_y = 0;
-	
+	break_Update = 0;
 }
 
 /*
@@ -266,11 +266,21 @@ void CPlayScene::Load()
 				camera->setCam(pos_x, pos_y);
 				camera->setBoundBox(left, top, right, bottom);
 				camera->setCamdefault(pos_x, pos_y);
-				
+				if (detail->Attribute("auto"))
+				{
+					camera->BlockCam();
+					TiXmlElement* path = detail->FirstChildElement("Path");
+					float cam_vx;
+					path->QueryFloatAttribute("speed", &cam_vx);
+					camera->setSpeed(cam_vx);
+					DebugOut(L"[cameras VX] = %f \n", cam_vx);
+				}
+
+
 				cameras.insert(make_pair(id, camera));
 				
 				//CGame::GetInstance()->SetCam(cameras[start]);
-				DebugOut(L"cameras size = %d\n", cameras.size());
+				
 			}
 			CGame::GetInstance()->SetCam(cameras[start]);
 		}
@@ -300,7 +310,7 @@ void CPlayScene::Load()
 	hud = new HUD();
 	
 	canvas = NULL;
-	
+	//break_Update = GetTickCount64();
 
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
 }
@@ -309,54 +319,62 @@ void CPlayScene::Update(DWORD dt)
 {
 	// We know that Mario is the first object in the list hence we won't add him into the colliable object list
 	// TO-DO: This is a "dirty" way, need a more organized way 
-
-	vector<LPGAMEOBJECT> coObjects;
-	for (size_t i = 0; i < objects.size(); i++)
+	if (GetTickCount64() -   break_Update < BREAK_UPDATE)
 	{
-		coObjects.push_back(objects[i]);
-	}
-	player->Update(dt, &coObjects);
-	for (size_t i = 0; i < objects.size(); i++)
-	{
-		objects[i]->Update(dt, &coObjects);
-	}
-	if (earseobjects.size() > 0)
-	{
-		for (auto e : earseobjects)
-		{
-			for (size_t i = 0; i < objects.size(); i++)
-			{
-				if (objects[i] == e) objects.erase(objects.begin()+i);
-			}
-		}
-		for (auto e : earseobjects) delete e;
-		earseobjects.clear();
-	}
-	if (addobjects.size() > 0)
-	{
-		for (auto e : addobjects)
-		{
-			objects.push_back(e);
-		}
+		dt = 0;
 		
-		addobjects.clear();
 	}
-	// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)
-	if (player == NULL) return; 
-
-	// Update camera to follow mario
-	float px, py;
-	player->GetPosition(px, py);
-	CGame::GetInstance()->GetInstance()->getCamera()->update(px, py);
-	
-	hud->Update(dt);
-	if (canvas != NULL) canvas->Update(dt);
-	if (start_x != 0 && start_y != 0)
+	else
 	{
-		player->SetPosition(start_x, start_y);
-		start_x = 0;
-		start_y = 0;
+		vector<LPGAMEOBJECT> coObjects;
+		for (size_t i = 0; i < objects.size(); i++)
+		{
+			coObjects.push_back(objects[i]);
+		}
+		player->Update(dt, &coObjects);
+		for (size_t i = 0; i < objects.size(); i++)
+		{
+			objects[i]->Update(dt, &coObjects);
+		}
+		if (earseobjects.size() > 0)
+		{
+			for (auto e : earseobjects)
+			{
+				for (size_t i = 0; i < objects.size(); i++)
+				{
+					if (objects[i] == e) objects.erase(objects.begin() + i);
+				}
+			}
+			for (auto e : earseobjects) delete e;
+			earseobjects.clear();
+		}
+		if (addobjects.size() > 0)
+		{
+			for (auto e : addobjects)
+			{
+				objects.push_back(e);
+			}
+
+			addobjects.clear();
+		}
+		// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)
+		if (player == NULL) return;
+
+		// Update camera to follow mario
+		float px, py;
+		player->GetPosition(px, py);
+		CGame::GetInstance()->GetInstance()->getCamera()->update(px, py, dt);
+
+		hud->Update(dt);
+		if (canvas != NULL) canvas->Update(dt);
+		if (start_x != 0 && start_y != 0)
+		{
+			player->SetPosition(start_x, start_y);
+			start_x = 0;
+			start_y = 0;
+		}
 	}
+
 	if (switchID != 0)
 		CGame::GetInstance()->SwitchScene(switchID);
 }
@@ -386,6 +404,8 @@ void CPlayScene::Unload()
 		delete objects[i];
 	switchID = 0;
 	objects.clear();
+	cameras.clear();
+
 	//player = NULL;
 
 	DebugOut(L"[INFO] Scene %s unloaded! \n", sceneFilePath);
@@ -430,6 +450,12 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	if (KeyCode == DIK_E)
 	{
 		CGame::GetInstance()->SwitchScene(1);
+	}
+	if (KeyCode == DIK_T)
+	{
+		mario->SetPosition(5842, 350);
+		CGame::GetInstance()->SetCam(((CPlayScene*)scence)->getCamera(0));
+		CGame::GetInstance()->getCamera()->setCam(5842, 224);
 	}
 }
 

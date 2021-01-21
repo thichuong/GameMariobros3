@@ -51,7 +51,7 @@ void CNode::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 		
 	}
 }
-void CNode::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
+void CNode::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 
 }

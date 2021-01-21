@@ -13,7 +13,7 @@ MapMario::MapMario() : CMario()
 	tempx = 0;
 	tempy = 0;
 }
-void MapMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
+void MapMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	if (isGoing)
 	{
@@ -47,7 +47,7 @@ void MapMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	}
 	vector<LPGAMEOBJECT> coObjectsResult;
 
-	CalcCollisions(colliable_objects, coObjectsResult);
+	CalcCollisions(coObjects, coObjectsResult);
 	//DebugOut(L"	[coObjectsResult] MArio  : %f \n", x);
 	//DebugOut(L"	[coObjectsResult] taik  : %f \n", tail->x);
 	for (UINT i = 0; i < coObjectsResult.size(); i++)

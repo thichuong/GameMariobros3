@@ -10,7 +10,7 @@
 #define MARIO_MAP_BBOX_HEIGHT 48.0f
 
 #define MARIO_MAP_RANGE 96.0f
-#define MARIO_MAP_SPEED 0.1f
+#define MARIO_MAP_SPEED 0.2f
 
 class MapMario :
     public CMario
@@ -24,7 +24,7 @@ public:
 	string levelMario;
 
 	MapMario();
-	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
+	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
 	virtual void Render();
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void SetAnimationSet(CAnimations* ani_set);

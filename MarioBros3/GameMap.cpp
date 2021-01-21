@@ -21,7 +21,8 @@
 #include "CTree.h"
 #include "CNode.h"
 #include "Portal.h"
-
+#include "Platform.h"
+#include "RedParatroopa.h"
 
 CLayer::CLayer()
 {
@@ -218,6 +219,13 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 							enemies->SetPosition(x, y);
 							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
 						}
+						if (Type == "red-para")
+						{
+							RedParatroopa* enemies = new RedParatroopa();
+							enemies->SetAnimationSet(CAnimations::GetInstance());
+							enemies->SetPosition(x, y);
+							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+						}
 						
 					}
 					if (Enemiesname == "venus")
@@ -237,6 +245,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 							enemies->SetPosition(x, y);
 							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
 						}
+
 
 					}
 					if (Enemiesname == "piranha")
@@ -361,9 +370,9 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 						 if(markname == "dest-y")	node->QueryFloatAttribute("value", &desty);
 						 if (markname == "lock")
 						 {
-							 node->QueryIntAttribute("value", &block);
-							 if (block == 1) warpmark->Block();
-							 else warpmark->UnBlock();
+							// node->QueryIntAttribute("value", &block);
+							 //if (block == 1) warpmark->Block();
+							// else warpmark->UnBlock();
 						 }
 						 if (markname == "out-direction")
 						 {
@@ -482,6 +491,26 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					TMXObject->QueryIntAttribute("type", &idSCence);
 					CPortal* Portal = new CPortal(x,y,width,height, idSCence);
 					CGame::GetInstance()->GetCurrentScene()->addobject(Portal);
+				}
+				else if (name == "MovingPlatforms")
+				{
+					TMXObject->QueryFloatAttribute("x", &x);
+					TMXObject->QueryFloatAttribute("y", &y);
+					TMXObject->QueryFloatAttribute("width", &width);
+					TMXObject->QueryFloatAttribute("height", &height);
+					Platform* platform = new Platform();
+					platform->SetPosition(x, y);
+					platform->setWidthHeight(width, height);
+					float vx, vy;
+					TiXmlElement* props = TMXObject->FirstChildElement("properties");
+					for (TiXmlElement* node = props->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
+					{
+						string property_name = node->Attribute("name");
+						if(property_name == "start-velocity-x") node->QueryFloatAttribute("value", &vx);
+						if (property_name == "start-velocity-y") node->QueryFloatAttribute("value", &vy);
+						platform->SetSpeed(vx, 0.0f);
+					}
+					CGame::GetInstance()->GetCurrentScene()->addobject(platform);
 				}
 			}
 		}

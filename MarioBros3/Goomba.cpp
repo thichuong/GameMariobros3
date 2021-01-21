@@ -30,7 +30,7 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	int camx = CGame::GetInstance()->GetScamX();
 	int width = CGame::GetInstance()->GetScreenWidth();
-	if (x + GOOMBA_BBOX_WIDTH >= camx || x < camx + width)
+	if (x + GOOMBA_BBOX_WIDTH >= camx && x < camx + width)
 	{
 		CGameObject::Update(dt);
 		vy += GOOMBA_GRAVITY * dt;
