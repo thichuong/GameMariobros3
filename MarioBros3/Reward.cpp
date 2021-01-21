@@ -55,6 +55,7 @@ void Reward::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 		CGame::GetInstance()->GetCurrentScene()->addCanvas(rewardcanvas);
 
 		CPlayer* player = CPlayer::GetInstance();
+		player->reWard_time_start = GetTickCount64();
 		for (int i = 0; i < 3; i++)
 		{
 			if (player->cards[i].card == ItemCard::empty)

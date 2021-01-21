@@ -18,7 +18,7 @@
 		<LoadMAP filepath ="textures/Maps" file ="overworld-1-map.tmx"/>
 		<LoadLayer x ="96.00" y="144.00" />
 		<Camera name="Camera" start="0" main="1">
-			 <Boundary id="0" pos_x="0" pos_y="0" left="0" top="0" right="8440" bottom="1296"/>
+			 <Boundary id="0" pos_x="0" pos_y="0" left="0" top="0" right="824" bottom="750"/>
 		 </Camera> 
 	</Textures>
 </Textures>

@@ -4,4 +4,5 @@ CScene::CScene(int id, string filePath)
 {
 	this->id = id;
 	this->sceneFilePath = filePath;
+	switchID = 0;
 }

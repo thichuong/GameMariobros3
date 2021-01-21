@@ -14,7 +14,6 @@ RaccoonMario::RaccoonMario() :CMario()
 }
 void RaccoonMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
-	UpdateVx();
 	if (CGame::GetInstance()->IsKeyDown(DIK_S))
 	{
 		if (metter == MAX_METTER && Mariostate.jump == JumpStates::Jump && canHighjump)

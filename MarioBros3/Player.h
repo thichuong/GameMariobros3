@@ -11,8 +11,9 @@
 #include "ItemCard.h"
 
 #define DOWN_LEVEL_TIME 1000
-
-
+#define REWARD_TIME 2000
+#define SPEED_X_REWARD 0.2f;
+#define ID_SCENE 1
 
 using namespace std;
 class CPlayer : public CGameObject
@@ -33,6 +34,7 @@ public:
     LPGAMEOBJECT holdobject;
     vector<CFireBullet*> bullets;
 
+    ULONGLONG reWard_time_start;
 
     string GetScore();
     string Getcoin();

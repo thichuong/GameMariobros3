@@ -10,6 +10,8 @@ MapMario::MapMario() : CMario()
 	down = false;
 	left = false;
 	right = false;
+	tempx = 0;
+	tempy = 0;
 }
 void MapMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
@@ -46,7 +48,6 @@ void MapMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	vector<LPGAMEOBJECT> coObjectsResult;
 
 	CalcCollisions(colliable_objects, coObjectsResult);
-	DebugOut(L"	[coObjectsResult] = : %d \n", coObjectsResult.size());
 	//DebugOut(L"	[coObjectsResult] MArio  : %f \n", x);
 	//DebugOut(L"	[coObjectsResult] taik  : %f \n", tail->x);
 	for (UINT i = 0; i < coObjectsResult.size(); i++)
@@ -60,6 +61,14 @@ void MapMario::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 			down = node->down;
 			left = node->left;
 			right = node->right;
+			if(!isGoing)
+				node->GetPosition(x, y);
+			if (CGame::GetInstance()->IsKeyDown(DIK_A) && node->getIDscene() != 0)
+			{
+				CGame::GetInstance()->SwitchScene(node->getIDscene());
+			}
+			//DebugOut(L"[NODE coObjectsResult] = %d , %d, %d , %d \n", up,down,left,right);
+			//DebugOut(L"[NODE coObjectsResult] = %d \n", left);
 		}
 
 	}
@@ -90,51 +99,18 @@ void MapMario::Render()
 	else if (MapMario::levelMario == big) ani = ANI_BIG_MAP;
 	else if (MapMario::levelMario == fire) ani = ANI_FIRE_MAP;
 	else if (MapMario::levelMario == raccoon) ani = ANI_RACCOON_MAP;
-	animations->Get(ani)->Render(x, y, false);
+	animations->Get(ani)->Render(x, y,1000, false);
 }
 void MapMario::KeyState(BYTE* state)
 {
-	//if (isGoing == false)
-	//{
-	//	
-	//	range = 0;
-	//	vx = 0;
-	//	vy = 0;
-	//	tempx = x;
-	//	tempy = y;
-	//	isGoing = true;
-	//	if (CGame::GetInstance()->IsKeyDown(DIK_RIGHT))
-	//	{
-	//		vx = MARIO_MAP_SPEED;
-	//		DebugOut(L" [MAPMARIO] going");
-	//	}
-
-	//	else if (CGame::GetInstance()->IsKeyDown(DIK_LEFT))
-	//	{
-
-	//		vx = -MARIO_MAP_SPEED;
-	//		DebugOut(L" [MAPMARIO] going");
-
-	//	}
-	//	else if (CGame::GetInstance()->IsKeyDown(DIK_DOWN))
-	//	{
-	//		vy = MARIO_MAP_SPEED;
-	//		DebugOut(L" [MAPMARIO] going");
-
-	//	}
-	//	if (CGame::GetInstance()->IsKeyDown(DIK_UP))
-	//	{
-	//		vy = -MARIO_MAP_SPEED;
-	//		DebugOut(L" [MAPMARIO] going");
-	//	}
-	//}
+	
 
 }
 void MapMario::OnKeyDown(int keyCode)
 {
 	if (isGoing == false)
 	{
-		DebugOut(L" [MAPMARIO] going \n");
+		
 		range = 0;
 		vx = 0;
 		vy = 0;

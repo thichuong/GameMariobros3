@@ -20,6 +20,7 @@
 #include "Reward.h"
 #include "CTree.h"
 #include "CNode.h"
+#include "Portal.h"
 
 
 CLayer::CLayer()
@@ -444,13 +445,43 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 								else if (adjacent_weight[i] == "u") cnode->up = true;
 								else if (adjacent_weight[i] == "d") cnode->down = true;
 							}
-							DebugOut(L"[NODE_MAP] = %f \n", 1);
+						
 						}
-
+						if (nameproperty == "scene")
+						{
+							
+								int idscene =0;
+								node->QueryIntAttribute("value", &idscene);
+								DebugOut(L"[NODE_MAP] sceneID = %d \n", idscene);
+								cnode->SetIDscene(idscene);
+								
+								
+						}
+						if (nameproperty == "node_id")
+						{
+							if (node->Attribute("value") != "")
+							{
+								int idNode = 0;
+								node->QueryIntAttribute("value", &idNode);
+								cnode->SetNodeID(idNode);
+							}
+						}
 						
 					}
-					DebugOut(L"[NODE_MAP] = %f \n", 1);
+				
 					CGame::GetInstance()->GetCurrentScene()->addobject(cnode);
+				}
+				else if (name == "Portal")
+				{
+					int idSCence = 0;
+					TMXObject->QueryFloatAttribute("x", &x);
+					TMXObject->QueryFloatAttribute("y", &y);
+					TMXObject->QueryFloatAttribute("width", &width);
+					TMXObject->QueryFloatAttribute("height", &height);
+					
+					TMXObject->QueryIntAttribute("type", &idSCence);
+					CPortal* Portal = new CPortal(x,y,width,height, idSCence);
+					CGame::GetInstance()->GetCurrentScene()->addobject(Portal);
 				}
 			}
 		}

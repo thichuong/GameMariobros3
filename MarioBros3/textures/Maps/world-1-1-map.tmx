@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="25" nextobjectid="292">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="27" nextobjectid="297">
  <editorsettings>
   <export target="world-1-1-map.xml" format="tmx"/>
  </editorsettings>
@@ -381,7 +381,7 @@
   <object id="13" x="4944" y="1246" width="1726.67" height="50"/>
   <object id="14" x="5330" y="1150" width="94" height="100"/>
   <object id="15" x="5520" y="1102" width="98" height="150"/>
-  <object id="16" x="6729" y="1248" width="1721" height="54"/>
+  <object id="16" x="6729" y="1248" width="1836" height="54"/>
   <object id="17" x="6729.33" y="1150.67" width="83.3333" height="93.3333"/>
   <object id="18" x="6914" y="1150" width="94" height="98"/>
   <object id="19" x="6720" y="478" width="96" height="530"/>
@@ -400,6 +400,9 @@
   <object id="146" x="6238.67" y="1390.17" width="97.6667" height="99"/>
   <object id="209" x="6720" y="1104.67" width="94.6666" height="47.3333"/>
   <object id="230" x="5136" y="1104" width="93.3333" height="138.667"/>
+ </objectgroup>
+ <objectgroup id="26" name="Portal">
+  <object id="293" name="Portal" type="1" x="8476" y="839" width="88" height="408"/>
  </objectgroup>
  <objectgroup id="14" name="Ghost">
   <object id="28" x="720.523" y="1104.97" width="142.597" height="47.1135"/>
@@ -576,7 +579,6 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="21" name="Portal"/>
  <objectgroup id="22" name="SwitchBlocks"/>
  <objectgroup id="23" name="Block"/>
  <objectgroup id="24" name="Card">

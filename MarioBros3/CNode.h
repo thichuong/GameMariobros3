@@ -50,6 +50,8 @@ public:
     virtual void CollisionObject(LPGAMEOBJECT obj, float nx, float ny);
     virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
     void SetTypeNode(string type);
-   
+    void SetIDscene(int id) { IDscene = id; }
+    void SetNodeID(int id) { nodeID = id; }
+    int getIDscene() { return IDscene; }
 };
 

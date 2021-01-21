@@ -130,8 +130,10 @@ public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
 	virtual void Pre_Render();
-	void UpdateVx();
+	void UpdateVx(DWORD dt);
 	void UpdateCollisions(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
+	void UpdateReward(DWORD dt);
+
 	virtual void OnKeyUp(int keyCode);
 	virtual void OnKeyDown(int keyCode);
 	virtual void KeyState(BYTE* state);
@@ -160,4 +162,5 @@ public:
 	float getMetter() { return metter; }
 
 	void Warp(TypeWarp warp);
+	
 };

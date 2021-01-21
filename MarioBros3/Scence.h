@@ -16,7 +16,7 @@ protected:
 	CKeyEventHandler * key_handler;
 	int id;
 	string sceneFilePath;
-
+	int switchID;
 public: 
 	CScene(int id, string filePath);
 	CKeyEventHandler * GetKeyEventHandler() { return key_handler; }
@@ -29,6 +29,7 @@ public:
 	virtual CPlayer* GetPlayer() { return NULL; }
 	virtual LPCamera getCamera(int id_camera) = 0;
 	virtual void addCanvas(Canvas* canvas) {};
+	void setSwitchID(int idScence) { switchID = idScence; }
 };
 typedef CScene * LPSCENE;
 

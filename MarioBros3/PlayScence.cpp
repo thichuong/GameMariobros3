@@ -18,6 +18,8 @@ CPlayScene::CPlayScene(int id, string filePath):
 	gamemap = NULL;
 	canvas = NULL;
 	hud = new HUD();
+	start_x = 0;
+	start_y = 0;
 	
 }
 
@@ -201,7 +203,8 @@ void CPlayScene::Load()
 	//LoadSource();
 	/*playsprites = csprites::getinstance();
 	playani = canimations::getinstance();*/
-
+	float x, y;
+	int start;
 	TiXmlDocument doc(sceneFilePath.c_str());
 	if (doc.LoadFile())
 	{
@@ -246,7 +249,7 @@ void CPlayScene::Load()
 
 		for (TiXmlElement* node = info->FirstChildElement("Camera"); node != nullptr; node = node->NextSiblingElement("Camera"))
 		{
-			int start;
+			
 			node->QueryIntAttribute("start", &start);
 			for (TiXmlElement* detail = node->FirstChildElement("Boundary"); detail != nullptr; detail = detail->NextSiblingElement("Boundary"))
 			{
@@ -280,19 +283,24 @@ void CPlayScene::Load()
 		DebugOut(L"[INFO]Staet load : %d \n", id);
 		
 		node = info->FirstChildElement("LoadLayer");
-		float x, y;
+		
 		node->QueryFloatAttribute("x", &x);
 		node->QueryFloatAttribute("y", &y);
 		player = CPlayer::GetInstance();
 		player->SetPosition(x, y);
 		player->SetAnimationSet(CAnimations::GetInstance());
+		start_x = x;
+		start_y = y ;
+		DebugOut(L"[INFO MARIO] Position : %f , %f \n", x, y);
 		//objects.push_back(player);
 		DebugOut(L"[INFO] GameMap:   \n");
+		
+		
 	}
 	hud = new HUD();
 	
-
-	CGame::GetInstance()->GetInstance()->getCamera()->setCamdefault(0, 750);
+	canvas = NULL;
+	
 
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
 }
@@ -343,6 +351,14 @@ void CPlayScene::Update(DWORD dt)
 	
 	hud->Update(dt);
 	if (canvas != NULL) canvas->Update(dt);
+	if (start_x != 0 && start_y != 0)
+	{
+		player->SetPosition(start_x, start_y);
+		start_x = 0;
+		start_y = 0;
+	}
+	if (switchID != 0)
+		CGame::GetInstance()->SwitchScene(switchID);
 }
 
 void CPlayScene::Render()
@@ -368,9 +384,9 @@ void CPlayScene::Unload()
 {
 	for (unsigned int i = 0; i < objects.size(); i++)
 		delete objects[i];
-
+	switchID = 0;
 	objects.clear();
-	player = NULL;
+	//player = NULL;
 
 	DebugOut(L"[INFO] Scene %s unloaded! \n", sceneFilePath);
 }
@@ -406,15 +422,14 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 		object->SetPosition(x + camw / 2, y - camh / 2);
 		((CPlayScene*)scence)->addobject(object);
 	}
-	if (KeyCode == DIK_E)
-	{
-		mario->SetPosition(6503, 1723);
-		CGame::GetInstance()->SetCam(((CPlayScene*)scence)->getCamera(1));
-	}
 	if (KeyCode == DIK_R)
 	{
 		mario->SetPosition(6903, 500);
 		CGame::GetInstance()->SetCam(((CPlayScene*)scence)->getCamera(0));
+	}
+	if (KeyCode == DIK_E)
+	{
+		CGame::GetInstance()->SwitchScene(1);
 	}
 }
 

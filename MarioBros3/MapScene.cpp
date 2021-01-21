@@ -9,6 +9,7 @@ MapScene::MapScene(int id, string filePath) :
 	gamemap = NULL;
 	canvas = NULL;
 	hud = new HUD();
+	player = NULL;
 }
 
 void MapScene::_ParseSection_SPRITES(string line)
@@ -160,9 +161,12 @@ void MapScene::Load()
 				cameras.insert(make_pair(id, camera));
 
 				//CGame::GetInstance()->SetCam(cameras[start]);
-				DebugOut(L"cameras size = %d\n", cameras.size());
+				
 			}
 			CGame::GetInstance()->SetCam(cameras[start]);
+			
+
+			
 		}
 		node = info->FirstChildElement("LoadMAP");
 		file = node->Attribute("file");
@@ -176,8 +180,12 @@ void MapScene::Load()
 		float x, y;
 		node->QueryFloatAttribute("x", &x);
 		node->QueryFloatAttribute("y", &y);
-		player = CPlayer::GetInstance();
-		player->getMapMario()->SetPosition(x, y);
+		if (player == NULL)
+		{
+			player = CPlayer::GetInstance();
+			player->getMapMario()->SetPosition(x, y);
+			
+		}
 		player->SetAnimationSet(CAnimations::GetInstance());
 		//objects.push_back(player);
 		DebugOut(L"[INFO] GameMap:   \n");
@@ -188,6 +196,7 @@ void MapScene::Load()
 	CGame::GetInstance()->GetInstance()->getCamera()->setCamdefault(0, 0);
 
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
+	
 }
 
 void MapScene::Update(DWORD dt)
@@ -201,6 +210,7 @@ void MapScene::Update(DWORD dt)
 		coObjects.push_back(objects[i]);
 	}
 	player->getMapMario()->Update(dt, &coObjects);
+	player->getMapMario()->levelMario = player->GetlevelMario();
 	for (size_t i = 0; i < objects.size(); i++)
 	{
 		objects[i]->Update(dt, &coObjects);
@@ -230,12 +240,15 @@ void MapScene::Update(DWORD dt)
 	if (player == NULL) return;
 
 	// Update camera to follow mario
-	float px, py;
-	player->GetPosition(px, py);
-	CGame::GetInstance()->GetInstance()->getCamera()->update(px, py);
-
+	//player->GetPosition(px, py);
+	
 	hud->Update(dt);
 	if (canvas != NULL) canvas->Update(dt);
+
+	float pos_x, pos_y;
+	pos_x = CGame::GetInstance()->GetInstance()->getCamera()->cam_x;
+	pos_y = CGame::GetInstance()->GetInstance()->getCamera()->cam_y;
+	DebugOut(L"[cameras position] = %f   %f\n", pos_x, pos_y);
 }
 
 void MapScene::Render()
@@ -256,7 +269,7 @@ void MapScene::Unload()
 		delete objects[i];
 
 	objects.clear();
-	player = NULL;
+	//player = NULL;
 
 	DebugOut(L"[INFO] Scene %s unloaded! \n", sceneFilePath);
 }
@@ -266,16 +279,21 @@ void MapScene::Unload()
 void CMapScenceKeyHandler::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
-
-	MapMario* mario = ((CPlayScene*)scence)->GetPlayer()->getMapMario();
-	mario->OnKeyDown(KeyCode);
+	DebugOut(L" [OnKeyDown] OnKeyDown \n");
+	if (KeyCode == DIK_RIGHT || KeyCode == DIK_LEFT || KeyCode == DIK_UP || KeyCode == DIK_DOWN)
+	{
+		MapMario* mario = ((CPlayScene*)scence)->GetPlayer()->getMapMario();
+		mario->OnKeyDown(KeyCode);
+	}
+	
 }
 
 void CMapScenceKeyHandler::KeyState(BYTE* states)
 {
-	CGame* game = CGame::GetInstance();
-	MapMario* mario = ((CPlayScene*)scence)->GetPlayer()->getMapMario();
-	mario->KeyState(states);
+	//CGame* game = CGame::GetInstance();
+	//MapMario* mario = ((CPlayScene*)scence)->GetPlayer()->getMapMario();
+	
+	//mario->KeyState(states);
 
 	// disable control key when Mario die 
 }

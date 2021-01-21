@@ -29,7 +29,7 @@ CMario::CMario(float x, float y) : CGameObject()
 	time_wrap = 0;
 	player = CGame::GetInstance()->GetCurrentScene()->GetPlayer();
 }
-void CMario::UpdateVx()
+void CMario::UpdateVx(DWORD dt)
 {
 	if (Mariostate.movement == MoveStates::Run || Mariostate.movement == MoveStates::Walk)
 	{
@@ -289,6 +289,12 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 }
 
+void CMario::UpdateReward(DWORD dt)
+{
+	vx = MARIO_WALKING_SPEED;
+	ax = 1;
+	SetMoveState(MoveStates::Walk);
+}
 void CMario::Render()
 {
 	string ani = IDLE;

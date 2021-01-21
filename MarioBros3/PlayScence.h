@@ -30,6 +30,8 @@ protected:
 	HUD* hud ;
 	Canvas* canvas ;
 
+	int start_x, start_y;
+
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);
 	void _ParseSection_ANIMATIONS(string line);

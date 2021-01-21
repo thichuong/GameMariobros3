@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Utils.h"
+#include "Game.h"
 
 
 CPlayer::CPlayer()
@@ -17,7 +18,7 @@ CPlayer::CPlayer()
 	ListMario[raccoon]->setPlayer(this);
 
 	holdobject = NULL;
-	levelMario = big;
+	levelMario = Mario_small;
 	playMario = ListMario[levelMario];
 	mapmario->levelMario = this->levelMario;
 	collision = CCollision::Full;
@@ -27,6 +28,8 @@ CPlayer::CPlayer()
 	score = 0;
 	life = 4;
 	coin = 0;
+	reWard_time_start = 0;
+	
 }
 
 CPlayer* CPlayer::__instance = NULL;
@@ -42,7 +45,14 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
 	if (playMario->GetLevel() != none) SwitchToMario(playMario->GetLevel());
 	if (downleveltime < DOWN_LEVEL_TIME) downleveltime += dt;
-
+	if (GetTickCount64() - reWard_time_start <= REWARD_TIME)
+	{
+		playMario->UpdateReward(dt);
+	}
+	else
+	{
+		playMario->UpdateVx(dt);
+	}
 	playMario->Update(dt, colliable_objects);
 	playMario->GetPosition(this->x, this->y);
 
@@ -83,6 +93,7 @@ void CPlayer::SetPosition(float x, float y)
 	this->x = x;
 	this->y = y;
 	playMario->SetPosition(x, y);
+	
 }
 void CPlayer::SwitchToMario(string state)
 {
@@ -118,7 +129,7 @@ void CPlayer::SetLevel(int lv)
 }
 int CPlayer::getMetter()
 {
-	int metter =playMario->getMetter();
+	int metter =(int) playMario->getMetter();
 	
 	return metter;	
 }
