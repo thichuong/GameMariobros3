@@ -75,42 +75,42 @@ CGameMap::CGameMap()
 }
 TileSet CGameMap::GetTileSet(int id)
 {
-	for (auto& tileset : tilesets) 
+	for (auto& tileset : tilesets)
 	{
-			if (id >= tileset.second->GetFirstGID() && id <= tileset.second->GettileCount())
-				return tileset.second;
+		if (id >= tileset.second->GetFirstGID() && id <= tileset.second->GettileCount())
+			return tileset.second;
 	}
 	return NULL;
 }
 void CGameMap::Render(CGame* game)
 {
-	int Width =(int)game->GetScamX() / tileWidth;
-	int Height =(int)game->GetScamY() / tileHeight;
+	int Width = (int)game->GetScamX() / tileWidth;
+	int Height = (int)game->GetScamY() / tileHeight;
 
 	if (Width > 0) Width--;
 	if (Height > 0) Height--;
 
 	//Vec2 camSize = Vec2(this->camera->GetCamSize().x / tileWidth, this->camera->GetCamSize().y / tileHeight);
-	
+
 	int camWidth = (int)game->GetScreenWidth() / tileWidth;
 	int camHeight = (int)game->GetScreenHeight() / tileHeight;
 	for (int i = Width; i < camWidth + Width + 3; i++) {
 		for (int j = Height; j < camHeight + Height + 3; j++) {
-			int x = i * tileWidth ;
-			int y = j * tileHeight ;
+			int x = i * tileWidth;
+			int y = j * tileHeight;
 			for (Layer layer : layers) {
 				if (!layer->visible) continue;
 				int id = layer->GetTileID(i % width, j % height);
-				if(this->GetTileSet(id))
+				if (this->GetTileSet(id))
 					this->GetTileSet(id)->Draw(id, x, y);
 			}
 		}
 	}
-	
+
 }
 void  CGameMap::ReRender(CGame* game)
 {
-	int Width =(int) game->GetScamX() / tileWidth;
+	int Width = (int)game->GetScamX() / tileWidth;
 	int Height = (int)game->GetScamY() / tileHeight;
 
 	if (Width > 0) Width--;
@@ -140,7 +140,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 	string fullPath = filePath + "/" + fileName;
 	TiXmlDocument doc(fullPath.c_str());
 
-	
+
 
 	if (doc.LoadFile()) {
 		TiXmlElement* root = doc.RootElement();
@@ -153,8 +153,8 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 			{
 
 				float x, y, width, height;
-				
-				
+
+
 				if (name == "Solid")
 				{
 					TMXObject->QueryFloatAttribute("x", &x);
@@ -164,7 +164,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 
 					Solid* solid = new Solid(x, y, width, height);
 					CGame::GetInstance()->GetCurrentScene()->addobject(solid);
-					
+
 				}
 				else if (name == "Ghost")
 				{
@@ -176,11 +176,11 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					Ghost* ghost = new Ghost(x, y, width, height);
 
 					CGame::GetInstance()->GetCurrentScene()->addobject(ghost);
-	
+
 				}
 				else if (name == "Enemy")
 				{
-					string Enemiesname= TMXObject->Attribute("name");
+					string Enemiesname = TMXObject->Attribute("name");
 					string Type = TMXObject->Attribute("type");
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
@@ -228,7 +228,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 							enemies->SetPosition(x, y);
 							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
 						}
-						
+
 					}
 					if (Enemiesname == "venus")
 					{
@@ -251,35 +251,35 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 
 					}
 					if (Enemiesname == "piranha")
-					{					
-							Piranha* enemies = new Piranha();
-							enemies->SetAnimationSet(CAnimations::GetInstance());
-							enemies->SetPosition(x, y);
-							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
-					}
-					if (Enemiesname == "boomerang-brother")
 					{
-						BoomerangBrother * enemies = new BoomerangBrother();
+						Piranha* enemies = new Piranha();
 						enemies->SetAnimationSet(CAnimations::GetInstance());
 						enemies->SetPosition(x, y);
 						CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
 					}
-					
+					if (Enemiesname == "boomerang-brother")
+					{
+						BoomerangBrother* enemies = new BoomerangBrother();
+						enemies->SetAnimationSet(CAnimations::GetInstance());
+						enemies->SetPosition(x, y);
+						CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+					}
+
 				}
 				else if (name == "Coin")
 				{
-					
+
 
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
-					Coin* coin = new Coin(x,y);
+					Coin* coin = new Coin(x, y);
 
 					CGame::GetInstance()->GetCurrentScene()->addobject(coin);
 
 				}
 				else if (name == "QuestionBlocks")
 				{
-					
+
 					int quantity = 0;
 					string blockname;
 
@@ -288,7 +288,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					TMXObject->QueryFloatAttribute("y", &y);
 					TMXObject->QueryIntAttribute("type", &quantity);
 
-					QuestionBlock* questionblock = new QuestionBlock(x,y);
+					QuestionBlock* questionblock = new QuestionBlock(x, y);
 
 					if (blockname == "bleaf")
 					{
@@ -302,18 +302,21 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					{
 						questionblock->SetItem(Item::Leaf);
 					}
-					questionblock->SetQuantity(quantity);
-					
+
+					questionblock->quantity = quantity;
+					DebugOut(L"[questionblock ] quantity = %d \n", questionblock->quantity);
+
+
 					CGame::GetInstance()->GetCurrentScene()->addobject(questionblock);
 
-					
+
 				}
 				else if (name == "Brick")
 				{
-				
+
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
-					
+
 					if (TMXObject->Attribute("name") == NULL)
 					{
 						Brick* brick = new Brick(x, y);
@@ -337,72 +340,72 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 				else if (name == "Warp")
 				{
 
-				 string Warpname;
+					string Warpname;
 
-				 Warpname = TMXObject->Attribute("name");
-				 TMXObject->QueryFloatAttribute("x", &x);
-				 TMXObject->QueryFloatAttribute("y", &y);
-				 TMXObject->QueryFloatAttribute("width", &width);
-				 TMXObject->QueryFloatAttribute("height", &height);
-				 
-				 if (Warpname == "warp-pipe")
-				 {
-					 string typeWarp = TMXObject->Attribute("type");
-					 WarpPipe* warppipe = new WarpPipe(x, y, width, height);
-					 if (typeWarp == "down")
-					 {
-						 warppipe->setWarp(TypeWarp::down);
-					 }
-					 if (typeWarp == "up")
-					 {
-						 warppipe->setWarp(TypeWarp::up);
-					 }
-					 DebugOut(L"[warp-pipe] = %f \n", 1);
-					 CGame::GetInstance()->GetCurrentScene()->addobject(warppipe);
-				 }
-				 if (Warpname == "warp-mark")
-				 {
-					 WarpMark* warpmark = new WarpMark(x, y, width, height);
-					 string markname ;
-					 int cameraid = 0;
-					 string typeWarp;
-					 float destx = 0;
-					 float desty = 0;
-					 int block;
-					 TiXmlElement* props = TMXObject->FirstChildElement("properties");
-					 for (TiXmlElement* node = props->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
-					 {
-						 markname = node->Attribute("name");
-						
-						 if (markname == "camera-bound-id") node->QueryIntAttribute("value", &cameraid);
-						 if(markname == "dest-x")	node->QueryFloatAttribute("value", &destx);
-						 if(markname == "dest-y")	node->QueryFloatAttribute("value", &desty);
-						 if (markname == "lock")
-						 {
-							// node->QueryIntAttribute("value", &block);
-							 //if (block == 1) warpmark->Block();
-							// else warpmark->UnBlock();
-						 }
-						 if (markname == "out-direction")
-						 {
-							 typeWarp = node->Attribute("value");
-							
-						 }
-						
-						 DebugOut(L"[warp-mark] = %f \n", 1);
-					 }
-					 warpmark->set(cameraid, destx, desty);
-					 if (typeWarp == "down")
-					 {
-						 warpmark->setWarp(TypeWarp::down);
-					 }
-					 if (typeWarp == "up")
-					 {
-						 warpmark->setWarp(TypeWarp::up);
-					 }
-					// DebugOut(L"[warp-mark] = %f \n", 1);
-					 CGame::GetInstance()->GetCurrentScene()->addobject(warpmark);
-				 }
+					Warpname = TMXObject->Attribute("name");
+					TMXObject->QueryFloatAttribute("x", &x);
+					TMXObject->QueryFloatAttribute("y", &y);
+					TMXObject->QueryFloatAttribute("width", &width);
+					TMXObject->QueryFloatAttribute("height", &height);
+
+					if (Warpname == "warp-pipe")
+					{
+						string typeWarp = TMXObject->Attribute("type");
+						WarpPipe* warppipe = new WarpPipe(x, y, width, height);
+						if (typeWarp == "down")
+						{
+							warppipe->setWarp(TypeWarp::down);
+						}
+						if (typeWarp == "up")
+						{
+							warppipe->setWarp(TypeWarp::up);
+						}
+						// DebugOut(L"[warp-pipe] = %f \n", 1);
+						CGame::GetInstance()->GetCurrentScene()->addobject(warppipe);
+					}
+					if (Warpname == "warp-mark")
+					{
+						WarpMark* warpmark = new WarpMark(x, y, width, height);
+						string markname;
+						int cameraid = 0;
+						string typeWarp;
+						float destx = 0;
+						float desty = 0;
+						int block;
+						TiXmlElement* props = TMXObject->FirstChildElement("properties");
+						for (TiXmlElement* node = props->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
+						{
+							markname = node->Attribute("name");
+
+							if (markname == "camera-bound-id") node->QueryIntAttribute("value", &cameraid);
+							if (markname == "dest-x")	node->QueryFloatAttribute("value", &destx);
+							if (markname == "dest-y")	node->QueryFloatAttribute("value", &desty);
+							if (markname == "lock")
+							{
+								// node->QueryIntAttribute("value", &block);
+								 //if (block == 1) warpmark->Block();
+								// else warpmark->UnBlock();
+							}
+							if (markname == "out-direction")
+							{
+								typeWarp = node->Attribute("value");
+
+							}
+
+							// DebugOut(L"[warp-mark] = %f \n", 1);
+						}
+						warpmark->set(cameraid, destx, desty);
+						if (typeWarp == "down")
+						{
+							warpmark->setWarp(TypeWarp::down);
+						}
+						if (typeWarp == "up")
+						{
+							warpmark->setWarp(TypeWarp::up);
+						}
+						// DebugOut(L"[warp-mark] = %f \n", 1);
+						CGame::GetInstance()->GetCurrentScene()->addobject(warpmark);
+					}
 
 				}
 				else if (name == "Card")
@@ -414,10 +417,10 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					TMXObject->QueryFloatAttribute("y", &y);
 					if (Cardname == "reward")
 					{
-						Reward* reward = new Reward(x,y);
+						Reward* reward = new Reward(x, y);
 						CGame::GetInstance()->GetCurrentScene()->addobject(reward);
 					}
-				
+
 				}
 				else if (name == "AnimatedBG")
 				{
@@ -425,7 +428,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					CTree* tree = new CTree();
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
-				
+
 					tree->SetPosition(x, y);
 					CGame::GetInstance()->GetCurrentScene()->addobject(tree);
 
@@ -453,27 +456,27 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					{
 						nameproperty = node->Attribute("name");
 
-						if (nameproperty == "adjacent_weight") 
+						if (nameproperty == "adjacent_weight")
 						{
 							vector<string> adjacent_weight = split(node->Attribute("value"), ",");
 							for (int i = 0; i < adjacent_weight.size(); i++)
 							{
-								if (adjacent_weight[i] == "l") cnode->left = true ;
+								if (adjacent_weight[i] == "l") cnode->left = true;
 								else if (adjacent_weight[i] == "r") cnode->right = true;
 								else if (adjacent_weight[i] == "u") cnode->up = true;
 								else if (adjacent_weight[i] == "d") cnode->down = true;
 							}
-						
+
 						}
 						if (nameproperty == "scene")
 						{
-							
-								int idscene =0;
-								node->QueryIntAttribute("value", &idscene);
-								DebugOut(L"[NODE_MAP] sceneID = %d \n", idscene);
-								cnode->SetIDscene(idscene);
-								
-								
+
+							int idscene = 0;
+							node->QueryIntAttribute("value", &idscene);
+							DebugOut(L"[NODE_MAP] sceneID = %d \n", idscene);
+							cnode->SetIDscene(idscene);
+
+
 						}
 						if (nameproperty == "node_id")
 						{
@@ -484,9 +487,9 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 								cnode->SetNodeID(idNode);
 							}
 						}
-						
+
 					}
-				
+
 					CGame::GetInstance()->GetCurrentScene()->addobject(cnode);
 				}
 				else if (name == "Portal")
@@ -496,35 +499,43 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					TMXObject->QueryFloatAttribute("y", &y);
 					TMXObject->QueryFloatAttribute("width", &width);
 					TMXObject->QueryFloatAttribute("height", &height);
-					
+
 					TMXObject->QueryIntAttribute("type", &idSCence);
-					CPortal* Portal = new CPortal(x,y,width,height, idSCence);
+					CPortal* Portal = new CPortal(x, y, width, height, idSCence);
 					CGame::GetInstance()->GetCurrentScene()->addobject(Portal);
 				}
 				else if (name == "MovingPlatforms")
 				{
+
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
-					TMXObject->QueryFloatAttribute("width", &width);
-					TMXObject->QueryFloatAttribute("height", &height);
+
+
 					Platform* platform = new Platform();
 					platform->SetPosition(x, y);
-					platform->setWidthHeight(width, height);
-					float vx, vy;
+
 					TiXmlElement* props = TMXObject->FirstChildElement("properties");
 					for (TiXmlElement* node = props->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
 					{
+						float vx = 0, vy = 0;
 						string property_name = node->Attribute("name");
-						if(property_name == "start-velocity-x") node->QueryFloatAttribute("value", &vx);
+						if (property_name == "start-velocity-x")
+						{
+							node->QueryFloatAttribute("value", &vx);
+							platform->SetSpeed(vx, 0.0f);
+
+						}
 						if (property_name == "start-velocity-y") node->QueryFloatAttribute("value", &vy);
-						platform->SetSpeed(vx, 0.0f);
+
+
+
 					}
 					CGame::GetInstance()->GetCurrentScene()->addobject(platform);
 				}
 			}
 		}
 	}
-	
+
 }
 
 void CGameMap::FromTMX(string filePath, string fileName)
@@ -553,7 +564,7 @@ void CGameMap::FromTMX(string filePath, string fileName)
 			this->layers.push_back(layer);
 		}
 
-		
+
 	}
 
 	//throw "Load map that bai!!";

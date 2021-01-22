@@ -53,7 +53,7 @@ void QuestionBlock::GetBoundingBox(float& l, float& t, float& r, float& b)
 		r = x + QuestionBlock_BBOX_WIDTH;
 		b = y + QuestionBlock_BBOX_HEIGHT;
 	}
-	
+
 }
 void QuestionBlock::SetAnimationSet(CAnimations* ani_set)
 {
@@ -65,49 +65,51 @@ void QuestionBlock::SetAnimationSet(CAnimations* ani_set)
 }
 void QuestionBlock::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 {
-	
+
 
 	if (obj->typeobject == TypeObject::player && ny > 0 && isActive && !isBounce)
 	{
 		isBounce = TRUE;
-		tempy -= BOUNCE_VEL;
-		obj->vy += GRAVITY_QUESTIONBLOCK;
+		vy = -BOUNCE_VEL;
 		Bounce();
+
+
 	}
-		
+
 	if (obj->typeobject == TypeObject::normal && isActive && !isBounce)
 	{
 		isBounce = TRUE;
-		tempy -= BOUNCE_VEL;
-		Bounce();	
-	}		
+		vy = -BOUNCE_VEL;
+		Bounce();
+
+	}
 
 }
 void QuestionBlock::Bounce()
 {
 	switch (item)
 	{
-		case Item::Coin:
-		{
-			Coin* coin = new Coin(x, y - COIN_BBOX_HEIGHT, TRUE);
-			CGame::GetInstance()->GetCurrentScene()->addobject(coin);
-		}
-		break;
-		case Item::Leaf:
-		{
-			Leaf* leaf = new Leaf(x, y - COIN_BBOX_HEIGHT, TRUE);
-			CGame::GetInstance()->GetCurrentScene()->addobject(leaf);
-		}
-		break;
-
-		case Item::PSwitch:
-		{
-			PSwitch* pswitch = new PSwitch(x, y);
-			CGame::GetInstance()->GetCurrentScene()->addobject(pswitch);
-		}
-		break;
+	case Item::Coin:
+	{
+		Coin* coin = new Coin(x, y - COIN_BBOX_HEIGHT, TRUE);
+		CGame::GetInstance()->GetCurrentScene()->addobject(coin);
 	}
-	
+	break;
+	case Item::Leaf:
+	{
+		Leaf* leaf = new Leaf(x, y - COIN_BBOX_HEIGHT, TRUE);
+		CGame::GetInstance()->GetCurrentScene()->addobject(leaf);
+	}
+	break;
+
+	case Item::PSwitch:
+	{
+		PSwitch* pswitch = new PSwitch(x, y);
+		CGame::GetInstance()->GetCurrentScene()->addobject(pswitch);
+	}
+	break;
+	}
+
 
 }
 void QuestionBlock::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
@@ -116,23 +118,26 @@ void QuestionBlock::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	{
 		CGameObject::Update(dt);
 		vy += GRAVITY_QUESTIONBLOCK * dt;
-		if (tempy + vy*dt >= 0)
+		if (tempy + vy * dt >= 0)
 		{
 			vy = 0;
 			tempy = 0;
 			isBounce = FALSE;
 			collision = CCollision::Full;
 			quantity--;
-			if(quantity <= 0)
+			if (quantity <= 0)
 				isActive = FALSE;
 		}
-		
+		else
+		{
+			tempy += vy * dt;
+		}
 	}
-	
+
 }
 
 void QuestionBlock::SetQuantity(int qunatity)
 {
 	this->quantity = quantity;
-	
+
 }

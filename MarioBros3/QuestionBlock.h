@@ -1,10 +1,10 @@
 #pragma once
 #include "GameObject.h"
 
-#define BOUNCE_VEL	12.0f
+#define BOUNCE_VEL	1.5f
 #define QuestionBlock_BBOX_WIDTH 48
 #define QuestionBlock_BBOX_HEIGHT 48
-#define GRAVITY_QUESTIONBLOCK  0.8f
+#define GRAVITY_QUESTIONBLOCK  0.04f
 
 #define ANI_ACTIVE "ani-question-block"
 #define ANI_EMPTY "ani-empty-block"
@@ -20,17 +20,18 @@ enum class Item
 };
 
 class QuestionBlock :
-    public CGameObject
+	public CGameObject
 {
 protected:
 	bool isBounce;
 	bool isActive;
-	int quantity;
+
 	float tempx, tempy;
 	Item item;
 public:
 	QuestionBlock(float l, float t);
 	QuestionBlock();
+	int quantity;
 	virtual void Render();
 	virtual void GetBoundingBox(float& l, float& t, float& r, float& b);
 	virtual void SetAnimationSet(CAnimations* ani_set);
