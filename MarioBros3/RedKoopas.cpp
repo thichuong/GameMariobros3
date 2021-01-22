@@ -72,6 +72,7 @@ void RedKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			LPCOLLISIONEVENT e = coEventsResult[i];
 			LPGAMEOBJECT obj = e->obj;
 			if (state == KOOPAS_STATE_SHELL_RUN || state == KOOPAS_STATE_SHELL_HOLD)
+				if (e->nx != 0)
 				obj->CollisionObject(this, e->nx, e->ny);
 			if (e->nx != 0 && e->obj->typeobject == TypeObject::enemy) nx = 0;
 			

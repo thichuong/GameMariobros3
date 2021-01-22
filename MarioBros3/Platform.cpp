@@ -7,7 +7,7 @@ Platform::Platform() : CGameObject()
 {
 
 	typeobject = TypeObject::normal;
-	collision = CCollision::Full;
+	collision = CCollision::Top;
 	SetAnimationSet(CAnimations::GetInstance());
 
 	isGravity = false;

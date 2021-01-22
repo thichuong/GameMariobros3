@@ -18,7 +18,7 @@ RewardCanvas::RewardCanvas()
 	font->LoadFont();
 
 	int screenHeight = CGame::GetInstance()->GetScreenHeight();
-	setPosition(D3DXVECTOR2(CGame::GetInstance()->GetScamX() +150, CGame::GetInstance()->GetScamY() + screenHeight * 0.1f));
+	setPosition(D3DXVECTOR2(CGame::GetInstance()->GetScamX() +180, CGame::GetInstance()->GetScamY() + screenHeight * 0.1f));
 	string1 = D3DXVECTOR2(position.x + 40, position.y);
 	string2 = D3DXVECTOR2(position.x, position.y + 60);
 	pos_card = D3DXVECTOR2(position.x + 350, position.y + 40);
