@@ -41,7 +41,7 @@ void CSprites::Add(string id, int left, int top, int right, int bottom, LPDIRECT
 	LPSPRITE s = new CSprite(id, left, top, right, bottom, tex, xPivot, yPivot);
 	sprites[id] = s;
 
-	DebugOut(L"[INFO] sprite added: %d, %d, %d, %d, %d \n", id, left, top, right, bottom);
+	DebugOut(L"[INFO] sprite added: %s:   %d, %d, %d, %d \n", ToLPCWSTR(id), left, top, right, bottom);
 }
 void CSprites::Add(string id, LPSPRITE sprite)
 {

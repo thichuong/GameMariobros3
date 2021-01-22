@@ -68,6 +68,8 @@ void RedParatroopa::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 	{
 		if (ny < 0)
 		{
+			obj->y -= KOOPAS_FLY;
+			obj->vy -= KOOPAS_FLY;
 			swicth(KOOPAS_STATE_WALKING, vx);
 		}
 		else

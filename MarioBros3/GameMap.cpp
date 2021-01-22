@@ -23,6 +23,8 @@
 #include "Portal.h"
 #include "Platform.h"
 #include "RedParatroopa.h"
+#include "BoomerangBrother.h"
+
 
 CLayer::CLayer()
 {
@@ -254,6 +256,13 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 							enemies->SetAnimationSet(CAnimations::GetInstance());
 							enemies->SetPosition(x, y);
 							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+					}
+					if (Enemiesname == "boomerang-brother")
+					{
+						BoomerangBrother * enemies = new BoomerangBrother();
+						enemies->SetAnimationSet(CAnimations::GetInstance());
+						enemies->SetPosition(x, y);
+						CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
 					}
 					
 				}

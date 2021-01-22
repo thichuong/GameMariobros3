@@ -97,6 +97,9 @@
     <Filter Include="Source Files\GameObject\IntroObject">
       <UniqueIdentifier>{b3897fce-ca73-4abd-87f4-c3eabc69bfb0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObject\Enemy\Boomerang">
+      <UniqueIdentifier>{88bcb45a-8bf6-48cb-b081-a514cd646b1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -302,6 +305,12 @@
     </ClInclude>
     <ClInclude Include="TitteIntro.h">
       <Filter>Source Files\GameObject\IntroObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Boomerang.h">
+      <Filter>Source Files\GameObject\Enemy\Boomerang</Filter>
+    </ClInclude>
+    <ClInclude Include="BoomerangBrother.h">
+      <Filter>Source Files\GameObject\Enemy\Boomerang</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -511,6 +520,12 @@
     </ClCompile>
     <ClCompile Include="TitteIntro.cpp">
       <Filter>Source Files\GameObject\IntroObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Boomerang.cpp">
+      <Filter>Source Files\GameObject\Enemy\Boomerang</Filter>
+    </ClCompile>
+    <ClCompile Include="BoomerangBrother.cpp">
+      <Filter>Source Files\GameObject\Enemy\Boomerang</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

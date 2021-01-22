@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Textures>
 	<Textures Game="MarioBros3" id="1">
-		<LoadSPRITES file ="textures/Sprites/MarioDB.xml" source ="Textures\\Mario\\mario_x3.png" textureId="tex-mario"/>
-		<LoadSPRITES file ="textures/Sprites/EnemyDB.xml" source ="Textures\\Enemy\\enemy_x3.png" textureId="tex-enemy"/>
+		<LoadSPRITES file ="textures/Sprites/MarioDB.xml" source ="Textures\\Mario\\mario_x3.png" textureId="tex-mario"/>	
 		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="Textures\\Misc\\misc_x3.png" textureId="tex-misc"/>
 		<LoadSPRITES file ="textures/Sprites/UiDB.xml" source ="Textures\\Misc\\ui_x3.png" textureId="tex-ui"/>
 		<LoadSPRITES file ="textures/Sprites/UiDB.xml" source ="Textures\\Misc\\box-small.png" textureId="tex-pannel"/>
@@ -11,7 +10,6 @@
 		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="textures\\Misc\\reward_x3.png" textureId="tex-goal" a="255"/>
 		<LoadSPRITES file ="textures/Sprites/OverworldMapDB.xml" source ="textures\\OverWorld\\overworld_x3.png" textureId="tex-overworld"/>
 		<LoadANIMATIONS file ="Textures/Animations/MarioAnim.xml"/>
-		<LoadANIMATIONS file ="Textures/Animations/EnemyAnim.xml"/>
 		<LoadANIMATIONS file ="Textures/Animations/MiscAnim.xml"/>
 		<LoadANIMATIONS file ="Textures/Animations/UiAnim.xml"/>
 		<LoadANIMATIONS file ="Textures/Animations/OverworldMapAnim.xml"/>
