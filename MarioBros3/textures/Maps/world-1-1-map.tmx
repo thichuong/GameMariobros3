@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="27" nextobjectid="297">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="27" nextobjectid="298">
  <editorsettings>
   <export target="world-1-1-map.xml" format="tmx"/>
  </editorsettings>
@@ -941,9 +941,6 @@
    </properties>
    <point/>
   </object>
-  <object id="265" name="item" type="p-switch" x="6076" y="1103">
-   <point/>
-  </object>
   <object id="266" type="Brick" x="6268" y="1151">
    <properties>
     <property name="Grid" value="[{&quot;x&quot;:16,&quot;y&quot;:3},{&quot;x&quot;:16,&quot;y&quot;:4}]"/>
@@ -961,6 +958,11 @@
     <property name="Grid" value="[{&quot;x&quot;:16,&quot;y&quot;:4}]"/>
    </properties>
    <point/>
+  </object>
+  <object id="297" name="p-switch" type="1" x="6075.33" y="1103" width="48" height="48">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:3}]"/>
+   </properties>
   </object>
  </objectgroup>
  <objectgroup id="15" name="Enemy">

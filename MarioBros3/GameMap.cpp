@@ -326,15 +326,16 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					{
 						string name;
 						name = TMXObject->Attribute("name");
-						string type = TMXObject->Attribute("type");
-						if (name == "item")
+						int type;  
+						TMXObject->QueryIntAttribute("type", &type);
+						ItemBrick* brick = new ItemBrick();
+						brick->SetPosition(x, y);
+						brick->quantity = type;
+						if (name == "p-switch")
 						{
-							ItemBrick* brick = new ItemBrick();
-							brick->SetPosition(x, y);
-							if (type == "p-switch")
-								brick->SetItem(Item::PSwitch);
-							CGame::GetInstance()->GetCurrentScene()->addobject(brick);
+							brick->SetItem(Item::PSwitch);
 						}
+						CGame::GetInstance()->GetCurrentScene()->addobject(brick);
 					}
 				}
 				else if (name == "Warp")
