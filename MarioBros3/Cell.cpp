@@ -7,8 +7,7 @@ Cell::Cell(int x, int y)
 
 	width = CELL_WIDTH;
 	height = CELL_HEIGHT;
-	objects = new unordered_set<LPGAMEOBJECT>();
-
+	objects =new  vector<CGameObject*>();
 }
 
 Cell::~Cell()
@@ -26,19 +25,23 @@ int Cell::getY()
 }
 
 void Cell::AddObject(CGameObject* obj)
-{
-		
-	if (objects->find(obj) == objects->end())
-		objects->insert(obj);
+{	
+	if( !(find(objects->begin(), objects->end(), obj) != objects->end()))
+	{
+		objects->push_back(obj);
+	}
 }
 
 void Cell::RemoveObject(CGameObject* obj)
 {
-	if (objects->find(obj) != objects->end())
-		objects->erase(obj);
+	for (size_t i = 0; i < objects->size(); i++)
+	{
+		if (objects->at(i) == obj) objects->erase(objects->begin() + i);
+	}
+	
 }
 
-unordered_set<LPGAMEOBJECT>* Cell::getCellObject()
+vector<LPGAMEOBJECT>* Cell::getCellObject()
 {
-	return this->objects;
+	return objects;
 }

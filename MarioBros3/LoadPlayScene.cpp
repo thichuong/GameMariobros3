@@ -38,6 +38,7 @@ void CPlayScene::newObject(LPGAMEOBJECT object, string stringGrid)
 		addobjects.push_back(object);
 	else
 	{
+		DebugOut(L"[ADD Cell] %s \n", ToLPCWSTR(stringGrid));
 		Document document;
 		document.Parse(stringGrid.c_str());
 		for (auto& v : document.GetArray())

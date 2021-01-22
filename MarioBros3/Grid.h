@@ -8,9 +8,9 @@ class Grid
 	int row;
 	int cellWidth;
 	int cellHeight;
-	vector<vector<Cell*>> Cells;
-	vector <Cell*>* activecells;
-	vector<LPGAMEOBJECT>* activeObject;
+	vector<vector<Cell*>> cells;
+	vector<Cell*> *activeCells;
+	vector<LPGAMEOBJECT> *activeList;
 public:
 	Grid(int col, int row, int cellWidth, int cellHeight);
 	~Grid();

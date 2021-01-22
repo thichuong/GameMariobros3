@@ -1001,7 +1001,7 @@
     <property name="Grid" value="[{&quot;x&quot;:5,&quot;y&quot;:3}]"/>
    </properties>
   </object>
-  <object id="196" name="koopa" type="red" x="5995.5" y="1024">
+  <object id="196" name="koopa" type="red" x="6268.17" y="1032.67">
    <properties>
     <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:3}]"/>
    </properties>

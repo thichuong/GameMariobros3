@@ -44,7 +44,7 @@ void Reward::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 		RewardFX* rewardFX = new RewardFX(reward);
 		rewardFX->SetPosition(x, y);
 		CGame::GetInstance()->GetCurrentScene()->addobject(rewardFX);
-		CGame::GetInstance()->GetCurrentScene()->delobject(this);
+		ActiveGameObject = false;
 		RewardCanvas* rewardcanvas = new RewardCanvas();
 		if (reward == 0)
 			itemcard = ItemCard::mushroom;

@@ -3,44 +3,64 @@
 
 Grid::Grid(int col, int row, int cellWidth, int cellHeight)
 {
-	
-	activecells = new vector<Cell*>();
-	activeObject = new std::vector<LPGAMEOBJECT>();
 
-	this->col = col;
-	this->row = row;
+	this->col = col+1;
+	this->row = row+1;
 	this->cellHeight = cellHeight;
 	this->cellWidth = cellWidth;
 
-	for (int x = 0; x < col; ++x)
+	for (int x = 0; x <= col+1; ++x)
 	{
-		vector<Cell*> column;
-		for (int y = 0; y < row; ++y)
+		vector<Cell*> column ;
+		for (int y = 0; y <= row+1; ++y)
 		{
 			Cell* cell = new Cell(x, y);
 			column.push_back(cell);
+		
 		}
-		Cells.push_back(column);
+		cells.push_back(column);
 	}
-
+	 activeCells = new vector<Cell*>();
+	 activeList = new vector<LPGAMEOBJECT>();
 
 }
 
 Grid::~Grid()
 {
-	for (int x = 0; x < col; ++x)
+	activeCells->clear();
+	activeList->clear();
+
+	for (int x = 0; x < cellWidth; ++x)
 	{
-		for (int y = 0; y < row; ++y)
-			delete Cells.at(x).at(y);
-		Cells.at(x).clear();
+		for (int y = 0; y < cellHeight; ++y)
+			delete cells.at(x).at(y);
+		cells.at(x).clear();
 	}
-	Cells.clear();
+	cells.clear();
+	delete activeCells;
+	delete activeList;
 }
 
 void Grid::Update(float l, float t, float r, float b)
 {
 	getActiveCell(l, t, r, b);
-
+	
+	activeList->clear();
+	for (auto cell : *activeCells)
+		for (auto obj : *cell->getCellObject())
+		{
+			if (obj->ActiveGameObject == true && obj->CallCell == false)
+			{
+				activeList->push_back(obj);
+				obj->CallCell = true;
+			}
+					
+		}
+	for (auto obj : *activeList)
+	{
+		obj->CallCell = false;
+	}
+	
 }
 void Grid::AddObject(LPGAMEOBJECT object)
 {
@@ -51,9 +71,10 @@ void Grid::AddObject(LPGAMEOBJECT object)
 
 void Grid::AddObject(LPGAMEOBJECT object, int cellx, int celly)
 {
-	Cell* cell = Cells[cellx][celly];
+	Cell* cell = cells[cellx][celly];
 	cell->AddObject(object);
-	//DebugOut(L"[ADD Cell] \n");
+//	DebugOut(L"[ADD Cell] \n");
+	DebugOut(L"			[ADD Cell] : %d , %d   \n", cellx, celly);
 }
 
 void Grid::RemoveObject(LPGAMEOBJECT obj)
@@ -70,7 +91,7 @@ Cell* Grid::getCell(int x, int y)
 	if (y < 0) y = 0;
 	if (y >= row) y = row;
 
-	return Cells[x][y];
+	return cells[x][y];
 }
 
 Cell* Grid::getCellbyObjPosition(float x, float y)
@@ -83,45 +104,28 @@ Cell* Grid::getCellbyObjPosition(float x, float y)
 
 vector<LPGAMEOBJECT>* Grid::getActiveGameObject()
 {
-
-	unordered_set<LPGAMEOBJECT > coObject;
-	coObject.clear();
-	for (auto cell = activecells->begin(); cell != activecells->end(); ++cell)
-		for (auto o : *((*cell)->objects))
-		{
-			coObject.insert(o);
-			//o->CallCell = false;
-		}
-	activeObject->clear();
-	for (auto obj : coObject)
-	{
-		//if (obj->CallCell == false)
-		//{
-			activeObject->push_back(obj);
-		//	obj->CallCell = true;
-		//}
-	}
-
-	return activeObject;
+	
+	return activeList;
 }
 
 void Grid::getActiveCell(float l, float t, float r, float b)
 {
-	activecells->clear();
-	int startX = (int)(l / cellWidth);
-	int endX = (int)(r / cellWidth);
-	int startY = (int)(t / cellHeight);
-	int endY = (int)(b / cellHeight);
+	
+	int startx = (int)(l / cellWidth);
+	int endx = (int)(r / cellWidth);
+	int starty = (int)(t / cellHeight);
+	int endy = (int)(b / cellHeight);
 
-	for (int i = startX; i <= endX; ++i)
+	activeCells->clear();
+	if (startx < 0) startx = 0;
+	for (int x = startx; x <= endx; ++x)
 	{
-		if (i < 0 || i >= col) continue;
-
-		for (int j = startY; j <= endY; ++j)
+		
+		for (int y = starty; y <= endy; ++y)
 		{
-			if (j<0 || j > row) continue;
-
-			activecells->push_back(Cells[i][j]);
+			
+			activeCells->push_back(cells[x][y]);
+		
 		}
 	}
 }

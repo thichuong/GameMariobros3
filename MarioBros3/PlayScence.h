@@ -24,7 +24,7 @@ protected:
 	vector<LPGAMEOBJECT> addobjects;
 	unordered_map<int, LPCamera> cameras;
 
-	vector<LPGAMEOBJECT>* gridObject;
+	vector<LPGAMEOBJECT> *gridObject;
 
 	Grid* grid;
 

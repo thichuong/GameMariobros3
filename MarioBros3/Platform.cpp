@@ -44,12 +44,9 @@ void Platform::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	int camx = CGame::GetInstance()->GetScamX();
 	int width = CGame::GetInstance()->GetScreenWidth();
-	if (x + PLATFORM_BOX_WIDTH >= camx && x <= camx + width * 1.1f)
-	{
-		CGameObject::Update(dt);
-		x += dx;
-		y += dy;
-	}
-
+	CGameObject::Update(dt);
+	x += dx;
+	y += dy;
+	
 
 }

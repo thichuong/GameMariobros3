@@ -10,16 +10,17 @@ using namespace std;
 class CGameObject;
 typedef CGameObject* LPGAMEOBJECT;
 
+
+
 class Cell
 {
-public:
+
 	int x, y;
 
-	unordered_set<LPGAMEOBJECT>* objects;
+	vector<LPGAMEOBJECT>* objects;
 
 	int width, height;
-
-
+public:
 	Cell(int x, int y);
 	~Cell();
 
@@ -29,8 +30,6 @@ public:
 	void AddObject(CGameObject* obj);
 	void RemoveObject(CGameObject* obj);
 
-	unordered_set<LPGAMEOBJECT>* getCellObject();
-
-
+	vector<LPGAMEOBJECT>* getCellObject();
 };
 

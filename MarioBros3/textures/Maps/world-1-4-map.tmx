@@ -195,7 +195,6 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="17" name="QuestionBlocks"/>
  <objectgroup id="13" name="Ghost">
   <object id="142" x="0" y="576" width="480" height="48">
    <properties>
@@ -678,13 +677,13 @@
   <object id="237" name="coin" type="basic" x="4512" y="672">
    <point/>
   </object>
-  <object id="238" name="coin" type="basic" x="5664" y="432">
+  <object id="238" name="coin" type="Coin" x="5664" y="432">
    <point/>
   </object>
-  <object id="239" name="coin" type="basic" x="5712" y="432">
+  <object id="239" name="coin" type="Coin" x="5712" y="432">
    <point/>
   </object>
-  <object id="240" name="coin" type="basic" x="5760" y="432">
+  <object id="240" name="coin" type="Coin" x="5760" y="432">
    <point/>
   </object>
  </objectgroup>

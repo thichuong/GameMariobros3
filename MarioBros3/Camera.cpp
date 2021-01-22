@@ -90,10 +90,10 @@ void Camera::setBoundBox(float l, float t, float r, float b)
 }
 void Camera::getBoundBox(float& l, float& t, float& r, float& b)
 {
-	l = left;
-	t = top;
-	r = right;
-	b = bottom;
+	l = cam_x;
+	t = cam_y;
+	r = cam_x+screen_width;
+	b = cam_y+ screen_height;
 }
 
 

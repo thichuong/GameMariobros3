@@ -16,7 +16,13 @@
 		<LoadMAP filepath ="textures/Maps" file ="world-1-4-map.tmx"/>
 		<LoadLayer x ="50" y="400" />
 		<Camera name="Camera" start="0" main="1">
-			<Boundary id="0" pos_x="0" pos_y="750" left="0" top="672" right="8350" bottom="1296"/>
-		 </Camera> 
+			<Boundary id="0" pos_x="0" pos_y="224" left="0" top="224" right="5400" bottom="1884" auto="1">
+				<Path speed="0.05">
+					<Point x="0" y="224"/>
+					<Point x="5320" y="224"/>
+				</Path>
+			</Boundary>
+			<Boundary id="1" pos_x="6192" pos_y="272" left="6192" top="224" right="7700" bottom="1884"/>
+		</Camera>
 	</Textures>
 </Textures>

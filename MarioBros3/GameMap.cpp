@@ -295,6 +295,8 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
 					Coin* coin = new Coin(x, y);
+					//CGame::GetInstance()->GetCurrentScene()->newObject(coin);
+
 					TiXmlElement* TMX = TMXObject->FirstChildElement("properties");
 					for (TiXmlElement* node = TMX->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
 					{
@@ -362,7 +364,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					if (TMXObject->Attribute("name") == NULL)
 					{
 						Brick* brick = new Brick(x, y);
-						CGame::GetInstance()->GetCurrentScene()->newObject(brick);
+						//CGame::GetInstance()->GetCurrentScene()->newObject(brick);
 						TiXmlElement* TMX = TMXObject->FirstChildElement("properties");
 						for (TiXmlElement* node = TMX->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
 						{
@@ -481,7 +483,19 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 							warpmark->setWarp(TypeWarp::up);
 						}
 						// DebugOut(L"[warp-mark] = %f \n", 1);
-						CGame::GetInstance()->GetCurrentScene()->newObject(warpmark);
+
+						TiXmlElement* TMX = TMXObject->FirstChildElement("properties");
+						for (TiXmlElement* node = TMX->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
+						{
+							string nameGrid = node->Attribute("name");
+							if (nameGrid == "Grid")
+							{
+								string Gird = node->Attribute("value");
+								CGame::GetInstance()->GetCurrentScene()->newObject(warpmark, Gird);
+							}
+
+						}
+						//CGame::GetInstance()->GetCurrentScene()->newObject(warpmark);
 					}
 
 				}
@@ -495,7 +509,19 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					if (Cardname == "reward")
 					{
 						Reward* reward = new Reward(x, y);
-						CGame::GetInstance()->GetCurrentScene()->newObject(reward);
+						//CGame::GetInstance()->GetCurrentScene()->newObject(reward);
+
+						TiXmlElement* TMX = TMXObject->FirstChildElement("properties");
+						for (TiXmlElement* node = TMX->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
+						{
+							string nameGrid = node->Attribute("name");
+							if (nameGrid == "Grid")
+							{
+								string Gird = node->Attribute("value");
+								CGame::GetInstance()->GetCurrentScene()->newObject(reward, Gird);
+							}
+
+						}
 					}
 
 				}
@@ -607,7 +633,18 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 
 
 					}
-					CGame::GetInstance()->GetCurrentScene()->newObject(platform);
+					TiXmlElement* TMX = TMXObject->FirstChildElement("properties");
+					for (TiXmlElement* node = TMX->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
+					{
+						string nameGrid = node->Attribute("name");
+						if (nameGrid == "Grid")
+						{
+							string Gird = node->Attribute("value");
+							CGame::GetInstance()->GetCurrentScene()->newObject(platform, Gird);
+						}
+
+					}
+					//CGame::GetInstance()->GetCurrentScene()->newObject(platform);
 				}
 			}
 		}

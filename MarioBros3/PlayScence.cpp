@@ -23,6 +23,7 @@ CPlayScene::CPlayScene(int id, string filePath):
 	break_Update = 0;
 
 	grid = NULL;
+	gridObject = new vector<LPGAMEOBJECT>();
 }
 
 /*
@@ -317,7 +318,7 @@ void CPlayScene::Load()
 	hud = new HUD();
 	
 	canvas = NULL;
-	gridObject = new vector<LPGAMEOBJECT>();
+	gridObject->clear();
 	//break_Update = GetTickCount64();
 
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
@@ -359,7 +360,6 @@ void CPlayScene::Update(DWORD dt)
 		{
 			gridObject->at(i)->Update(dt, &coObjects);
 		}
-
 
 		if (earseobjects.size() > 0)
 		{
