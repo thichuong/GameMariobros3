@@ -94,6 +94,9 @@
     <Filter Include="Source Files\GameObject\MapObject">
       <UniqueIdentifier>{b99b3785-1530-4ff7-97d2-44f0c8d35938}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObject\IntroObject">
+      <UniqueIdentifier>{b3897fce-ca73-4abd-87f4-c3eabc69bfb0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -293,6 +296,12 @@
     </ClInclude>
     <ClInclude Include="RedParatroopa.h">
       <Filter>Source Files\GameObject\Enemy\koopa</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroScene.h">
+      <Filter>Framework\Scence</Filter>
+    </ClInclude>
+    <ClInclude Include="TitteIntro.h">
+      <Filter>Source Files\GameObject\IntroObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -496,6 +505,12 @@
     </ClCompile>
     <ClCompile Include="RedParatroopa.cpp">
       <Filter>Source Files\GameObject\Enemy\koopa</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroScene.cpp">
+      <Filter>Framework\Scence</Filter>
+    </ClCompile>
+    <ClCompile Include="TitteIntro.cpp">
+      <Filter>Source Files\GameObject\IntroObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

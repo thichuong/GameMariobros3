@@ -170,6 +170,7 @@
     <ClInclude Include="Goomba.h" />
     <ClInclude Include="GreenVenus.h" />
     <ClInclude Include="HUD.h" />
+    <ClInclude Include="IntroScene.h" />
     <ClInclude Include="ItemBrick.h" />
     <ClInclude Include="ItemCard.h" />
     <ClInclude Include="KeyEventHandler.h" />
@@ -209,6 +210,7 @@
     <ClInclude Include="MapMario.h" />
     <ClInclude Include="tinyXML\tinystr.h" />
     <ClInclude Include="tinyXML\tinyxml.h" />
+    <ClInclude Include="TitteIntro.h" />
     <ClInclude Include="UIObject.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="WarpMark.h" />
@@ -238,6 +240,7 @@
     <ClCompile Include="Goomba.cpp" />
     <ClCompile Include="GreenVenus.cpp" />
     <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="ItemBrick.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Leaf.cpp" />
@@ -278,6 +281,7 @@
     <ClCompile Include="tinyXML\tinyxmlerror.cpp" />
     <ClCompile Include="tinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="tinyXML\xmltest.cpp" />
+    <ClCompile Include="TitteIntro.cpp" />
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WarpMark.cpp" />

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Textures>
+	<Textures Game="MarioBros3" id="1">
+		<LoadSPRITES file ="textures/Sprites/MarioDB.xml" source ="Textures\\Mario\\mario_x3.png" textureId="tex-mario"/>
+		<LoadSPRITES file ="textures/Sprites/EnemyDB.xml" source ="Textures\\Enemy\\enemy_x3.png" textureId="tex-enemy"/>
+		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="Textures\\Misc\\misc_x3.png" textureId="tex-misc"/>
+		<LoadSPRITES file ="textures/Sprites/UiDB.xml" source ="Textures\\Misc\\ui_x3.png" textureId="tex-ui"/>
+		<LoadSPRITES file ="textures/Sprites/UiDB.xml" source ="Textures\\Misc\\box-small.png" textureId="tex-pannel"/>
+		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="textures\\Misc\\fire-ball.png" textureId="tex-fire-ball"/>
+		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="textures\\Misc\\effect_white_x3.png" textureId="tex-effect"/>
+		<LoadSPRITES file ="textures/Sprites/MiscDB.xml" source ="textures\\Misc\\reward_x3.png" textureId="tex-goal" a="255"/>
+		<LoadSPRITES file ="textures/Sprites/OverworldMapDB.xml" source ="textures\\OverWorld\\overworld_x3.png" textureId="tex-overworld"/>
+		<LoadSPRITES file ="textures/Sprites/IntroDB.xml" source ="textures\\OverWorld\\intro_x3.png" textureId="tex-intro"/>
+		<LoadANIMATIONS file ="Textures/Animations/MarioAnim.xml"/>
+		<LoadANIMATIONS file ="Textures/Animations/EnemyAnim.xml"/>
+		<LoadANIMATIONS file ="Textures/Animations/MiscAnim.xml"/>
+		<LoadANIMATIONS file ="Textures/Animations/UiAnim.xml"/>
+		<LoadANIMATIONS file ="Textures/Animations/OverworldMapAnim.xml"/>
+		<LoadANIMATIONS file ="Textures/Animations/IntroAnim.xml"/>
+		<LoadMAP filepath ="textures/Maps" file ="intro-map.tmx"/>
+		<LoadLayer x ="50" y="400" />
+		<Camera name="Camera" start="0" main="1">
+			<Boundary id="0" pos_x="0" pos_y="0" left="0" top="0" right="5400" bottom="1884" />
+		 </Camera> 
+	</Textures>
+</Textures>

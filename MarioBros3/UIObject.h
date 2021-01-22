@@ -14,7 +14,7 @@ protected:
 
 	DWORD dt; 
 
-	unordered_map<std::string, LPANIMATION> animation_set; 
+	unordered_map<string, LPANIMATION> animation_set; 
 
 public:
 	UIObject(); 

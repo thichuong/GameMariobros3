@@ -299,6 +299,8 @@ void CPlayScene::Load()
 		player = CPlayer::GetInstance();
 		player->SetPosition(x, y);
 		player->SetAnimationSet(CAnimations::GetInstance());
+		player->time_game = 300;
+		player->tick_time_game = 0;
 		start_x = x;
 		start_y = y ;
 		DebugOut(L"[INFO MARIO] Position : %f , %f \n", x, y);

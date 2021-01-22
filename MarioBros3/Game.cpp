@@ -5,6 +5,7 @@
 
 #include "PlayScence.h"
 #include "MapScene.h"
+#include "IntroScene.h"
 
 CGame * CGame::__instance = NULL;
 
@@ -435,6 +436,16 @@ void CGame::Load(string gameFile)
 			sprNode->QueryIntAttribute("id", &id);
 			//_ParseSection_SCENES(path + line);
 			LPSCENE scene = new MapScene(id, path + line);
+			scenes[id] = scene;
+			DebugOut(L"[INFO] start scene %d \n", id);
+		}
+		for (TiXmlElement* sprNode = node->FirstChildElement("introscene"); sprNode != nullptr; sprNode = sprNode->NextSiblingElement("introscene"))
+		{
+			string line = sprNode->Attribute("file");
+			int id;
+			sprNode->QueryIntAttribute("id", &id);
+			//_ParseSection_SCENES(path + line);
+			LPSCENE scene = new IntroScene(id, path + line);
 			scenes[id] = scene;
 			DebugOut(L"[INFO] start scene %d \n", id);
 		}

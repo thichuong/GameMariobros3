@@ -24,10 +24,10 @@ public:
 	virtual void Unload() = 0;
 	virtual void Update(DWORD dt) = 0;
 	virtual void Render() = 0; 
-	virtual void addobject(LPGAMEOBJECT object) =0;
-	virtual void delobject(LPGAMEOBJECT object) = 0;
+	virtual void addobject(LPGAMEOBJECT object) {};
+	virtual void delobject(LPGAMEOBJECT object) {};
 	virtual CPlayer* GetPlayer() { return NULL; }
-	virtual LPCamera getCamera(int id_camera) = 0;
+	virtual LPCamera getCamera(int id_camera) { return NULL; }
 	virtual void addCanvas(Canvas* canvas) {};
 	void setSwitchID(int idScence) { switchID = idScence; }
 };

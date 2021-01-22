@@ -70,7 +70,7 @@ void HUD::Render()
 	font->RenderText("4", life);
 	font->RenderText(CPlayer::GetInstance()->GetScore(), score);
 	font->RenderText(CPlayer::GetInstance()->Getcoin(), coin);
-	font->RenderText("100", timer);
+	font->RenderText(CPlayer::GetInstance()->GetTime(), timer);
 
 	metter->Render();
 

@@ -28,8 +28,9 @@ CPlayer::CPlayer()
 	score = 0;
 	life = 4;
 	coin = 0;
-	reWard_time_start = 0;
-	
+	isReWard = false;
+	time_game = 0;
+	tick_time_game = 0;
 }
 
 CPlayer* CPlayer::__instance = NULL;
@@ -45,13 +46,20 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
 	if (playMario->GetLevel() != none) SwitchToMario(playMario->GetLevel());
 	if (downleveltime < DOWN_LEVEL_TIME) downleveltime += dt;
-	if (GetTickCount64() - reWard_time_start <= REWARD_TIME)
+	if (isReWard)
 	{
 		playMario->UpdateReward(dt);
 	}
 	else
 	{
+
 		playMario->UpdateVx(dt);
+		if (tick_time_game + dt >= 1000)
+		{
+			tick_time_game = 0;
+			time_game--;
+		}
+		else tick_time_game += dt;
 	}
 	playMario->Update(dt, colliable_objects);
 	playMario->GetPosition(this->x, this->y);
@@ -65,6 +73,8 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 			bullets.erase(bullets.begin() + i);
 		}
 	}
+	
+
 }
 void CPlayer::Render()
 {
@@ -172,4 +182,8 @@ string CPlayer::Getcoin()
 string CPlayer::GetLife()
 {
 	return to_string(life);
+}
+string  CPlayer::GetTime()
+{
+	return to_string(time_game);
 }

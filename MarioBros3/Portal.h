@@ -8,9 +8,10 @@
 class CPortal : public CGameObject
 {
 	int scene_id;	// target scene to switch to 
-
+	bool isReward;
 	float width;
-	float height; 
+	float height;
+	ULONGLONG time_tick;
 public:
 	CPortal(float l, float t, float r, float b, int scene_id);
 	virtual void Render();
@@ -18,4 +19,5 @@ public:
 	virtual void SetAnimationSet(CAnimations* ani_set);
 	int GetSceneId() { return scene_id;  }
 	virtual void CollisionObject(LPGAMEOBJECT obj, float nx, float ny);
+	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
 };

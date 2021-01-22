@@ -24,21 +24,28 @@ class CPlayer : public CGameObject
     
     MapMario* mapmario;
     string levelMario;
-    DWORD downleveltime;
+    ULONGLONG downleveltime;
+
+    
 public: 
+    ULONGLONG tick_time_game;
+
     long score;
 
     int life, coin;
     
+    int time_game;
     Card cards[3];
     LPGAMEOBJECT holdobject;
     vector<CFireBullet*> bullets;
 
-    ULONGLONG reWard_time_start;
+    bool isReWard;
 
     string GetScore();
     string Getcoin();
     string GetLife();
+    string GetTime();
+
     
     void AddScore(long x);
     void AddCoin(int x);

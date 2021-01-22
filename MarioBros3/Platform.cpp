@@ -38,14 +38,14 @@ void Platform::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 	{
 		vx = 0;
 		vy = PLATFORM_GRAVITTY;
-		
+		obj->vy = PLATFORM_GRAVITTY * 2;
 	}
 }
 void Platform::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	int camx = CGame::GetInstance()->GetScamX();
 	int width = CGame::GetInstance()->GetScreenWidth();
-	if (x + width >= camx && x <= camx + width)
+	if (x + width >= camx && x <= camx + width*1.1f)
 	{
 		CGameObject::Update(dt);
 		x += dx;

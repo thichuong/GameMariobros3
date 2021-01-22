@@ -851,61 +851,115 @@
   </object>
  </objectgroup>
  <objectgroup id="19" name="Brick">
-  <object id="250" x="5836" y="1199">
+  <object id="250" type="Brick" x="5836" y="1199">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="251" x="5884" y="1199">
+  <object id="251" type="Brick" x="5884" y="1199">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="252" x="5932" y="1199">
+  <object id="252" type="Brick" x="5932" y="1199">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="253" x="5980" y="1199">
+  <object id="253" type="Brick" x="5980" y="1199">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="254" x="6028" y="1199">
+  <object id="254" type="Brick" x="6028" y="1199">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="255" x="6076" y="1199">
+  <object id="255" type="Brick" x="6076" y="1199">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="256" x="6124" y="1199">
+  <object id="256" type="Brick" x="6124" y="1199">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:4},{&quot;x&quot;:16,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="257" x="5884" y="1151">
+  <object id="257" type="Brick" x="5884" y="1151">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:3},{&quot;x&quot;:15,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="258" x="5932" y="1151">
+  <object id="258" type="Brick" x="5932" y="1151">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:3},{&quot;x&quot;:15,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="259" x="5980" y="1151">
+  <object id="259" type="Brick" x="5980" y="1151">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:3},{&quot;x&quot;:15,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="260" x="6028" y="1151">
+  <object id="260" type="Brick" x="6028" y="1151">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:3},{&quot;x&quot;:15,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="261" x="6076" y="1151">
+  <object id="261" type="Brick" x="6076" y="1151">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:3},{&quot;x&quot;:15,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="262" x="5932" y="1103">
+  <object id="262" type="Brick" x="5932" y="1103">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:3}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="263" x="5980" y="1103">
+  <object id="263" type="Brick" x="5980" y="1103">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:3}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="264" x="6028" y="1103">
+  <object id="264" type="Brick" x="6028" y="1103">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:3}]"/>
+   </properties>
    <point/>
   </object>
   <object id="265" name="item" type="p-switch" x="6076" y="1103">
    <point/>
   </object>
-  <object id="266" x="6268" y="1151">
+  <object id="266" type="Brick" x="6268" y="1151">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:16,&quot;y&quot;:3},{&quot;x&quot;:16,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="267" x="6268" y="1199">
+  <object id="267" type="Brick" x="6268" y="1199">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:16,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="268" x="6316" y="1199">
+  <object id="268" type="Brick" x="6316" y="1199">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:16,&quot;y&quot;:4}]"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
