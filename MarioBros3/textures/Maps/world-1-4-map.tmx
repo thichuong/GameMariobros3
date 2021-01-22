@@ -608,82 +608,160 @@
   </object>
  </objectgroup>
  <objectgroup id="12" name="Coin">
-  <object id="215" name="coin" type="basic" x="1008" y="432">
+  <object id="215" name="coin" type="Coin" x="1008" y="432">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:2,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="216" name="coin" type="basic" x="1056" y="432">
+  <object id="216" name="coin" type="Coin" x="1056" y="432">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:2,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="217" name="coin" type="basic" x="1104" y="432">
+  <object id="217" name="coin" type="Coin" x="1104" y="432">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:2,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="218" name="coin" type="basic" x="1248" y="336">
+  <object id="218" name="coin" type="Coin" x="1248" y="336">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:3,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="219" name="coin" type="basic" x="1296" y="336">
+  <object id="219" name="coin" type="Coin" x="1296" y="336">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:3,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="220" name="coin" type="basic" x="1344" y="336">
+  <object id="220" name="coin" type="Coin" x="1344" y="336">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:3,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="221" name="coin" type="basic" x="2304" y="432">
+  <object id="221" name="coin" type="Coin" x="2304" y="432">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:5,&quot;y&quot;:1},{&quot;x&quot;:6,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="222" name="coin" type="basic" x="2352" y="432">
+  <object id="222" name="coin" type="Coin" x="2352" y="432">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:6,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="223" name="coin" type="basic" x="2400" y="432">
+  <object id="223" name="coin" type="Coin" x="2400" y="432">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:6,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="224" name="coin" type="basic" x="2544" y="336">
+  <object id="224" name="coin" type="Coin" x="2544" y="336">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:6,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="225" name="coin" type="basic" x="2592" y="336">
+  <object id="225" name="coin" type="Coin" x="2592" y="336">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:6,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="226" name="coin" type="basic" x="2640" y="336">
+  <object id="226" name="coin" type="Coin" x="2640" y="336">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:6,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="227" name="coin" type="basic" x="3984" y="384">
+  <object id="227" name="coin" type="Coin" x="3984" y="384">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:10,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="228" name="coin" type="basic" x="4032" y="384">
+  <object id="228" name="coin" type="Coin" x="4032" y="384">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:10,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="229" name="coin" type="basic" x="4080" y="384">
+  <object id="229" name="coin" type="Coin" x="4080" y="384">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:10,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="230" name="coin" type="basic" x="4512" y="336">
+  <object id="230" name="coin" type="Coin" x="4512" y="336">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:11,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="231" name="coin" type="basic" x="4512" y="384">
+  <object id="231" name="coin" type="Coin" x="4512" y="384">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:11,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="232" name="coin" type="basic" x="4512" y="432">
+  <object id="232" name="coin" type="Coin" x="4512" y="432">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:11,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="233" name="coin" type="basic" x="4512" y="480">
+  <object id="233" name="coin" type="Coin" x="4512" y="480">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:11,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="234" name="coin" type="basic" x="4512" y="528">
+  <object id="234" name="coin" type="Coin" x="4512" y="528">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:11,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="235" name="coin" type="basic" x="4512" y="576">
+  <object id="235" name="coin" type="Coin" x="4512" y="576">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:11,&quot;y&quot;:1},{&quot;x&quot;:11,&quot;y&quot;:2}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="236" name="coin" type="basic" x="4512" y="624">
+  <object id="236" name="coin" type="Coin" x="4512" y="624">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:11,&quot;y&quot;:2}]"/>
+   </properties>
    <point/>
   </object>
-  <object id="237" name="coin" type="basic" x="4512" y="672">
+  <object id="237" name="coin" type="Coin" x="4512" y="672">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:11,&quot;y&quot;:2}]"/>
+   </properties>
    <point/>
   </object>
   <object id="238" name="coin" type="Coin" x="5664" y="432">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:14,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
   <object id="239" name="coin" type="Coin" x="5712" y="432">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:14,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
   <object id="240" name="coin" type="Coin" x="5760" y="432">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:14,&quot;y&quot;:1},{&quot;x&quot;:15,&quot;y&quot;:1}]"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>

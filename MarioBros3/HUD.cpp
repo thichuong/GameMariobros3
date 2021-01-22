@@ -67,7 +67,7 @@ void HUD::Render()
 		animations->Get("ani-hud")->Render(Position.x+250, Position.y,false);
 
 	font->RenderText("1", world);
-	font->RenderText("4", life);
+	font->RenderText(CPlayer::GetInstance()->GetLife(), life);
 	font->RenderText(CPlayer::GetInstance()->GetScore(), score);
 	font->RenderText(CPlayer::GetInstance()->Getcoin(), coin);
 	font->RenderText(CPlayer::GetInstance()->GetTime(), timer);
