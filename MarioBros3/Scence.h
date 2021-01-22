@@ -26,6 +26,7 @@ public:
 	virtual void Render() = 0; 
 	virtual void addobject(LPGAMEOBJECT object) {};
 	virtual void delobject(LPGAMEOBJECT object) {};
+	virtual void newObject(LPGAMEOBJECT object , string stringGrid = "") {};
 	virtual CPlayer* GetPlayer() { return NULL; }
 	virtual LPCamera getCamera(int id_camera) { return NULL; }
 	virtual void addCanvas(Canvas* canvas) {};

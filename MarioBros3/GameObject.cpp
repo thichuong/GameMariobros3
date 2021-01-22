@@ -21,6 +21,8 @@ CGameObject::CGameObject()
 	animations = CAnimations::GetInstance();
 	wx = 0;
 	typeobject = TypeObject::normal;
+	ActiveGameObject = true;
+	CallCell = false;
 }
 
 void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -283,7 +285,6 @@ void CGameObject::RenderBoundingBox()
 
 	CGame::GetInstance()->Draw((int)x,(int) y,0,0, bbox, rect.left, rect.top, rect.right, rect.bottom, 128);
 }
-
 
 CGameObject::~CGameObject()
 {

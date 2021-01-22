@@ -3,7 +3,7 @@
 #include "DebrisFx.h"
 #include "Player.h"
 
-Brick::Brick(float l, float t)
+Brick::Brick(float l, float t) :CGameObject()
 {
 	x = l;
 	y = t;
@@ -67,13 +67,13 @@ void Brick::Explosion()
 			fx->setForce(velx[i], vely[i]);
 			CGame::GetInstance()->GetCurrentScene()->addobject(fx);
 		}
-		CGame::GetInstance()->GetCurrentScene()->delobject(this);
+		ActiveGameObject = false;
 	}
 	else if (state == STATE_COIN)
 	{
 		CPlayer::GetInstance()->AddCoin(1);
 		CPlayer::GetInstance()->AddScore(50);
-		CGame::GetInstance()->GetCurrentScene()->delobject(this);
+		ActiveGameObject = false;
 	}
 }
 void Brick::SetState(int state)

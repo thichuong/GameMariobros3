@@ -21,6 +21,8 @@ CPlayScene::CPlayScene(int id, string filePath):
 	start_x = 0;
 	start_y = 0;
 	break_Update = 0;
+
+	grid = NULL;
 }
 
 /*
@@ -287,6 +289,9 @@ void CPlayScene::Load()
 		node = info->FirstChildElement("LoadMAP");
 		file = node->Attribute("file");
 		filepath = node->Attribute("filepath");
+
+		CreatGrid(filepath, file);
+
 		gamemap = new CGameMap();
 		gamemap->FromTMX(filepath, file);
 		gamemap->MapOBJECTS(filepath, file);
@@ -312,6 +317,7 @@ void CPlayScene::Load()
 	hud = new HUD();
 	
 	canvas = NULL;
+	gridObject = new vector<LPGAMEOBJECT>();
 	//break_Update = GetTickCount64();
 
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
@@ -329,15 +335,32 @@ void CPlayScene::Update(DWORD dt)
 	else
 	{
 		vector<LPGAMEOBJECT> coObjects;
+
+		float l, t, r, b;
+		CGame::GetInstance()->getCamera()->getBoundBox(l, t, r, b);
+		grid->Update(l, t, r, b);
+		gridObject = grid->getActiveGameObject();
 		for (size_t i = 0; i < objects.size(); i++)
 		{
 			coObjects.push_back(objects[i]);
 		}
+		for (size_t i = 0; i < gridObject->size(); i++)
+		{
+			coObjects.push_back(gridObject->at(i));
+		}
+
 		player->Update(dt, &coObjects);
+
 		for (size_t i = 0; i < objects.size(); i++)
 		{
 			objects[i]->Update(dt, &coObjects);
 		}
+		for (size_t i = 0; i < gridObject->size(); i++)
+		{
+			gridObject->at(i)->Update(dt, &coObjects);
+		}
+
+
 		if (earseobjects.size() > 0)
 		{
 			for (auto e : earseobjects)
@@ -384,12 +407,23 @@ void CPlayScene::Update(DWORD dt)
 void CPlayScene::Render()
 {
 	gamemap->Render(CGame::GetInstance());
+
+	//GRID RENDER
+	for (unsigned int i = 0; i < gridObject->size(); i++)
+		gridObject->at(i)->Pre_Render();
+
 	for (unsigned int i = 0; i < objects.size(); i++)
 		objects[i]->Pre_Render();
+
 	player->Pre_Render();
+
+	for (unsigned int i = 0; i < gridObject->size(); i++)
+		gridObject->at(i)->Render();
+
 	gamemap->ReRender(CGame::GetInstance());
 	for (unsigned int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
+	
 	player->Render();
 
 	

@@ -4,7 +4,7 @@
 #include "ScoreFx.h"
 #include "RewardCanvas.h"
 #include "Player.h"
-Reward::Reward(float l, float t)
+Reward::Reward(float l, float t) :CGameObject()
 {
 	x = l;
 	y = t;

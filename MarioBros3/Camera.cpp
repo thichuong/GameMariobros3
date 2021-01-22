@@ -88,5 +88,12 @@ void Camera::setBoundBox(float l, float t, float r, float b)
 	right = r;
 	bottom = b;
 }
+void Camera::getBoundBox(float& l, float& t, float& r, float& b)
+{
+	l = left;
+	t = top;
+	r = right;
+	b = bottom;
+}
 
 

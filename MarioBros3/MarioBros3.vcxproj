@@ -154,6 +154,7 @@
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Canvas.h" />
+    <ClInclude Include="Cell.h" />
     <ClInclude Include="CNode.h" />
     <ClInclude Include="Coin.h" />
     <ClInclude Include="CoinFX.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="Goomba.h" />
     <ClInclude Include="GreenVenus.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="ItemBrick.h" />
@@ -261,6 +263,7 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="Cell.cpp" />
     <ClCompile Include="CNode.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="CoinFX.cpp" />
@@ -278,11 +281,13 @@
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Goomba.cpp" />
     <ClCompile Include="GreenVenus.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="ItemBrick.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Leaf.cpp" />
+    <ClCompile Include="LoadPlayScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapScene.cpp" />
     <ClCompile Include="Mario.cpp" />

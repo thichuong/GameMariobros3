@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "Player.h"
 #include "ScoreFx.h"
-Leaf::Leaf(float l, float t, bool Fly)
+Leaf::Leaf(float l, float t, bool Fly) :CGameObject()
 {
 	x = l;
 	y = t;

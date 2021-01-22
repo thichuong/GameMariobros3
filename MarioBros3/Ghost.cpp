@@ -1,6 +1,6 @@
 #include "Ghost.h"
 
-Ghost::Ghost(float l, float t, float w, float h)
+Ghost::Ghost(float l, float t, float w, float h) :CGameObject()
 {
 	x = l;
 	y = t; 

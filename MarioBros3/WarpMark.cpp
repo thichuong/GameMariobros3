@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "Camera.h"
 
-WarpMark::WarpMark(float l, float t, float w, float h)
+WarpMark::WarpMark(float l, float t, float w, float h) :CGameObject()
 {
 	x = l;
 	y = t;

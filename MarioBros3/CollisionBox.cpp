@@ -1,5 +1,5 @@
 #include "CollisionBox.h"
-CCollisionBox::CCollisionBox(float l, float t, float w, float h)
+CCollisionBox::CCollisionBox(float l, float t, float w, float h) :CGameObject()
 {
 	box_width = w;
 	box_height = h;

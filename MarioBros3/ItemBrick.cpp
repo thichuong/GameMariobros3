@@ -2,7 +2,7 @@
 #include "Game.h"
 
 
-ItemBrick::ItemBrick()
+ItemBrick::ItemBrick(): QuestionBlock()
 {
 
 	tempx = 0;

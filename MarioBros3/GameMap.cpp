@@ -163,7 +163,19 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					TMXObject->QueryFloatAttribute("height", &height);
 
 					Solid* solid = new Solid(x, y, width, height);
-					CGame::GetInstance()->GetCurrentScene()->addobject(solid);
+					//CGame::GetInstance()->GetCurrentScene()->newObject(solid);
+					
+					TiXmlElement* TMX = TMXObject->FirstChildElement("properties");
+					for (TiXmlElement* node = TMX->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
+					{
+						string nameGrid = node->Attribute("name");
+						if (nameGrid == "Grid")
+						{
+							string Gird = node->Attribute("value");
+							CGame::GetInstance()->GetCurrentScene()->newObject(solid, Gird);
+						}
+						
+					}
 
 				}
 				else if (name == "Ghost")
@@ -175,7 +187,17 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 
 					Ghost* ghost = new Ghost(x, y, width, height);
 
-					CGame::GetInstance()->GetCurrentScene()->addobject(ghost);
+					TiXmlElement* TMX = TMXObject->FirstChildElement("properties");
+					for (TiXmlElement* node = TMX->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
+					{
+						string nameGrid = node->Attribute("name");
+						if (nameGrid == "Grid")
+						{
+							string Gird = node->Attribute("value");
+							CGame::GetInstance()->GetCurrentScene()->newObject(ghost, Gird);
+						}
+
+					}
 
 				}
 				else if (name == "Enemy")
@@ -189,14 +211,14 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 						CGoomba* enemies = new CGoomba();
 						enemies->SetAnimationSet(CAnimations::GetInstance());
 						enemies->SetPosition(x, y);
-						CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+						CGame::GetInstance()->GetCurrentScene()->newObject(enemies);
 					}
 					if (Enemiesname == "para-goomba")
 					{
 						RedGoomba* enemies = new RedGoomba();
 						enemies->SetAnimationSet(CAnimations::GetInstance());
 						enemies->SetPosition(x, y);
-						CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+						CGame::GetInstance()->GetCurrentScene()->newObject(enemies);
 					}
 					if (Enemiesname == "koopa")
 					{
@@ -205,28 +227,28 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 							CKoopas* enemies = new CKoopas();
 							enemies->SetAnimationSet(CAnimations::GetInstance());
 							enemies->SetPosition(x, y);
-							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+							CGame::GetInstance()->GetCurrentScene()->newObject(enemies);
 						}
 						if (Type == "red")
 						{
 							RedKoopas* enemies = new RedKoopas();
 							enemies->SetAnimationSet(CAnimations::GetInstance());
 							enemies->SetPosition(x, y);
-							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+							CGame::GetInstance()->GetCurrentScene()->newObject(enemies);
 						}
 						if (Type == "green-para")
 						{
 							Paratroopa* enemies = new Paratroopa();
 							enemies->SetAnimationSet(CAnimations::GetInstance());
 							enemies->SetPosition(x, y);
-							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+							CGame::GetInstance()->GetCurrentScene()->newObject(enemies);
 						}
 						if (Type == "red-para")
 						{
 							RedParatroopa* enemies = new RedParatroopa();
 							enemies->SetAnimationSet(CAnimations::GetInstance());
 							enemies->SetPosition(x, y);
-							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+							CGame::GetInstance()->GetCurrentScene()->newObject(enemies);
 						}
 
 					}
@@ -238,14 +260,14 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 							Redvenus* enemies = new Redvenus();
 							enemies->SetAnimationSet(CAnimations::GetInstance());
 							enemies->SetPosition(x, y);
-							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+							CGame::GetInstance()->GetCurrentScene()->newObject(enemies);
 						}
 						if (Type == "green")
 						{
 							GreenVenus* enemies = new GreenVenus();
 							enemies->SetAnimationSet(CAnimations::GetInstance());
 							enemies->SetPosition(x, y);
-							CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+							CGame::GetInstance()->GetCurrentScene()->newObject(enemies);
 						}
 
 
@@ -255,14 +277,14 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 						Piranha* enemies = new Piranha();
 						enemies->SetAnimationSet(CAnimations::GetInstance());
 						enemies->SetPosition(x, y);
-						CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+						CGame::GetInstance()->GetCurrentScene()->newObject(enemies);
 					}
 					if (Enemiesname == "boomerang-brother")
 					{
 						BoomerangBrother* enemies = new BoomerangBrother();
 						enemies->SetAnimationSet(CAnimations::GetInstance());
 						enemies->SetPosition(x, y);
-						CGame::GetInstance()->GetCurrentScene()->addobject(enemies);
+						CGame::GetInstance()->GetCurrentScene()->newObject(enemies);
 					}
 
 				}
@@ -273,8 +295,18 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					TMXObject->QueryFloatAttribute("x", &x);
 					TMXObject->QueryFloatAttribute("y", &y);
 					Coin* coin = new Coin(x, y);
+					TiXmlElement* TMX = TMXObject->FirstChildElement("properties");
+					for (TiXmlElement* node = TMX->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
+					{
+						string nameGrid = node->Attribute("name");
+						if (nameGrid == "Grid")
+						{
+							string Gird = node->Attribute("value");
+							CGame::GetInstance()->GetCurrentScene()->newObject(coin, Gird);
+						}
 
-					CGame::GetInstance()->GetCurrentScene()->addobject(coin);
+					}
+					
 
 				}
 				else if (name == "QuestionBlocks")
@@ -307,7 +339,17 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					DebugOut(L"[questionblock ] quantity = %d \n", questionblock->quantity);
 
 
-					CGame::GetInstance()->GetCurrentScene()->addobject(questionblock);
+					TiXmlElement* TMX = TMXObject->FirstChildElement("properties");
+					for (TiXmlElement* node = TMX->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
+					{
+						string nameGrid = node->Attribute("name");
+						if (nameGrid == "Grid")
+						{
+							string Gird = node->Attribute("value");
+							CGame::GetInstance()->GetCurrentScene()->newObject(questionblock, Gird);
+						}
+
+					}
 
 
 				}
@@ -320,7 +362,18 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					if (TMXObject->Attribute("name") == NULL)
 					{
 						Brick* brick = new Brick(x, y);
-						CGame::GetInstance()->GetCurrentScene()->addobject(brick);
+						CGame::GetInstance()->GetCurrentScene()->newObject(brick);
+						TiXmlElement* TMX = TMXObject->FirstChildElement("properties");
+						for (TiXmlElement* node = TMX->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
+						{
+							string nameGrid = node->Attribute("name");
+							if (nameGrid == "Grid")
+							{
+								string Gird = node->Attribute("value");
+								CGame::GetInstance()->GetCurrentScene()->newObject(brick, Gird);
+							}
+
+						}
 					}
 					else
 					{
@@ -335,7 +388,30 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 						{
 							brick->SetItem(Item::PSwitch);
 						}
-						CGame::GetInstance()->GetCurrentScene()->addobject(brick);
+						if (name == "bleaf")
+						{
+							brick->SetItem(Item::Leaf);
+						}
+						else if (name == "bcoin")
+						{
+							brick->SetItem(Item::Coin);
+						}
+						else if (name == "bmushroom")
+						{
+							brick->SetItem(Item::Leaf);
+						}
+						TiXmlElement* TMX = TMXObject->FirstChildElement("properties");
+						for (TiXmlElement* node = TMX->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))
+						{
+							string nameGrid = node->Attribute("name");
+							if (nameGrid == "Grid")
+							{
+								string Gird = node->Attribute("value");
+								CGame::GetInstance()->GetCurrentScene()->newObject(brick, Gird);
+								//DebugOut(L"[ADD Cell] \n");
+							}
+
+						}
 					}
 				}
 				else if (name == "Warp")
@@ -362,7 +438,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 							warppipe->setWarp(TypeWarp::up);
 						}
 						// DebugOut(L"[warp-pipe] = %f \n", 1);
-						CGame::GetInstance()->GetCurrentScene()->addobject(warppipe);
+						CGame::GetInstance()->GetCurrentScene()->newObject(warppipe);
 					}
 					if (Warpname == "warp-mark")
 					{
@@ -405,7 +481,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 							warpmark->setWarp(TypeWarp::up);
 						}
 						// DebugOut(L"[warp-mark] = %f \n", 1);
-						CGame::GetInstance()->GetCurrentScene()->addobject(warpmark);
+						CGame::GetInstance()->GetCurrentScene()->newObject(warpmark);
 					}
 
 				}
@@ -419,7 +495,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					if (Cardname == "reward")
 					{
 						Reward* reward = new Reward(x, y);
-						CGame::GetInstance()->GetCurrentScene()->addobject(reward);
+						CGame::GetInstance()->GetCurrentScene()->newObject(reward);
 					}
 
 				}
@@ -431,7 +507,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					TMXObject->QueryFloatAttribute("y", &y);
 
 					tree->SetPosition(x, y);
-					CGame::GetInstance()->GetCurrentScene()->addobject(tree);
+					CGame::GetInstance()->GetCurrentScene()->newObject(tree);
 
 				}
 				else if (name == "WorldGraph")
@@ -491,7 +567,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 
 					}
 
-					CGame::GetInstance()->GetCurrentScene()->addobject(cnode);
+					CGame::GetInstance()->GetCurrentScene()->newObject(cnode);
 				}
 				else if (name == "Portal")
 				{
@@ -503,7 +579,7 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 
 					TMXObject->QueryIntAttribute("type", &idSCence);
 					CPortal* Portal = new CPortal(x, y, width, height, idSCence);
-					CGame::GetInstance()->GetCurrentScene()->addobject(Portal);
+					CGame::GetInstance()->GetCurrentScene()->newObject(Portal);
 				}
 				else if (name == "MovingPlatforms")
 				{
@@ -520,18 +596,18 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					{
 						float vx = 0, vy = 0;
 						string property_name = node->Attribute("name");
-						if (property_name == "start-velocity-x")
+						if (property_name == "VelocityX")
 						{
 							node->QueryFloatAttribute("value", &vx);
 							platform->SetSpeed(vx, 0.0f);
 
 						}
-						if (property_name == "start-velocity-y") node->QueryFloatAttribute("value", &vy);
+						if (property_name == "VelocityY") node->QueryFloatAttribute("value", &vy);
 
 
 
 					}
-					CGame::GetInstance()->GetCurrentScene()->addobject(platform);
+					CGame::GetInstance()->GetCurrentScene()->newObject(platform);
 				}
 			}
 		}

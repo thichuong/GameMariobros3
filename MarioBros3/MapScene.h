@@ -29,6 +29,7 @@ public:
     virtual void addobject(LPGAMEOBJECT object) { addobjects.push_back(object); }
     virtual void delobject(LPGAMEOBJECT object) { earseobjects.push_back(object); }
     virtual LPCamera getCamera(int id_camera) { return cameras[id_camera]; }
+    virtual void newObject(LPGAMEOBJECT object, string stringGrid = "") { addobjects.push_back(object); }
 };
 
 class CMapScenceKeyHandler : public CScenceKeyHandler

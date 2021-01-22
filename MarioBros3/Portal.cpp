@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "Player.h"
 
-CPortal::CPortal(float l, float t, float r, float b, int scene_id )
+CPortal::CPortal(float l, float t, float r, float b, int scene_id ) :CGameObject()
 {
 	this->scene_id = scene_id;
 	x = l; 

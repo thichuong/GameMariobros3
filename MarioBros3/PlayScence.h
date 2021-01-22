@@ -8,16 +8,11 @@
 #include "Goomba.h"
 #include "Koopas.h"
 #include "HUD.h"
-
+#include "Grid.h"
 #include "Resource.h"
 
 
 #define BREAK_UPDATE 1000
-
-using namespace std;
-
-
-
 
 
 class CPlayScene: public CScene
@@ -28,6 +23,11 @@ protected:
 	vector<LPGAMEOBJECT> earseobjects;
 	vector<LPGAMEOBJECT> addobjects;
 	unordered_map<int, LPCamera> cameras;
+
+	vector<LPGAMEOBJECT>* gridObject;
+
+	Grid* grid;
+
 	CGameMap* gamemap ;
 	HUD* hud ;
 	Canvas* canvas ;
@@ -52,6 +52,9 @@ public:
 	virtual CPlayer* GetPlayer() { return player; }
 	virtual LPCamera getCamera(int id_camera) { return cameras[id_camera]; }
 	virtual void addCanvas(Canvas* canvas) { this->canvas = canvas; }
+
+	void CreatGrid(string filePath, string fileName);
+	virtual void newObject(LPGAMEOBJECT object, string stringGrid = "");
 	//friend class CPlayScenceKeyHandler;
 };
 

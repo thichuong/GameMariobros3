@@ -4,7 +4,7 @@
 #include "Leaf.h"
 #include "PSwitch.h"
 
-QuestionBlock::QuestionBlock()
+QuestionBlock::QuestionBlock() :CGameObject()
 {
 	tempx = 0;
 	tempy = 0;
@@ -72,8 +72,6 @@ void QuestionBlock::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 		isBounce = TRUE;
 		vy = -BOUNCE_VEL;
 		Bounce();
-
-
 	}
 
 	if (obj->typeobject == TypeObject::normal && isActive && !isBounce)

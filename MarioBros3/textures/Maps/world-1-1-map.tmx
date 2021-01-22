@@ -1066,7 +1066,10 @@
  <objectgroup id="22" name="SwitchBlocks"/>
  <objectgroup id="23" name="Block"/>
  <objectgroup id="24" name="Card">
-  <object id="202" name="reward" x="8039.5" y="1027">
+  <object id="202" name="reward" type="EndmapReward" x="8039.5" y="1027">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:20,&quot;y&quot;:3},{&quot;x&quot;:21,&quot;y&quot;:3}]"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>

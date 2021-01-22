@@ -1,6 +1,6 @@
 #include "Solid.h"
 
-Solid::Solid(float l, float t, float w, float h)
+Solid::Solid(float l, float t, float w, float h) :CGameObject()
 {
 	x = l;
 	y = t;

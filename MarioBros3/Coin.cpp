@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "CoinFX.h"
 #include "ScoreFx.h"
-Coin::Coin(float l, float t, bool Fly)
+Coin::Coin(float l, float t, bool Fly) :CGameObject()
 {
 	x = l;
 	y = t;
@@ -42,34 +42,13 @@ void Coin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 	else
 	{
-		vector<LPGAMEOBJECT> coEvents;
-
-		vector<LPGAMEOBJECT> player;
-
-		player.clear();
-		coEvents.clear();
-
-		player.push_back(CGame::GetInstance()->GetCurrentScene()->GetPlayer()->getMario());
-		CalcCollisions(&player, coEvents);
-
-		if (coEvents.size() == 0)
+	
+		
+		if (AABBEx(CGame::GetInstance()->GetCurrentScene()->GetPlayer()->getMario()))
 		{
-
-		}
-		else
-		{
-
-			for (UINT i = 0; i < coEvents.size(); i++)
-			{
-				LPGAMEOBJECT obj = coEvents[i];
-
-				if (obj->typeobject == TypeObject::player)
-				{
-					CGame::GetInstance()->GetCurrentScene()->delobject(this);
-					CPlayer::GetInstance()->AddCoin(1);
-					CPlayer::GetInstance()->AddScore(50);
-				}
-			}
+			ActiveGameObject = false;
+			CPlayer::GetInstance()->AddCoin(1);
+			CPlayer::GetInstance()->AddScore(50);
 		}
 	}
 	

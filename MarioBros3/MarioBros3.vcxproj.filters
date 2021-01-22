@@ -103,6 +103,9 @@
     <Filter Include="Framework\rapidjson">
       <UniqueIdentifier>{68020b30-63a2-45e9-bc07-222367ef749c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Grid">
+      <UniqueIdentifier>{53ee072f-4543-428e-999c-f9427539ff55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -420,6 +423,12 @@
     <ClInclude Include="rapidjson\error\error.h">
       <Filter>Framework\rapidjson</Filter>
     </ClInclude>
+    <ClInclude Include="Cell.h">
+      <Filter>Framework\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Framework\Grid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -634,6 +643,15 @@
     </ClCompile>
     <ClCompile Include="BoomerangBrother.cpp">
       <Filter>Source Files\GameObject\Enemy\Boomerang</Filter>
+    </ClCompile>
+    <ClCompile Include="Cell.cpp">
+      <Filter>Framework\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Framework\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadPlayScene.cpp">
+      <Filter>Framework\Scence</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 #include "WarpPipe.h"
 #include "Game.h"
 
-WarpPipe::WarpPipe(float l, float t, float w, float h)
+WarpPipe::WarpPipe(float l, float t, float w, float h) :CGameObject()
 {
 	x = l;
 	y = t;

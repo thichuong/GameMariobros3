@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "Coin.h"
 #include "Brick.h"
-PSwitch::PSwitch(float l, float t)
+PSwitch::PSwitch(float l, float t) :CGameObject()
 {
 	x = l ;
 	y = t - PSWITCH_BBOX_HEIGHT;

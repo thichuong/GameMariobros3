@@ -8,13 +8,17 @@
 #include "Sprites.h"
 #include "Animations.h"
 #include "Resource.h"
+#include "Cell.h"
 
 using namespace std;
 
 #define ID_TEX_BBOX "-100"		// special texture to draw object bounding box
 
+
 class CGameObject; 
 typedef CGameObject * LPGAMEOBJECT;
+
+class Cell;
 
 struct CCollisionEvent;
 typedef CCollisionEvent * LPCOLLISIONEVENT;
@@ -87,6 +91,8 @@ public:
 	//CAnimationSet* animation_set;
 	CAnimations* animations;
 	//LPANIMATION animations;
+	bool CallCell;
+	bool ActiveGameObject;
 public:
 	virtual void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
@@ -134,6 +140,7 @@ public:
 	virtual void DownLevel() {};
 	virtual void SetLevel(int lv) {};
 	virtual void Warp(TypeWarp warp) {};
+	
 	~CGameObject();
 };
 
