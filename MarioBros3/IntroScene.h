@@ -9,12 +9,13 @@ class IntroScene :
 {
     vector<LPGAMEOBJECT> objects;
     CGameMap* gamemap;
-    TitteIntro* titte;
+   
     unordered_map<int, LPCamera> cameras;
 
     void _ParseSection_SPRITES(string line);
     void _ParseSection_ANIMATIONS(string line);
 public:
+    TitteIntro* titte;
     IntroScene(int id, string filePath);
     virtual void Load();
     virtual void Update(DWORD dt);

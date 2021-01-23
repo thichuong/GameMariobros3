@@ -32,6 +32,7 @@ CPlayer::CPlayer()
 	time_game = 0;
 	tick_time_game = 0;
 	NoUpdate = false;
+	time_die = DIE_TIME;
 }
 
 CPlayer* CPlayer::__instance = NULL;
@@ -147,7 +148,8 @@ void CPlayer::Downlevel()
 	{
 		if (levelMario == Mario_small)
 		{
-			playMario->SetState(MARIO_STATE_DIE);
+			//playMario->SetState(MARIO_STATE_DIE);
+			MarioDie();
 		}
 		else if (levelMario == big) playMario->SetLevel(Mario_small);
 		else playMario->SetLevel(big);
@@ -160,10 +162,10 @@ void CPlayer::Downlevel()
 void CPlayer::SetLevel(int lv)
 {
 	string lvSet = levelMario;
-	if (lv == 4)
+	if (lv == 4 )
 		lvSet = raccoon;
 	if (lv == 2)	lvSet = big;
-	if (lvSet == levelMario)
+	if (lvSet != levelMario)
 	{
 		playMario->SetLevel(lvSet);
 
@@ -223,7 +225,8 @@ string  CPlayer::GetTime()
 }
 void  CPlayer::MarioDie()
 {
-	SwitchToMario(Mario_small);
+	if(levelMario != Mario_small)
+		SwitchToMario(Mario_small);
 	playMario->SetState(MARIO_STATE_DIE);
 	
 }

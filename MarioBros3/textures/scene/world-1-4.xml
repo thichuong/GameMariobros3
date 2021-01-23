@@ -17,7 +17,7 @@
 		<LoadLayer x ="50" y="400" />
 		<Camera name="Camera" start="0" main="1">
 			<Boundary id="0" pos_x="0" pos_y="224" left="0" top="224" right="5400" bottom="1884" auto="1">
-				<Path speed="0.05">
+				<Path speed="0.08">
 					<Point x="0" y="224"/>
 					<Point x="5320" y="224"/>
 				</Path>

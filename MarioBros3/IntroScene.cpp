@@ -245,8 +245,11 @@ void CIntroSceneKeyHandler::OnKeyDown(int KeyCode)
 	{
 		//MapMario* mario = ((CPlayScene*)scence)->GetPlayer()->getMapMario();
 		//mario->OnKeyDown(KeyCode);
+		
 		CGame::GetInstance()->SwitchScene(1);
 	}
+	if (KeyCode == DIK_DOWN) ((IntroScene*)scence)->titte->ArrowM = false;
+	if (KeyCode == DIK_UP) ((IntroScene*)scence)->titte->ArrowM = true;
 
 }
 

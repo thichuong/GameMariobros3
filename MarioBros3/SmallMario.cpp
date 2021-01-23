@@ -79,10 +79,10 @@ void SmallMario::KeyState(BYTE* state)
 
 	if (CGame::GetInstance()->IsKeyDown(DIK_S))
 	{
-		if (onGround && Mariostate.jump == JumpStates::Stand)
+		if (onGround && Mariostate.jump == JumpStates::Stand )
 		{
 			SetJumpState(JumpStates::Jump);
-			vy -= MARIO_JUMP_SPEED_Y * dt;
+			vy = -MARIO_JUMP_SPEED_Y ;
 			onGround = FALSE;
 		}
 	}

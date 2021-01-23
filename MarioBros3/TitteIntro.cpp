@@ -7,12 +7,14 @@ TitteIntro::TitteIntro()
 	time = 0;
 	Three = D3DXVECTOR2(0, 0);
 	Titte = D3DXVECTOR2(0, 0);
-	Arrow = D3DXVECTOR2(0, 0);
+	Arrow1 = D3DXVECTOR2(0, 0);
+	Arrow2 = D3DXVECTOR2(0, 0);
 	Options = D3DXVECTOR2(0, 0);
 	curtain = D3DXVECTOR2(350, 0);
 	animations = new CAnimations();
 	ArrowSprite = NULL;
 	OptionsSprite = NULL;
+	ArrowM = true;
 }
 
 void TitteIntro::setAnimation(CAnimations* ani_set)
@@ -28,7 +30,8 @@ void TitteIntro::Update(DWORD dt)
 {
 	Titte = D3DXVECTOR2(Position.x + 265, Position.y);;
 	Three = D3DXVECTOR2(Position.x + 275, Position.y + 217);
-	Arrow = D3DXVECTOR2(Position.x + 73, Position.y + 360);
+	Arrow1 = D3DXVECTOR2(Position.x + 73, Position.y + 360);
+	Arrow2 = D3DXVECTOR2(Position.x + 73, Position.y + 410);
 	Options = D3DXVECTOR2(Position.x + 250, Position.y + 360);
 	float dy = -SPEED_CURTAIN * dt;
 	if(curtain.y + dy >= -MAX_CURTAIN)
@@ -41,7 +44,10 @@ void TitteIntro::Render()
 	animations->Get(ANI_TITTE)->Render(Titte.x, Titte.y, false);
 	OptionsSprite->Draw(Options.x, Options.y, FALSE);
 	animations->Get(ANI_THREE)->Render(Three.x, Three.y, false);
-	ArrowSprite->Draw(Arrow.x, Arrow.y, FALSE);
+	if(ArrowM)
+		ArrowSprite->Draw(Arrow1.x, Arrow1.y, FALSE);
+	else
+		ArrowSprite->Draw(Arrow2.x, Arrow2.y, FALSE);
 	animations->Get(ANI_CURTAIN)->Render(curtain.x, curtain.y, false);
 	//DebugOut(L"[TILLE RENDER]    \n");
 	

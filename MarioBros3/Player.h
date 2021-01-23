@@ -13,7 +13,7 @@
 #define DOWN_LEVEL_TIME 1000
 #define CHANGE_LEVEL_TIME 500
 
-#define REWARD_TIME 2000
+#define DIE_TIME 2000
 #define SPEED_X_REWARD 0.2f;
 #define ID_SCENE 1
 
@@ -28,7 +28,7 @@ class CPlayer : public CGameObject
     string levelMario;
     ULONGLONG downleveltime;
 
-    
+    ULONGLONG time_die;
     ULONGLONG changeleveltime;
 public: 
     bool NoUpdate;

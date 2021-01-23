@@ -3,9 +3,10 @@
 #include "GameObject.h"
 
 #define PLATFORM_ANI "ani-platform"
-#define PLATFORM_GRAVITTY 0.3f
+#define PLATFORM_GRAVITTY 0.1f
 #define PLATFORM_BOX_WIDTH 144
 #define PLATFORM_BOX_HEIGHT 48
+#define PLUS 40
 
 class Platform :
 	public CGameObject

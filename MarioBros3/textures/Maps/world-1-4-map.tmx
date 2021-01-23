@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="161" height="18" tilewidth="48" tileheight="48" infinite="0" nextlayerid="20" nextobjectid="323">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="161" height="18" tilewidth="48" tileheight="48" infinite="0" nextlayerid="20" nextobjectid="330">
  <properties>
   <property name="CellHeight" type="int" value="290"/>
   <property name="CellWidth" type="int" value="385"/>
@@ -855,31 +855,31 @@
     <property name="VelocityY" type="float" value="0"/>
    </properties>
   </object>
-  <object id="312" type="MovingPlatform" x="4140.36" y="582.727" width="144" height="48">
+  <object id="312" type="MovingPlatform" x="4043.36" y="593.727" width="144" height="48">
    <properties>
     <property name="Direction" type="int" value="3"/>
-    <property name="Grid" value="[{&quot;x&quot;:10,&quot;y&quot;:2},{&quot;x&quot;:11,&quot;y&quot;:2}]"/>
+    <property name="Grid" value="[{&quot;x&quot;:10,&quot;y&quot;:2}]"/>
     <property name="VelocityX" type="float" value="-0.045"/>
     <property name="VelocityY" type="float" value="0"/>
    </properties>
   </object>
-  <object id="313" type="MovingPlatform" x="4236.36" y="534.727" width="144" height="48">
+  <object id="313" type="MovingPlatform" x="4376.36" y="510.727" width="144" height="48">
    <properties>
     <property name="Direction" type="int" value="3"/>
-    <property name="Grid" value="[{&quot;x&quot;:11,&quot;y&quot;:1},{&quot;x&quot;:11,&quot;y&quot;:2}]"/>
+    <property name="Grid" value="[{&quot;x&quot;:11,&quot;y&quot;:1}]"/>
     <property name="VelocityX" type="float" value="-0.045"/>
     <property name="VelocityY" type="float" value="0"/>
    </properties>
   </object>
-  <object id="314" type="MovingPlatform" x="5340.36" y="534.727" width="144" height="48">
+  <object id="314" type="MovingPlatform" x="5394.36" y="471.727" width="144" height="48">
    <properties>
     <property name="Direction" type="int" value="3"/>
-    <property name="Grid" value="[{&quot;x&quot;:13,&quot;y&quot;:1},{&quot;x&quot;:13,&quot;y&quot;:2},{&quot;x&quot;:14,&quot;y&quot;:1},{&quot;x&quot;:14,&quot;y&quot;:2}]"/>
+    <property name="Grid" value="[{&quot;x&quot;:14,&quot;y&quot;:1}]"/>
     <property name="VelocityX" type="float" value="-0.045"/>
     <property name="VelocityY" type="float" value="0"/>
    </properties>
   </object>
-  <object id="315" type="MovingPlatform" x="5244.36" y="678.727" width="144" height="48">
+  <object id="315" type="MovingPlatform" x="5144.36" y="583.727" width="144" height="48">
    <properties>
     <property name="Direction" type="int" value="3"/>
     <property name="Grid" value="[{&quot;x&quot;:13,&quot;y&quot;:2}]"/>
@@ -887,10 +887,66 @@
     <property name="VelocityY" type="float" value="0"/>
    </properties>
   </object>
-  <object id="316" type="MovingPlatform" x="5388.36" y="774.727" width="144" height="48">
+  <object id="316" type="MovingPlatform" x="5566.36" y="688.727" width="144" height="48">
    <properties>
     <property name="Direction" type="int" value="3"/>
-    <property name="Grid" value="[{&quot;x&quot;:13,&quot;y&quot;:2},{&quot;x&quot;:14,&quot;y&quot;:2}]"/>
+    <property name="Grid" value="[{&quot;x&quot;:14,&quot;y&quot;:2}]"/>
+    <property name="VelocityX" type="float" value="-0.045"/>
+    <property name="VelocityY" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="323" type="MovingPlatform" x="5006" y="474" width="144" height="48">
+   <properties>
+    <property name="Direction" type="int" value="3"/>
+    <property name="Grid" value="[{&quot;x&quot;:13,&quot;y&quot;:1}]"/>
+    <property name="VelocityX" type="float" value="-0.045"/>
+    <property name="VelocityY" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="324" type="MovingPlatform" x="4840" y="566" width="144" height="48">
+   <properties>
+    <property name="Direction" type="int" value="3"/>
+    <property name="Grid" value="[{&quot;x&quot;:12,&quot;y&quot;:1},{&quot;x&quot;:12,&quot;y&quot;:2}]"/>
+    <property name="VelocityX" type="float" value="-0.045"/>
+    <property name="VelocityY" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="325" type="MovingPlatform" x="4690" y="436" width="144" height="48">
+   <properties>
+    <property name="Direction" type="int" value="3"/>
+    <property name="Grid" value="[{&quot;x&quot;:12,&quot;y&quot;:1}]"/>
+    <property name="VelocityX" type="float" value="-0.045"/>
+    <property name="VelocityY" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="326" type="MovingPlatform" x="3920" y="428" width="144" height="48">
+   <properties>
+    <property name="Direction" type="int" value="3"/>
+    <property name="Grid" value="[{&quot;x&quot;:10,&quot;y&quot;:1}]"/>
+    <property name="VelocityX" type="float" value="-0.045"/>
+    <property name="VelocityY" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="327" type="MovingPlatform" x="1325" y="486" width="144" height="48">
+   <properties>
+    <property name="Direction" type="int" value="3"/>
+    <property name="Grid" value="[{&quot;x&quot;:3,&quot;y&quot;:1}]"/>
+    <property name="VelocityX" type="float" value="-0.045"/>
+    <property name="VelocityY" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="328" type="MovingPlatform" x="1984" y="482" width="144" height="48">
+   <properties>
+    <property name="Direction" type="int" value="3"/>
+    <property name="Grid" value="[{&quot;x&quot;:5,&quot;y&quot;:1}]"/>
+    <property name="VelocityX" type="float" value="-0.045"/>
+    <property name="VelocityY" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="329" type="MovingPlatform" x="4171" y="498" width="144" height="48">
+   <properties>
+    <property name="Direction" type="int" value="3"/>
+    <property name="Grid" value="[{&quot;x&quot;:10,&quot;y&quot;:1},{&quot;x&quot;:11,&quot;y&quot;:1}]"/>
     <property name="VelocityX" type="float" value="-0.045"/>
     <property name="VelocityY" type="float" value="0"/>
    </properties>

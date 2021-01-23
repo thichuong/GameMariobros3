@@ -16,9 +16,10 @@ class TitteIntro
 	ULONGLONG time;
 	LPSPRITE ArrowSprite, OptionsSprite;
 	CAnimations* animations;
-	D3DXVECTOR2 Three, Titte, Arrow, Options;
+	D3DXVECTOR2 Three, Titte, Arrow1,Arrow2, Options;
 	D3DXVECTOR2 curtain;
 public:
+	bool ArrowM;
 	TitteIntro();
 	void setAnimation(CAnimations* ani_set);
 	void Update(DWORD dt);

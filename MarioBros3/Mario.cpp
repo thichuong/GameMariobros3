@@ -133,7 +133,7 @@ void  CMario::UpdateCollisions(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		x += dx;
 		y += dy;
-		
+		if(vy > 0) Mariostate.jump = JumpStates::Fall;
 	}
 	else
 	{
@@ -166,10 +166,11 @@ void  CMario::UpdateCollisions(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			{
 				onGround = FALSE;
 				canHighjump = FALSE;
-				Mariostate.jump = JumpStates::Fall;
+				//Mariostate.jump = JumpStates::Fall;
 			}
 		}
-
+		else
+			SetJumpState(JumpStates::Fall);
 
 		//
 		// Collision logic with other objects
@@ -215,7 +216,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	if (x + dx <= CGame::GetInstance()->GetScamX() + 1)
 	{
 		
-		vx = CGame::GetInstance()->getCamera()->vx;
+		vx = CGame::GetInstance()->getCamera()->vx*2;
 		CGameObject::Update(dt);
 		ax = 1;
 		
@@ -251,11 +252,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		
 	}
 	
-	if (vy > 0)
-	{
-		//onGround = FALSE;
-		SetJumpState(JumpStates::Fall);
-	}
+	
 	
 	if (!CGame::GetInstance()->IsKeyDown(DIK_A))
 		attack = FALSE;
@@ -403,6 +400,7 @@ void CMario::SetAnimationSet(CAnimations* ani_set)
 void CMario::SetState(int state)
 {
 	CGameObject::SetState(state);
+	if (state == MARIO_STATE_DIE) vy = -MARIO_FLY_SPEED_Y;
 }
 /*
 
@@ -481,7 +479,7 @@ void CMario::KeyState(BYTE* state)
 		if (onGround && Mariostate.jump == JumpStates::Stand)
 		{
 			SetJumpState(JumpStates::Jump);
-			vy -= MARIO_JUMP_SPEED_Y*dt;
+			vy = -MARIO_JUMP_SPEED_Y;
 			onGround = FALSE;
 		}
 	}

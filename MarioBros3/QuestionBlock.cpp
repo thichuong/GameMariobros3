@@ -82,7 +82,6 @@ void QuestionBlock::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 		isBounce = TRUE;
 		vy = -BOUNCE_VEL;
 		Bounce();
-		
 	}
 
 }
@@ -132,6 +131,7 @@ void QuestionBlock::Bounce()
 }
 void QuestionBlock::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
+	if (y < tempy - COIN_BBOX_HEIGHT / 2) vy = 0;
 	if (isBounce)
 	{
 		CGameObject::Update(dt);

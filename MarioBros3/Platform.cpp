@@ -14,16 +14,16 @@ Platform::Platform() : CGameObject()
 }
 void Platform::Render()
 {
-	animations->Get(PLATFORM_ANI)->Render(x, y, 1000, false);
+	animations->Get(PLATFORM_ANI)->Render(x, y);
 	RenderBoundingBox();
 }
 
 void Platform::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
-	l = x;
+	l = x - PLUS;
 	t = y;
 	r = x + PLATFORM_BOX_WIDTH;
-	b = y + PLATFORM_BOX_HEIGHT;
+	b = y + PLATFORM_BOX_HEIGHT/2;
 }
 void Platform::SetAnimationSet(CAnimations* ani_set)
 {
@@ -37,16 +37,20 @@ void Platform::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 	{
 		vx = 0;
 		vy = PLATFORM_GRAVITTY;
-		obj->vy = PLATFORM_GRAVITTY * 2;
+		obj->vy = PLATFORM_GRAVITTY * 3;
 	}
 }
 void Platform::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	int camx = CGame::GetInstance()->GetScamX();
 	int width = CGame::GetInstance()->GetScreenWidth();
-	CGameObject::Update(dt);
-	x += dx;
-	y += dy;
+	
+		CGameObject::Update(dt);
+		x += dx;
+		y += dy;
+	
+	
+	
 	
 
 }
