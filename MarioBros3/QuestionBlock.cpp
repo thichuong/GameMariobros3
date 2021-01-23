@@ -3,6 +3,8 @@
 #include "Coin.h"
 #include "Leaf.h"
 #include "PSwitch.h"
+#include "Mushroom.h"
+#include"UPMushroom.h"
 
 QuestionBlock::QuestionBlock() :CGameObject()
 {
@@ -96,8 +98,18 @@ void QuestionBlock::Bounce()
 	break;
 	case Item::Leaf:
 	{
-		Leaf* leaf = new Leaf(x, y - COIN_BBOX_HEIGHT, TRUE);
-		CGame::GetInstance()->GetCurrentScene()->addobject(leaf);
+		if (CPlayer::GetInstance()->GetlevelMario() != Mario_small)
+		{
+			Leaf* leaf = new Leaf(x, y - COIN_BBOX_HEIGHT, TRUE);
+			CGame::GetInstance()->GetCurrentScene()->addobject(leaf);
+		}
+		else
+		{
+			Mushroom* mushroom = new Mushroom();
+			mushroom->SetPosition(x, y - COIN_BBOX_HEIGHT);
+			CGame::GetInstance()->GetCurrentScene()->addobject(mushroom);
+		}
+		
 	}
 	break;
 
@@ -105,6 +117,13 @@ void QuestionBlock::Bounce()
 	{
 		PSwitch* pswitch = new PSwitch(x, y);
 		CGame::GetInstance()->GetCurrentScene()->addobject(pswitch);
+	}
+	break;
+	case Item::UPRoom:
+	{
+		UPMushroom* mushroom = new UPMushroom();
+		mushroom->SetPosition(x, y - COIN_BBOX_HEIGHT);
+		CGame::GetInstance()->GetCurrentScene()->addobject(mushroom);
 	}
 	break;
 	}

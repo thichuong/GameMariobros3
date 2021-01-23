@@ -24,13 +24,14 @@ CPlayer::CPlayer()
 	collision = CCollision::Full;
 	typeobject = TypeObject::player;
 	downleveltime = DOWN_LEVEL_TIME;
-
+	changeleveltime = CHANGE_LEVEL_TIME;
 	score = 0;
 	life = 4;
 	coin = 0;
 	isReWard = false;
 	time_game = 0;
 	tick_time_game = 0;
+	NoUpdate = false;
 }
 
 CPlayer* CPlayer::__instance = NULL;
@@ -46,24 +47,36 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
 	if (playMario->GetLevel() != none) SwitchToMario(playMario->GetLevel());
 	if (downleveltime < DOWN_LEVEL_TIME) downleveltime += dt;
-	if (isReWard)
+	if (changeleveltime < CHANGE_LEVEL_TIME)
 	{
-		playMario->UpdateReward(dt);
+		changeleveltime += dt;
+		NoUpdate = true;
 	}
-	else
-	{
+	else NoUpdate = false;
 
-		playMario->UpdateVx(dt);
-		if (tick_time_game + dt >= 1000)
+	if (NoUpdate == false)
+	{
+		if (isReWard)
 		{
-			tick_time_game = 0;
-			time_game--;
+			playMario->UpdateReward(dt);
 		}
-		else tick_time_game += dt;
-	}
-	playMario->Update(dt, colliable_objects);
-	playMario->GetPosition(this->x, this->y);
+		else
+		{
 
+			playMario->UpdateVx(dt);
+			if (tick_time_game + dt >= 1000)
+			{
+				tick_time_game = 0;
+				time_game--;
+			}
+			else tick_time_game += dt;
+		}
+
+		playMario->Update(dt, colliable_objects);
+		playMario->GetPosition(this->x, this->y);
+
+	}
+	
 	for (unsigned int i = 0; i < bullets.size(); i++)
 	{
 		if (!bullets[i]->getactive())
@@ -78,7 +91,12 @@ void CPlayer::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 }
 void CPlayer::Render()
 {
-	playMario->Render();
+	if (changeleveltime < CHANGE_LEVEL_TIME)
+	{
+		animations->Get("ani-mario-damaged")->Render(x, y,(DWORD) CHANGE_LEVEL_TIME,false);
+	}
+	else
+		playMario->Render();
 }
 void CPlayer::Pre_Render()
 {
@@ -96,6 +114,8 @@ void CPlayer::SetAnimationSet(CAnimations* ani_set)
 	ListMario[raccoon]->SetAnimationSet(ani_set);
 
 	mapmario->SetAnimationSet(ani_set);
+
+	animations = ani_set;
 	//playMario->SetAnimationSet(ani_set);
 }
 void CPlayer::SetPosition(float x, float y)
@@ -117,13 +137,18 @@ void CPlayer::SwitchToMario(string state)
 	playMario = ListMario[levelMario];
 	playMario->SetPosition(this->x, this->y);
 	playMario->StartUntouchable();
+
+	changeleveltime = 0;
 	DebugOut(L"[Change playMario]   %s \n", ToLPCWSTR(levelMario));
 }
 void CPlayer::Downlevel()
 {
 	if (downleveltime >= DOWN_LEVEL_TIME)
 	{
-		if (levelMario == Mario_small) playMario->SetState(MARIO_STATE_DIE);
+		if (levelMario == Mario_small)
+		{
+			playMario->SetState(MARIO_STATE_DIE);
+		}
 		else if (levelMario == big) playMario->SetLevel(Mario_small);
 		else playMario->SetLevel(big);
 		
@@ -134,8 +159,17 @@ void CPlayer::Downlevel()
 }
 void CPlayer::SetLevel(int lv)
 {
+	string lvSet = levelMario;
 	if (lv == 4)
-		playMario->SetLevel(raccoon);
+		lvSet = raccoon;
+	if (lv == 2)	lvSet = big;
+	if (lvSet == levelMario)
+	{
+		playMario->SetLevel(lvSet);
+
+		downleveltime = DOWN_LEVEL_TIME;
+	}
+		
 }
 int CPlayer::getMetter()
 {
@@ -186,4 +220,10 @@ string CPlayer::GetLife()
 string  CPlayer::GetTime()
 {
 	return to_string(time_game);
+}
+void  CPlayer::MarioDie()
+{
+	SwitchToMario(Mario_small);
+	playMario->SetState(MARIO_STATE_DIE);
+	
 }

@@ -336,6 +336,10 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 					{
 						questionblock->SetItem(Item::Leaf);
 					}
+					else if (blockname == "f1up-mushroom")
+					{
+						questionblock->SetItem(Item::UPRoom);
+					}
 
 					questionblock->quantity = quantity;
 					DebugOut(L"[questionblock ] quantity = %d \n", questionblock->quantity);
@@ -401,6 +405,10 @@ void CGameMap::MapOBJECTS(string filePath, string fileName)
 						else if (name == "bmushroom")
 						{
 							brick->SetItem(Item::Leaf);
+						}
+						else if (name == "f1up-mushroom")
+						{
+							brick->SetItem(Item::UPRoom);
 						}
 						TiXmlElement* TMX = TMXObject->FirstChildElement("properties");
 						for (TiXmlElement* node = TMX->FirstChildElement("property"); node != nullptr; node = node->NextSiblingElement("property"))

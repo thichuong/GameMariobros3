@@ -184,6 +184,7 @@
     <ClInclude Include="Mario.h" />
     <ClInclude Include="MarioDamageFX.h" />
     <ClInclude Include="MarioTail.h" />
+    <ClInclude Include="Mushroom.h" />
     <ClInclude Include="Paratroopa.h" />
     <ClInclude Include="Piranha.h" />
     <ClInclude Include="Plant.h" />
@@ -251,6 +252,7 @@
     <ClInclude Include="tinyXML\tinyxml.h" />
     <ClInclude Include="TitteIntro.h" />
     <ClInclude Include="UIObject.h" />
+    <ClInclude Include="UPMushroom.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="WarpMark.h" />
     <ClInclude Include="WarpPipe.h" />
@@ -293,6 +295,7 @@
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="MarioDamageFX.cpp" />
     <ClCompile Include="MarioTail.cpp" />
+    <ClCompile Include="Mushroom.cpp" />
     <ClCompile Include="Paratroopa.cpp" />
     <ClCompile Include="Piranha.cpp" />
     <ClCompile Include="Plant.cpp" />
@@ -327,6 +330,7 @@
     <ClCompile Include="tinyXML\xmltest.cpp" />
     <ClCompile Include="TitteIntro.cpp" />
     <ClCompile Include="UIObject.cpp" />
+    <ClCompile Include="UPMushroom.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WarpMark.cpp" />
     <ClCompile Include="WarpPipe.cpp" />

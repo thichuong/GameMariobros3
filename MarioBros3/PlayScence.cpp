@@ -328,13 +328,8 @@ void CPlayScene::Update(DWORD dt)
 {
 	// We know that Mario is the first object in the list hence we won't add him into the colliable object list
 	// TO-DO: This is a "dirty" way, need a more organized way 
-	if (GetTickCount64() -   break_Update < BREAK_UPDATE)
-	{
-		dt = 0;
-		
-	}
-	else
-	{
+	
+	
 		vector<LPGAMEOBJECT> coObjects;
 
 		float l, t, r, b;
@@ -352,15 +347,20 @@ void CPlayScene::Update(DWORD dt)
 
 		player->Update(dt, &coObjects);
 
-		for (size_t i = 0; i < objects.size(); i++)
+		if (player->NoUpdate == false)
 		{
-			objects[i]->Update(dt, &coObjects);
-		}
-		for (size_t i = 0; i < gridObject->size(); i++)
-		{
-			gridObject->at(i)->Update(dt, &coObjects);
+			for (size_t i = 0; i < objects.size(); i++)
+			{
+				objects[i]->Update(dt, &coObjects);
+			}
+			for (size_t i = 0; i < gridObject->size(); i++)
+			{
+				gridObject->at(i)->Update(dt, &coObjects);
+			}
+
 		}
 
+		
 		if (earseobjects.size() > 0)
 		{
 			for (auto e : earseobjects)
@@ -398,7 +398,7 @@ void CPlayScene::Update(DWORD dt)
 			start_x = 0;
 			start_y = 0;
 		}
-	}
+	
 
 	if (switchID != 0)
 		CGame::GetInstance()->SwitchScene(switchID);

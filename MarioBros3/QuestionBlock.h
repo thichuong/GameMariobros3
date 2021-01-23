@@ -16,7 +16,8 @@ enum class Item
 	FireFlower,
 	GreenShroom,
 	Coin,
-	PSwitch
+	PSwitch,
+	UPRoom
 };
 
 class QuestionBlock :

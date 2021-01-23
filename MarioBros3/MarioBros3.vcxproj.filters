@@ -429,6 +429,12 @@
     <ClInclude Include="Grid.h">
       <Filter>Framework\Grid</Filter>
     </ClInclude>
+    <ClInclude Include="Mushroom.h">
+      <Filter>Source Files\GameObject\ITem</Filter>
+    </ClInclude>
+    <ClInclude Include="UPMushroom.h">
+      <Filter>Source Files\GameObject\ITem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -652,6 +658,12 @@
     </ClCompile>
     <ClCompile Include="LoadPlayScene.cpp">
       <Filter>Framework\Scence</Filter>
+    </ClCompile>
+    <ClCompile Include="Mushroom.cpp">
+      <Filter>Source Files\GameObject\ITem</Filter>
+    </ClCompile>
+    <ClCompile Include="UPMushroom.cpp">
+      <Filter>Source Files\GameObject\ITem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
