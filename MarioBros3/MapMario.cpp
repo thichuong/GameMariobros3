@@ -12,6 +12,7 @@ MapMario::MapMario() : CMario()
 	right = false;
 	tempx = 0;
 	tempy = 0;
+	complete = false;
 }
 void MapMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -66,6 +67,11 @@ void MapMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			if (CGame::GetInstance()->IsKeyDown(DIK_A) && node->getIDscene() != 0)
 			{
 				CGame::GetInstance()->SwitchScene(node->getIDscene());
+			}
+			if (this->complete == true)
+			{
+				this->complete = false;
+				node->SetTypeNode("numM");
 			}
 			//DebugOut(L"[NODE coObjectsResult] = %d , %d, %d , %d \n", up,down,left,right);
 			//DebugOut(L"[NODE coObjectsResult] = %d \n", left);

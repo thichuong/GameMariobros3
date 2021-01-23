@@ -54,6 +54,7 @@ void CPortal::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			if (time_tick >= 1000)
 			{
 				player->isReWard = false;
+				player->getMapMario()->complete = true;
 				CGame::GetInstance()->GetCurrentScene()->setSwitchID(this->scene_id);
 			}
 				

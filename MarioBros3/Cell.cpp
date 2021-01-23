@@ -12,6 +12,8 @@ Cell::Cell(int x, int y)
 
 Cell::~Cell()
 {
+	objects->clear();
+	delete objects;
 }
 
 int Cell::getX()

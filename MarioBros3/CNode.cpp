@@ -66,5 +66,7 @@ void CNode::SetTypeNode(string type)
 	if (type == "num-4") typenode = TypeNode::num4;
 	if (type == "num-5") typenode = TypeNode::num5;
 	if (type == "num-6") typenode = TypeNode::num6;
+	if (type == "numM") typenode = TypeNode::numM;
 	if (type == "bonus-slot") typenode = TypeNode::bonus;
+
 }

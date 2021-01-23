@@ -27,6 +27,8 @@ Grid::Grid(int col, int row, int cellWidth, int cellHeight)
 
 Grid::~Grid()
 {
+	DebugOut(L"[DELETE GRID] \n");
+	
 	activeCells->clear();
 	activeList->clear();
 

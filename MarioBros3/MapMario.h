@@ -20,9 +20,11 @@ class MapMario :
 	float tempx, tempy;
 
 	bool up, down, left, right;
+
+	
 public:
 	string levelMario;
-
+	bool complete;
 	MapMario();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
 	virtual void Render();

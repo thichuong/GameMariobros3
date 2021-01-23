@@ -441,7 +441,7 @@ void CPlayScene::Unload()
 	switchID = 0;
 	objects.clear();
 	cameras.clear();
-
+	grid = NULL;
 	//player = NULL;
 
 	DebugOut(L"[INFO] Scene %s unloaded! \n", sceneFilePath);
