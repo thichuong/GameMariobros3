@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="27" nextobjectid="298">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="176" height="41" tilewidth="48" tileheight="48" infinite="0" nextlayerid="27" nextobjectid="303">
  <editorsettings>
   <export target="world-1-1-map.xml" format="tmx"/>
  </editorsettings>
@@ -672,6 +672,26 @@
     <property name="Grid" value="[{&quot;x&quot;:11,&quot;y&quot;:1}]"/>
    </properties>
   </object>
+  <object id="298" name="bcoin" type="1" x="7208.67" y="1096" width="44.6667" height="47.3333">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:18,&quot;y&quot;:3}]"/>
+   </properties>
+  </object>
+  <object id="299" name="bcoin" type="1" x="7162.33" y="1096" width="44.6667" height="47.3333">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:18,&quot;y&quot;:3}]"/>
+   </properties>
+  </object>
+  <object id="300" name="bcoin" type="1" x="7254.33" y="1096" width="44.6667" height="47.3333">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:18,&quot;y&quot;:3}]"/>
+   </properties>
+  </object>
+  <object id="301" name="bcoin" type="1" x="7299.67" y="1096" width="44.6667" height="47.3333">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:18,&quot;y&quot;:3},{&quot;x&quot;:19,&quot;y&quot;:3}]"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="15" name="Coin">
   <object id="59" x="3236.5" y="983.5">
@@ -1003,7 +1023,7 @@
   </object>
   <object id="196" name="koopa" type="red" x="6268.17" y="1032.67">
    <properties>
-    <property name="Grid" value="[{&quot;x&quot;:15,&quot;y&quot;:3}]"/>
+    <property name="Grid" value="[{&quot;x&quot;:16,&quot;y&quot;:3}]"/>
    </properties>
   </object>
   <object id="282" name="koopa" type="green-para" x="4030" y="759">
@@ -1014,6 +1034,11 @@
   </object>
   <object id="284" name="koopa" type="green-para" x="4272" y="739">
    <point/>
+  </object>
+  <object id="302" name="koopa" type="red" x="7240.67" y="966" width="28.6667" height="26.6667">
+   <properties>
+    <property name="Grid" value="[{&quot;x&quot;:16,&quot;y&quot;:3}]"/>
+   </properties>
   </object>
  </objectgroup>
  <objectgroup id="20" name="Warp">

@@ -20,8 +20,8 @@ QuestionBlock::QuestionBlock(float l, float t)
 {
 	x = l;
 	y = t;
-	tempx = 0;
-	tempy = 0;
+	tempx = l;
+	tempy = t;
 	typeobject = TypeObject::block;
 	collision = CCollision::Full;
 	SetAnimationSet(CAnimations::GetInstance());
@@ -35,7 +35,7 @@ void QuestionBlock::Render()
 	string ani = ANI_ACTIVE;
 	if (!isActive) ani = ANI_EMPTY;
 	if (animations->Get(ani) != NULL)
-		animations->Get(ani)->Render(x, y + tempy);
+		animations->Get(ani)->Render(x, y );
 	RenderBoundingBox();
 }
 
@@ -45,8 +45,8 @@ void QuestionBlock::GetBoundingBox(float& l, float& t, float& r, float& b)
 	t = y;
 	if (isBounce)
 	{
-		r = x + tempx + QuestionBlock_BBOX_WIDTH;
-		b = y + tempy + QuestionBlock_BBOX_HEIGHT;
+		r = x +  QuestionBlock_BBOX_WIDTH;
+		b = y +  QuestionBlock_BBOX_HEIGHT;
 	}
 	else
 	{
@@ -72,6 +72,7 @@ void QuestionBlock::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 		isBounce = TRUE;
 		vy = -BOUNCE_VEL;
 		Bounce();
+		
 	}
 
 	if (obj->typeobject == TypeObject::normal && isActive && !isBounce)
@@ -79,7 +80,7 @@ void QuestionBlock::CollisionObject(LPGAMEOBJECT obj, float nx, float ny)
 		isBounce = TRUE;
 		vy = -BOUNCE_VEL;
 		Bounce();
-
+		
 	}
 
 }
@@ -116,22 +117,55 @@ void QuestionBlock::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 	{
 		CGameObject::Update(dt);
 		vy += GRAVITY_QUESTIONBLOCK * dt;
-		if (tempy + vy * dt >= 0)
+		
+		vector<LPCOLLISIONEVENT> coEvents;
+		vector<LPCOLLISIONEVENT> coEventsResult;
+		coEvents.clear();
+
+		CalcPotentialCollisions(colliable_objects, coEvents);
+
+		if (coEvents.size() == 0)
 		{
-			vy = 0;
-			tempy = 0;
-			isBounce = FALSE;
-			collision = CCollision::Full;
-			quantity--;
-			if (quantity <= 0)
-				isActive = FALSE;
+			
+				y += vy * dt;
 		}
 		else
 		{
-			tempy += vy * dt;
-		}
-	}
+			float min_tx, min_ty, nx = 0, ny = 0;
+			float rdx = 0;
+			float rdy = 0;
 
+			// TODO: This is a very ugly designed function!!!!
+			FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
+
+			
+			
+			for (UINT i = 0; i < coEventsResult.size(); i++)
+			{
+				LPCOLLISIONEVENT e = coEventsResult[i];
+
+				if (e->obj->typeobject == TypeObject::enemy && e->ny !=0) // if e->obj is Goomba 
+				{
+					LPGAMEOBJECT obj = e->obj;
+					obj->CollisionObject(this, e->nx, e->ny);
+					
+				}
+			}
+
+		}
+		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+	}
+	if (y  > tempy)
+	{
+		vy = 0;
+		y = tempy;
+		x = tempx;
+		isBounce = FALSE;
+		collision = CCollision::Full;
+		quantity--;
+		if (quantity <= 0)
+			isActive = FALSE;
+	}
 }
 
 void QuestionBlock::SetQuantity(int qunatity)

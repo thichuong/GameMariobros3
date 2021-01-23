@@ -14,7 +14,7 @@ CTileSet::CTileSet(TiXmlElement* data, string xmlPath)
 	CTextures* textures = CTextures::GetInstance();
 	TiXmlElement* imgDom = data->FirstChildElement("image");
 	string imgPath = xmlPath + "\\" + imgDom->Attribute("source");
-	textures->Add(imgPath, ToLPCWSTR(imgPath), D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add(imgPath, ToLPCWSTR(imgPath), D3DCOLOR_XRGB(254, 254, 254));
 
 	texture = CTextures::GetInstance()->Get(imgPath);
 	DebugOut(L"[Load Tile] CTileSet = : %d \n", firstgid);

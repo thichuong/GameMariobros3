@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
-#define BOUNCE_VEL	1.5f
+#define BOUNCE_VEL	2.0f
 #define QuestionBlock_BBOX_WIDTH 48
 #define QuestionBlock_BBOX_HEIGHT 48
 #define GRAVITY_QUESTIONBLOCK  0.04f
@@ -40,5 +40,6 @@ public:
 	void SetItem(Item inblockitem) { this->item = inblockitem; }
 	void SetQuantity(int quantity);
 	void Bounce();
+	virtual void SetPosition(float x, float y) { tempy = y; tempx = x; this->x = x; this->y = y; }
 };
 
