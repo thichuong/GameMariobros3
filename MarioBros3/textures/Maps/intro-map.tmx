@@ -39,7 +39,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="4" name="Titte" width="16" height="14" visible="0">
+ <layer id="4" name="Titte" width="16" height="14">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,85,86,87,88,89,90,91,92,93,94,95,96,0,0,
